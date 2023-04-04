@@ -20,16 +20,16 @@ interface JurusanEmit {
 const props = defineProps<JurusanProps>();
 const emit = defineEmits<JurusanEmit>();
 
-const tahunAjar = useJurusanStore()
+const jurusan = useJurusanStore()
 
-const tahunAjarForm = ref<Jurusan>({
+const form = ref<Jurusan>({
   id: 0,
   nama_jurusan: '',
 })
 
-watch(() => tahunAjar.selectedJurusan, (value) => {
-  tahunAjarForm.value.id = value?.id || 0
-  tahunAjarForm.value.nama_jurusan = value?.nama_jurusan || ''
+watch(() => jurusan.selectedJurusan, (value) => {
+  form.value.id = value?.id || 0
+  form.value.nama_jurusan = value?.nama_jurusan || ''
 })
 
 const showModal = ref(props.modelValue);
@@ -42,12 +42,14 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = async () => {
-  if (tahunAjarForm.value.id)
-    await tahunAjar.updateJurusan(tahunAjarForm.value.id, tahunAjarForm.value.nama_jurusan)
+const handleSubmit = () => {
+  if (form.value.id)
+    jurusan.updateJurusan(form.value.id, form.value.nama_jurusan).then(handleSuccess)
   else
-    await tahunAjar.createJurusan(tahunAjarForm.value.nama_jurusan)
+    jurusan.createJurusan(form.value.nama_jurusan).then(handleSuccess)
+}
 
+const handleSuccess = () => {
   showModal.value = false
   emit("success")
 }
@@ -67,13 +69,14 @@ const handleSubmit = async () => {
           @submit="handleSubmit"
       >
         <div class="p-5 flex flex-col gap-5">
+          <p class="text-lg font-bold">Form Jurusan</p>
           <div>
             <FormLabel for="nama_jurusan">
               Nama Jurusan
             </FormLabel>
             <Field
                 v-slot="{ field, errorMessage }"
-                v-model="tahunAjarForm.nama_jurusan"
+                v-model="form.nama_jurusan"
                 :validate-on-blur="false"
                 name="Nama Jurusan"
                 :rules="{
@@ -96,9 +99,10 @@ const handleSubmit = async () => {
           </div>
           <div class="text-right">
             <Button
+                type="button"
                 variant="outline-secondary"
                 class="w-24 mr-1"
-                @click.prevent="() => {
+                @click="() => {
                   showModal = false
                 }"
             >
@@ -106,7 +110,7 @@ const handleSubmit = async () => {
             </Button>
             <Button
                 type="submit"
-                variant="info"
+                variant="primary"
                 class="w-24"
             >
               Simpan

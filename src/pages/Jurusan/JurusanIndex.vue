@@ -22,7 +22,7 @@ const getData = () => {
 
 getData()
 
-const editJurusan = (item: Jurusan) => {
+const showJurusanModal = (item?: Jurusan) => {
   jurusan.selectedJurusan = item
   showModal.value = true
 }
@@ -55,8 +55,8 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
     </h2>
     <Button
         class="gap-2"
-        variant="info"
-        @click="showModal = true"
+        variant="primary"
+        @click="showJurusanModal()"
     >
       <Lucide icon="Plus"/>
       Tambah Data
@@ -95,7 +95,7 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
                 <Button
                     class="gap-2"
                     variant="warning"
-                    @click="editJurusan(item)"
+                    @click="showJurusanModal(item)"
                 >
                   <Lucide
                       class="w-5 h-5"
