@@ -4,7 +4,7 @@ import illustrationUrl from "../assets/images/illustration.svg";
 import {FormInput} from "../base-components/Form";
 import {Field, Form} from 'vee-validate';
 import Button from "../base-components/Button";
-import {useAuthStore} from "../stores/modules/user/auth";
+import {useAuthStore} from "../stores/modules/auth";
 import {ref} from "vue";
 
 const authStore = useAuthStore()

@@ -16,7 +16,7 @@ const global = useGlobalStore()
     <LoadingIcon
       icon="oval"
       class="w-12 h-12"
-      color="#2F9E51"
+      color="#0B5351"
     />
   </div>
 </template>
