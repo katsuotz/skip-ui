@@ -14,6 +14,7 @@ interface TahunAjarProps {
 
 interface TahunAjarEmit {
   (e: "update:modelValue", value: boolean): void;
+
   (e: "success"): void;
 }
 
@@ -22,14 +23,14 @@ const emit = defineEmits<TahunAjarEmit>();
 
 const tahunAjar = useTahunAjarStore()
 
-const tahunAjarForm = ref<TahunAjar>({
+const form = ref<TahunAjar>({
   id: 0,
   tahun_ajar: '',
 })
 
 watch(() => tahunAjar.selectedTahunAjar, (value) => {
-  tahunAjarForm.value.id = value?.id || 0
-  tahunAjarForm.value.tahun_ajar = value?.tahun_ajar || ''
+  form.value.id = value?.id || 0
+  form.value.tahun_ajar = value?.tahun_ajar || ''
 })
 
 const showModal = ref(props.modelValue);
@@ -43,10 +44,10 @@ watch(showModal, () => {
 });
 
 const handleSubmit = async () => {
-  if (tahunAjarForm.value.id)
-    await tahunAjar.updateTahunAjar(tahunAjarForm.value.id, tahunAjarForm.value.tahun_ajar)
+  if (form.value.id)
+    await tahunAjar.updateTahunAjar(form.value.id, form.value.tahun_ajar)
   else
-    await tahunAjar.createTahunAjar(tahunAjarForm.value.tahun_ajar)
+    await tahunAjar.createTahunAjar(form.value.tahun_ajar)
 
   showModal.value = false
   emit('success')
@@ -67,13 +68,14 @@ const handleSubmit = async () => {
           @submit="handleSubmit"
       >
         <div class="p-5 flex flex-col gap-5">
+          <p class="text-lg font-bold">Form Tahun Ajar</p>
           <div>
             <FormLabel for="tahun_ajar">
               Tahun Ajar
             </FormLabel>
             <Field
                 v-slot="{ field, errorMessage }"
-                v-model="tahunAjarForm.tahun_ajar"
+                v-model="form.tahun_ajar"
                 :validate-on-blur="false"
                 name="Tahun Ajar"
                 :rules="{
@@ -96,6 +98,7 @@ const handleSubmit = async () => {
           </div>
           <div class="text-right">
             <Button
+                type="button"
                 variant="outline-secondary"
                 class="w-24 mr-1"
                 @click.prevent="() => {
@@ -106,7 +109,7 @@ const handleSubmit = async () => {
             </Button>
             <Button
                 type="submit"
-                variant="info"
+                variant="primary"
                 class="w-24"
             >
               Simpan

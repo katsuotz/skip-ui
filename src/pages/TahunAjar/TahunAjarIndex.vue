@@ -51,7 +51,7 @@ const handleUpdateActive = (id: number) => {
   })
 }
 
-const editTahunAjar = (item: TahunAjar) => {
+const showTahunAjarModal = (item?: TahunAjar) => {
   tahunAjar.selectedTahunAjar = item
   showModal.value = true
 }
@@ -63,11 +63,11 @@ const deleteTahunAjar = (item: TahunAjar) => {
     description: `Yakin untuk menghapus Tahun Ajar <span class="text-danger">${item.tahun_ajar}</span>?`,
     icon: 'XCircle',
     buttonConfirmationText: 'Hapus',
-    callback: () => handleDeleteTahunAajar(item.id),
+    callback: () => handleDeleteTahunAjar(item.id),
   })
 }
 
-const handleDeleteTahunAajar = async (id: number): Promise<void> => {
+const handleDeleteTahunAjar = async (id: number): Promise<void> => {
   await tahunAjar.deleteTahunAjar(id)
   await getData()
 }
@@ -84,8 +84,8 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
     </h2>
     <Button
         class="gap-2"
-        variant="info"
-        @click="showModal = true"
+        variant="primary"
+        @click="showTahunAjarModal()"
     >
       <Lucide icon="Plus"/>
       Tambah Data
@@ -145,7 +145,7 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
                 <Button
                     class="gap-2"
                     variant="warning"
-                    @click="editTahunAjar(item)"
+                    @click="showTahunAjarModal(item)"
                 >
                   <Lucide
                       class="w-5 h-5"
