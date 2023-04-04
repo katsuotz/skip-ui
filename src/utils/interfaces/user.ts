@@ -17,5 +17,6 @@ export interface User {
 export type Role =
   | ""
   | "admin"
+  | "staff-ict"
   | "siswa"
   | "guru";

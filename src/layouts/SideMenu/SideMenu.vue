@@ -16,7 +16,7 @@ const setFormattedMenu = (
   Object.assign(formattedMenu, computedFormattedMenu);
 };
 const sideMenuStore = useSideMenuStore();
-const sideMenu = computed(() => nestedMenu(sideMenuStore.menu, route));
+const sideMenu = computed(() => nestedMenu(sideMenuStore.activeMenu, route));
 
 watch(sideMenu, () => {
   setFormattedMenu(sideMenu.value);

@@ -1,5 +1,5 @@
 import axios from "axios"
-import {useAuthStore} from "../stores/modules/user/auth";
+import {useAuthStore} from "../stores/modules/auth";
 import {useGlobalStore} from "../stores/global";
 import router from "../router";
 

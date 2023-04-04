@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import SideMenu from "../layouts/SideMenu/SideMenu.vue";
 import Page1 from "../pages/Page1.vue";
 import Page2 from "../pages/Page2.vue";
-import {useAuthStore} from "../stores/modules/user/auth";
+import {useAuthStore} from "../stores/modules/auth";
 
 const routes = [
   {
@@ -23,11 +23,25 @@ const routes = [
         path: "tahun-ajar",
         name: "tahun-ajar",
         component: () => import("../pages/TahunAjar/TahunAjarIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
       },
       {
         path: "jurusan",
         name: "jurusan",
         component: () => import("../pages/Jurusan/JurusanIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
+      },
+      {
+        path: "data-poin",
+        name: "data-poin",
+        component: () => import("../pages/DataPoin/DataPoinIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
       },
     ],
   },

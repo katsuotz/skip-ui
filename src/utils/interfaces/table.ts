@@ -6,14 +6,12 @@ export interface Table {
   search?: string;
 }
 
-export  interface Payload extends Table, Any {
-  select?: string;
-  [key: string]: any;
+export interface Payload extends Table, Any {
 }
 
 export interface Pagination {
-  page:number;
-  total_item:number;
-  total_page:number;
-  per_page:number;
+  page: number;
+  total_item: number;
+  total_page: number;
+  per_page: number;
 }

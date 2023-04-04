@@ -2,7 +2,7 @@
 import Lucide from "../../base-components/Lucide";
 import logoUrl from "../../assets/images/logo.svg";
 import {Menu} from "../../base-components/Headless";
-import {useAuthStore} from "../../stores/modules/user/auth";
+import {useAuthStore} from "../../stores/modules/auth";
 
 const props = defineProps<{
   layout?: "side-menu" | "simple-menu" | "top-menu";

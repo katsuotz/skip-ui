@@ -1,10 +1,10 @@
-import api from '../../../utils/api'
+import api from '../../utils/api'
 import {defineStore} from "pinia";
-import router from "../../../router";
+import router from "../../router";
 
-import {User} from '../../../utils/interfaces/user'
-import {useGlobalStore} from "../../global";
-import {capitalizeFirstLetter} from "../../../utils/helper";
+import {User} from '../../utils/interfaces/user'
+import {useGlobalStore} from "../global";
+import {capitalizeFirstLetter} from "../../utils/helper";
 
 interface AuthState {
   user?: User;

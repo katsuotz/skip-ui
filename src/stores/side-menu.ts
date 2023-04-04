@@ -1,5 +1,7 @@
 import {defineStore} from "pinia";
 import {Icon} from "../base-components/Lucide/Lucide.vue";
+import {useAuthStore} from "./modules/auth";
+import {Role} from "../utils/interfaces/user";
 
 export interface Menu {
   icon: Icon;
@@ -7,6 +9,7 @@ export interface Menu {
   pageName?: string;
   subMenu?: Menu[];
   ignore?: boolean;
+  role?: string[];
 }
 
 export interface SideMenuState {
@@ -58,19 +61,40 @@ export const useSideMenuStore = defineStore("sideMenu", {
             icon: "ChevronRight",
             pageName: "jurusan",
             title: "Jurusan",
+            role: ['admin', 'staff-ict'],
           },
           {
             icon: "ChevronRight",
             pageName: "tahun-ajar",
             title: "Tahun Ajar",
+            role: ['admin', 'staff-ict'],
           },
           {
             icon: "ChevronRight",
-            pageName: "side-menu-page-2",
+            pageName: "data-poin",
             title: "Poin",
+            role: ['admin', 'staff-ict'],
           },
         ],
       }
     ],
   }),
+  getters: {
+    activeMenu: (state) => {
+      const auth = useAuthStore()
+
+      const checkRole = (e: Menu) => e.role ? e.role.includes(<Role>auth?.user?.role || '') : true
+
+      return state.menu.map(e => {
+        if (e === "divider") return e
+        if (e.subMenu) {
+          e.subMenu = e.subMenu?.filter(checkRole)
+        }
+        return e
+      }).filter(e => {
+        if (e === "divider") return true
+        return checkRole(e)
+      })
+    }
+  },
 });
