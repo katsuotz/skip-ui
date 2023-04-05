@@ -42,7 +42,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
           },
           {
             icon: "ChevronRight",
-            pageName: "side-menu-page-2",
+            pageName: "kelas",
             title: "Kelas",
           },
         ]

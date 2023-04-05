@@ -26,6 +26,14 @@ const routes = [
         },
       },
       {
+        path: "kelas",
+        name: "kelas",
+        component: () => import("../pages/Kelas/KelasIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
+      },
+      {
         path: "tahun-ajar",
         name: "tahun-ajar",
         component: () => import("../pages/TahunAjar/TahunAjarIndex.vue"),
