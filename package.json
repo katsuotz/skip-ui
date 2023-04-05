@@ -9,11 +9,6 @@
     "lint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix src"
   },
   "dependencies": {
-    "@ckeditor/ckeditor5-build-balloon": "^35.1.0",
-    "@ckeditor/ckeditor5-build-balloon-block": "^35.1.0",
-    "@ckeditor/ckeditor5-build-classic": "^35.1.0",
-    "@ckeditor/ckeditor5-build-decoupled-document": "^35.1.0",
-    "@ckeditor/ckeditor5-build-inline": "^35.1.0",
     "@fullcalendar/daygrid": "^5.11.3",
     "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/list": "^5.11.3",
@@ -46,6 +41,7 @@
     "tom-select": "^2.2.0",
     "vee-validate": "^4.8.4",
     "vue": "^3.2.41",
+    "vue-datepicker-next": "^1.0.2",
     "vue-router": "^4.1.6",
     "xlsx": "^0.18.5",
     "zoom-vanilla.js": "^2.0.6"

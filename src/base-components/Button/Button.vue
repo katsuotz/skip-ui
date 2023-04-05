@@ -7,7 +7,7 @@ export default {
 <script setup lang="ts">
 import omit from "lodash-es/omit";
 import { twMerge } from "tailwind-merge";
-import {withDefaults, computed, ButtonHTMLAttributes, useAttrs, ref, toRef} from "vue";
+import {withDefaults, computed, ButtonHTMLAttributes, useAttrs, toRef} from "vue";
 
 import {Variant} from "../../utils/colors";
 
@@ -222,9 +222,9 @@ const computedClass = computed(() =>
 
 <template>
   <component
-      :is="as"
-      v-bind="omit(attrs, 'class')"
-      :class="computedClass"
+    :is="as"
+    v-bind="omit(attrs, 'class')"
+    :class="computedClass"
   >
     <!--      ref="wrapper"-->
     <slot />

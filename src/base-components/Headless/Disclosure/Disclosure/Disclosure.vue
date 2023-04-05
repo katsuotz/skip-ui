@@ -12,6 +12,7 @@ import { useAttrs, computed, inject } from "vue";
 import { ProvideGroup } from "../Group.vue";
 import Provider from "./Provider.vue";
 
+// eslint-disable-next-line no-undef
 interface DisclosureProps extends ExtractProps<typeof HeadlessDisclosure> {
   index?: number;
 }

@@ -10,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 import { PopoverButton as HeadlessPopoverButton } from "@headlessui/vue";
 import { useAttrs, computed } from "vue";
 
+// eslint-disable-next-line no-undef
 interface ButtonProps extends ExtractProps<typeof HeadlessPopoverButton> {
   as?: string | object;
 }

@@ -2,7 +2,6 @@ import api from '../../utils/api'
 import {defineStore} from "pinia";
 
 import {Jurusan} from '../../utils/interfaces/jurusan'
-import {Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 
 interface JurusanState {

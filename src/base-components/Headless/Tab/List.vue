@@ -16,6 +16,7 @@ export type ProvideList = {
   variant?: Variant;
 };
 
+// eslint-disable-next-line no-undef
 interface ListProps extends ExtractProps<typeof HeadlessTabList> {
   variant?: Variant;
 }

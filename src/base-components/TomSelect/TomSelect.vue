@@ -126,11 +126,11 @@ onMounted(() => {
 
 <template>
   <select
-      ref="tomSelectRef"
-      v-select-directive
-      :value="props.modelValue"
-      class="tom-select"
-      @change="
+    ref="tomSelectRef"
+    v-select-directive
+    :value="props.modelValue"
+    class="tom-select"
+    @change="
       (event) => {
         emit('update:modelValue', (event.target as HTMLSelectElement).value);
       }

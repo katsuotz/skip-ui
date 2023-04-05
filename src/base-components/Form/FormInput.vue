@@ -67,9 +67,9 @@ watch(localValue, () => {
 
 <template>
   <input
-      v-bind="omit(attrs, 'class')"
-      v-model="localValue"
-      :class="computedClass"
+    v-bind="omit(attrs, 'class')"
+    v-model="localValue"
+    :class="computedClass"
   >
 <!--  ref="wrapper"-->
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { TabPanel as HeadlessTabPanel, TransitionRoot } from "@headlessui/vue";
 
+// eslint-disable-next-line no-undef
 interface PanelProps extends ExtractProps<typeof HeadlessTabPanel> {}
 
 defineProps<PanelProps>();

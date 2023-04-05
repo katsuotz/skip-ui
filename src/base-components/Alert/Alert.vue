@@ -8,7 +8,7 @@ export default {
 import omit from "lodash-es/omit";
 import { twMerge } from "tailwind-merge";
 import { TransitionRoot } from "@headlessui/vue";
-import { withDefaults, computed, ref, HTMLAttributes, useAttrs } from "vue";
+import {withDefaults, computed, ref, HTMLAttributes, useAttrs, toRef} from "vue";
 
 type Variant =
   | "primary"
@@ -43,12 +43,16 @@ interface AlertProps extends HTMLAttributes {
   onHidden?: () => {};
 }
 
-const { as, dismissible, variant, ...props } = withDefaults(
+const props = withDefaults(
   defineProps<AlertProps>(),
   {
     as: "div",
   }
 );
+
+const { as, dismissible } = props
+
+const variant = toRef(props, 'variant')
 
 const attrs = useAttrs();
 const show = ref<boolean>(true);
@@ -145,28 +149,28 @@ const softDark = [
 
 const computedClass = computed(() =>
   twMerge([
-    "relative border rounded-md px-5 py-4",
-    variant == "primary" && primary,
-    variant == "secondary" && secondary,
-    variant == "success" && success,
-    variant == "warning" && warning,
-    variant == "pending" && pending,
-    variant == "danger" && danger,
-    variant == "dark" && dark,
-    variant == "outline-primary" && outlinePrimary,
-    variant == "outline-secondary" && outlineSecondary,
-    variant == "outline-success" && outlineSuccess,
-    variant == "outline-warning" && outlineWarning,
-    variant == "outline-pending" && outlinePending,
-    variant == "outline-danger" && outlineDanger,
-    variant == "outline-dark" && outlineDark,
-    variant == "soft-primary" && softPrimary,
-    variant == "soft-secondary" && softSecondary,
-    variant == "soft-success" && softSuccess,
-    variant == "soft-warning" && softWarning,
-    variant == "soft-pending" && softPending,
-    variant == "soft-danger" && softDanger,
-    variant == "soft-dark" && softDark,
+    "relative border rounded-md px-3 py-2 font-medium",
+    variant.value == "primary" && primary,
+    variant.value == "secondary" && secondary,
+    variant.value == "success" && success,
+    variant.value == "warning" && warning,
+    variant.value == "pending" && pending,
+    variant.value == "danger" && danger,
+    variant.value == "dark" && dark,
+    variant.value == "outline-primary" && outlinePrimary,
+    variant.value == "outline-secondary" && outlineSecondary,
+    variant.value == "outline-success" && outlineSuccess,
+    variant.value == "outline-warning" && outlineWarning,
+    variant.value == "outline-pending" && outlinePending,
+    variant.value == "outline-danger" && outlineDanger,
+    variant.value == "outline-dark" && outlineDark,
+    variant.value == "soft-primary" && softPrimary,
+    variant.value == "soft-secondary" && softSecondary,
+    variant.value == "soft-success" && softSuccess,
+    variant.value == "soft-warning" && softWarning,
+    variant.value == "soft-pending" && softPending,
+    variant.value == "soft-danger" && softDanger,
+    variant.value == "soft-dark" && softDark,
     dismissible && "pl-5 pr-16",
     typeof attrs.class === "string" && attrs.class,
   ])

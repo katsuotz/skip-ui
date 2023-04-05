@@ -57,41 +57,43 @@ const handleSuccess = () => {
 
 <template>
   <Dialog
-      :open="showModal"
-      static-backdrop
-      @close="() => {showModal = false}"
+    :open="showModal"
+    static-backdrop
+    @close="() => {showModal = false}"
   >
     <Dialog.Panel
-        @close="() => {showModal = false}"
+      @close="() => {showModal = false}"
     >
       <Form
-          :validate-on-blur="false"
-          @submit="handleSubmit"
+        :validate-on-blur="false"
+        @submit="handleSubmit"
       >
         <div class="p-5 flex flex-col gap-5">
-          <p class="text-lg font-bold">Form Jurusan</p>
+          <p class="text-lg font-bold">
+            Form Jurusan
+          </p>
           <div>
             <FormLabel for="nama_jurusan">
               Nama Jurusan
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model="form.nama_jurusan"
-                :validate-on-blur="false"
-                name="Nama Jurusan"
-                :rules="{
-                  required: true,
-                }"
+              v-slot="{ field, errorMessage }"
+              v-model="form.nama_jurusan"
+              :validate-on-blur="false"
+              name="Nama Jurusan"
+              :rules="{
+                required: true,
+              }"
             >
               <FormInput
-                  id="nama_jurusan"
-                  :class="{ 'border-danger': errorMessage }"
-                  type="text"
-                  v-bind="field"
+                id="nama_jurusan"
+                :class="{ 'border-danger': errorMessage }"
+                type="text"
+                v-bind="field"
               />
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -99,19 +101,19 @@ const handleSuccess = () => {
           </div>
           <div class="text-right">
             <Button
-                type="button"
-                variant="outline-secondary"
-                class="w-24 mr-1"
-                @click="() => {
-                  showModal = false
-                }"
+              type="button"
+              variant="outline-secondary"
+              class="w-24 mr-1"
+              @click="() => {
+                showModal = false
+              }"
             >
               Batal
             </Button>
             <Button
-                type="submit"
-                variant="primary"
-                class="w-24"
+              type="submit"
+              variant="primary"
+              class="w-24"
             >
               Simpan
             </Button>

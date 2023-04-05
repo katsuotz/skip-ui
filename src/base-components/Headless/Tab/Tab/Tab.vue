@@ -4,6 +4,7 @@ import { Tab as HeadlessTab } from "@headlessui/vue";
 import Provider from "./Provider.vue";
 import { ProvideList } from "../List.vue";
 
+// eslint-disable-next-line no-undef
 interface TabProps extends ExtractProps<typeof HeadlessTab> {
   fullWidth?: boolean;
 }

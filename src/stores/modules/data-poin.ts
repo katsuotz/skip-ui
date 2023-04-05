@@ -1,12 +1,12 @@
 import api from '../../utils/api'
 import {defineStore} from "pinia";
 
-import {Table, Payload, Pagination} from '../../utils/interfaces/table'
+import {Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 import {DataPoin, DataPoinTable} from "../../utils/interfaces/data-poin";
 
 interface DataPoinState {
-  dataPoin?: DataPoin[];
+  dataPoin: DataPoin[];
   selectedDataPoin?: DataPoin | undefined;
   pagination: Pagination;
 }

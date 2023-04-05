@@ -13,6 +13,7 @@ import {
 } from "@headlessui/vue";
 import { useAttrs, computed } from "vue";
 
+// eslint-disable-next-line no-undef
 interface PanelProps extends ExtractProps<typeof HeadlessPopoverPanel> {
   as?: string | object;
   placement?:

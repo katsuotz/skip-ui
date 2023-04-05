@@ -13,6 +13,7 @@ import {
 } from "@headlessui/vue";
 import { useAttrs, computed } from "vue";
 
+// eslint-disable-next-line no-undef
 interface ItemsProps extends ExtractProps<typeof HeadlessMenuItems> {
   as?: string | object;
   placement?:

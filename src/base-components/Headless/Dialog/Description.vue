@@ -11,6 +11,7 @@ import { DialogDescription as HeadlessDialogDescription } from "@headlessui/vue"
 import { useAttrs, computed } from "vue";
 
 interface DescriptionProps
+// eslint-disable-next-line no-undef
   extends ExtractProps<typeof HeadlessDialogDescription> {
   as?: string | object;
 }

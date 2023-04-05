@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import omit from "lodash-es/omit";
 import { twMerge } from "tailwind-merge";
 import { computed, useAttrs } from "vue";
 

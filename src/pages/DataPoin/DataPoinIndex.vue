@@ -73,58 +73,71 @@ const handleDeletePoin = async (id: number): Promise<void> => {
 </script>
 <template>
   <DataPoinModal
-      v-model="showModal"
-      @success="getData"
+    v-model="showModal"
+    @success="getData"
   />
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
       Data Poin
     </h2>
     <Button
-        class="gap-2"
-        variant="primary"
-        @click="showDataPoinModal()"
+      class="gap-2"
+      variant="primary"
+      @click="showDataPoinModal()"
     >
-      <Lucide icon="Plus"/>
+      <Lucide icon="Plus" />
       Tambah Data
     </Button>
   </div>
   <div class="p-5 mt-5 intro-y box">
-
     <div class="flex flex-wrap gap-2 mb-4">
       <TomSelect
-            id="type"
-            v-model="type"
-            placeholder="Pilih Tipe"
-            style="width: 200px"
-            @update:modelValue="getData(true)"
-        >
-          <option value="">Pilih Tipe</option>
-          <option value="Penghargaan">Penghargaan</option>
-          <option value="Pelanggaran">Pelanggaran</option>
-        </TomSelect>
+        id="type"
+        v-model="type"
+        placeholder="Pilih Tipe"
+        style="width: 200px"
+        @update:modelValue="getData(true)"
+      >
+        <option value="">
+          Pilih Tipe
+        </option>
+        <option value="Penghargaan">
+          Penghargaan
+        </option>
+        <option value="Pelanggaran">
+          Pelanggaran
+        </option>
+      </TomSelect>
       <TomSelect
-            id="category"
-            v-model="category"
-            placeholder="Pilih Kategori"
-            style="width: 200px"
-            @update:modelValue="getData(true)"
-        >
-          <option value="">Pilih Kategori</option>
-          <option value="Ringan">Ringan</option>
-          <option value="Sedang">Sedang</option>
-          <option value="Berat">Berat</option>
-        </TomSelect>
+        id="category"
+        v-model="category"
+        placeholder="Pilih Kategori"
+        style="width: 200px"
+        @update:modelValue="getData(true)"
+      >
+        <option value="">
+          Pilih Kategori
+        </option>
+        <option value="Ringan">
+          Ringan
+        </option>
+        <option value="Sedang">
+          Sedang
+        </option>
+        <option value="Berat">
+          Berat
+        </option>
+      </TomSelect>
     </div>
 
     <MyTable
-        :current-page="dataPoin.pagination.page"
-        :page-count="dataPoin.pagination.total_page"
-        :per-page="dataPoin.pagination.per_page"
-        :search="search"
-        @updatePerPage="handleUpdatePerPage"
-        @updatePage="handleUpdatePage"
-        @updateSearch="handleSearch"
+      :current-page="dataPoin.pagination.page"
+      :page-count="dataPoin.pagination.total_page"
+      :per-page="dataPoin.pagination.per_page"
+      :search="search"
+      @updatePerPage="handleUpdatePerPage"
+      @updatePage="handleUpdatePage"
+      @updateSearch="handleSearch"
     >
       <Table>
         <Table.Thead>
@@ -147,7 +160,7 @@ const handleDeletePoin = async (id: number): Promise<void> => {
             <Table.Th>
               Poin
             </Table.Th>
-            <Table.Th style="width: 200px"/>
+            <Table.Th style="width: 200px" />
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody
@@ -155,8 +168,8 @@ const handleDeletePoin = async (id: number): Promise<void> => {
           :data="dataPoin.dataPoin"
         >
           <Table.Tr
-              v-for="(item, key) in dataPoin.dataPoin"
-              :key="key"
+            v-for="(item, key) in dataPoin.dataPoin"
+            :key="key"
           >
             <Table.Td>
               {{ countPaginationNumber(dataPoin.pagination, key) }}
@@ -168,21 +181,25 @@ const handleDeletePoin = async (id: number): Promise<void> => {
               {{ item.description }}
             </Table.Td>
             <Table.Td>
-              <span :class="{
-                'text-danger': item.type === 'Pelanggaran',
-                'text-success': item.type === 'Penghargaan',
-                'font-bold': true,
-              }">
+              <span
+                :class="{
+                  'text-danger': item.type === 'Pelanggaran',
+                  'text-success': item.type === 'Penghargaan',
+                  'font-bold': true,
+                }"
+              >
                 {{ item.type }}
               </span>
             </Table.Td>
             <Table.Td>
-              <span :class="[
+              <span
+                :class="[
                   'px-2 py-1 text-xs text-white rounded-full',
                   item.category === 'Ringan' && 'bg-success/90',
                   item.category === 'Sedang' && 'bg-warning/90',
                   item.category === 'Berat' && 'bg-danger/90',
-              ]">{{ item.category }}</span>
+                ]"
+              >{{ item.category }}</span>
             </Table.Td>
             <Table.Td>
               {{ item.poin }}
@@ -190,24 +207,24 @@ const handleDeletePoin = async (id: number): Promise<void> => {
             <Table.Td>
               <div class="flex gap-2">
                 <Button
-                    class="gap-2"
-                    variant="warning"
-                    @click="showDataPoinModal(item)"
+                  class="gap-2"
+                  variant="warning"
+                  @click="showDataPoinModal(item)"
                 >
                   <Lucide
-                      class="w-5 h-5"
-                      icon="Edit"
+                    class="w-5 h-5"
+                    icon="Edit"
                   />
                   Ubah
                 </Button>
                 <Button
-                    class="gap-2"
-                    variant="danger"
-                    @click="deleteDataPoin(item)"
+                  class="gap-2"
+                  variant="danger"
+                  @click="deleteDataPoin(item)"
                 >
                   <Lucide
-                      class="w-5 h-5"
-                      icon="Trash2"
+                    class="w-5 h-5"
+                    icon="Trash2"
                   />
                   Hapus
                 </Button>
@@ -217,7 +234,12 @@ const handleDeletePoin = async (id: number): Promise<void> => {
         </Table.Tbody>
         <Table.Tbody v-else>
           <Table.Tr>
-            <Table.Td colspan="99" class="text-center">Tidak ada Data</Table.Td>
+            <Table.Td
+              colspan="99"
+              class="text-center"
+            >
+              Tidak ada Data
+            </Table.Td>
           </Table.Tr>
         </Table.Tbody>
       </Table>

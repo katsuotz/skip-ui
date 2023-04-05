@@ -18,6 +18,7 @@ export type ProvideSlideover = {
   size?: Size;
 };
 
+// eslint-disable-next-line no-undef
 interface SlideoverProps extends ExtractProps<typeof HeadlessDialog> {
   size?: Size;
   open: boolean;

@@ -12,6 +12,7 @@ import { useAttrs, computed, inject, watch } from "vue";
 import { ProvideDisclosure } from "./Disclosure/Provider.vue";
 import { ProvideGroup } from "./Group.vue";
 
+// eslint-disable-next-line no-undef
 interface ButtonProps extends ExtractProps<typeof HeadlessDisclosureButton> {
   as?: string | object;
 }

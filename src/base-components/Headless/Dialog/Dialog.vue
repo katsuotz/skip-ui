@@ -3,7 +3,7 @@ export default {
   inheritAttrs: false,
 };
 
-type Size = "sm" | "md" | "lg" | "xl";
+type Size = "sm" | "md" | "lg" | "xl" | "fullscreen";
 </script>
 
 <script setup lang="ts">
@@ -18,6 +18,7 @@ export type ProvideDialog = {
   size?: Size;
 };
 
+// eslint-disable-next-line no-undef
 interface DialogProps extends ExtractProps<typeof HeadlessDialog> {
   size?: Size;
   open: boolean;

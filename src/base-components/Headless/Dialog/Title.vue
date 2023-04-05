@@ -10,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 import { DialogTitle as HeadlessDialogTitle } from "@headlessui/vue";
 import { useAttrs, computed } from "vue";
 
+// eslint-disable-next-line no-undef
 interface TitleProps extends ExtractProps<typeof HeadlessDialogTitle> {
   as?: string | object;
 }

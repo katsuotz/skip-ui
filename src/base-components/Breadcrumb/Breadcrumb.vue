@@ -32,7 +32,7 @@ provide<ProvideBeradcrumb>("breadcrumb", {
       <component
         :is="item"
         v-for="(item, key) in slots.default && slots.default()"
-        :index="key"
+        :key="key"
       />
     </ol>
   </nav>

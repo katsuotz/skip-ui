@@ -3,11 +3,9 @@ import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {useJurusanStore} from "../../stores/modules/jurusan";
 import {ref} from "vue";
-import {countPaginationNumber} from "../../utils/helper";
 import JurusanModal from "../../components/Jurusan/JurusanModal.vue";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
-import FormSwitch from "../../base-components/Form/FormSwitch";
 import {useGlobalStore} from "../../stores/global";
 import {Jurusan} from "../../utils/interfaces/jurusan";
 
@@ -46,26 +44,26 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
 </script>
 <template>
   <JurusanModal
-      v-model="showModal"
-      @success="getData"
+    v-model="showModal"
+    @success="getData"
   />
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
       Jurusan
     </h2>
     <Button
-        class="gap-2"
-        variant="primary"
-        @click="showJurusanModal()"
+      class="gap-2"
+      variant="primary"
+      @click="showJurusanModal()"
     >
-      <Lucide icon="Plus"/>
+      <Lucide icon="Plus" />
       Tambah Data
     </Button>
   </div>
   <div class="p-5 mt-5 intro-y box">
     <MyTable
-        :pagination="false"
-        :hide-search="true"
+      :pagination="false"
+      :hide-search="true"
     >
       <Table>
         <Table.Thead>
@@ -76,13 +74,13 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
             <Table.Th>
               Jurusan
             </Table.Th>
-            <Table.Th style="width: 200px"/>
+            <Table.Th style="width: 200px" />
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody :data="jurusan.jurusan">
           <Table.Tr
-              v-for="(item, key) in jurusan.jurusan"
-              :key="key"
+            v-for="(item, key) in jurusan.jurusan"
+            :key="key"
           >
             <Table.Td>
               {{ key + 1 }}
@@ -93,24 +91,24 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
             <Table.Td>
               <div class="flex gap-2">
                 <Button
-                    class="gap-2"
-                    variant="warning"
-                    @click="showJurusanModal(item)"
+                  class="gap-2"
+                  variant="warning"
+                  @click="showJurusanModal(item)"
                 >
                   <Lucide
-                      class="w-5 h-5"
-                      icon="Edit"
+                    class="w-5 h-5"
+                    icon="Edit"
                   />
                   Ubah
                 </Button>
                 <Button
-                    class="gap-2"
-                    variant="danger"
-                    @click="deleteJurusan(item)"
+                  class="gap-2"
+                  variant="danger"
+                  @click="deleteJurusan(item)"
                 >
                   <Lucide
-                      class="w-5 h-5"
-                      icon="Trash2"
+                    class="w-5 h-5"
+                    icon="Trash2"
                   />
                   Hapus
                 </Button>

@@ -10,6 +10,7 @@ import { twMerge } from "tailwind-merge";
 import { MenuItem as HeadlessMenuItem } from "@headlessui/vue";
 import { useAttrs, computed } from "vue";
 
+// eslint-disable-next-line no-undef
 interface ItemProps extends ExtractProps<typeof HeadlessMenuItem> {
   as?: string | object;
 }

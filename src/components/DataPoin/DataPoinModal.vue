@@ -69,41 +69,43 @@ const handleSuccess = () => {
 
 <template>
   <Dialog
-      :open="showModal"
-      static-backdrop
-      @close="() => {showModal = false}"
+    :open="showModal"
+    static-backdrop
+    @close="() => {showModal = false}"
   >
     <Dialog.Panel
-        @close="() => {showModal = false}"
+      @close="() => {showModal = false}"
     >
       <Form
-          :validate-on-blur="false"
-          @submit="handleSubmit"
+        :validate-on-blur="false"
+        @submit="handleSubmit"
       >
         <div class="p-5 flex flex-col gap-5">
-          <p class="text-lg font-bold">Form Data Poin</p>
+          <p class="text-lg font-bold">
+            Form Data Poin
+          </p>
           <div>
             <FormLabel for="title">
               Nama
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model.trim="form.title"
-                :validate-on-blur="false"
-                name="Nama"
-                :rules="{
-                  required: true,
-                }"
+              v-slot="{ field, errorMessage }"
+              v-model.trim="form.title"
+              :validate-on-blur="false"
+              name="Nama"
+              :rules="{
+                required: true,
+              }"
             >
               <FormInput
-                  id="title"
-                  :class="{ 'border-danger': errorMessage }"
-                  type="text"
-                  v-bind="field"
+                id="title"
+                :class="{ 'border-danger': errorMessage }"
+                type="text"
+                v-bind="field"
               />
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -114,23 +116,23 @@ const handleSuccess = () => {
               Deskripsi
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model.trim="form.description"
-                :validate-on-blur="false"
-                name="Deskripsi"
-                :rules="{
-                  required: true,
-                }"
+              v-slot="{ field, errorMessage }"
+              v-model.trim="form.description"
+              :validate-on-blur="false"
+              name="Deskripsi"
+              :rules="{
+                required: true,
+              }"
             >
               <FormTextarea
-                  id="description"
-                  :class="{ 'border-danger': errorMessage }"
-                  v-model="form.description"
-                  v-bind="field"
+                id="description"
+                v-model="form.description"
+                :class="{ 'border-danger': errorMessage }"
+                v-bind="field"
               />
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -141,25 +143,25 @@ const handleSuccess = () => {
               Poin
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model.number="form.poin"
-                :validate-on-blur="false"
-                name="Poin"
-                :rules="{
-                  required: true,
-                  integer: true,
-                }"
+              v-slot="{ field, errorMessage }"
+              v-model.number="form.poin"
+              :validate-on-blur="false"
+              name="Poin"
+              :rules="{
+                required: true,
+                integer: true,
+              }"
             >
               <FormInput
-                  id="poin"
-                  :class="{ 'border-danger': errorMessage }"
-                  type="number"
-                  step="1"
-                  v-bind="field"
+                id="poin"
+                :class="{ 'border-danger': errorMessage }"
+                type="number"
+                step="1"
+                v-bind="field"
               />
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -170,30 +172,36 @@ const handleSuccess = () => {
               Tipe
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model.number="form.type"
-                :validate-on-blur="false"
-                name="Tipe"
-                :rules="{
-                  required: true,
-                }"
+              v-slot="{ field, errorMessage }"
+              v-model.number="form.type"
+              :validate-on-blur="false"
+              name="Tipe"
+              :rules="{
+                required: true,
+              }"
             >
               <div>
                 <TomSelect
-                    id="type"
-                    :class="{ 'border-danger': errorMessage }"
-                    v-model="form.type"
-                    placeholder="Pilih Tipe"
-                    v-bind="field"
+                  id="type"
+                  v-model="form.type"
+                  :class="{ 'border-danger': errorMessage }"
+                  placeholder="Pilih Tipe"
+                  v-bind="field"
                 >
-                  <option value="">Pilih Tipe</option>
-                  <option value="Penghargaan">Penghargaan</option>
-                  <option value="Pelanggaran">Pelanggaran</option>
+                  <option value="">
+                    Pilih Tipe
+                  </option>
+                  <option value="Penghargaan">
+                    Penghargaan
+                  </option>
+                  <option value="Pelanggaran">
+                    Pelanggaran
+                  </option>
                 </TomSelect>
               </div>
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -204,31 +212,39 @@ const handleSuccess = () => {
               Kategori
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model.number="form.category"
-                :validate-on-blur="false"
-                name="Kategori"
-                :rules="{
-                  required: true,
-                }"
+              v-slot="{ field, errorMessage }"
+              v-model.number="form.category"
+              :validate-on-blur="false"
+              name="Kategori"
+              :rules="{
+                required: true,
+              }"
             >
               <div>
                 <TomSelect
-                    id="category"
-                    :class="{ 'border-danger': errorMessage }"
-                    v-model="form.category"
-                    placeholder="Pilih Kategori"
-                    v-bind="field"
+                  id="category"
+                  v-model="form.category"
+                  :class="{ 'border-danger': errorMessage }"
+                  placeholder="Pilih Kategori"
+                  v-bind="field"
                 >
-                  <option value="">Pilih Kategori</option>
-                  <option value="Ringan">Ringan</option>
-                  <option value="Sedang">Sedang</option>
-                  <option value="Berat">Berat</option>
+                  <option value="">
+                    Pilih Kategori
+                  </option>
+                  <option value="Ringan">
+                    Ringan
+                  </option>
+                  <option value="Sedang">
+                    Sedang
+                  </option>
+                  <option value="Berat">
+                    Berat
+                  </option>
                 </TomSelect>
               </div>
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -237,19 +253,19 @@ const handleSuccess = () => {
 
           <div class="text-right">
             <Button
-                type="button"
-                variant="outline-secondary"
-                class="w-24 mr-1"
-                @click="() => {
-                  showModal = false
-                }"
+              type="button"
+              variant="outline-secondary"
+              class="w-24 mr-1"
+              @click="() => {
+                showModal = false
+              }"
             >
               Batal
             </Button>
             <Button
-                type="submit"
-                variant="primary"
-                class="w-24"
+              type="submit"
+              variant="primary"
+              class="w-24"
             >
               Simpan
             </Button>

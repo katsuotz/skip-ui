@@ -14,6 +14,7 @@ import { twMerge } from "tailwind-merge";
 import { ProvideSlideover } from "./Slideover.vue";
 import { inject, useAttrs, computed } from "vue";
 
+// eslint-disable-next-line no-undef
 interface PanelProps extends ExtractProps<typeof HeadlessDialogPanel> {
   as?: string | object;
 }
