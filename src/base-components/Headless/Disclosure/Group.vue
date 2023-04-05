@@ -47,8 +47,8 @@ provide<ProvideGroup>(
     <component
       :is="item"
       v-for="(item, key) in slots.default && slots.default()"
-      :index="key"
       :key="key"
+      :index="key"
     />
   </component>
 </template>
