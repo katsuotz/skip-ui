@@ -20,13 +20,13 @@ const jurusan = useJurusanStore()
 const tahunAjar = useTahunAjarStore()
 
 const filter = ref({
-  tahun_ajar_id: null,
-  jurusan_id: null,
+  tahun_ajar_id: '',
+  jurusan_id: '',
 })
 
 const getData = () => {
   if (!filter.value.tahun_ajar_id || !filter.value.jurusan_id) return
-  kelas.getKelas(filter.value.tahun_ajar_id, filter.value.jurusan_id)
+  kelas.getKelas(parseInt(filter.value.tahun_ajar_id), parseInt(filter.value.jurusan_id))
 }
 
 getData()

@@ -77,23 +77,23 @@ const handleSubmit = async () => {
       >
         <div class="p-5 flex flex-col gap-5">
           <p class="text-lg font-bold">
-            Form Tahun Ajar
+            Form Kelas
           </p>
           <div>
-            <FormLabel for="tahun_ajar">
-              Tahun Ajar
+            <FormLabel for="nama_kelas">
+              Nama Kelas
             </FormLabel>
             <Field
               v-slot="{ field, errorMessage }"
-              v-model="form.tahun_ajar"
+              v-model="form.nama_kelas"
               :validate-on-blur="false"
-              name="Tahun Ajar"
+              name="Nama Kelas"
               :rules="{
                 required: true,
               }"
             >
               <FormInput
-                id="tahun_ajar"
+                id="nama_kelas"
                 :class="{ 'border-danger': errorMessage }"
                 type="text"
                 v-bind="field"
