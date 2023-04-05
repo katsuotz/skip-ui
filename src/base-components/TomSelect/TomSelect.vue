@@ -8,7 +8,7 @@ import {
   SelectHTMLAttributes,
   onMounted,
   inject,
-  ref,
+  ref, watch,
 } from "vue";
 
 export interface TomSelectElement extends HTMLSelectElement {
@@ -25,6 +25,7 @@ export interface TomSelectProps extends SelectHTMLAttributes {
 export interface TomSelectEmit {
   (e: "update:modelValue", value: string | string[]): void;
   (e: "optionAdd", value: string | number): void;
+  (e: "search", value: string): void;
 }
 
 export type ProvideTomSelect = (el: TomSelectElement) => void;
@@ -122,6 +123,13 @@ onMounted(() => {
     bindInstance(tomSelectRef.value);
   }
 });
+
+const handleInput = (value: any) => {
+  console.log(value)
+}
+watch(() => props.modelValue, () => {
+  console.log(props.modelValue)
+})
 </script>
 
 <template>
@@ -130,6 +138,7 @@ onMounted(() => {
     v-select-directive
     :value="props.modelValue"
     class="tom-select"
+    @type="handleInput"
     @change="
       (event) => {
         emit('update:modelValue', (event.target as HTMLSelectElement).value);

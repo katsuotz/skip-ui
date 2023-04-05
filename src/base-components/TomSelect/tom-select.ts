@@ -72,7 +72,13 @@ const init = (
       "update:modelValue",
       Array.isArray(selectedItems) ? [...selectedItems] : selectedItems,
     );
-  }), 0);
+  }, 0));
+
+  // On type
+  clonedEl.TomSelect.on("type", debounce(function (value: string) {
+    emit("search", value)
+  }, 500));
+
 };
 
 const getOptions = (

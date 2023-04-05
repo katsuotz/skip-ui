@@ -129,6 +129,13 @@ input[type=number] {
     opacity: 1;
 }
 
+.tom-select .item {
+    max-width: calc(100% - 55px);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 .dropzone .dz-preview .dz-image {
     @apply flex justify-center items-center border border-slate-200;
     img {
