@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import SideMenu from "../layouts/SideMenu/SideMenu.vue";
-import Page1 from "../pages/Page1.vue";
-import Page2 from "../pages/Page2.vue";
 import {useAuthStore} from "../stores/modules/auth";
 
 const routes = [
@@ -12,12 +10,20 @@ const routes = [
       {
         path: "/",
         name: "side-menu-page-1",
-        component: Page1,
+        component: () => import("../pages/Page1.vue"),
       },
       {
         path: "page-2",
         name: "side-menu-page-2",
-        component: Page2,
+        component: () => import("../pages/Page2.vue"),
+      },
+      {
+        path: "guru",
+        name: "guru",
+        component: () => import("../pages/Guru/GuruIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
       },
       {
         path: "tahun-ajar",
@@ -76,10 +82,6 @@ router.beforeEach((to, from, next) => {
   // @ts-ignore
   if (meta?.role && !meta?.role?.includes(auth.user?.role))
     return next('/')
-
-  // @ts-ignore
-  // if (meta?.level && !meta?.level?.includes(auth.user?.school?.level))
-  //   return next('/')
 
   next()
 })

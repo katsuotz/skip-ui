@@ -49,12 +49,11 @@ export const useSideMenuStore = defineStore("sideMenu", {
       },
       {
         icon: "UserCheck",
-        pageName: "side-menu-page-2",
+        pageName: "guru",
         title: "Guru",
       },
       {
         icon: "Inbox",
-        pageName: "side-menu-dashboard",
         title: "Admin",
         subMenu: [
           {

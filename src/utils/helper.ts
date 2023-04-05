@@ -11,6 +11,10 @@ const dateTimeFormat = (date?: string | Date) => {
   return formatDate('DD MMM YYYY, HH:mm', date)
 }
 
+const dateInputFormat = (date?: string | Date) => {
+  return formatDate('YYYY-MM-DD', date)
+}
+
 const dateFormat = (date?: string | Date) => {
   return formatDate('DD MMM YYYY', date)
 }
@@ -184,6 +188,7 @@ export {
   createFilter,
   numberFormat,
   dateTimeFormat,
+  dateInputFormat,
   dateFormat,
   timeFormat,
   getFileUrl,
