@@ -169,7 +169,9 @@ const handleSearchGuru = (search: string) => {
                     :value="item.id"
                   >
                     {{ item.tahun_ajar }}
-                    <template v-if="item.is_active">Aktif</template>
+                    <template v-if="item.is_active">
+                      Aktif
+                    </template>
                   </option>
                 </TomSelect>
               </div>

@@ -27,7 +27,6 @@ export const useSideMenuStore = defineStore("sideMenu", {
 
       {
         icon: "ListOrdered",
-        pageName: "side-menu-dashboard",
         title: "Siswa",
         subMenu: [
           {
@@ -37,7 +36,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
           },
           {
             icon: "ChevronRight",
-            pageName: "side-menu-page-2",
+            pageName: "siswa",
             title: "Data Siswa",
           },
           {
