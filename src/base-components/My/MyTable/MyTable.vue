@@ -118,7 +118,7 @@ const handleSearch = debounce((value: string) => {
     <slot />
   </div>
   <div
-    v-if="pagination"
+    v-if="pagination && pageCount > 0"
     class="flex flex-wrap justify-end mt-5"
   >
     <MyPagination

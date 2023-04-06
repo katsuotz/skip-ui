@@ -16,6 +16,9 @@ const showModal = ref(false)
 const global = useGlobalStore()
 const tahunAjar = useTahunAjarStore()
 
+tahunAjar.updatePerPage(10)
+tahunAjar.updateCurrentPage(1)
+
 const getData = (resetPage: boolean = false) => {
   if (resetPage) tahunAjar.updateCurrentPage(1)
 
