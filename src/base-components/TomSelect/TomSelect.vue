@@ -8,7 +8,7 @@ import {
   SelectHTMLAttributes,
   onMounted,
   inject,
-  ref, watch,
+  ref,
 } from "vue";
 
 export interface TomSelectElement extends HTMLSelectElement {
