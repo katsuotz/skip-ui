@@ -131,7 +131,6 @@ onMounted(() => {
     v-select-directive
     :value="props.modelValue"
     class="tom-select"
-    @type="handleInput"
     @change="
       (event) => {
         emit('update:modelValue', (event.target as HTMLSelectElement).value);
