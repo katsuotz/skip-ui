@@ -26,17 +26,6 @@ const filter = ref({
 
 const disableKelas = ref(true)
 
-const getTahunAjar = () => {
-  tahunAjar.getTahunAjar({
-    page: 1,
-    per_page: -1,
-  })
-}
-
-const getJurusan = () => {
-  jurusan.getJurusan()
-}
-
 const getKelas = () => {
   disableKelas.value = !filter.value.tahun_ajar_id
   kelas.kelas = []
@@ -54,7 +43,7 @@ const getData = (resetPage: boolean = false) => {
     page: siswa.pagination.page,
     per_page: siswa.pagination.per_page,
     search: search.value,
-    kelas_id: "0",
+    kelas_id: filter.value.kelas_id,
   })
 }
 
@@ -81,18 +70,18 @@ const resetData = () => {
 }
 
 resetData()
-getTahunAjar()
-getJurusan()
 
 const selectedSiswa = ref<number[]>([])
 
 const router = useRouter()
 
 const handleAddSiswaKelas = () => {
-  kelas.addSiswaKelas(kelas_id, selectedSiswa.value).then(() => {
+  kelas.siswaNaikKelas(kelas_id, selectedSiswa.value).then(() => {
     router.push('/kelas/' + kelas_id + '/siswa')
   })
 }
+
+const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !== kelas.selectedKelas?.tahun_ajar_id))
 
 </script>
 <template>
@@ -124,7 +113,7 @@ const handleAddSiswaKelas = () => {
           Pilih Tahun Ajar
         </option>
         <option
-            v-for="(item, key) in tahunAjar.tahunAjar"
+            v-for="(item, key) in tahunAjarOptions"
             :key="key"
             :value="item.id"
         >
@@ -152,7 +141,6 @@ const handleAddSiswaKelas = () => {
           {{ item.nama_jurusan }}
         </option>
       </TomSelect>
-      {{disableKelas}}
       <TomSelect
           id="kelas_id"
           v-model="filter.kelas_id"
@@ -197,7 +185,7 @@ const handleAddSiswaKelas = () => {
               Nama
             </Table.Th>
             <Table.Th>
-              Status
+              Poin
             </Table.Th>
           </Table.Tr>
         </Table.Thead>
@@ -214,8 +202,7 @@ const handleAddSiswaKelas = () => {
                 <FormCheck.Input
                     v-model="selectedSiswa"
                     type="checkbox"
-                    :value="item.id"
-                    :disabled="item.siswa_kelas?.length"
+                    :value="item.siswa_kelas_id"
                 />
                 <span class="ml-2">
                   {{ countPaginationNumber(siswa.pagination, key) }}
@@ -229,20 +216,7 @@ const handleAddSiswaKelas = () => {
               {{ item.nama }}
             </Table.Td>
             <Table.Td>
-              <span
-                  :class="[
-                  item.siswa_kelas?.length && 'text-success',
-                  !item.siswa_kelas?.length && 'text-danger',
-                  'font-bold',
-                ]"
-              >
-                <Lucide
-                    v-if="item.siswa_kelas?.length"
-                    icon="Check"
-                    class="stroke-2"
-                />
-                {{ item.siswa_kelas?.length ? '' : 'Belum ada kelas' }}
-              </span>
+              {{ item.poin }}
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>

@@ -143,6 +143,9 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             <Table.Th>
               Nama
             </Table.Th>
+            <Table.Th>
+              Poin
+            </Table.Th>
             <Table.Th style="width: 200px" />
           </Table.Tr>
         </Table.Thead>
@@ -171,6 +174,9 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             </Table.Td>
             <Table.Td>
               {{ item.nama }}
+            </Table.Td>
+            <Table.Td>
+              {{ item.poin }}
             </Table.Td>
             <Table.Td>
               <div class="flex gap-2">

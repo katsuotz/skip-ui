@@ -64,7 +64,23 @@ export const useKelasStore = defineStore("kelas", {
       return new Promise((resolve, reject) => {
         global.loading = true
         api.post('/kelas/' + kelas_id + '/add-siswa', {
-          siswa_id
+          siswa_id,
+        }).then((res: any) => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        }).finally(() => {
+          global.loading = false
+        })
+      })
+    },
+    siswaNaikKelas(kelas_id: string, siswa_kelas_id: number[]) {
+      const global = useGlobalStore()
+
+      return new Promise((resolve, reject) => {
+        global.loading = true
+        api.post('/kelas/' + kelas_id + '/naik-kelas', {
+          siswa_kelas_id,
         }).then((res: any) => {
           resolve(res)
         }).catch(err => {

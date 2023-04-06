@@ -6,6 +6,8 @@ export interface Siswa extends Base, Profile {
   id?: number;
   nis: string;
   siswa_kelas?: SiswaKelas[];
+  siswa_kelas_id?: number;
+  poin?: number;
 }
 
 export interface SiswaTable extends Table {
