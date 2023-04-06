@@ -1,9 +1,9 @@
 export interface Profile {
   id?: number;
   nama: string;
-  jenis_kelamin: string;
-  tempat_lahir: string;
-  tanggal_lahir: string | Date;
+  jenis_kelamin?: string;
+  tempat_lahir?: string;
+  tanggal_lahir?: string | Date;
 }
 
 export interface User {

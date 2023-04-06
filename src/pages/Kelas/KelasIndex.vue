@@ -89,8 +89,8 @@ getJurusan()
       Tambah Data
     </Button>
   </div>
-  <div class="p-5 mt-5 intro-y box">
-    <div class="flex flex-wrap gap-2 mb-4">
+  <div class="p-5 mt-5 intro-y box flex flex-col gap-4">
+    <div class="flex flex-wrap gap-2">
       <TomSelect
         id="tahun_ajar_id"
         v-model="filter.tahun_ajar_id"
@@ -108,6 +108,7 @@ getJurusan()
           :value="item.id"
         >
           {{ item.tahun_ajar }}
+          <template v-if="item.is_active">(Aktif)</template>
         </option>
       </TomSelect>
       <TomSelect
