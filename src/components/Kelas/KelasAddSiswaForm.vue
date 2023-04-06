@@ -113,7 +113,7 @@ getData(true)
                   v-model="selectedSiswa"
                   type="checkbox"
                   :value="item.id"
-                  :disabled="item.siswa_kelas?.length"
+                  :disabled="!!item.siswa_kelas?.length"
                 />
                 <span class="ml-2">
                   {{ countPaginationNumber(siswa.pagination, key) }}

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
-import {computed, ref, watch} from "vue";
+import {computed, ref} from "vue";
 import {countPaginationNumber} from "../../utils/helper";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
@@ -88,14 +88,14 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
   <div class="flex flex-col gap-4">
     <div class="flex justify-end">
       <Button
-          class="gap-2"
-          variant="success"
-          :disabled="selectedSiswa.length === 0"
-          @click="handleAddSiswaKelas"
+        class="gap-2"
+        variant="success"
+        :disabled="selectedSiswa.length === 0"
+        @click="handleAddSiswaKelas"
       >
         <Lucide
-            class="w-5 h-5"
-            icon="Check"
+          class="w-5 h-5"
+          icon="Check"
         />
         Tambah Siswa Terpilih
       </Button>
@@ -103,19 +103,19 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
 
     <div class="flex flex-wrap gap-2">
       <TomSelect
-          id="tahun_ajar_id"
-          v-model="filter.tahun_ajar_id"
-          placeholder="Pilih Tahun Ajar"
-          style="width: 200px"
-          @update:modelValue="getKelas"
+        id="tahun_ajar_id"
+        v-model="filter.tahun_ajar_id"
+        placeholder="Pilih Tahun Ajar"
+        style="width: 200px"
+        @update:modelValue="getKelas"
       >
         <option value="">
           Pilih Tahun Ajar
         </option>
         <option
-            v-for="(item, key) in tahunAjarOptions"
-            :key="key"
-            :value="item.id"
+          v-for="(item, key) in tahunAjarOptions"
+          :key="key"
+          :value="item.id"
         >
           {{ item.tahun_ajar }}
           <template v-if="item.is_active">
@@ -124,38 +124,38 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
         </option>
       </TomSelect>
       <TomSelect
-          id="jurusan_id"
-          v-model="filter.jurusan_id"
-          placeholder="Pilih Jurusan"
-          style="width: 200px"
-          @update:modelValue="getKelas"
+        id="jurusan_id"
+        v-model="filter.jurusan_id"
+        placeholder="Pilih Jurusan"
+        style="width: 200px"
+        @update:modelValue="getKelas"
       >
         <option value="">
           Pilih Jurusan
         </option>
         <option
-            v-for="(item, key) in jurusan.jurusan"
-            :key="key"
-            :value="item.id"
+          v-for="(item, key) in jurusan.jurusan"
+          :key="key"
+          :value="item.id"
         >
           {{ item.nama_jurusan }}
         </option>
       </TomSelect>
       <TomSelect
-          id="kelas_id"
-          v-model="filter.kelas_id"
-          placeholder="Pilih Kelas"
-          style="width: 200px"
-          :disable-option="disableKelas"
-          @update:modelValue="() => getData(true)"
+        id="kelas_id"
+        v-model="filter.kelas_id"
+        placeholder="Pilih Kelas"
+        style="width: 200px"
+        :disable-option="disableKelas"
+        @update:modelValue="() => getData(true)"
       >
         <option value="">
           Pilih Kelas
         </option>
         <option
-            v-for="(item, key) in kelas.kelas"
-            :key="key"
-            :value="item.id"
+          v-for="(item, key) in kelas.kelas"
+          :key="key"
+          :value="item.id"
         >
           {{ item.nama_kelas }}
         </option>
@@ -163,14 +163,14 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
     </div>
 
     <MyTable
-        v-if="filter.tahun_ajar_id && filter.jurusan_id && filter.kelas_id"
-        :current-page="siswa.pagination.page"
-        :page-count="siswa.pagination.total_page"
-        :per-page="siswa.pagination.per_page"
-        :search="search"
-        @updatePerPage="handleUpdatePerPage"
-        @updatePage="handleUpdatePage"
-        @updateSearch="handleSearch"
+      v-if="filter.tahun_ajar_id && filter.jurusan_id && filter.kelas_id"
+      :current-page="siswa.pagination.page"
+      :page-count="siswa.pagination.total_page"
+      :per-page="siswa.pagination.per_page"
+      :search="search"
+      @updatePerPage="handleUpdatePerPage"
+      @updatePage="handleUpdatePage"
+      @updateSearch="handleSearch"
     >
       <Table>
         <Table.Thead>
@@ -190,19 +190,19 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody
-            v-if="siswa.siswa?.length"
-            :data="siswa.siswa"
+          v-if="siswa.siswa?.length"
+          :data="siswa.siswa"
         >
           <Table.Tr
-              v-for="(item, key) in siswa.siswa"
-              :key="key"
+            v-for="(item, key) in siswa.siswa"
+            :key="key"
           >
             <Table.Td>
               <FormCheck>
                 <FormCheck.Input
-                    v-model="selectedSiswa"
-                    type="checkbox"
-                    :value="item.siswa_kelas_id"
+                  v-model="selectedSiswa"
+                  type="checkbox"
+                  :value="item.siswa_kelas_id"
                 />
                 <span class="ml-2">
                   {{ countPaginationNumber(siswa.pagination, key) }}
@@ -223,8 +223,8 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
         <Table.Tbody v-else>
           <Table.Tr>
             <Table.Td
-                colspan="99"
-                class="text-center"
+              colspan="99"
+              class="text-center"
             >
               Tidak ada Data
             </Table.Td>
