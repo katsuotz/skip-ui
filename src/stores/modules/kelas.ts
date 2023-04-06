@@ -6,7 +6,7 @@ import {useGlobalStore} from "../global";
 import {Any} from "../../utils/interfaces/helper";
 
 interface KelasState {
-  kelas?: KelasResponse[];
+  kelas: KelasResponse[];
   selectedKelas?: KelasResponse;
 }
 
@@ -99,7 +99,6 @@ export const useKelasStore = defineStore("kelas", {
       }
 
       this.kelas = []
-      this.selectedKelas = undefined
 
       const global = useGlobalStore()
 

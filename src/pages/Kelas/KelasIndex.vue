@@ -63,10 +63,6 @@ const getJurusan = () => {
   jurusan.getJurusan()
 }
 
-const handleSearchTahunAjar = (value:string) => {
-  console.log(value)
-}
-
 getTahunAjar()
 getJurusan()
 
@@ -97,7 +93,6 @@ getJurusan()
         placeholder="Pilih Tahun Ajar"
         style="width: 200px"
         @update:modelValue="getData"
-        @search="handleSearchTahunAjar"
       >
         <option value="">
           Pilih Tahun Ajar

@@ -5,7 +5,7 @@ import {Jurusan} from '../../utils/interfaces/jurusan'
 import {useGlobalStore} from "../global";
 
 interface JurusanState {
-  jurusan?: Jurusan[];
+  jurusan: Jurusan[];
   selectedJurusan?: Jurusan | undefined;
 }
 

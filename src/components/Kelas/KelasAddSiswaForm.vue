@@ -44,14 +44,6 @@ const handleSearch = (value: string = '') => {
   getData(true)
 }
 
-const onLoaded = () => {
-  kelas.getKelasByID(kelas_id).then(() => {
-    getData(true)
-  })
-}
-
-onLoaded()
-
 const selectedSiswa = ref<number[]>([])
 
 const router = useRouter()
@@ -62,14 +54,11 @@ const handleAddSiswaKelas = () => {
   })
 }
 
+getData(true)
+
 </script>
 <template>
-  <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
-    <h2 class="mr-auto text-lg font-medium">
-      Tambah Siswa - {{ kelas.selectedKelas?.nama_kelas }}
-    </h2>
-  </div>
-  <div class="p-5 mt-5 intro-y box flex flex-col gap-4">
+  <div class="flex flex-col gap-4">
     <div class="flex justify-end">
       <Button
         class="gap-2"
@@ -84,7 +73,6 @@ const handleAddSiswaKelas = () => {
         Tambah Siswa Terpilih
       </Button>
     </div>
-
     <MyTable
       :current-page="siswa.pagination.page"
       :page-count="siswa.pagination.total_page"
@@ -127,10 +115,10 @@ const handleAddSiswaKelas = () => {
                   :value="item.id"
                   :disabled="item.siswa_kelas?.length"
                 />
+                <span class="ml-2">
+                  {{ countPaginationNumber(siswa.pagination, key) }}
+                </span>
               </FormCheck>
-              <span class="ml-2">
-                {{ countPaginationNumber(siswa.pagination, key) }}
-              </span>
             </Table.Td>
             <Table.Td>
               {{ item.nis }}

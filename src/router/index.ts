@@ -52,7 +52,7 @@ const routes = [
       {
         path: "kelas/:kelas_id/siswa/add",
         name: "kelas-siswa-add",
-        component: () => import("../pages/Kelas/KelasSiswaAdd.vue"),
+        component: () => import("../pages/Kelas/KelasSiswaForm.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
         },

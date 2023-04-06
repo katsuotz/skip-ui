@@ -6,7 +6,7 @@ import {Table, Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 
 interface TahunAjarState {
-  tahunAjar?: TahunAjar[];
+  tahunAjar: TahunAjar[];
   selectedTahunAjar?: TahunAjar | undefined;
   pagination: Pagination;
 }
