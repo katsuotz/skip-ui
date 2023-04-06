@@ -123,13 +123,6 @@ onMounted(() => {
     bindInstance(tomSelectRef.value);
   }
 });
-
-const handleInput = (value: any) => {
-  console.log(value)
-}
-watch(() => props.modelValue, () => {
-  console.log(props.modelValue)
-})
 </script>
 
 <template>
