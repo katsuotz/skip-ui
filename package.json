@@ -37,7 +37,6 @@
     "@types/js-beautify": "^1.13.3",
     "@types/lodash": "^4.14.184",
     "@types/lodash-es": "^4.17.7",
-    "@types/tabulator-tables": "^5.32.1",
     "@types/toastify-js": "^1.11.1",
     "@typescript-eslint/eslint-plugin": "^5.48.0",
     "@typescript-eslint/parser": "^5.48.0",
