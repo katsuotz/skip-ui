@@ -68,7 +68,7 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
       <Table>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>
+            <Table.Th width="10">
               #
             </Table.Th>
             <Table.Th>

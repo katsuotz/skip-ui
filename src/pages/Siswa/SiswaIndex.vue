@@ -97,7 +97,7 @@ const handleDeleteSiswa = async (id: number): Promise<void> => {
       <Table>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>
+            <Table.Th width="10">
               #
             </Table.Th>
             <Table.Th>
@@ -109,7 +109,10 @@ const handleDeleteSiswa = async (id: number): Promise<void> => {
             <Table.Th style="width: 200px" />
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody :data="siswa.siswa">
+        <Table.Tbody
+          v-if="siswa.siswa?.length"
+          :data="siswa.siswa"
+        >
           <Table.Tr
             v-for="(item, key) in siswa.siswa"
             :key="key"
@@ -148,6 +151,16 @@ const handleDeleteSiswa = async (id: number): Promise<void> => {
                   Hapus
                 </Button>
               </div>
+            </Table.Td>
+          </Table.Tr>
+        </Table.Tbody>
+        <Table.Tbody v-else>
+          <Table.Tr>
+            <Table.Td
+              colspan="99"
+              class="text-center"
+            >
+              Tidak ada Data
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>
