@@ -20,6 +20,7 @@ export interface TomSelectProps extends SelectHTMLAttributes {
   options?: RecursivePartial<TomSettings>;
   refKey?: string;
   clearable?: boolean;
+  disableOption?: boolean;
 }
 
 export interface TomSelectEmit {
@@ -99,12 +100,15 @@ const vSelectDirective = {
     // Initialize tom select
     setValue(clonedEl, props);
     init(el, clonedEl, props, computedOptions.value, emit);
+    if (props.disableOption) clonedEl.TomSelect.disable()
   },
   updated(el: TomSelectElement) {
     const clonedEl = document.querySelectorAll(
         `[data-id='${el.getAttribute("data-id")}'][data-initial-class]`
     )[0] as TomSelectElement;
     const value = props.modelValue;
+    if (props.disableOption) clonedEl.TomSelect.disable()
+    else clonedEl.TomSelect.enable()
     updateValue(el, clonedEl, value || '', props, computedOptions.value, emit);
   },
 };
