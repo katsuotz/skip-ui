@@ -141,7 +141,7 @@ getJurusan()
       <Table>
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>
+            <Table.Th width="10">
               #
             </Table.Th>
             <Table.Th>
@@ -172,17 +172,23 @@ getJurusan()
             </Table.Td>
             <Table.Td>
               <div class="flex gap-2">
-                <Button
-                  class="gap-2"
-                  variant="info"
-                  @click="showKelasModal(item)"
+                <RouterLink
+                  v-slot="{ navigate, href }"
+                  :to="`/kelas/${item.id}/siswa`"
                 >
-                  <Lucide
-                    class="w-5 h-5"
-                    icon="Users"
-                  />
-                  Siswa
-                </Button>
+                  <Button
+                    class="gap-2"
+                    variant="info"
+                    :href="href"
+                    @click="navigate"
+                  >
+                    <Lucide
+                      class="w-5 h-5"
+                      icon="Users"
+                    />
+                    Siswa
+                  </Button>
+                </RouterLink>
                 <Button
                   class="gap-2"
                   variant="warning"

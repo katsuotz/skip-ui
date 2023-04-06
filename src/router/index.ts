@@ -42,6 +42,22 @@ const routes = [
         },
       },
       {
+        path: "kelas/:kelas_id/siswa",
+        name: "kelas-siswa",
+        component: () => import("../pages/Kelas/KelasSiswaIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
+      },
+      {
+        path: "kelas/:kelas_id/siswa/add",
+        name: "kelas-siswa-add",
+        component: () => import("../pages/Kelas/KelasSiswaAdd.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
+      },
+      {
         path: "tahun-ajar",
         name: "tahun-ajar",
         component: () => import("../pages/TahunAjar/TahunAjarIndex.vue"),

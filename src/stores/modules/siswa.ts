@@ -1,8 +1,8 @@
 import api from '../../utils/api'
 import {defineStore} from "pinia";
 
-import {Siswa} from '../../utils/interfaces/siswa'
-import {Table, Payload, Pagination} from '../../utils/interfaces/table'
+import {Siswa, SiswaTable} from '../../utils/interfaces/siswa'
+import {Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 
 interface SiswaState {
@@ -65,11 +65,12 @@ export const useSiswaStore = defineStore("siswa", {
         })
       })
     },
-    getSiswa({page = 1, per_page = 10, search = ''}: Table) {
+    getSiswa({page = 1, per_page = 10, search = '', kelas_id = ''}: SiswaTable) {
       const params: Payload = {
         page,
         per_page,
         search,
+        kelas_id,
       }
 
       this.siswa = []

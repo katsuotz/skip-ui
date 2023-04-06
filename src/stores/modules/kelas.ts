@@ -58,6 +58,40 @@ export const useKelasStore = defineStore("kelas", {
         })
       })
     },
+    addSiswaKelas(kelas_id: string, siswa_id: number[]) {
+      const global = useGlobalStore()
+
+      return new Promise((resolve, reject) => {
+        global.loading = true
+        api.post('/kelas/' + kelas_id + '/add-siswa', {
+          siswa_id
+        }).then((res: any) => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        }).finally(() => {
+          global.loading = false
+        })
+      })
+    },
+    deleteSiswaKelas(kelas_id: string, siswa_id: number[]) {
+      const global = useGlobalStore()
+
+      return new Promise((resolve, reject) => {
+        global.loading = true
+        api.delete('/kelas/' + kelas_id + '/remove-siswa', {
+          data: {
+            siswa_id
+          },
+        }).then((res: any) => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        }).finally(() => {
+          global.loading = false
+        })
+      })
+    },
     getKelas(tahun_ajar_id: number, jurusan_id: number) {
       const params: Any = {
         tahun_ajar_id,
@@ -83,7 +117,7 @@ export const useKelasStore = defineStore("kelas", {
         })
       })
     },
-    getKelasDetail(id: string) {
+    getKelasByID(id: string) {
       this.selectedKelas = undefined
 
       const params: any = {}
