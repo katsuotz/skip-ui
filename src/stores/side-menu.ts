@@ -31,11 +31,6 @@ export const useSideMenuStore = defineStore("sideMenu", {
         subMenu: [
           {
             icon: "ChevronRight",
-            pageName: "side-menu-page-2",
-            title: "Poin Siswa",
-          },
-          {
-            icon: "ChevronRight",
             pageName: "siswa",
             title: "Data Siswa",
           },
@@ -50,6 +45,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
         icon: "UserCheck",
         pageName: "guru",
         title: "Guru",
+        role: ['admin', 'staff-ict'],
       },
       {
         icon: "Inbox",
@@ -81,7 +77,10 @@ export const useSideMenuStore = defineStore("sideMenu", {
     activeMenu: (state) => {
       const auth = useAuthStore()
 
-      const checkRole = (e: Menu) => e.role ? e.role.includes(<Role>auth?.user?.role || '') : true
+      const checkRole = (e: Menu) => {
+        if (e.subMenu) return e.subMenu.length
+        return e.role ? e.role.includes(<Role>auth?.user?.role || '') : true
+      }
 
       return state.menu.map(e => {
         if (e === "divider") return e

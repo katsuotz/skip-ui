@@ -7,8 +7,13 @@ import MobileMenu from "../../components/MobileMenu";
 import { useSideMenuStore } from "../../stores/side-menu";
 import { FormattedMenu, nestedMenu, enter, leave } from "./side-menu";
 import { watch, reactive, computed, onMounted } from "vue";
+import Lucide from "../../base-components/Lucide/Lucide.vue";
+import {useAuthStore} from "../../stores/modules/auth";
 
 const route = useRoute();
+
+const auth = useAuthStore()
+
 let formattedMenu = reactive<Array<FormattedMenu | "divider">>([]);
 const setFormattedMenu = (
   computedFormattedMenu: Array<FormattedMenu | "divider">
@@ -137,7 +142,7 @@ onMounted(() => {
       <!-- BEGIN: Content -->
       <div
         :class="[
-          'max-w-full md:max-w-none rounded-[30px] md:rounded-none px-4 md:px-[22px] min-w-0 min-h-screen bg-slate-100 flex-1 md:pt-20 pb-10 mt-5 md:mt-1 relative dark:bg-darkmode-700',
+          'max-w-full md:max-w-none rounded-[30px] md:rounded-none px-4 md:px-[22px] min-w-0 min-h-screen bg-slate-100 flex-1 md:pt-20 pb-24 mt-5 md:mt-1 relative dark:bg-darkmode-700',
           'before:content-[\'\'] before:w-full before:h-px before:block',
         ]"
       >
@@ -145,5 +150,16 @@ onMounted(() => {
       </div>
       <!-- END: Content -->
     </div>
+
+    <RouterLink
+      v-if="auth.isGuru"
+      to="/add-poin"
+      class="w-12 h-12 bg-primary text-white fixed bottom-8 right-8 flex justify-center items-center rounded-full shadow-md cursor-pointer z-50"
+    >
+      <Lucide
+        class="w-6 h-6 stroke-2"
+        icon="Plus"
+      />
+    </RouterLink>
   </div>
 </template>

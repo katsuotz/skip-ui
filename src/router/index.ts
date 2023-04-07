@@ -50,6 +50,14 @@ const routes = [
         },
       },
       {
+        path: "kelas/:kelas_id/siswa/:siswa_kelas_id",
+        name: "kelas-siswa-log",
+        component: () => import("../pages/Kelas/KelasSiswaLog.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+        },
+      },
+      {
         path: "kelas/:kelas_id/siswa/add",
         name: "kelas-siswa-add",
         component: () => import("../pages/Kelas/KelasSiswaForm.vue"),
@@ -79,6 +87,14 @@ const routes = [
         component: () => import("../pages/DataPoin/DataPoinIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+        },
+      },
+      {
+        path: "add-poin",
+        name: "add-poin",
+        component: () => import("../pages/Poin/AddPoin.vue"),
+        meta: {
+          role: ['staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
         },
       },
     ],

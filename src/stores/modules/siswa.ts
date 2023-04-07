@@ -65,12 +65,13 @@ export const useSiswaStore = defineStore("siswa", {
         })
       })
     },
-    getSiswa({page = 1, per_page = 10, search = '', kelas_id = ''}: SiswaTable) {
+    getSiswa({page = 1, per_page = 10, search = '', kelas_id = '', tahun_ajar_active}: SiswaTable) {
       const params: Payload = {
         page,
         per_page,
         search,
         kelas_id,
+        tahun_ajar_active,
       }
 
       this.siswa = []

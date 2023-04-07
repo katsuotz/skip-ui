@@ -30,11 +30,6 @@ const setup = (url: string) => {
 
     return res.data
   }, function (error: any) {
-    if (error?.response && error?.response.status === 401) {
-      const auth = useAuthStore();
-      return auth.logout()
-    }
-
     const global = useGlobalStore()
 
     const msg = error?.response?.data?.message
@@ -43,6 +38,11 @@ const setup = (url: string) => {
     else if (typeof error.code === 'string') {
       global.setNotification(error.message || error.code, 'danger')
       router.push('/')
+    }
+
+    if (error?.response && error?.response.status === 401) {
+      const auth = useAuthStore();
+      return auth.logout()
     }
 
     return Promise.reject(error?.response)

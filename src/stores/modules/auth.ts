@@ -42,7 +42,8 @@ export const useAuthStore = defineStore("auth", {
       if (state.user)
         return capitalizeFirstLetter(state.user.role.replace(/-/g, ' '))
       return ''
-    }
+    },
+    isGuru: state => ['guru', 'staff-ict', 'guru-bk', 'tata-usaha'].includes(state.user?.role || '')
   },
   actions: {
     login(username: string, password: string) {

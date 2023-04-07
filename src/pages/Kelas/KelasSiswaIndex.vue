@@ -88,7 +88,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
 <template>
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
-      Siswa - {{ kelas.selectedKelas?.nama_kelas }}
+      Siswa
     </h2>
     <RouterLink
       v-slot="{ navigate, href }"
@@ -105,6 +105,26 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
         Tambah Data
       </Button>
     </RouterLink>
+  </div>
+  <div class="p-5 mt-5 intro-y box">
+    <table>
+      <tr>
+        <td style="width: 90px">
+          Kelas
+        </td>
+        <th class="text-left">
+          : {{ kelas.selectedKelas?.nama_kelas }}
+        </th>
+      </tr>
+      <tr>
+        <td style="width: 90px">
+          Tahun Ajar
+        </td>
+        <th class="text-left">
+          : {{ kelas.selectedKelas?.tahun_ajar }}
+        </th>
+      </tr>
+    </table>
   </div>
   <div class="p-5 mt-5 intro-y box flex flex-col gap-4">
     <div class="flex justify-end">
@@ -177,6 +197,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             </Table.Td>
             <Table.Td>
               <span
+                v-if="item.poin"
                 :class="[
                   item.poin < 50 && 'text-danger',
                   item.poin >= 50 && item.poin < 100 && 'text-warning',
@@ -189,16 +210,24 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             </Table.Td>
             <Table.Td>
               <div class="flex gap-2">
-                <Button
-                  class="gap-2 whitespace-nowrap"
-                  variant="success"
+                <RouterLink
+                  v-slot="{ href, navigate }"
+                  :to="`/kelas/${kelas_id}/siswa/${item.siswa_kelas_id}`"
                 >
-                  <Lucide
-                    class="w-5 h-5"
-                    icon="History"
-                  />
-                  Riwayat Poin
-                </Button>
+                  <Button
+                    as="a"
+                    :href="href"
+                    class="gap-2 whitespace-nowrap"
+                    variant="success"
+                    @click="navigate"
+                  >
+                    <Lucide
+                      class="w-5 h-5"
+                      icon="History"
+                    />
+                    Riwayat Poin
+                  </Button>
+                </RouterLink>
                 <Button
                   class="gap-2"
                   variant="danger"
