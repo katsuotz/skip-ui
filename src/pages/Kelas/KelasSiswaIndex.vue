@@ -176,10 +176,29 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
               {{ item.nama }}
             </Table.Td>
             <Table.Td>
-              {{ item.poin }}
+              <span
+                :class="[
+                  item.poin < 50 && 'text-danger',
+                  item.poin >= 50 && item.poin < 100 && 'text-warning',
+                  item.poin >= 100 && 'text-success',
+                  'font-bold'
+                ]"
+              >
+                {{ item.poin }}
+              </span>
             </Table.Td>
             <Table.Td>
               <div class="flex gap-2">
+                <Button
+                  class="gap-2 whitespace-nowrap"
+                  variant="success"
+                >
+                  <Lucide
+                    class="w-5 h-5"
+                    icon="History"
+                  />
+                  Riwayat Poin
+                </Button>
                 <Button
                   class="gap-2"
                   variant="danger"
