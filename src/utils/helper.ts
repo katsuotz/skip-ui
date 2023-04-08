@@ -1,7 +1,6 @@
 import dayjs from "dayjs";
 import {parseColor} from "tailwindcss/lib/util/color";
 import {Pagination} from "./interfaces/table";
-import {Any} from "./interfaces/helper";
 
 const formatDate = (format: string, date?: string | Date) => {
   return dayjs(date).format(format);
@@ -16,7 +15,7 @@ const dateInputFormat = (date?: string | Date) => {
 }
 
 const dateFormat = (date?: string | Date) => {
-  return formatDate('DD MMM YYYY', date)
+  return formatDate('D MMM YYYY', date)
 }
 
 const timeFormat = (date?: string | Date) => {
@@ -51,9 +50,18 @@ const isset = (obj: object | string) => {
   return false;
 };
 
-const numberFormat = (number:number = 0, decimal:number = 3) => {
+const numberFormat = (number:number = 0, decimal:number = 0) => {
   // @ts-ignore
-  return +parseFloat(number).toFixed(decimal)
+  number = +parseFloat(number).toFixed(decimal)
+
+  const currencyFractionDigits = new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+  }).resolvedOptions().maximumFractionDigits;
+
+  return (number).toLocaleString('id-ID', {
+    maximumFractionDigits: currencyFractionDigits
+  })
 }
 
 const toRGB = (value: string) => {
@@ -153,19 +161,6 @@ const sortStringArray = (data: any[], key?: string, orderBy = 'asc') => {
   }))
 }
 
-const createFilter = (filters?: Any) => {
-  const res: Any = {}
-
-  if (filters && filters.length) {
-    for (let i = 0; i < filters.length; i++) {
-      res['filters[' + i + '][key]'] = filters[i].key
-      res['filters[' + i + '][value]'] = filters[i].value
-    }
-  }
-
-  return res
-}
-
 const getFileUrl = (path: string) => {
   return import.meta.env.VITE_REGISTRATION_API + 'file/download?path=' + path
 }
@@ -185,7 +180,6 @@ export {
   countPaginationNumber,
   createFormData,
   sortStringArray,
-  createFilter,
   numberFormat,
   dateTimeFormat,
   dateInputFormat,

@@ -12,10 +12,14 @@ export interface PoinLog extends Base {
   guru_id: number;
   nip: string;
   nama_guru: string;
+  nis?: string;
+  nama?: string;
+  nama_kelas?: string;
 }
 
 export interface PoinLogTable extends Table {
-  siswa_kelas_id: string;
+  siswa_kelas_id?: string;
+  tahun_ajar_id?: string;
 }
 
 export interface SiswaKelas {

@@ -4,6 +4,8 @@ export interface Table {
   page: number;
   per_page: number;
   search?: string;
+  order?: string;
+  order_by?: string;
 }
 
 export interface Payload extends Table, Any {

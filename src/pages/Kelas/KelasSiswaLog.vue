@@ -24,7 +24,7 @@ const siswa_kelas_id:string = route.params.siswa_kelas_id.toString()
 const getData = (resetPage: boolean = false) => {
   if (resetPage) poinLog.updateCurrentPage(1)
 
-  poinLog.getPoinLog({
+  poinLog.getPoinLogBySiswaKelasID({
     page: poinLog.pagination.page,
     per_page: poinLog.pagination.per_page,
     search: search.value,
@@ -141,11 +141,11 @@ const deleteLog = (item: PoinLog) => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody
-          v-if="poinLog.poinLog?.length"
-          :data="poinLog.poinLog"
+          v-if="poinLog.poinLogSiswaKelas?.length"
+          :data="poinLog.poinLogSiswaKelas"
         >
           <Table.Tr
-            v-for="(item, key) in poinLog.poinLog"
+            v-for="(item, key) in poinLog.poinLogSiswaKelas"
             :key="key"
           >
             <Table.Td>

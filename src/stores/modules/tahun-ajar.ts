@@ -7,7 +7,7 @@ import {useGlobalStore} from "../global";
 
 interface TahunAjarState {
   tahunAjar: TahunAjar[];
-  selectedTahunAjar?: TahunAjar | undefined;
+  selectedTahunAjar?: TahunAjar;
   pagination: Pagination;
 }
 
@@ -22,6 +22,9 @@ export const useTahunAjarStore = defineStore("tahunAjar", {
       per_page: 10,
     },
   }),
+  getters: {
+    activeTahunAjar: state => state.tahunAjar.find(e => e.is_active),
+  },
   actions: {
     createTahunAjar(tahun_ajar: string) {
       const global = useGlobalStore()

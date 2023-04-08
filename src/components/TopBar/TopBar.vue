@@ -27,7 +27,7 @@ const logout = () => {
     <div class="flex items-center h-full">
       <!-- BEGIN: Logo -->
       <RouterLink
-        :to="{ name: 'side-menu-page-1' }"
+        :to="{ name: 'dashboard' }"
         :class="[
           '-intro-x hidden md:flex',
           props.layout == 'side-menu' && 'xl:w-[180px]',

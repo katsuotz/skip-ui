@@ -21,7 +21,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
     menu: [
       {
         icon: "LineChart",
-        pageName: "side-menu-page-1",
+        pageName: "dashboard",
         title: "Dashboard",
       },
 

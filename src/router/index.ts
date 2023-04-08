@@ -9,13 +9,8 @@ const routes = [
     children: [
       {
         path: "/",
-        name: "side-menu-page-1",
-        component: () => import("../pages/Page1.vue"),
-      },
-      {
-        path: "page-2",
-        name: "side-menu-page-2",
-        component: () => import("../pages/Page2.vue"),
+        name: "dashboard",
+        component: () => import("../pages/Dashboard.vue"),
       },
       {
         path: "guru",

@@ -72,6 +72,10 @@
     }
 }
 
+.tom-select.ts-wrapper, .tom-select.plugin-dropdown_input.focus.dropdown-active {
+    background-color: #ffffff;
+}
+
 .tom-select .ts-dropdown [data-selectable] .highlight {
     background-color: rgb(var(--color-primary) / 1);
 }

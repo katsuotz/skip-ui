@@ -20,3 +20,13 @@ export type Role =
   | "staff-ict"
   | "siswa"
   | "guru";
+
+export interface LoginLog {
+  username: string;
+  nama: string;
+  role: Role;
+  action: string;
+  user_agent: string;
+  location: string;
+  created_at: string;
+}

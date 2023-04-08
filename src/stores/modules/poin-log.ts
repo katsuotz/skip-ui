@@ -7,12 +7,16 @@ import {useGlobalStore} from "../global";
 
 interface PoinLogState {
   poinLog?: PoinLog[];
+  latestLog?: PoinLog[];
+  poinLogSiswaKelas?: PoinLog[];
   pagination: Pagination;
 }
 
 export const usePoinLogStore = defineStore("poinLog", {
   state: (): PoinLogState => ({
     poinLog: [],
+    latestLog: [],
+    poinLogSiswaKelas: [],
     pagination: {
       page: 1,
       total_item: 0,
@@ -49,14 +53,37 @@ export const usePoinLogStore = defineStore("poinLog", {
         })
       })
     },
-    getPoinLog({page = 1, per_page = 10, search = '', siswa_kelas_id}: PoinLogTable) {
+    getPoinLog({page = 1, per_page = 10, order = 'desc', order_by = 'created_at', tahun_ajar_id}: PoinLogTable) {
+      const params: Payload = {
+        page,
+        per_page,
+        order,
+        order_by,
+        tahun_ajar_id,
+      }
+
+      this.poinLog = []
+
+      return new Promise((resolve, reject) => {
+        api.get('/poin/log', {
+          params,
+        }).then((res: any) => {
+          this.poinLog = res.data
+          this.pagination = res.pagination
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    getPoinLogBySiswaKelasID({page = 1, per_page = 10, search = '', siswa_kelas_id}: PoinLogTable) {
       const params: Payload = {
         page,
         per_page,
         search,
       }
 
-      this.poinLog = []
+      this.poinLogSiswaKelas = []
 
       const global = useGlobalStore()
 
@@ -65,9 +92,8 @@ export const usePoinLogStore = defineStore("poinLog", {
         api.get('/poin/log/' + siswa_kelas_id, {
           params,
         }).then((res: any) => {
-          this.poinLog = res.data
+          this.poinLogSiswaKelas = res.data
           this.pagination = res.pagination
-          console.log(res.pagination)
           resolve(res)
         }).catch(err => {
           reject(err)
@@ -82,5 +108,21 @@ export const usePoinLogStore = defineStore("poinLog", {
     updatePerPage(per_page: number) {
       this.pagination.per_page = per_page
     },
+
+    getLatestLog(tahun_ajar_id: string) {
+      return new Promise((resolve, reject) => {
+        this.getPoinLog({
+          page: 1,
+          per_page: 5,
+          order: 'desc',
+          order_by: 'created_at',
+          tahun_ajar_id: tahun_ajar_id,
+        }).then((res: any) => {
+          this.latestLog = res.data
+          resolve(res)
+        }).catch(reject)
+      })
+    },
+
   },
 });
