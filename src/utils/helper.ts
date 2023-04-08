@@ -162,7 +162,7 @@ const sortStringArray = (data: any[], key?: string, orderBy = 'asc') => {
 }
 
 const getFileUrl = (path: string) => {
-  return import.meta.env.VITE_REGISTRATION_API + 'file/download?path=' + path
+  return import.meta.env.VITE_FILE_URL + '/' + path
 }
 
 const toLowerCase = (string: string, spaceReplace = '_') => {

@@ -4,6 +4,7 @@ export interface Profile {
   jenis_kelamin?: string;
   tempat_lahir?: string;
   tanggal_lahir?: string | Date;
+  foto?: string;
 }
 
 export interface User {
@@ -12,6 +13,12 @@ export interface User {
   role: Role;
   password?: string;
   profile?: Profile;
+}
+
+export interface UserResponse extends User, Profile {
+  nis?: string;
+  nip?: string;
+  foto?: string;
 }
 
 export type Role =

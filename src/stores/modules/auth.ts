@@ -2,12 +2,12 @@ import api from '../../utils/api'
 import {defineStore} from "pinia";
 import router from "../../router";
 
-import {User} from '../../utils/interfaces/user'
+import {UserResponse} from '../../utils/interfaces/user'
 import {useGlobalStore} from "../global";
 import {capitalizeFirstLetter} from "../../utils/helper";
 
 interface AuthState {
-  user?: User;
+  user?: UserResponse;
   token?: string;
 }
 
@@ -18,7 +18,7 @@ const removeUser = () => {
   router.push('/login')
 }
 
-const getUser = (): User | undefined => {
+const getUser = (): UserResponse | undefined => {
   const {'skip-user': value}: Storage = localStorage
 
   try {
@@ -76,6 +76,11 @@ export const useAuthStore = defineStore("auth", {
       api.get('/me').then((res: any) => {
         this.user = res
         localStorage.setItem("skip-user", JSON.stringify(res));
+      })
+    },
+    updateProfile(payload: UserResponse) {
+      return new Promise((resolve, reject) => {
+        api.patch('/profile', payload).then(resolve).catch(reject)
       })
     },
   },
