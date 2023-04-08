@@ -18,3 +18,9 @@ export interface InfoListDataCount {
   type: string;
   total: number;
 }
+
+export interface InfoGraphCount {
+  month: number;
+  year: number;
+  total: number;
+}

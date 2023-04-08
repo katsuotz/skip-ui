@@ -165,6 +165,10 @@ const getFileUrl = (path: string) => {
   return import.meta.env.VITE_FILE_URL + '/' + path
 }
 
+const getUserPhoto = (url = '') => {
+  return url ? getFileUrl(url) : '/src/assets/images/avatar.svg'
+}
+
 const toLowerCase = (string: string, spaceReplace = '_') => {
   return string.replace(/ /g, spaceReplace).toLowerCase()
 }
@@ -186,5 +190,6 @@ export {
   dateFormat,
   timeFormat,
   getFileUrl,
+  getUserPhoto,
   toLowerCase,
 };

@@ -2,12 +2,13 @@
 import Lucide from "../base-components/Lucide";
 import {useInfoStore} from "../stores/modules/info";
 import {ref} from "vue";
-import {dateFormat, numberFormat, timeFormat} from "../utils/helper";
+import {dateFormat, getUserPhoto, numberFormat, timeFormat} from "../utils/helper";
 import LoadingIcon from "../base-components/LoadingIcon/LoadingIcon.vue";
 import {usePoinLogStore} from "../stores/modules/poin-log";
 import {useTahunAjarStore} from "../stores/modules/tahun-ajar";
 import TomSelect from "../base-components/TomSelect";
 import Tippy from "../base-components/Tippy";
+import DashboardPoinGraph from "../components/Dashboard/DashboardPoinGraph.vue";
 
 const info = useInfoStore()
 const poinLog = usePoinLogStore()
@@ -21,6 +22,8 @@ const loading = ref({
   latestLog: true,
   listPenghargaan: true,
   listPelanggaran: true,
+  graphPenghargaan: true,
+  graphPelanggaran: true,
   loginLog: true,
 })
 
@@ -37,6 +40,8 @@ const getData = () => {
     latestLog: true,
     listPenghargaan: true,
     listPelanggaran: true,
+    graphPenghargaan: true,
+    graphPelanggaran: true,
     loginLog: true,
   }
 
@@ -60,6 +65,12 @@ const getData = () => {
   })
   info.listPoinCountPelanggaran(selectedTahunAjar.value).finally(() => {
     loading.value.listPelanggaran = false
+  })
+  info.getGraphCountPenghargaan(selectedTahunAjar.value).finally(() => {
+    loading.value.graphPenghargaan = false
+  })
+  info.getGraphCountPelanggaran(selectedTahunAjar.value).finally(() => {
+    loading.value.graphPelanggaran = false
   })
   info.getLoginLog({
     page: 1,
@@ -305,8 +316,8 @@ tahunAjar.getTahunAjar({
                   class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                 >
                   <img
-                    alt="Midone Tailwind HTML Admin Template"
-                    src="/src/assets/images/fakers/food-beverage-1.jpg"
+                    alt=""
+                    :src="getUserPhoto(item?.foto)"
                   >
                 </div>
                 <div class="ml-4 mr-auto">
@@ -362,8 +373,8 @@ tahunAjar.getTahunAjar({
                   class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                 >
                   <img
-                    alt="Midone Tailwind HTML Admin Template"
-                    src="/src/assets/images/fakers/food-beverage-1.jpg"
+                    alt=""
+                    :src="getUserPhoto(item?.foto)"
                   >
                 </div>
                 <div class="ml-4 mr-auto">
@@ -479,6 +490,76 @@ tahunAjar.getTahunAjar({
             </a>
           </div>
         </div>
+        <div
+          class="col-span-12 mt-3 md:col-span-6"
+        >
+          <div class="flex items-center h-10 intro-x">
+            <h2 class="mr-5 text-lg font-medium truncate">
+              Grafik Jumlah Penghargaan
+            </h2>
+          </div>
+          <div
+            v-if="loading.graphPenghargaan"
+            class="flex justify-center py-8 intro-x"
+          >
+            <LoadingIcon
+              icon="puff"
+              class="w-16 h-16"
+              color="#0B5351"
+            />
+          </div>
+          <div
+            v-else
+            class="mt-5"
+          >
+            <div class="intro-x">
+              <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
+                <DashboardPoinGraph
+                    :width="300"
+                    :height="300"
+                    variant="success"
+                    label="Jumlah Penghargaan"
+                    v-model="info.graphCountPenghargaan"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-span-12 mt-3 md:col-span-6"
+        >
+          <div class="flex items-center h-10 intro-x">
+            <h2 class="mr-5 text-lg font-medium truncate">
+              Grafik Jumlah Pelanggaran
+            </h2>
+          </div>
+          <div
+            v-if="loading.graphPelanggaran"
+            class="flex justify-center py-8 intro-x"
+          >
+            <LoadingIcon
+              icon="puff"
+              class="w-16 h-16"
+              color="#0B5351"
+            />
+          </div>
+          <div
+            v-else
+            class="mt-5"
+          >
+            <div class="intro-x">
+              <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
+                <DashboardPoinGraph
+                    :width="300"
+                    :height="300"
+                    variant="danger"
+                    label="Jumlah Pelanggaran"
+                    v-model="info.graphCountPelanggaran"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -518,8 +599,8 @@ tahunAjar.getTahunAjar({
                       class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                     >
                       <img
-                        alt="Midone Tailwind HTML Admin Template"
-                        src="/src/assets/images/fakers/food-beverage-1.jpg"
+                        alt=""
+                        :src="getUserPhoto(item?.foto)"
                       >
                     </div>
                     <div class="ml-4 mr-auto">
@@ -586,8 +667,8 @@ tahunAjar.getTahunAjar({
                     class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                   >
                     <img
-                      alt="Midone Tailwind HTML Admin Template"
-                      src="/src/assets/images/fakers/food-beverage-1.jpg"
+                      alt=""
+                      :src="getUserPhoto(item?.foto)"
                     >
                   </div>
                   <div class="ml-4 mr-auto">

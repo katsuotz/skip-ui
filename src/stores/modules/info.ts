@@ -1,7 +1,7 @@
 import api from '../../utils/api'
 import {defineStore} from "pinia";
 
-import {InfoListData, InfoListDataCount, InfoListTable} from "../../utils/interfaces/info";
+import {InfoGraphCount, InfoListData, InfoListDataCount, InfoListTable} from "../../utils/interfaces/info";
 import {Payload, Table} from "../../utils/interfaces/table";
 import {LoginLog} from "../../utils/interfaces/user";
 
@@ -12,6 +12,8 @@ interface InfoState {
   infoListSmaller: InfoListData[];
   listPenghargaan: InfoListDataCount[];
   listPelanggaran: InfoListDataCount[];
+  graphCountPenghargaan: InfoGraphCount[];
+  graphCountPelanggaran: InfoGraphCount[];
   loginLog: LoginLog[];
 }
 
@@ -24,6 +26,8 @@ export const useInfoStore = defineStore("info", {
     listPenghargaan: [],
     listPelanggaran: [],
     loginLog: [],
+    graphCountPenghargaan: [],
+    graphCountPelanggaran: [],
   }),
   getters: {
     totalData: state =>
@@ -160,6 +164,40 @@ export const useInfoStore = defineStore("info", {
           this.listPelanggaran = res.data
           resolve(res)
         }).catch(reject)
+      })
+    },
+    getGraphCount(tahun_ajar_id: string, type: string) {
+      return new Promise((resolve, reject) => {
+        api.get('/info/poin/graph/count', {
+          params: {
+            tahun_ajar_id,
+            type,
+          }
+        }).then((res: any) => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    getGraphCountPenghargaan (tahun_ajar_id: string) {
+      return new Promise((resolve, reject) => {
+        this.getGraphCount(tahun_ajar_id, 'Penghargaan').then((res:any) => {
+          this.graphCountPenghargaan = res
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    getGraphCountPelanggaran (tahun_ajar_id: string) {
+      return new Promise((resolve, reject) => {
+        this.getGraphCount(tahun_ajar_id, 'Pelanggaran').then((res:any) => {
+          this.graphCountPelanggaran = res
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
       })
     },
     getLoginLog({page = 1, per_page = 10, search = ''}: Table) {

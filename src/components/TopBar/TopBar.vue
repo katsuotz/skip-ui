@@ -3,9 +3,10 @@ import Lucide from "../../base-components/Lucide";
 import logoUrl from "../../assets/images/logo.svg";
 import {Menu} from "../../base-components/Headless";
 import {useAuthStore} from "../../stores/modules/auth";
-import EditProfileModal from "../User/EditProfileModal.vue";
-import {ref} from "vue";
-import {getFileUrl} from "../../utils/helper";
+import {defineAsyncComponent, ref} from "vue";
+import {getFileUrl, getUserPhoto} from "../../utils/helper";
+
+const EditProfileModal = defineAsyncComponent(() => import("../User/EditProfileModal.vue"));
 
 const props = defineProps<{
   layout?: "side-menu" | "simple-menu" | "top-menu";
@@ -22,8 +23,8 @@ const showModalProfile = ref(false)
 
 <template>
   <EditProfileModal
-      v-model="showModalProfile"
-      @success="auth.getMyData"
+    v-model="showModalProfile"
+    @success="auth.getMyData"
   />
 
   <div
@@ -46,7 +47,7 @@ const showModalProfile = ref(false)
         ]"
       >
         <img
-          alt="Enigma Tailwind HTML Admin Template"
+          alt="Sistem Kredit Poin"
           class="w-6"
           :src="logoUrl"
         >
@@ -76,14 +77,17 @@ const showModalProfile = ref(false)
           </div>
           <img
             alt=""
-            :src="auth.user?.foto ? getFileUrl(auth.user.foto) : '/src/assets/images/fakers/food-beverage-1.jpg'"
+            :src="getUserPhoto(auth.user?.foto)"
             class="w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit cursor-pointer bg-white object-cover object-center"
           >
         </Menu.Button>
         <Menu.Items
           class="p-2 border-transparent rounded-md dark:bg-darkmode-600 dark:border-transparent w-56 mt-px relative bg-white shadow-lg"
         >
-          <Menu.Item class="hover:bg-dark/5" @click="showModalProfile = true">
+          <Menu.Item
+            class="hover:bg-dark/5"
+            @click="showModalProfile = true"
+          >
             <Lucide
               icon="User"
               class="w-4 h-4 mr-2"

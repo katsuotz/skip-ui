@@ -9,7 +9,7 @@ import Lucide from "../../base-components/Lucide/Lucide.vue";
 import {useAuthStore} from "../../stores/modules/auth";
 import {UserResponse} from "../../utils/interfaces/user";
 import {useFileStore} from "../../stores/modules/file";
-import {dateInputFormat, getFileUrl} from "../../utils/helper";
+import {dateInputFormat, getFileUrl, getUserPhoto} from "../../utils/helper";
 import DatePicker from "vue-datepicker-next";
 import FormCheck from "../../base-components/Form/FormCheck";
 
@@ -102,25 +102,29 @@ const handleFileChange = (e: Event) => {
         <div class="p-5 flex flex-col gap-5">
           <div class="flex flex-col items-center">
             <div
-                class="relative flex-none w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 image-fit mb-4 mt-4"
+              class="relative flex-none w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 image-fit mb-4 mt-4"
             >
               <img
-                  alt=""
-                  class="rounded-full object-cover object-center"
-                  :src="form.foto ? getFileUrl(form.foto) : '/src/assets/images/fakers/food-beverage-1.jpg'"
+                alt=""
+                class="rounded-full object-cover object-center"
+                :src="getUserPhoto(form.foto)"
               >
               <div
-                  class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer"
-                  @click="openUploadFile"
+                class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer"
+                @click="openUploadFile"
               >
                 <Lucide
-                    icon="Camera"
-                    class="w-5 h-5 text-dark"
+                  icon="Camera"
+                  class="w-5 h-5 text-dark"
                 />
               </div>
             </div>
-            <p class="font-bold text-lg">{{ form.nama }}</p>
-            <p class="text-slate-500 mt-0.5">{{ form.role }}</p>
+            <p class="font-bold text-lg">
+              {{ form.nama }}
+            </p>
+            <p class="text-slate-500 mt-0.5">
+              {{ form.role }}
+            </p>
           </div>
 
           <div>
@@ -156,26 +160,26 @@ const handleFileChange = (e: Event) => {
               Tanggal Lahir
             </FormLabel>
             <Field
-                v-slot="{ errorMessage }"
-                v-model="form.tanggal_lahir"
-                :validate-on-blur="false"
-                name="Tanggal Lahir"
-                :rules="{
+              v-slot="{ errorMessage }"
+              v-model="form.tanggal_lahir"
+              :validate-on-blur="false"
+              name="Tanggal Lahir"
+              :rules="{
                 required: true,
               }"
             >
               <div>
                 <DatePicker
-                    id="tanggal_lahir"
-                    v-model:value="form.tanggal_lahir"
-                    :class="{
+                  id="tanggal_lahir"
+                  v-model:value="form.tanggal_lahir"
+                  :class="{
                     'border-danger': errorMessage
                   }"
                 />
               </div>
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -186,23 +190,23 @@ const handleFileChange = (e: Event) => {
               Tempat Lahir
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model="form.tempat_lahir"
-                :validate-on-blur="false"
-                name="Tempat Lahir"
-                :rules="{
+              v-slot="{ field, errorMessage }"
+              v-model="form.tempat_lahir"
+              :validate-on-blur="false"
+              name="Tempat Lahir"
+              :rules="{
                 required: true,
               }"
             >
               <FormInput
-                  id="tempat_lahir"
-                  :class="{ 'border-danger': errorMessage }"
-                  type="text"
-                  v-bind="field"
+                id="tempat_lahir"
+                :class="{ 'border-danger': errorMessage }"
+                type="text"
+                v-bind="field"
               />
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>
@@ -213,22 +217,22 @@ const handleFileChange = (e: Event) => {
               Jenis Kelamin
             </FormLabel>
             <Field
-                v-slot="{ field, errorMessage }"
-                v-model="form.jenis_kelamin"
-                :validate-on-blur="false"
-                name="Jenis Kelamin"
-                :rules="{
+              v-slot="{ field, errorMessage }"
+              v-model="form.jenis_kelamin"
+              :validate-on-blur="false"
+              name="Jenis Kelamin"
+              :rules="{
                 required: true,
               }"
             >
               <div class="flex flex-row flex-wrap gap-2">
                 <FormCheck>
                   <FormCheck.Input
-                      id="jenis_kelamin-l"
-                      v-bind="field"
-                      v-model="form.jenis_kelamin"
-                      type="radio"
-                      value="L"
+                    id="jenis_kelamin-l"
+                    v-bind="field"
+                    v-model="form.jenis_kelamin"
+                    type="radio"
+                    value="L"
                   />
                   <FormCheck.Label for="jenis_kelamin-l">
                     Laki - Laki
@@ -236,11 +240,11 @@ const handleFileChange = (e: Event) => {
                 </FormCheck>
                 <FormCheck>
                   <FormCheck.Input
-                      id="jenis_kelamin-p"
-                      v-bind="field"
-                      v-model="form.jenis_kelamin"
-                      type="radio"
-                      value="P"
+                    id="jenis_kelamin-p"
+                    v-bind="field"
+                    v-model="form.jenis_kelamin"
+                    type="radio"
+                    value="P"
                   />
                   <FormCheck.Label for="jenis_kelamin-p">
                     Perempuan
@@ -249,8 +253,8 @@ const handleFileChange = (e: Event) => {
               </div>
 
               <div
-                  v-show="errorMessage"
-                  class="mt-2 text-danger"
+                v-show="errorMessage"
+                class="mt-2 text-danger"
               >
                 {{ errorMessage }}
               </div>

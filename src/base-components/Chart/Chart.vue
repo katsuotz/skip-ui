@@ -71,10 +71,14 @@ onMounted(() => {
 <template>
   <div
     :style="{
+      minWidth: '100%',
       width: `${width}px`,
       height: `${height}px`,
     }"
   >
-    <canvas ref="chartRef" :class="$attrs.class"></canvas>
+    <canvas
+      ref="chartRef"
+      :class="$attrs.class"
+    />
   </div>
 </template>

@@ -1,16 +1,19 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import {computed, InputHTMLAttributes} from "vue";
 import { ChartData, ChartOptions } from "chart.js/auto";
 import { useColorSchemeStore } from "../../stores/color-scheme";
 import { useDarkModeStore } from "../../stores/dark-mode";
 import Chart from "../../base-components/Chart";
 import { getColor } from "../../utils/colors";
 import {useInfoStore} from "../../stores/modules/info";
+import {InfoGraphCount} from "../../utils/interfaces/info";
 
 const props = defineProps<{
+  modelValue: InfoGraphCount[];
   width?: number;
   height?: number;
-  lineColor?: string;
+  variant: string;
+  label: string;
 }>();
 
 const colorScheme = computed(() => useColorSchemeStore().colorScheme);
@@ -21,7 +24,7 @@ const info = useInfoStore()
 const month = [7,8,9,10,11,12,1,2,3,4,5,6]
 
 const chartData = computed(() => {
-  const infoGraphData = info.graphCountPenghargaan
+  const infoGraphData = props.modelValue
 
   return month.map(e => {
     let selectedMonth = infoGraphData.find(f => f.month === e)
@@ -47,10 +50,11 @@ const data = computed<ChartData>(() => {
     ],
     datasets: [
       {
-        label: "Jumlah Penghargaan",
+        label: props.label,
         data: chartData.value,
         borderWidth: 1,
-        backgroundColor: colorScheme.value ? getColor("success") : "",
+        // @ts-ignore
+        backgroundColor: getColor(props.variant),
         pointBorderColor: "transparent",
         tension: 0.4,
         spanGaps: true,
