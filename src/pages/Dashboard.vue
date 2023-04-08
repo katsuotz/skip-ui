@@ -109,19 +109,19 @@ tahunAjar.getTahunAjar({
             <div class="ml-auto flex items-center gap-4">
               <div>
                 <TomSelect
-                    id="tahun_ajar_id"
-                    v-model="selectedTahunAjar"
-                    placeholder="Pilih Tahun Ajar"
-                    style="width: 200px"
-                    @update:modelValue="getData"
+                  id="tahun_ajar_id"
+                  v-model="selectedTahunAjar"
+                  placeholder="Pilih Tahun Ajar"
+                  style="width: 200px"
+                  @update:modelValue="getData"
                 >
                   <option value="">
                     Pilih Tahun Ajar
                   </option>
                   <option
-                      v-for="(item, key) in tahunAjar.tahunAjar"
-                      :key="key"
-                      :value="item.id"
+                    v-for="(item, key) in tahunAjar.tahunAjar"
+                    :key="key"
+                    :value="item.id"
                   >
                     {{ item.tahun_ajar }}
                     <template v-if="item.is_active">
@@ -131,12 +131,12 @@ tahunAjar.getTahunAjar({
                 </TomSelect>
               </div>
               <div
-                  class="flex items-center text-primary cursor-pointer"
-                  @click.prevent="getData"
+                class="flex items-center text-primary cursor-pointer"
+                @click.prevent="getData"
               >
                 <Lucide
-                    icon="RefreshCcw"
-                    class="w-4 h-4 mr-3"
+                  icon="RefreshCcw"
+                  class="w-4 h-4 mr-3"
                 />
                 Refresh
               </div>
@@ -396,16 +396,19 @@ tahunAjar.getTahunAjar({
             </h2>
           </div>
           <div
-              v-if="loading.listPenghargaan"
-              class="flex justify-center py-8 intro-x"
+            v-if="loading.listPenghargaan"
+            class="flex justify-center py-8 intro-x"
           >
             <LoadingIcon
-                icon="puff"
-                class="w-16 h-16"
-                color="#0B5351"
+              icon="puff"
+              class="w-16 h-16"
+              color="#0B5351"
             />
           </div>
-          <div v-else class="mt-5">
+          <div
+            v-else
+            class="mt-5"
+          >
             <div
               v-for="(item, key) in info.listPenghargaan"
               :key="key"
@@ -423,8 +426,8 @@ tahunAjar.getTahunAjar({
               </div>
             </div>
             <a
-                href=""
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              href=""
+              class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
             >
               Lihat Lebih Banyak
             </a>
@@ -439,16 +442,19 @@ tahunAjar.getTahunAjar({
             </h2>
           </div>
           <div
-              v-if="loading.listPelanggaran"
-              class="flex justify-center py-8 intro-x"
+            v-if="loading.listPelanggaran"
+            class="flex justify-center py-8 intro-x"
           >
             <LoadingIcon
-                icon="puff"
-                class="w-16 h-16"
-                color="#0B5351"
+              icon="puff"
+              class="w-16 h-16"
+              color="#0B5351"
             />
           </div>
-          <div v-else class="mt-5">
+          <div
+            v-else
+            class="mt-5"
+          >
             <div
               v-for="(item, key) in info.listPelanggaran"
               :key="key"
@@ -466,8 +472,8 @@ tahunAjar.getTahunAjar({
               </div>
             </div>
             <a
-                href=""
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              href=""
+              class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
             >
               Lihat Lebih Banyak
             </a>
@@ -488,29 +494,32 @@ tahunAjar.getTahunAjar({
               </h2>
             </div>
             <div
-                v-if="loading.latestLog"
-                class="flex justify-center py-8 intro-x"
+              v-if="loading.latestLog"
+              class="flex justify-center py-8 intro-x"
             >
               <LoadingIcon
-                  icon="puff"
-                  class="w-16 h-16"
-                  color="#0B5351"
+                icon="puff"
+                class="w-16 h-16"
+                color="#0B5351"
               />
             </div>
-            <div v-else class="mt-5">
+            <div
+              v-else
+              class="mt-5"
+            >
               <template v-if="poinLog.latestLog?.length">
                 <div
-                    v-for="(item, key) in poinLog.latestLog"
-                    :key="key"
-                    class="intro-x"
+                  v-for="(item, key) in poinLog.latestLog"
+                  :key="key"
+                  class="intro-x"
                 >
                   <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                     <div
-                        class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
+                      class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                     >
                       <img
-                          alt="Midone Tailwind HTML Admin Template"
-                          src="/src/assets/images/fakers/food-beverage-1.jpg"
+                        alt="Midone Tailwind HTML Admin Template"
+                        src="/src/assets/images/fakers/food-beverage-1.jpg"
                       >
                     </div>
                     <div class="ml-4 mr-auto">
@@ -525,19 +534,21 @@ tahunAjar.getTahunAjar({
                         {{ timeFormat(item.created_at) }}
                       </div>
                     </div>
-                    <div :class="[
+                    <div
+                      :class="[
                         item.poin > 0 && 'text-success',
                         item.poin < 0 && 'text-danger',
                         'font-bold'
-                    ]">
+                      ]"
+                    >
                       {{ item.poin }}
                     </div>
                   </div>
                 </div>
               </template>
               <a
-                  href=""
-                  class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                href=""
+                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
               </a>
@@ -552,16 +563,19 @@ tahunAjar.getTahunAjar({
               </h2>
             </div>
             <div
-                v-if="loading.loginLog"
-                class="flex justify-center py-8 intro-x"
+              v-if="loading.loginLog"
+              class="flex justify-center py-8 intro-x"
             >
               <LoadingIcon
-                  icon="puff"
-                  class="w-16 h-16"
-                  color="#0B5351"
+                icon="puff"
+                class="w-16 h-16"
+                color="#0B5351"
               />
             </div>
-            <div v-else class="mt-5">
+            <div
+              v-else
+              class="mt-5"
+            >
               <div
                 v-for="(item, key) in info.loginLog"
                 :key="key"
@@ -589,27 +603,33 @@ tahunAjar.getTahunAjar({
                     </div>
                   </div>
                   <Tippy
-                      as="div"
-                      :content="item.action"
+                    as="div"
+                    :content="item.action"
                   >
                     <div
-                        v-if="item.action === 'Successful Login'"
-                        class="text-success flex"
+                      v-if="item.action === 'Successful Login'"
+                      class="text-success flex"
                     >
-                      <Lucide icon="CheckCircle" class="w-6 h-6"/>
+                      <Lucide
+                        icon="CheckCircle"
+                        class="w-6 h-6"
+                      />
                     </div>
                     <div
-                        v-else
-                        class="text-danger flex"
+                      v-else
+                      class="text-danger flex"
                     >
-                      <Lucide icon="XCircle" class="w-6 h-6"/>
+                      <Lucide
+                        icon="XCircle"
+                        class="w-6 h-6"
+                      />
                     </div>
                   </Tippy>
                 </div>
               </div>
               <a
-                  href=""
-                  class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                href=""
+                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
               </a>
