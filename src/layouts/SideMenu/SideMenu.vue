@@ -9,6 +9,7 @@ import { FormattedMenu, nestedMenu, enter, leave } from "./side-menu";
 import { watch, reactive, computed, onMounted } from "vue";
 import Lucide from "../../base-components/Lucide/Lucide.vue";
 import {useAuthStore} from "../../stores/modules/auth";
+import EditProfileModal from "../../components/User/EditProfileModal.vue";
 
 const route = useRoute();
 
@@ -30,6 +31,8 @@ watch(sideMenu, () => {
 onMounted(() => {
   setFormattedMenu(sideMenu.value);
 });
+
+auth.getMyData()
 </script>
 
 <template>

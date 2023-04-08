@@ -3,19 +3,29 @@ import Lucide from "../../base-components/Lucide";
 import logoUrl from "../../assets/images/logo.svg";
 import {Menu} from "../../base-components/Headless";
 import {useAuthStore} from "../../stores/modules/auth";
+import EditProfileModal from "../User/EditProfileModal.vue";
+import {ref} from "vue";
+import {getFileUrl} from "../../utils/helper";
 
 const props = defineProps<{
   layout?: "side-menu" | "simple-menu" | "top-menu";
 }>();
 
-const authStore = useAuthStore()
+const auth = useAuthStore()
 
 const logout = () => {
-  authStore.logout()
+  auth.logout()
 }
+
+const showModalProfile = ref(false)
 </script>
 
 <template>
+  <EditProfileModal
+      v-model="showModalProfile"
+      @success="auth.getMyData"
+  />
+
   <div
     :class="[
       'h-[70px] md:h-[65px] z-[51] border-b border-white/[0.08] mt-12 md:mt-0 -mx-3 sm:-mx-8 md:-mx-0 px-3 md:border-b-0 relative md:fixed md:inset-x-0 md:top-0 sm:px-8 md:px-10 md:pt-10 md:bg-gradient-to-b md:from-slate-100 md:to-transparent dark:md:from-darkmode-700',
@@ -58,34 +68,27 @@ const logout = () => {
         >
           <div class="text-white text-right mr-4">
             <div class="font-medium">
-              {{ authStore.user?.profile?.nama }}
+              {{ auth.user?.nama }}
             </div>
             <div class="text-xs dark:text-slate-500">
-              {{ authStore.user?.role }}
+              {{ auth.user?.role }}
             </div>
           </div>
           <img
-            alt="Midone Tailwind HTML Admin Template"
-            src="/src/assets/images/fakers/food-beverage-1.jpg"
-            class="w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit cursor-pointer bg-white"
+            alt=""
+            :src="auth.user?.foto ? getFileUrl(auth.user.foto) : '/src/assets/images/fakers/food-beverage-1.jpg'"
+            class="w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit cursor-pointer bg-white object-cover object-center"
           >
         </Menu.Button>
         <Menu.Items
           class="p-2 border-transparent rounded-md dark:bg-darkmode-600 dark:border-transparent w-56 mt-px relative bg-white shadow-lg"
         >
-          <Menu.Item class="hover:bg-dark/5">
+          <Menu.Item class="hover:bg-dark/5" @click="showModalProfile = true">
             <Lucide
               icon="User"
               class="w-4 h-4 mr-2"
             />
-            Profil
-          </Menu.Item>
-          <Menu.Item class="hover:bg-dark/5">
-            <Lucide
-              icon="Lock"
-              class="w-4 h-4 mr-2"
-            />
-            Ganti Password
+            Ubah Profil
           </Menu.Item>
           <Menu.Item
             class="hover:bg-dark/5"

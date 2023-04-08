@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {defineAsyncComponent} from "vue";
+import {defineAsyncComponent, ref} from "vue";
 
 const Loading = defineAsyncComponent(() => import("./components/Main/Loading.vue"))
 const ConfirmationModal = defineAsyncComponent(() => import("./components/Main/ConfirmationModal.vue"))
