@@ -2,8 +2,9 @@ import api from '../../utils/api'
 import {defineStore} from "pinia";
 
 import {InfoGraphCount, InfoListData, InfoListDataCount, InfoListTable} from "../../utils/interfaces/info";
-import {Payload, Table} from "../../utils/interfaces/table";
+import {Pagination, Payload, Table} from "../../utils/interfaces/table";
 import {LoginLog} from "../../utils/interfaces/user";
+import {useGlobalStore} from "../global";
 
 interface InfoState {
   totalPenghargaan?: number;
@@ -11,13 +12,18 @@ interface InfoState {
   maxPoin?: number;
   minPoin?: number;
   avgPoin?: number;
+  infoList: InfoListData[];
+  infoListPagination: Pagination;
   infoListBigger: InfoListData[];
   infoListSmaller: InfoListData[];
+  listType: InfoListDataCount[];
+  listTypePagination: Pagination;
   listPenghargaan: InfoListDataCount[];
   listPelanggaran: InfoListDataCount[];
   graphCountPenghargaan: InfoGraphCount[];
   graphCountPelanggaran: InfoGraphCount[];
   loginLog: LoginLog[];
+  loginLogPagination: Pagination;
 }
 
 export const useInfoStore = defineStore("info", {
@@ -27,11 +33,31 @@ export const useInfoStore = defineStore("info", {
     maxPoin: undefined,
     minPoin: undefined,
     avgPoin: undefined,
+    infoList: [],
+    infoListPagination: {
+      page: 1,
+      total_item: 0,
+      total_page: 0,
+      per_page: 10,
+    },
     infoListBigger: [],
     infoListSmaller: [],
+    listType: [],
+    listTypePagination: {
+      page: 1,
+      total_item: 0,
+      total_page: 0,
+      per_page: 10,
+    },
     listPenghargaan: [],
     listPelanggaran: [],
     loginLog: [],
+    loginLogPagination: {
+      page: 1,
+      total_item: 0,
+      total_page: 0,
+      per_page: 10,
+    },
     graphCountPenghargaan: [],
     graphCountPelanggaran: [],
   }),
@@ -89,7 +115,7 @@ export const useInfoStore = defineStore("info", {
         })
       })
     },
-    listPoin({page = 1, per_page = 10, order = 'desc', order_by = 'poin', tahun_ajar_id}: InfoListTable) {
+    listPoin({page = 1, per_page = 10, order = 'desc', order_by = 'poin', tahun_ajar_id}: InfoListTable, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
@@ -98,13 +124,22 @@ export const useInfoStore = defineStore("info", {
         tahun_ajar_id,
       }
 
+      this.infoList = []
+
+      const global = useGlobalStore()
+
       return new Promise((resolve, reject) => {
+        if (loading) global.loading = true
         api.get('/info/poin/list', {
           params,
         }).then((res: any) => {
+          this.infoList = res.data
+          if (loading) this.infoListPagination = res.pagination
           resolve(res)
         }).catch(err => {
           reject(err)
+        }).finally(() => {
+          if (loading) global.loading = false
         })
       })
     },
@@ -116,7 +151,7 @@ export const useInfoStore = defineStore("info", {
           order: 'desc',
           order_by: 'poin',
           tahun_ajar_id,
-        }).then((res: any) => {
+        }, false).then((res: any) => {
           this.infoListBigger = res.data
           resolve(res)
         }).catch(reject)
@@ -130,13 +165,13 @@ export const useInfoStore = defineStore("info", {
           order: 'asc',
           order_by: 'poin',
           tahun_ajar_id,
-        }).then((res: any) => {
+        }, false).then((res: any) => {
           this.infoListSmaller = res.data
           resolve(res)
         }).catch(reject)
       })
     },
-    listPoinCount({page = 1, per_page = 10, order = 'desc', order_by = 'poin', tahun_ajar_id, type, group_by}: InfoListTable) {
+    listPoinCount({page = 1, per_page = 10, order = 'desc', order_by = 'total', tahun_ajar_id, type, group_by}: InfoListTable, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
@@ -147,13 +182,20 @@ export const useInfoStore = defineStore("info", {
         group_by,
       }
 
+      const global = useGlobalStore()
+
       return new Promise((resolve, reject) => {
+        if (loading) global.loading = true
         api.get('/info/poin/list/count', {
           params,
         }).then((res: any) => {
+          this.listType = res.data
+          if (loading) this.listTypePagination = res.pagination
           resolve(res)
         }).catch(err => {
           reject(err)
+        }).finally(() => {
+          if (loading) global.loading = false
         })
       })
     },
@@ -223,21 +265,27 @@ export const useInfoStore = defineStore("info", {
         })
       })
     },
-    getLoginLog({page = 1, per_page = 10, search = ''}: Table) {
+    getLoginLog({page = 1, per_page = 10, search = ''}: Table, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
         search,
       }
 
+      const global = useGlobalStore()
+
       return new Promise((resolve, reject) => {
+        if (loading) global.loading = true
         api.get('/info/login', {
           params,
         }).then((res: any) => {
           this.loginLog = res.data
+          if (loading) this.loginLogPagination = res.pagination
           resolve(res)
         }).catch(err => {
           reject(err)
+        }).finally(() => {
+          if (loading) global.loading = false
         })
       })
     },

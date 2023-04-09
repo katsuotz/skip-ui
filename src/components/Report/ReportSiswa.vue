@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {getUserPhoto} from "../../utils/helper";
-import PoinLogTable from "../../base-components/PoinLog/PoinLogTable.vue";
+import PoinLogTable from "../Poin/PoinLogTable.vue";
 import Lucide from "../../base-components/Lucide/Lucide.vue";
 import VueQrious from "vue-qrious";
 import Divider from "../../base-components/Divider";

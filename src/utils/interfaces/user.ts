@@ -34,6 +34,8 @@ export interface LoginLog {
   role: Role;
   action: string;
   user_agent: string;
+  os: string;
+  browser: string;
   location: string;
   created_at: string;
   foto?: string;

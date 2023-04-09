@@ -96,7 +96,7 @@ const getData = () => {
     info.getLoginLog({
       page: 1,
       per_page: 5,
-    }).finally(() => {
+    }, false).finally(() => {
       loading.value.loginLog = false
     })
   }
@@ -143,6 +143,7 @@ tahunAjar.getTahunAjar({
                   v-model="selectedTahunAjar"
                   placeholder="Pilih Tahun Ajar"
                   style="width: 200px"
+                  :clearable="false"
                   @update:modelValue="getData"
                 >
                   <option
@@ -456,12 +457,18 @@ tahunAjar.getTahunAjar({
                   <PoinValue v-model="item.poin" />
                 </div>
               </div>
-              <a
-                href=""
+              <RouterLink
+                :to="{
+                  path: '/poin/siswa',
+                  query: {
+                    tahun_ajar_id: selectedTahunAjar,
+                    order: 'desc',
+                  }
+                }"
                 class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
-              </a>
+              </RouterLink>
             </template>
             <p
               v-else
@@ -519,12 +526,18 @@ tahunAjar.getTahunAjar({
                   <PoinValue v-model="item.poin" />
                 </div>
               </div>
-              <a
-                href=""
+              <RouterLink
+                :to="{
+                  path: '/poin/siswa',
+                  query: {
+                    tahun_ajar_id: selectedTahunAjar,
+                    order: 'asc',
+                  }
+                }"
                 class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
-              </a>
+              </RouterLink>
             </template>
             <p
               v-else
@@ -573,12 +586,18 @@ tahunAjar.getTahunAjar({
                   </div>
                 </div>
               </div>
-              <a
-                href=""
+              <RouterLink
+                :to="{
+                  path: '/poin/type',
+                  query: {
+                    tahun_ajar_id: selectedTahunAjar,
+                    type: 'Penghargaan',
+                  }
+                }"
                 class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
-              </a>
+              </RouterLink>
             </template>
             <p
               v-else
@@ -627,12 +646,18 @@ tahunAjar.getTahunAjar({
                   </div>
                 </div>
               </div>
-              <a
-                href=""
+              <RouterLink
+                :to="{
+                  path: '/poin/type',
+                  query: {
+                    tahun_ajar_id: selectedTahunAjar,
+                    type: 'Pelanggaran',
+                  }
+                }"
                 class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
-              </a>
+              </RouterLink>
             </template>
             <p
               v-else
@@ -899,12 +924,12 @@ tahunAjar.getTahunAjar({
                     </Tippy>
                   </div>
                 </div>
-                <a
-                  href=""
+                <RouterLink
+                  to="/login/log"
                   class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
                 >
                   Lihat Lebih Banyak
-                </a>
+                </RouterLink>
               </template>
               <p
                 v-else

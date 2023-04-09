@@ -106,7 +106,31 @@ const routes = [
       {
         path: "poin/log",
         name: "poin-log",
-        component: () => import("../pages/Poin/LogIndex.vue"),
+        component: () => import("../pages/Poin/PoinLogIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+        },
+      },
+      {
+        path: "poin/siswa",
+        name: "poin-siswa",
+        component: () => import("../pages/Poin/PoinSiswaIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+        },
+      },
+      {
+        path: "poin/type",
+        name: "poin-type",
+        component: () => import("../pages/Poin/PoinTypeIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+        },
+      },
+      {
+        path: "login/log",
+        name: "login-log",
+        component: () => import("../pages/LoginLog/LoginLogIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
         },

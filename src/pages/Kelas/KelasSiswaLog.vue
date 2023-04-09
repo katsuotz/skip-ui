@@ -6,7 +6,7 @@ import {useRoute} from "vue-router";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {PoinLog} from "../../utils/interfaces/poin-log";
 import {usePoinSiswaStore} from "../../stores/modules/poin-siswa";
-import PoinLogTable from "../../base-components/PoinLog/PoinLogTable.vue";
+import PoinLogTable from "../../components/Poin/PoinLogTable.vue";
 
 const global = useGlobalStore()
 const kelas = useKelasStore()
