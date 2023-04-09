@@ -9,10 +9,12 @@ import {useTahunAjarStore} from "../stores/modules/tahun-ajar";
 import TomSelect from "../base-components/TomSelect";
 import Tippy from "../base-components/Tippy";
 import DashboardPoinGraph from "../components/Dashboard/DashboardPoinGraph.vue";
+import {useAuthStore} from "../stores/modules/auth";
 
 const info = useInfoStore()
 const poinLog = usePoinLogStore()
 const tahunAjar = useTahunAjarStore()
+const auth = useAuthStore()
 
 const loading = ref({
   countPenghargaan: true,
@@ -87,12 +89,14 @@ const getData = () => {
   info.getGraphCountPelanggaran(selectedTahunAjar.value).finally(() => {
     loading.value.graphPelanggaran = false
   })
-  info.getLoginLog({
-    page: 1,
-    per_page: 5,
-  }).finally(() => {
-    loading.value.loginLog = false
-  })
+  if (auth.isAdmin) {
+    info.getLoginLog({
+      page: 1,
+      per_page: 5,
+    }).finally(() => {
+      loading.value.loginLog = false
+    })
+  }
 }
 
 tahunAjar.getTahunAjar({
@@ -809,6 +813,7 @@ tahunAjar.getTahunAjar({
             </div>
           </div>
           <div
+            v-if="auth.isAdmin"
             class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12"
           >
             <div class="flex items-center h-10 intro-x">
