@@ -8,6 +8,9 @@ import {LoginLog} from "../../utils/interfaces/user";
 interface InfoState {
   totalPenghargaan?: number;
   totalPelanggaran?: number;
+  maxPoin?: number;
+  minPoin?: number;
+  avgPoin?: number;
   infoListBigger: InfoListData[];
   infoListSmaller: InfoListData[];
   listPenghargaan: InfoListDataCount[];
@@ -21,6 +24,9 @@ export const useInfoStore = defineStore("info", {
   state: (): InfoState => ({
     totalPenghargaan: undefined,
     totalPelanggaran: undefined,
+    maxPoin: undefined,
+    minPoin: undefined,
+    avgPoin: undefined,
     infoListBigger: [],
     infoListSmaller: [],
     listPenghargaan: [],
@@ -60,6 +66,23 @@ export const useInfoStore = defineStore("info", {
           if (type === "Penghargaan") this.totalPenghargaan = total
           else if (type === "Pelanggaran") this.totalPelanggaran = total
 
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
+    calculatePoin(type: string, tahun_ajar_id: string) {
+      return new Promise((resolve, reject) => {
+        api.get('/info/poin/' + type, {
+          params: {
+            tahun_ajar_id,
+          },
+        }).then((res: any) => {
+          const {total} = res
+          if (type === 'max') this.maxPoin = total
+          else if (type === 'min') this.minPoin = total
+          else if (type === 'avg') this.avgPoin = total
           resolve(res)
         }).catch(err => {
           reject(err)

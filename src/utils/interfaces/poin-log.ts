@@ -1,5 +1,6 @@
 import {Base} from "./helper";
 import {Table} from "./table";
+import {Kelas, KelasResponse} from "./kelas";
 
 export interface PoinLog extends Base {
   id: number;
@@ -15,6 +16,7 @@ export interface PoinLog extends Base {
   nis?: string;
   nama?: string;
   nama_kelas?: string;
+  foto?: string;
 }
 
 export interface PoinLogTable extends Table {
@@ -22,8 +24,7 @@ export interface PoinLogTable extends Table {
   tahun_ajar_id?: string;
 }
 
-export interface SiswaKelas {
-  id: number,
-  siswa_id: number,
-  kelas_id: number,
+export interface PoinLogWithKelas {
+  kelas: KelasResponse;
+  data: PoinLog[];
 }

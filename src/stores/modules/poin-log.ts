@@ -1,14 +1,16 @@
 import api from '../../utils/api'
 import {defineStore} from "pinia";
 
-import {PoinLog, PoinLogTable} from '../../utils/interfaces/poin-log'
+import {PoinLog, PoinLogTable, PoinLogWithKelas} from '../../utils/interfaces/poin-log'
 import {Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
+import {useSiswaStore} from "./siswa";
 
 interface PoinLogState {
   poinLog?: PoinLog[];
   latestLog?: PoinLog[];
   poinLogSiswaKelas?: PoinLog[];
+  poinLogWithKelas: PoinLogWithKelas[];
   pagination: Pagination;
 }
 
@@ -17,6 +19,7 @@ export const usePoinLogStore = defineStore("poinLog", {
     poinLog: [],
     latestLog: [],
     poinLogSiswaKelas: [],
+    poinLogWithKelas: [],
     pagination: {
       page: 1,
       total_item: 0,
@@ -121,6 +124,27 @@ export const usePoinLogStore = defineStore("poinLog", {
           this.latestLog = res.data
           resolve(res)
         }).catch(reject)
+      })
+    },
+
+    getPoinLogByNis(nis: string) {
+      this.poinLogWithKelas = []
+
+      const global = useGlobalStore()
+      const siswa = useSiswaStore()
+
+      global.loading = true
+
+      return new Promise((resolve, reject) => {
+        api.get('/siswa/' + nis + '/log').then((res: any) => {
+          siswa.selectedSiswa = res.siswa
+          this.poinLogWithKelas = res.log
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        }).finally(() => {
+          global.loading = false
+        })
       })
     },
 

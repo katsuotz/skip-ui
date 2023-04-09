@@ -11,6 +11,7 @@ import {useRoute} from "vue-router";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {PoinLog} from "../../utils/interfaces/poin-log";
 import {usePoinSiswaStore} from "../../stores/modules/poin-siswa";
+import PoinLogTable from "../../base-components/PoinLog/PoinLogTable.vue";
 
 const global = useGlobalStore()
 const kelas = useKelasStore()
@@ -60,7 +61,7 @@ const onLoaded = async () => {
 
 onLoaded()
 
-const deleteLog = (item: PoinLog) => {
+const handleDeleteLog = (item: PoinLog) => {
   global.showModal({
     type: 'danger',
     title: 'Konfirmasi',
@@ -107,122 +108,12 @@ const deleteLog = (item: PoinLog) => {
     </table>
   </div>
   <div class="p-5 mt-5 intro-y box">
-    <MyTable
-      :current-page="poinLog.pagination.page"
-      :page-count="poinLog.pagination.total_page"
-      :per-page="poinLog.pagination.per_page"
-      :search="search"
+    <PoinLogTable
+      v-model="poinLog.poinLogSiswaKelas"
       @updatePerPage="handleUpdatePerPage"
       @updatePage="handleUpdatePage"
       @updateSearch="handleSearch"
-    >
-      <Table>
-        <Table.Thead>
-          <Table.Tr>
-            <Table.Th width="10">
-              #
-            </Table.Th>
-            <Table.Th>
-              Riwayat Poin
-            </Table.Th>
-            <Table.Th>
-              Poin
-            </Table.Th>
-            <Table.Th>
-              Poin Awal
-            </Table.Th>
-            <Table.Th>
-              Poin Akhir
-            </Table.Th>
-            <Table.Th>
-              Nama Guru
-            </Table.Th>
-            <Table.Th style="width: 200px" />
-          </Table.Tr>
-        </Table.Thead>
-        <Table.Tbody
-          v-if="poinLog.poinLogSiswaKelas?.length"
-          :data="poinLog.poinLogSiswaKelas"
-        >
-          <Table.Tr
-            v-for="(item, key) in poinLog.poinLogSiswaKelas"
-            :key="key"
-          >
-            <Table.Td>
-              {{ countPaginationNumber(poinLog.pagination, key) }}
-            </Table.Td>
-            <Table.Td>
-              {{ item.title }}
-              <p class="text-xs">
-                {{ item.description }}
-              </p>
-            </Table.Td>
-            <Table.Td>
-              <span
-                :class="[
-                  item.type === 'Pelanggaran' && 'text-danger',
-                  item.type === 'Penghargaan' && 'text-success',
-                  'font-bold'
-                ]"
-              >
-                {{ item.poin }}
-              </span>
-            </Table.Td>
-            <Table.Td>
-              <span
-                :class="[
-                  item.poin_before < 50 && 'text-danger',
-                  item.poin_before >= 50 && item.poin_before < 100 && 'text-warning',
-                  item.poin_before >= 100 && 'text-success',
-                  'font-bold'
-                ]"
-              >
-                {{ item.poin_before }}
-              </span>
-            </Table.Td>
-            <Table.Td>
-              <span
-                :class="[
-                  item.poin_after < 50 && 'text-danger',
-                  item.poin_after >= 50 && item.poin_after < 100 && 'text-warning',
-                  item.poin_after >= 100 && 'text-success',
-                  'font-bold'
-                ]"
-              >
-                {{ item.poin_after }}
-              </span>
-            </Table.Td>
-            <Table.Td>
-              {{ item.nama_guru }}
-            </Table.Td>
-            <Table.Td>
-              <div class="flex gap-2">
-                <Button
-                  class="gap-2"
-                  variant="danger"
-                  @click="deleteLog(item)"
-                >
-                  <Lucide
-                    class="w-5 h-5"
-                    icon="Trash2"
-                  />
-                  Hapus
-                </Button>
-              </div>
-            </Table.Td>
-          </Table.Tr>
-        </Table.Tbody>
-        <Table.Tbody v-else>
-          <Table.Tr>
-            <Table.Td
-              colspan="99"
-              class="text-center"
-            >
-              Tidak ada Data
-            </Table.Td>
-          </Table.Tr>
-        </Table.Tbody>
-      </Table>
-    </MyTable>
+      @delete="handleDeleteLog"
+    />
   </div>
 </template>

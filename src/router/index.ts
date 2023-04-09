@@ -11,6 +11,9 @@ const routes = [
         path: "/",
         name: "dashboard",
         component: () => import("../pages/Dashboard.vue"),
+        meta: {
+          breadcrumbs: ['Dashboard'],
+        }
       },
       {
         path: "guru",
@@ -18,6 +21,7 @@ const routes = [
         component: () => import("../pages/Guru/GuruIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Guru', 'Data Guru'],
         },
       },
       {
@@ -26,6 +30,7 @@ const routes = [
         component: () => import("../pages/Siswa/SiswaIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Siswa', 'Data Siswa'],
         },
       },
       {
@@ -34,6 +39,7 @@ const routes = [
         component: () => import("../pages/Kelas/KelasIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Siswa', 'Kelas'],
         },
       },
       {
@@ -42,6 +48,7 @@ const routes = [
         component: () => import("../pages/Kelas/KelasSiswaIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Siswa', 'Kelas', 'List Siswa'],
         },
       },
       {
@@ -50,6 +57,7 @@ const routes = [
         component: () => import("../pages/Kelas/KelasSiswaLog.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Siswa', 'Riwayat Poin'],
         },
       },
       {
@@ -66,6 +74,7 @@ const routes = [
         component: () => import("../pages/TahunAjar/TahunAjarIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Admin', 'Tahun Ajar'],
         },
       },
       {
@@ -74,6 +83,7 @@ const routes = [
         component: () => import("../pages/Jurusan/JurusanIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Admin', 'Jurusan'],
         },
       },
       {
@@ -82,6 +92,7 @@ const routes = [
         component: () => import("../pages/DataPoin/DataPoinIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
+          breadcrumbs: ['Admin', 'Poin'],
         },
       },
       {
@@ -90,6 +101,24 @@ const routes = [
         component: () => import("../pages/Poin/AddPoin.vue"),
         meta: {
           role: ['staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+        },
+      },
+      {
+        path: "report",
+        name: "report",
+        component: () => import("../pages/Report/ReportIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Laporan', 'Rekap'],
+        },
+      },
+      {
+        path: "report/personal",
+        name: "report-personal",
+        component: () => import("../pages/Report/ReportSiswaIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Laporan', 'Personal'],
         },
       },
     ],

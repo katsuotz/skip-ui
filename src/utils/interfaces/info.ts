@@ -11,6 +11,7 @@ export interface InfoListData {
   nama: string;
   nama_kelas: string;
   poin: number;
+  foto?: string;
 }
 
 export interface InfoListDataCount {

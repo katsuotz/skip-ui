@@ -36,4 +36,5 @@ export interface LoginLog {
   user_agent: string;
   location: string;
   created_at: string;
+  foto?: string;
 }

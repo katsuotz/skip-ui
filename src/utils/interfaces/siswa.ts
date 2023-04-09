@@ -12,6 +12,8 @@ export interface Siswa extends Base, Profile {
 
 export interface SiswaTable extends Table {
   kelas_id?: string;
+  jurusan_id?: string;
+  tahun_ajar_id?: string;
   tahun_ajar_active?: boolean;
 }
 

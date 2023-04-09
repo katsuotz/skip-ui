@@ -9,7 +9,7 @@ import Lucide from "../../base-components/Lucide/Lucide.vue";
 import {useAuthStore} from "../../stores/modules/auth";
 import {UserResponse} from "../../utils/interfaces/user";
 import {useFileStore} from "../../stores/modules/file";
-import {dateInputFormat, getFileUrl, getUserPhoto} from "../../utils/helper";
+import {dateInputFormat, getUserPhoto} from "../../utils/helper";
 import DatePicker from "vue-datepicker-next";
 import FormCheck from "../../base-components/Form/FormCheck";
 
@@ -110,7 +110,7 @@ const handleFileChange = (e: Event) => {
                 :src="getUserPhoto(form.foto)"
               >
               <div
-                class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer"
+                class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer shadow-md"
                 @click="openUploadFile"
               >
                 <Lucide

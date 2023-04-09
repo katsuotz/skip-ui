@@ -17,6 +17,9 @@ const tahunAjar = useTahunAjarStore()
 const loading = ref({
   countPenghargaan: true,
   countPelanggaran: true,
+  calculateMax: true,
+  calculateMin: true,
+  calculateAvg: true,
   listBigger: true,
   listSmaller: true,
   latestLog: true,
@@ -35,6 +38,9 @@ const getData = () => {
   loading.value = {
     countPenghargaan: true,
     countPelanggaran: true,
+    calculateMax: true,
+    calculateMin: true,
+    calculateAvg: true,
     listBigger: true,
     listSmaller: true,
     latestLog: true,
@@ -50,6 +56,15 @@ const getData = () => {
   })
   info.countPoin("Pelanggaran", selectedTahunAjar.value).finally(() => {
     loading.value.countPelanggaran = false
+  })
+  info.calculatePoin("max", selectedTahunAjar.value).finally(() => {
+    loading.value.calculateMax = false
+  })
+  info.calculatePoin("min", selectedTahunAjar.value).finally(() => {
+    loading.value.calculateMin = false
+  })
+  info.calculatePoin("avg", selectedTahunAjar.value).finally(() => {
+    loading.value.calculateAvg = false
   })
   info.listPoinBigger(selectedTahunAjar.value).finally(() => {
     loading.value.listBigger = false
@@ -102,20 +117,14 @@ tahunAjar.getTahunAjar({
 </script>
 
 <template>
-  <!--  <div class="flex items-center mt-8">-->
-  <!--    <h2 class="mr-auto text-lg font-medium">-->
-  <!--      Dashboard-->
-  <!--    </h2>-->
-  <!--  </div>-->
   <!-- BEGIN: Page Layout -->
-
   <div class="grid grid-cols-12 gap-6">
     <div class="col-span-12 2xl:col-span-9">
       <div class="grid grid-cols-12 gap-6">
         <div class="col-span-12 mt-8">
           <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
-              Dashboard
+              Statistik Data
             </h2>
             <div class="ml-auto flex items-center gap-4">
               <div>
@@ -180,7 +189,7 @@ tahunAjar.getTahunAjar({
                   </div>
                   <div
                     v-else
-                    class="mt-6 text-3xl font-medium leading-8"
+                    class="mt-4 text-3xl font-medium leading-8"
                   >
                     {{ numberFormat(info.totalData) }}
                   </div>
@@ -226,7 +235,7 @@ tahunAjar.getTahunAjar({
                   </div>
                   <div
                     v-else
-                    class="mt-6 text-3xl font-medium leading-8"
+                    class="mt-4 text-3xl font-medium leading-8"
                   >
                     {{ numberFormat(info.totalPenghargaan) }}
                   </div>
@@ -272,12 +281,120 @@ tahunAjar.getTahunAjar({
                   </div>
                   <div
                     v-else
-                    class="mt-6 text-3xl font-medium leading-8"
+                    class="mt-4 text-3xl font-medium leading-8"
                   >
                     {{ numberFormat(info.totalPelanggaran) }}
                   </div>
                   <div class="mt-1 text-base text-slate-500">
                     Total Pelanggaran
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+              <div
+                :class="[
+                  'relative zoom-in',
+                  'before:content-[\'\'] before:w-[90%] before:shadow-[0px_3px_20px_#0000000b] before:bg-slate-50 before:h-full before:mt-3 before:absolute before:rounded-md before:mx-auto before:inset-x-0 before:dark:bg-darkmode-400/70',
+                ]"
+              >
+                <div class="p-5 box">
+                  <div class="flex">
+                    <Lucide
+                      icon="ChevronsUp"
+                      class="w-[28px] h-[28px] text-success"
+                    />
+                  </div>
+                  <div
+                    v-if="loading.calculateMax"
+                    class="flex mt-6"
+                  >
+                    <LoadingIcon
+                      icon="puff"
+                      class="w-8 h-8"
+                      color="#0B5351"
+                    />
+                  </div>
+                  <div
+                    v-else
+                    class="mt-4 text-3xl font-medium leading-8"
+                  >
+                    {{ numberFormat(info.maxPoin) }}
+                  </div>
+                  <div class="mt-1 text-base text-slate-500">
+                    Jumlah Poin Terbesar
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+              <div
+                :class="[
+                  'relative zoom-in',
+                  'before:content-[\'\'] before:w-[90%] before:shadow-[0px_3px_20px_#0000000b] before:bg-slate-50 before:h-full before:mt-3 before:absolute before:rounded-md before:mx-auto before:inset-x-0 before:dark:bg-darkmode-400/70',
+                ]"
+              >
+                <div class="p-5 box">
+                  <div class="flex">
+                    <Lucide
+                      icon="ChevronsDown"
+                      class="w-[28px] h-[28px] text-danger"
+                    />
+                  </div>
+                  <div
+                    v-if="loading.calculateMin"
+                    class="flex mt-6"
+                  >
+                    <LoadingIcon
+                      icon="puff"
+                      class="w-8 h-8"
+                      color="#0B5351"
+                    />
+                  </div>
+                  <div
+                    v-else
+                    class="mt-4 text-3xl font-medium leading-8"
+                  >
+                    {{ numberFormat(info.minPoin) }}
+                  </div>
+                  <div class="mt-1 text-base text-slate-500">
+                    Jumlah Poin Terkecil
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+              <div
+                :class="[
+                  'relative zoom-in',
+                  'before:content-[\'\'] before:w-[90%] before:shadow-[0px_3px_20px_#0000000b] before:bg-slate-50 before:h-full before:mt-3 before:absolute before:rounded-md before:mx-auto before:inset-x-0 before:dark:bg-darkmode-400/70',
+                ]"
+              >
+                <div class="p-5 box">
+                  <div class="flex">
+                    <Lucide
+                      icon="ChevronsLeftRight"
+                      class="w-[28px] h-[28px] text-gray-500"
+                    />
+                  </div>
+                  <div
+                    v-if="loading.calculateAvg"
+                    class="flex mt-6"
+                  >
+                    <LoadingIcon
+                      icon="puff"
+                      class="w-8 h-8"
+                      color="#0B5351"
+                    />
+                  </div>
+                  <div
+                    v-else
+                    class="mt-4 text-3xl font-medium leading-8"
+                  >
+                    {{ numberFormat(info.avgPoin) }}
+                  </div>
+                  <div class="mt-1 text-base text-slate-500">
+                    Rata - Rata Jumlah Poin
                   </div>
                 </div>
               </div>
@@ -515,11 +632,11 @@ tahunAjar.getTahunAjar({
             <div class="intro-x">
               <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
                 <DashboardPoinGraph
-                    :width="300"
-                    :height="300"
-                    variant="success"
-                    label="Jumlah Penghargaan"
-                    v-model="info.graphCountPenghargaan"
+                  v-model="info.graphCountPenghargaan"
+                  :width="300"
+                  :height="300"
+                  variant="success"
+                  label="Jumlah Penghargaan"
                 />
               </div>
             </div>
@@ -550,11 +667,11 @@ tahunAjar.getTahunAjar({
             <div class="intro-x">
               <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
                 <DashboardPoinGraph
-                    :width="300"
-                    :height="300"
-                    variant="danger"
-                    label="Jumlah Pelanggaran"
-                    v-model="info.graphCountPelanggaran"
+                  v-model="info.graphCountPelanggaran"
+                  :width="300"
+                  :height="300"
+                  variant="danger"
+                  label="Jumlah Pelanggaran"
                 />
               </div>
             </div>
@@ -697,11 +814,29 @@ tahunAjar.getTahunAjar({
                       />
                     </div>
                     <div
-                      v-else
+                      v-else-if="item.action === 'Failed Login Attempt'"
                       class="text-danger flex"
                     >
                       <Lucide
                         icon="XCircle"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div
+                      v-else-if="item.action === 'Change Password Attempt'"
+                      class="text-warning flex"
+                    >
+                      <Lucide
+                        icon="AlertTriangle"
+                        class="w-6 h-6"
+                      />
+                    </div>
+                    <div
+                      v-else-if="item.action === 'Password Changed'"
+                      class="text-warning flex"
+                    >
+                      <Lucide
+                        icon="FormInput"
                         class="w-6 h-6"
                       />
                     </div>

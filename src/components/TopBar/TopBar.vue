@@ -3,8 +3,10 @@ import Lucide from "../../base-components/Lucide";
 import logoUrl from "../../assets/images/logo.svg";
 import {Menu} from "../../base-components/Headless";
 import {useAuthStore} from "../../stores/modules/auth";
-import {defineAsyncComponent, ref} from "vue";
-import {getFileUrl, getUserPhoto} from "../../utils/helper";
+import {defineAsyncComponent, ref, watch} from "vue";
+import {getUserPhoto} from "../../utils/helper";
+import Breadcrumb from "../../base-components/Breadcrumb";
+import {useRoute} from "vue-router";
 
 const EditProfileModal = defineAsyncComponent(() => import("../User/EditProfileModal.vue"));
 
@@ -19,6 +21,14 @@ const logout = () => {
 }
 
 const showModalProfile = ref(false)
+
+const route = useRoute()
+
+const breadcrumbs = ref(route.meta?.breadcrumbs)
+
+watch(() => route.meta?.breadcrumbs, () => {
+  breadcrumbs.value = route.meta?.breadcrumbs
+})
 </script>
 
 <template>
@@ -62,6 +72,25 @@ const showModalProfile = ref(false)
         </span>
       </RouterLink>
       <!-- END: Logo -->
+      <Breadcrumb
+        v-if="breadcrumbs?.length"
+        light
+        :class="[
+          'h-[45px] md:ml-10 md:border-l border-white/[0.08] dark:border-white/[0.08] mr-auto -intro-x',
+          props.layout != 'top-menu' && 'md:pl-6',
+          props.layout == 'top-menu' && 'md:pl-10',
+        ]"
+      >
+        <Breadcrumb.Link
+          v-for="(item, key) in breadcrumbs"
+          :key="key"
+          :index="key"
+          :active="key + 1 === breadcrumbs.length"
+        >
+          {{ item }}
+        </Breadcrumb.Link>
+      </Breadcrumb>
+
       <!-- BEGIN: Account Menu -->
       <Menu class="ml-auto">
         <Menu.Button

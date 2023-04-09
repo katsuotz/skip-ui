@@ -48,6 +48,29 @@ export const useSideMenuStore = defineStore("sideMenu", {
         role: ['admin', 'staff-ict'],
       },
       {
+        icon: "FileText",
+        title: "Laporan",
+        subMenu: [
+          {
+            icon: "ChevronRight",
+            pageName: "report",
+            title: "Rekap",
+            role: ['admin', 'staff-ict'],
+          },
+          {
+            icon: "ChevronRight",
+            pageName: "report-personal",
+            title: "Personal",
+            role: ['admin', 'staff-ict'],
+          },
+        ],
+      },
+      {
+        icon: "Swords",
+        pageName: "dashboard",
+        title: "Bandingkan",
+      },
+      {
         icon: "Inbox",
         title: "Admin",
         subMenu: [

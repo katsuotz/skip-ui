@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import {computed, InputHTMLAttributes} from "vue";
+import {computed} from "vue";
 import { ChartData, ChartOptions } from "chart.js/auto";
-import { useColorSchemeStore } from "../../stores/color-scheme";
 import { useDarkModeStore } from "../../stores/dark-mode";
 import Chart from "../../base-components/Chart";
 import { getColor } from "../../utils/colors";
@@ -16,10 +15,7 @@ const props = defineProps<{
   label: string;
 }>();
 
-const colorScheme = computed(() => useColorSchemeStore().colorScheme);
 const darkMode = computed(() => useDarkModeStore().darkMode);
-
-const info = useInfoStore()
 
 const month = [7,8,9,10,11,12,1,2,3,4,5,6]
 
