@@ -8,7 +8,7 @@ import {getUserPhoto} from "../../utils/helper";
 import Breadcrumb from "../../base-components/Breadcrumb";
 import {useRoute} from "vue-router";
 
-const ProfileModal = defineAsyncComponent(() => import("../User/EditProfileModal.vue"));
+const ProfileModal = defineAsyncComponent(() => import("../User/ProfileModal.vue"));
 
 const props = defineProps<{
   layout?: "side-menu" | "simple-menu" | "top-menu";
