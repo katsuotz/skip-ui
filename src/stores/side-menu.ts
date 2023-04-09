@@ -33,11 +33,13 @@ export const useSideMenuStore = defineStore("sideMenu", {
             icon: "ChevronRight",
             pageName: "siswa",
             title: "Data Siswa",
+            role: ['admin', 'staff-ict'],
           },
           {
             icon: "ChevronRight",
             pageName: "kelas",
             title: "Kelas",
+            role: ['admin', 'staff-ict'],
           },
         ]
       },
@@ -69,6 +71,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
         icon: "Swords",
         pageName: "dashboard",
         title: "Bandingkan",
+        role: ['admin', 'staff-ict'],
       },
       {
         icon: "Inbox",

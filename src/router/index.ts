@@ -106,7 +106,7 @@ const routes = [
       {
         path: "report",
         name: "report",
-        component: () => import("../pages/Report/ReportIndex.vue"),
+        component: () => import("../pages/Report/ReportKelasForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['Laporan', 'Rekap'],
@@ -115,7 +115,7 @@ const routes = [
       {
         path: "report/personal",
         name: "report-personal",
-        component: () => import("../pages/Report/ReportSiswaIndex.vue"),
+        component: () => import("../pages/Report/ReportSiswaForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['Laporan', 'Personal'],
