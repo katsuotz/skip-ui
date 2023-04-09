@@ -42,14 +42,15 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = () => {
+const handleSubmit = (values: any, actions: any) => {
   if (form.value.id)
-    jurusan.updateJurusan(form.value.id, form.value.nama_jurusan).then(handleSuccess)
+    jurusan.updateJurusan(form.value.id, form.value.nama_jurusan).then(() => handleSuccess(actions))
   else
-    jurusan.createJurusan(form.value.nama_jurusan).then(handleSuccess)
+    jurusan.createJurusan(form.value.nama_jurusan).then(() => handleSuccess(actions))
 }
 
-const handleSuccess = () => {
+const handleSuccess = (actions: any) => {
+  actions.resetForm()
   showModal.value = false
   emit("success")
 }

@@ -49,7 +49,7 @@ watch(showModal, () => {
 });
 
 
-const handleSubmit = async () => {
+const handleSubmit = () => {
   let payload = {
     ...form.value,
     tanggal_lahir: dateInputFormat(form.value.tanggal_lahir)

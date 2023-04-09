@@ -67,7 +67,7 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = async () => {
+const handleSubmit = (values: any, actions: any) => {
   const payload: Kelas = {
     id: form.value?.id,
     nama_kelas: form.value.nama_kelas,
@@ -77,10 +77,13 @@ const handleSubmit = async () => {
   }
 
   if (form.value.id)
-    await kelas.updateKelas(form.value.id, payload)
+    kelas.updateKelas(form.value.id, payload).then(() => handleSuccess(actions))
   else
-    await kelas.createKelas(payload)
+    kelas.createKelas(payload).then(() => handleSuccess(actions))
+}
 
+const handleSuccess = (actions: any) => {
+  actions.resetForm()
   showModal.value = false
   emit('success')
 }
@@ -249,13 +252,15 @@ const handleSearchGuru = (search: string) => {
                   <option value="">
                     Cari Guru
                   </option>
-                  <option
-                    v-for="(item, key) in guru.guru"
-                    :key="key"
-                    :value="item.id"
-                  >
-                    {{ item.nama }}
-                  </option>
+                  <template v-if="guru.guru?.length">
+                    <option
+                      v-for="(item, key) in guru.guru"
+                      :key="key"
+                      :value="item.id"
+                    >
+                      {{ item.nama }}
+                    </option>
+                  </template>
                 </TomSelect>
               </div>
               <div

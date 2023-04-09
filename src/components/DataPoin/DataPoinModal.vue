@@ -54,14 +54,15 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = () => {
+const handleSubmit = (values:any, actions:any) => {
   if (form.value.id)
-    dataPoin.updateDataPoin(form.value).then(handleSuccess)
+    dataPoin.updateDataPoin(form.value).then(() => handleSuccess(actions))
   else
-    dataPoin.createDataPoin(form.value).then(handleSuccess)
+    dataPoin.createDataPoin(form.value).then(() => handleSuccess(actions))
 }
 
-const handleSuccess = () => {
+const handleSuccess = (actions: any) => {
+  actions.resetForm()
   showModal.value = false
   emit('success')
 }

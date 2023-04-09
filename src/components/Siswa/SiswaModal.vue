@@ -55,17 +55,20 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = async () => {
+const handleSubmit = (values: any, actions: any) => {
   let payload = {
     ...form.value,
     tanggal_lahir: dateInputFormat(form.value.tanggal_lahir)
   }
 
   if (form.value.id)
-    await siswa.updateSiswa(form.value.id, payload)
+    siswa.updateSiswa(form.value.id, payload).then(() => handleSuccess(actions))
   else
-    await siswa.createSiswa(payload)
+    siswa.createSiswa(payload).then(() => handleSuccess(actions))
+}
 
+const handleSuccess = (actions: any) => {
+  actions.resetForm()
   showModal.value = false
   emit('success')
 }

@@ -43,12 +43,15 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = async () => {
+const handleSubmit = (values: any, actions: any) => {
   if (form.value.id)
-    await tahunAjar.updateTahunAjar(form.value.id, form.value.tahun_ajar)
+    tahunAjar.updateTahunAjar(form.value.id, form.value.tahun_ajar).then(() => handleSuccess(actions))
   else
-    await tahunAjar.createTahunAjar(form.value.tahun_ajar)
+    tahunAjar.createTahunAjar(form.value.tahun_ajar).then(() => handleSuccess(actions))
+}
 
+const handleSuccess = (actions: any) => {
+  actions.resetForm()
   showModal.value = false
   emit('success')
 }

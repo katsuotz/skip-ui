@@ -58,17 +58,20 @@ watch(showModal, () => {
   emit("update:modelValue", showModal.value);
 });
 
-const handleSubmit = async () => {
+const handleSubmit = (values: any, actions: any) => {
   let payload = {
     ...form.value,
     tanggal_lahir: dateInputFormat(form.value.tanggal_lahir)
   }
 
   if (form.value.id)
-    await guru.updateGuru(form.value.id, payload)
+    guru.updateGuru(form.value.id, payload).then(() => handleSuccess(actions))
   else
-    await guru.createGuru(payload)
+    guru.createGuru(payload).then(() => handleSuccess(actions))
+}
 
+const handleSuccess = (actions: any) => {
+  actions.resetForm()
   showModal.value = false
   emit('success')
 }
