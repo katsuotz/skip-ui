@@ -46,16 +46,16 @@ watch(() => notification.value.show, (value, oldValue) => {
 
 const icon: ComputedRef<Icon | null> = computed((): Icon | null => {
   switch (notification.value.type) {
-    case 'success':
-      return 'CheckCircle'
-    case 'danger':
-      return 'XCircle'
-    case 'warning':
-      return 'AlertTriangle'
-    case 'primary':
-      return 'AlertCircle'
-    default:
-      return null
+  case 'success':
+    return 'CheckCircle'
+  case 'danger':
+    return 'XCircle'
+  case 'warning':
+    return 'AlertTriangle'
+  case 'primary':
+    return 'AlertCircle'
+  default:
+    return null
   }
 });
 

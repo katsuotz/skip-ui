@@ -24,6 +24,8 @@ module.exports = {
     "*.d.ts",
   ],
   rules: {
+    // enable additional rules
+    'indent': ['error', 2],
     // override/add rules settings here, such as:
     'vue/no-unused-vars': 'error',
     "vue/v-on-event-hyphenation": 'off',

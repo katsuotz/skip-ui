@@ -24,10 +24,10 @@ interface ButtonProps extends ButtonHTMLAttributes {
 }
 
 const props = withDefaults(
-    defineProps<ButtonProps>(),
-    {
-      as: "button",
-    }
+  defineProps<ButtonProps>(),
+  {
+    as: "button",
+  }
 );
 
 const { as, size, elevated, rounded } = props
@@ -180,40 +180,40 @@ const softDark = [
 const variant = toRef(props, 'variant')
 
 const computedClass = computed(() =>
-    twMerge([
-      generalStyles,
-      size == "sm" && small,
-      size == "lg" && large,
-      variant.value == "primary" && primary,
-      variant.value == "info" && info,
-      variant.value == "secondary" && secondary,
-      variant.value == "success" && success,
-      variant.value == "warning" && warning,
-      variant.value == "pending" && pending,
-      variant.value == "danger" && danger,
-      variant.value == "dark" && dark,
-      variant.value == "outline-primary" && outlinePrimary,
-      variant.value == "outline-secondary" && outlineSecondary,
-      variant.value == "outline-success" && outlineSuccess,
-      variant.value == "outline-warning" && outlineWarning,
-      variant.value == "outline-pending" && outlinePending,
-      variant.value == "outline-danger" && outlineDanger,
-      variant.value == "outline-dark" && outlineDark,
-      variant.value == "soft-primary" && softPrimary,
-      variant.value == "soft-secondary" && softSecondary,
-      variant.value == "soft-success" && softSuccess,
-      variant.value == "soft-warning" && softWarning,
-      variant.value == "soft-pending" && softPending,
-      variant.value == "soft-danger" && softDanger,
-      variant.value == "soft-dark" && softDark,
-      variant.value == "facebook" && facebook,
-      variant.value == "twitter" && twitter,
-      variant.value == "instagram" && instagram,
-      variant.value == "linkedin" && linkedin,
-      rounded && "rounded-full",
-      elevated && "shadow-md",
-      typeof attrs.class === "string" && attrs.class,
-    ])
+  twMerge([
+    generalStyles,
+    size == "sm" && small,
+    size == "lg" && large,
+    variant.value == "primary" && primary,
+    variant.value == "info" && info,
+    variant.value == "secondary" && secondary,
+    variant.value == "success" && success,
+    variant.value == "warning" && warning,
+    variant.value == "pending" && pending,
+    variant.value == "danger" && danger,
+    variant.value == "dark" && dark,
+    variant.value == "outline-primary" && outlinePrimary,
+    variant.value == "outline-secondary" && outlineSecondary,
+    variant.value == "outline-success" && outlineSuccess,
+    variant.value == "outline-warning" && outlineWarning,
+    variant.value == "outline-pending" && outlinePending,
+    variant.value == "outline-danger" && outlineDanger,
+    variant.value == "outline-dark" && outlineDark,
+    variant.value == "soft-primary" && softPrimary,
+    variant.value == "soft-secondary" && softSecondary,
+    variant.value == "soft-success" && softSuccess,
+    variant.value == "soft-warning" && softWarning,
+    variant.value == "soft-pending" && softPending,
+    variant.value == "soft-danger" && softDanger,
+    variant.value == "soft-dark" && softDark,
+    variant.value == "facebook" && facebook,
+    variant.value == "twitter" && twitter,
+    variant.value == "instagram" && instagram,
+    variant.value == "linkedin" && linkedin,
+    rounded && "rounded-full",
+    elevated && "shadow-md",
+    typeof attrs.class === "string" && attrs.class,
+  ])
 );
 
 // const wrapper = ref<HTMLElement>()

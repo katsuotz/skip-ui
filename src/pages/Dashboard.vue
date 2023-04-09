@@ -213,7 +213,7 @@ tahunAjar.getTahunAjar({
                       class="w-[28px] h-[28px] text-success"
                     />
                     <div
-                      v-if="!loading.countPenghargaan && info.totalData > 0"
+                      v-if="!loading.countPenghargaan && typeof info.totalData === 'number' && info.totalData > 0"
                       class="ml-auto"
                     >
                       <div
@@ -259,7 +259,7 @@ tahunAjar.getTahunAjar({
                       class="w-[28px] h-[28px] text-danger"
                     />
                     <div
-                      v-if="!loading.countPelanggaran && info.totalData > 0"
+                      v-if="!loading.countPelanggaran && typeof info.totalData === 'number' && info.totalData > 0"
                       class="ml-auto"
                     >
                       <div
