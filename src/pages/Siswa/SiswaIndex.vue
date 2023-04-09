@@ -16,7 +16,10 @@ const global = useGlobalStore()
 const siswa = useSiswaStore()
 
 const getData = (resetPage: boolean = false) => {
-  if (resetPage) siswa.updateCurrentPage(1)
+  if (resetPage) {
+    siswa.updateCurrentPage(1)
+    siswa.updatePerPage(10)
+  }
 
   siswa.getSiswa({
     page: siswa.pagination.page,
