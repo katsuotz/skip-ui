@@ -107,7 +107,7 @@ const handleSearch = debounce((value: string) => {
     <FormInput
       v-if="!hideSearch"
       id="search"
-      v-model.trim="searchDebounce"
+      v-model="searchDebounce"
       type="text"
       placeholder="Cari"
       class="w-64"

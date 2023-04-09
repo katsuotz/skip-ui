@@ -16,7 +16,10 @@ const global = useGlobalStore()
 const guru = useGuruStore()
 
 const getData = (resetPage: boolean = false) => {
-  if (resetPage) guru.updateCurrentPage(1)
+  if (resetPage) {
+    guru.updateCurrentPage(1)
+    guru.updatePerPage(10)
+  }
 
   guru.getGuru({
     page: guru.pagination.page,
@@ -42,7 +45,7 @@ const handleSearch = (value: string = '') => {
   getData(true)
 }
 
-getData()
+getData(true)
 
 const showGuruModal = (item?: Guru) => {
   guru.selectedGuru = item
@@ -112,7 +115,10 @@ const handleDeleteGuru = async (id: number): Promise<void> => {
             <Table.Th style="width: 200px" />
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody :data="guru.guru">
+        <Table.Tbody
+          v-if="guru.guru?.length"
+          :data="guru.guru"
+        >
           <Table.Tr
             v-for="(item, key) in guru.guru"
             :key="key"
@@ -157,6 +163,7 @@ const handleDeleteGuru = async (id: number): Promise<void> => {
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>
+        <Table.Empty v-else />
       </Table>
     </MyTable>
   </div>

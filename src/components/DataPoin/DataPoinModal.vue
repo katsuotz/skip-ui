@@ -91,7 +91,7 @@ const handleSuccess = (actions: any) => {
             </FormLabel>
             <Field
               v-slot="{ field, errorMessage }"
-              v-model.trim="form.title"
+              v-model="form.title"
               :validate-on-blur="false"
               name="Nama"
               :rules="{
@@ -118,7 +118,7 @@ const handleSuccess = (actions: any) => {
             </FormLabel>
             <Field
               v-slot="{ field, errorMessage }"
-              v-model.trim="form.description"
+              v-model="form.description"
               :validate-on-blur="false"
               name="Deskripsi"
               :rules="{

@@ -142,7 +142,7 @@ const handleSubmit = (values:any, actions:any) => {
           </FormLabel>
           <Field
             v-slot="{ field, errorMessage }"
-            v-model.trim="form.siswa_kelas_id"
+            v-model="form.siswa_kelas_id"
             name="Siswa"
             :rules="{
               required: true,
@@ -191,7 +191,7 @@ const handleSubmit = (values:any, actions:any) => {
           </FormLabel>
           <Field
             v-slot="{ field, errorMessage }"
-            v-model.trim="form.poin_id"
+            v-model="form.poin_id"
             name="Poin"
             :rules="{
               required: true,
@@ -234,7 +234,7 @@ const handleSubmit = (values:any, actions:any) => {
           </FormLabel>
           <Field
             v-slot="{ field, errorMessage }"
-            v-model.trim="form.description"
+            v-model="form.description"
             name="Deskripsi"
             :rules="{
               required: true,
