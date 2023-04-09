@@ -77,7 +77,10 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
             <Table.Th style="width: 200px" />
           </Table.Tr>
         </Table.Thead>
-        <Table.Tbody :data="jurusan.jurusan">
+        <Table.Tbody
+          v-if="jurusan.jurusan.length"
+          :data="jurusan.jurusan"
+        >
           <Table.Tr
             v-for="(item, key) in jurusan.jurusan"
             :key="key"
@@ -116,6 +119,7 @@ const handleDeleteTahunAajar = async (id: number): Promise<void> => {
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>
+        <Table.Empty v-else />
       </Table>
     </MyTable>
   </div>

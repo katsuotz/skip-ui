@@ -213,7 +213,7 @@ tahunAjar.getTahunAjar({
                       class="w-[28px] h-[28px] text-success"
                     />
                     <div
-                      v-if="!loading.countPenghargaan"
+                      v-if="!loading.countPenghargaan && info.totalData > 0"
                       class="ml-auto"
                     >
                       <div
@@ -259,7 +259,7 @@ tahunAjar.getTahunAjar({
                       class="w-[28px] h-[28px] text-danger"
                     />
                     <div
-                      v-if="!loading.countPelanggaran"
+                      v-if="!loading.countPelanggaran && info.totalData > 0"
                       class="ml-auto"
                     >
                       <div
@@ -423,39 +423,47 @@ tahunAjar.getTahunAjar({
             v-else
             class="mt-5"
           >
-            <div
-              v-for="(item, key) in info.infoListBigger"
-              :key="key"
-              class="intro-x"
-            >
-              <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
-                <div
-                  class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
-                >
-                  <img
-                    alt=""
-                    :src="getUserPhoto(item?.foto)"
+            <template v-if="info.infoListBigger.length">
+              <div
+                v-for="(item, key) in info.infoListBigger"
+                :key="key"
+                class="intro-x"
+              >
+                <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
+                  <div
+                    class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                   >
-                </div>
-                <div class="ml-4 mr-auto">
-                  <div class="font-medium">
-                    {{ item.nama }}
+                    <img
+                      alt=""
+                      :src="getUserPhoto(item?.foto)"
+                    >
                   </div>
-                  <div class="text-slate-500 text-xs mt-0.5">
-                    {{ item.nis }}
+                  <div class="ml-4 mr-auto">
+                    <div class="font-medium">
+                      {{ item.nama }}
+                    </div>
+                    <div class="text-slate-500 text-xs mt-0.5">
+                      {{ item.nis }}
+                    </div>
                   </div>
-                </div>
-                <div class="text-success font-bold">
-                  {{ numberFormat(item.poin) }}
+                  <div class="text-success font-bold">
+                    {{ numberFormat(item.poin) }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <a
-              href=""
-              class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              <a
+                href=""
+                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              >
+                Lihat Lebih Banyak
+              </a>
+            </template>
+            <p
+              v-else
+              class="-mt-4 text-slate-500"
             >
-              Lihat Lebih Banyak
-            </a>
+              Tidak Ada Data
+            </p>
           </div>
         </div>
         <div
@@ -480,39 +488,47 @@ tahunAjar.getTahunAjar({
             v-else
             class="mt-5"
           >
-            <div
-              v-for="(item, key) in info.infoListSmaller"
-              :key="key"
-              class="intro-x"
-            >
-              <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
-                <div
-                  class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
-                >
-                  <img
-                    alt=""
-                    :src="getUserPhoto(item?.foto)"
+            <template v-if="info.infoListSmaller.length">
+              <div
+                v-for="(item, key) in info.infoListSmaller"
+                :key="key"
+                class="intro-x"
+              >
+                <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
+                  <div
+                    class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                   >
-                </div>
-                <div class="ml-4 mr-auto">
-                  <div class="font-medium">
-                    {{ item.nama }}
+                    <img
+                      alt=""
+                      :src="getUserPhoto(item?.foto)"
+                    >
                   </div>
-                  <div class="text-slate-500 text-xs mt-0.5">
-                    {{ item.nis }}
+                  <div class="ml-4 mr-auto">
+                    <div class="font-medium">
+                      {{ item.nama }}
+                    </div>
+                    <div class="text-slate-500 text-xs mt-0.5">
+                      {{ item.nis }}
+                    </div>
                   </div>
-                </div>
-                <div class="text-danger font-bold">
-                  {{ numberFormat(item.poin) }}
+                  <div class="text-danger font-bold">
+                    {{ numberFormat(item.poin) }}
+                  </div>
                 </div>
               </div>
-            </div>
-            <a
-              href=""
-              class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              <a
+                href=""
+                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              >
+                Lihat Lebih Banyak
+              </a>
+            </template>
+            <p
+              v-else
+              class="-mt-4 text-slate-500"
             >
-              Lihat Lebih Banyak
-            </a>
+              Tidak Ada Data
+            </p>
           </div>
         </div>
         <div
@@ -537,28 +553,36 @@ tahunAjar.getTahunAjar({
             v-else
             class="mt-5"
           >
-            <div
-              v-for="(item, key) in info.listPenghargaan"
-              :key="key"
-              class="intro-x"
-            >
-              <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
-                <div class="mr-auto">
-                  <div class="font-medium">
-                    {{ item.title }}
+            <template v-if="info.listPenghargaan.length">
+              <div
+                v-for="(item, key) in info.listPenghargaan"
+                :key="key"
+                class="intro-x"
+              >
+                <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
+                  <div class="mr-auto">
+                    <div class="font-medium">
+                      {{ item.title }}
+                    </div>
+                  </div>
+                  <div class="text-success font-bold">
+                    {{ numberFormat(item.total) }}
                   </div>
                 </div>
-                <div class="text-success font-bold">
-                  {{ numberFormat(item.total) }}
-                </div>
               </div>
-            </div>
-            <a
-              href=""
-              class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              <a
+                href=""
+                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              >
+                Lihat Lebih Banyak
+              </a>
+            </template>
+            <p
+              v-else
+              class="-mt-4 text-slate-500"
             >
-              Lihat Lebih Banyak
-            </a>
+              Tidak Ada Data
+            </p>
           </div>
         </div>
         <div
@@ -583,28 +607,36 @@ tahunAjar.getTahunAjar({
             v-else
             class="mt-5"
           >
-            <div
-              v-for="(item, key) in info.listPelanggaran"
-              :key="key"
-              class="intro-x"
-            >
-              <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
-                <div class="mr-auto">
-                  <div class="font-medium">
-                    {{ item.title }}
+            <template v-if="info.listPelanggaran.length">
+              <div
+                v-for="(item, key) in info.listPelanggaran"
+                :key="key"
+                class="intro-x"
+              >
+                <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
+                  <div class="mr-auto">
+                    <div class="font-medium">
+                      {{ item.title }}
+                    </div>
+                  </div>
+                  <div class="text-danger font-bold">
+                    {{ item.total }}
                   </div>
                 </div>
-                <div class="text-danger font-bold">
-                  {{ item.total }}
-                </div>
               </div>
-            </div>
-            <a
-              href=""
-              class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              <a
+                href=""
+                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              >
+                Lihat Lebih Banyak
+              </a>
+            </template>
+            <p
+              v-else
+              class="-mt-4 text-slate-500"
             >
-              Lihat Lebih Banyak
-            </a>
+              Tidak Ada Data
+            </p>
           </div>
         </div>
         <div
@@ -629,7 +661,10 @@ tahunAjar.getTahunAjar({
             v-else
             class="mt-5"
           >
-            <div class="intro-x">
+            <div
+              v-if="info.graphCountPenghargaan.length"
+              class="intro-x"
+            >
               <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
                 <DashboardPoinGraph
                   v-model="info.graphCountPenghargaan"
@@ -640,6 +675,12 @@ tahunAjar.getTahunAjar({
                 />
               </div>
             </div>
+            <p
+              v-else
+              class="-mt-4 text-slate-500"
+            >
+              Tidak Ada Data
+            </p>
           </div>
         </div>
         <div
@@ -664,7 +705,10 @@ tahunAjar.getTahunAjar({
             v-else
             class="mt-5"
           >
-            <div class="intro-x">
+            <div
+              v-if="info.graphCountPelanggaran.length"
+              class="intro-x"
+            >
               <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
                 <DashboardPoinGraph
                   v-model="info.graphCountPelanggaran"
@@ -675,6 +719,12 @@ tahunAjar.getTahunAjar({
                 />
               </div>
             </div>
+            <p
+              v-else
+              class="-mt-4 text-slate-500"
+            >
+              Tidak Ada Data
+            </p>
           </div>
         </div>
       </div>
@@ -743,13 +793,19 @@ tahunAjar.getTahunAjar({
                     </div>
                   </div>
                 </div>
+                <a
+                  href=""
+                  class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                >
+                  Lihat Lebih Banyak
+                </a>
               </template>
-              <a
-                href=""
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+              <p
+                v-else
+                class="-mt-4 text-slate-500"
               >
-                Lihat Lebih Banyak
-              </a>
+                Tidak Ada Data
+              </p>
             </div>
           </div>
           <div
@@ -774,81 +830,89 @@ tahunAjar.getTahunAjar({
               v-else
               class="mt-5"
             >
-              <div
-                v-for="(item, key) in info.loginLog"
-                :key="key"
-                class="intro-x"
-              >
-                <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
-                  <div
-                    class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
-                  >
-                    <img
-                      alt=""
-                      :src="getUserPhoto(item?.foto)"
+              <template v-if="info.loginLog.length">
+                <div
+                  v-for="(item, key) in info.loginLog"
+                  :key="key"
+                  class="intro-x"
+                >
+                  <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
+                    <div
+                      class="flex-none w-10 h-10 overflow-hidden rounded-full image-fit"
                     >
+                      <img
+                        alt=""
+                        :src="getUserPhoto(item?.foto)"
+                      >
+                    </div>
+                    <div class="ml-4 mr-auto">
+                      <div class="font-medium">
+                        {{ item.nama }}
+                      </div>
+                      <div class="text-slate-500 text-xs mt-0.5">
+                        {{ item.role }}
+                      </div>
+                      <div class="text-slate-500 text-xs mt-0.5">
+                        {{ dateFormat(item.created_at) }},
+                        {{ timeFormat(item.created_at) }}
+                      </div>
+                    </div>
+                    <Tippy
+                      as="div"
+                      :content="item.action"
+                    >
+                      <div
+                        v-if="item.action === 'Successful Login'"
+                        class="text-success flex"
+                      >
+                        <Lucide
+                          icon="CheckCircle"
+                          class="w-6 h-6"
+                        />
+                      </div>
+                      <div
+                        v-else-if="item.action === 'Failed Login Attempt'"
+                        class="text-danger flex"
+                      >
+                        <Lucide
+                          icon="XCircle"
+                          class="w-6 h-6"
+                        />
+                      </div>
+                      <div
+                        v-else-if="item.action === 'Change Password Attempt'"
+                        class="text-warning flex"
+                      >
+                        <Lucide
+                          icon="AlertTriangle"
+                          class="w-6 h-6"
+                        />
+                      </div>
+                      <div
+                        v-else-if="item.action === 'Password Changed'"
+                        class="text-warning flex"
+                      >
+                        <Lucide
+                          icon="FormInput"
+                          class="w-6 h-6"
+                        />
+                      </div>
+                    </Tippy>
                   </div>
-                  <div class="ml-4 mr-auto">
-                    <div class="font-medium">
-                      {{ item.nama }}
-                    </div>
-                    <div class="text-slate-500 text-xs mt-0.5">
-                      {{ item.role }}
-                    </div>
-                    <div class="text-slate-500 text-xs mt-0.5">
-                      {{ dateFormat(item.created_at) }},
-                      {{ timeFormat(item.created_at) }}
-                    </div>
-                  </div>
-                  <Tippy
-                    as="div"
-                    :content="item.action"
-                  >
-                    <div
-                      v-if="item.action === 'Successful Login'"
-                      class="text-success flex"
-                    >
-                      <Lucide
-                        icon="CheckCircle"
-                        class="w-6 h-6"
-                      />
-                    </div>
-                    <div
-                      v-else-if="item.action === 'Failed Login Attempt'"
-                      class="text-danger flex"
-                    >
-                      <Lucide
-                        icon="XCircle"
-                        class="w-6 h-6"
-                      />
-                    </div>
-                    <div
-                      v-else-if="item.action === 'Change Password Attempt'"
-                      class="text-warning flex"
-                    >
-                      <Lucide
-                        icon="AlertTriangle"
-                        class="w-6 h-6"
-                      />
-                    </div>
-                    <div
-                      v-else-if="item.action === 'Password Changed'"
-                      class="text-warning flex"
-                    >
-                      <Lucide
-                        icon="FormInput"
-                        class="w-6 h-6"
-                      />
-                    </div>
-                  </Tippy>
                 </div>
-              </div>
-              <a
-                href=""
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                <a
+                  href=""
+                  class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                >
+                  Lihat Lebih Banyak
+                </a>
+              </template>
+              <p
+                v-else
+                class="-mt-4 text-slate-500"
               >
-                Lihat Lebih Banyak
-              </a>
+                Tidak Ada Data
+              </p>
             </div>
           </div>
         </div>

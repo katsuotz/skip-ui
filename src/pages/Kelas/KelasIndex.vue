@@ -210,16 +210,7 @@ getJurusan()
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>
-        <Table.Tbody v-else>
-          <Table.Tr>
-            <Table.Td
-              colspan="99"
-              class="text-center"
-            >
-              Tidak ada Data
-            </Table.Td>
-          </Table.Tr>
-        </Table.Tbody>
+        <Table.Empty v-else />
       </Table>
     </MyTable>
   </div>
