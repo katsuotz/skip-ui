@@ -10,13 +10,14 @@ import {useGlobalStore} from "../../stores/global";
 import {useSiswaStore} from "../../stores/modules/siswa";
 import {useKelasStore} from "../../stores/modules/kelas";
 import FormCheck from "../../base-components/Form/FormCheck";
+import PoinValue from "../Poin/PoinValue.vue";
 
-interface KelasTableProps {
+interface SiswaKelasTableProps {
   kelasId: string | number;
   hideDelete?: boolean;
 }
 
-const props = defineProps<KelasTableProps>();
+const props = defineProps<SiswaKelasTableProps>();
 
 const global = useGlobalStore()
 const siswa = useSiswaStore()
@@ -162,17 +163,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             {{ item.nama }}
           </Table.Td>
           <Table.Td>
-            <span
-              v-if="item.poin"
-              :class="[
-                item.poin < 50 && 'text-danger',
-                item.poin >= 50 && item.poin < 100 && 'text-warning',
-                item.poin >= 100 && 'text-success',
-                'font-bold'
-              ]"
-            >
-              {{ item.poin }}
-            </span>
+            <PoinValue v-model="item.poin" />
           </Table.Td>
           <Table.Td>
             <div class="flex gap-2">

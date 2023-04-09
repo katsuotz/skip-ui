@@ -66,6 +66,7 @@ const url = computed(() => document.location.origin + '/report/personal/12345')
           hide-pagination
           hide-action
           hide-guru
+          hide-siswa
         />
       </div>
     </div>

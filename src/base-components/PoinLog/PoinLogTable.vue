@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {countPaginationNumber} from "../../utils/helper";
+import {countPaginationNumber, getUserPhoto} from "../../utils/helper";
 import Table from "../Table";
 import Button from "../Button";
 import Lucide from "../Lucide";
@@ -7,13 +7,16 @@ import MyTable from "../My/MyTable/MyTable.vue";
 import {ref} from "vue";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {PoinLog} from "../../utils/interfaces/poin-log";
+import PoinType from "../../components/Poin/PoinType.vue";
+import PoinValue from "../../components/Poin/PoinValue.vue";
 
 interface PoinLogTableProps {
-  modelValue: PoinLog[],
+  modelValue?: PoinLog[],
   hidePagination?: boolean;
   hideGuru?: boolean;
   hideAction?: boolean;
   hideDetail?: boolean;
+  hideSiswa?: boolean;
 }
 
 interface PoinLogEmit {
@@ -66,6 +69,9 @@ const deleteLog = (item: PoinLog) => {
           <Table.Th width="10">
             #
           </Table.Th>
+          <Table.Th v-if="!props.hideSiswa">
+            Siswa
+          </Table.Th>
           <Table.Th>
             Riwayat Poin
           </Table.Th>
@@ -79,7 +85,7 @@ const deleteLog = (item: PoinLog) => {
             Poin
           </Table.Th>
           <Table.Th v-if="!hideGuru">
-            Nama Guru
+            Pencatat
           </Table.Th>
           <Table.Th
             v-if="!hideAction"
@@ -98,6 +104,23 @@ const deleteLog = (item: PoinLog) => {
           <Table.Td>
             {{ props.hidePagination ? key + 1 : countPaginationNumber(poinLog.pagination, key) }}
           </Table.Td>
+          <Table.Td v-if="!props.hideSiswa">
+            <div class="flex items-center gap-2">
+              <img
+                class="w-10 h-10 overflow-hidden rounded-full object-cover object-center"
+                alt=""
+                :src="getUserPhoto(item?.foto)"
+              >
+              <div>
+                <p class="font-medium">
+                  {{ item.nama }}
+                </p>
+                <p class="text-slate-500 text-xs mt-0.5">
+                  {{ item.nis }}
+                </p>
+              </div>
+            </div>
+          </Table.Td>
           <Table.Td>
             {{ item.title }}
             <p class="text-xs">
@@ -105,39 +128,16 @@ const deleteLog = (item: PoinLog) => {
             </p>
           </Table.Td>
           <Table.Td>
-            <span
-              :class="[
-                item.poin_before < 50 && 'text-danger',
-                item.poin_before >= 50 && item.poin_before < 100 && 'text-warning',
-                item.poin_before >= 100 && 'text-success',
-                'font-bold'
-              ]"
-            >
-              {{ item.poin_before }}
-            </span>
+            <PoinValue v-model="item.poin_before" />
           </Table.Td>
           <Table.Td>
-            <span
-              :class="[
-                item.poin_after < 50 && 'text-danger',
-                item.poin_after >= 50 && item.poin_after < 100 && 'text-warning',
-                item.poin_after >= 100 && 'text-success',
-                'font-bold'
-              ]"
-            >
-              {{ item.poin_after }}
-            </span>
+            <PoinValue v-model="item.poin_after" />
           </Table.Td>
           <Table.Td>
-            <span
-              :class="[
-                item.type === 'Pelanggaran' && 'text-danger',
-                item.type === 'Penghargaan' && 'text-success',
-                'font-bold'
-              ]"
-            >
-              {{ item.type === 'Pelanggaran' ? '-' : '+' }}{{ item.poin }}
-            </span>
+            <PoinType
+              v-model="item.poin"
+              :type="item.type"
+            />
           </Table.Td>
           <Table.Td v-if="!props.hideGuru">
             {{ item.nama_guru }}

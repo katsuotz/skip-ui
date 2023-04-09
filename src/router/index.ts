@@ -104,6 +104,14 @@ const routes = [
         },
       },
       {
+        path: "poin/log",
+        name: "poin-log",
+        component: () => import("../pages/Poin/LogIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+        },
+      },
+      {
         path: "report",
         name: "report",
         component: () => import("../pages/Report/ReportKelasForm.vue"),

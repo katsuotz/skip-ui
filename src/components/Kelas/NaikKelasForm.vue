@@ -12,6 +12,7 @@ import FormCheck from "../../base-components/Form/FormCheck";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
 import {useJurusanStore} from "../../stores/modules/jurusan";
 import TomSelect from "../../base-components/TomSelect/TomSelect.vue";
+import PoinValue from "../Poin/PoinValue.vue";
 
 const siswa = useSiswaStore()
 const kelas = useKelasStore()
@@ -216,7 +217,7 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
               {{ item.nama }}
             </Table.Td>
             <Table.Td>
-              {{ item.poin }}
+              <PoinValue v-model="item.poin" />
             </Table.Td>
           </Table.Tr>
         </Table.Tbody>

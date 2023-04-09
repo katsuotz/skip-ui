@@ -105,6 +105,7 @@ const handleDeleteLog = (item: PoinLog) => {
   <div class="p-5 mt-5 intro-y box">
     <PoinLogTable
       v-model="poinLog.poinLogSiswaKelas"
+      hide-siswa
       @updatePerPage="handleUpdatePerPage"
       @updatePage="handleUpdatePage"
       @updateSearch="handleSearch"

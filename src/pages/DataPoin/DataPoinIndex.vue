@@ -10,6 +10,7 @@ import Lucide from "../../base-components/Lucide";
 import {DataPoin} from "../../utils/interfaces/data-poin";
 import {useGlobalStore} from "../../stores/global";
 import TomSelect from "../../base-components/TomSelect";
+import PoinType from "../../components/Poin/PoinType.vue";
 
 const showModal = ref(false)
 
@@ -202,7 +203,10 @@ const handleDeletePoin = async (id: number): Promise<void> => {
               >{{ item.category }}</span>
             </Table.Td>
             <Table.Td>
-              {{ item.poin }}
+              <PoinType
+                v-model="item.poin"
+                :type="item.type"
+              />
             </Table.Td>
             <Table.Td>
               <div class="flex gap-2">

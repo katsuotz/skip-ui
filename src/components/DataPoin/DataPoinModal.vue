@@ -9,6 +9,7 @@ import {useDataPoinStore} from "../../stores/modules/data-poin";
 import FormTextarea from "../../base-components/Form/FormTextarea.vue";
 import {DataPoin} from "../../utils/interfaces/data-poin";
 import TomSelect from "../../base-components/TomSelect";
+import InputGroup from "../../base-components/Form/InputGroup";
 
 interface TahunAjarProps {
   modelValue: boolean;
@@ -140,35 +141,6 @@ const handleSuccess = (actions: any) => {
             </Field>
           </div>
           <div>
-            <FormLabel for="poin">
-              Poin
-            </FormLabel>
-            <Field
-              v-slot="{ field, errorMessage }"
-              v-model.number="form.poin"
-              :validate-on-blur="false"
-              name="Poin"
-              :rules="{
-                required: true,
-                integer: true,
-              }"
-            >
-              <FormInput
-                id="poin"
-                :class="{ 'border-danger': errorMessage }"
-                type="number"
-                step="1"
-                v-bind="field"
-              />
-              <div
-                v-show="errorMessage"
-                class="mt-2 text-danger"
-              >
-                {{ errorMessage }}
-              </div>
-            </Field>
-          </div>
-          <div>
             <FormLabel for="type">
               Tipe
             </FormLabel>
@@ -200,6 +172,53 @@ const handleSuccess = (actions: any) => {
                   </option>
                 </TomSelect>
               </div>
+              <div
+                v-show="errorMessage"
+                class="mt-2 text-danger"
+              >
+                {{ errorMessage }}
+              </div>
+            </Field>
+          </div>
+          <div>
+            <FormLabel for="poin">
+              Poin
+            </FormLabel>
+            <Field
+              v-slot="{ field, errorMessage }"
+              v-model.number="form.poin"
+              :validate-on-blur="false"
+              name="Poin"
+              :rules="{
+                required: true,
+                integer: true,
+              }"
+            >
+              <InputGroup>
+                <InputGroup.Text
+                  v-if="form.type"
+                  :class="[
+                    form.type === 'Pelanggaran' && 'text-danger',
+                    form.type === 'Penghargaan' && 'text-success',
+                    'font-bold border-r-transparent w-10 text-center'
+                  ]"
+                >
+                  {{ form.type === 'Penghargaan' ? '+' : '-' }}
+                </InputGroup.Text>
+                <FormInput
+                  id="poin"
+                  :class="[
+                    form.type === 'Pelanggaran' && 'text-danger',
+                    form.type === 'Penghargaan' && 'text-success',
+                    errorMessage && 'border-danger',
+                    'font-bold',
+                  ]"
+                  type="number"
+                  step="1"
+                  v-bind="field"
+                  :disabled="!form.type"
+                />
+              </InputGroup>
               <div
                 v-show="errorMessage"
                 class="mt-2 text-danger"

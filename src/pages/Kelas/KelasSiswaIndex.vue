@@ -4,7 +4,7 @@ import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
 import {useKelasStore} from "../../stores/modules/kelas";
 import {useRoute} from "vue-router";
-import KelasTable from "../../components/Kelas/KelasTable.vue";
+import SiswaKelasTable from "../../components/Siswa/SiswaKelasTable.vue";
 
 const kelas = useKelasStore()
 
@@ -60,7 +60,7 @@ kelas.getKelasByID(kelas_id).then(() => {
     </table>
   </div>
   <div class="p-5 mt-5 intro-y box flex flex-col gap-4">
-    <KelasTable
+    <SiswaKelasTable
       v-if="loaded"
       :kelas-id="kelas_id"
     />

@@ -10,6 +10,8 @@ import TomSelect from "../../base-components/TomSelect";
 import Tippy from "../../base-components/Tippy";
 import DashboardPoinGraph from "./DashboardPoinGraph.vue";
 import {useAuthStore} from "../../stores/modules/auth";
+import PoinType from "../Poin/PoinType.vue";
+import PoinValue from "../Poin/PoinValue.vue";
 
 const info = useInfoStore()
 const poinLog = usePoinLogStore()
@@ -450,9 +452,7 @@ tahunAjar.getTahunAjar({
                       {{ item.nis }}
                     </div>
                   </div>
-                  <div class="text-success font-bold">
-                    {{ numberFormat(item.poin) }}
-                  </div>
+                  <PoinValue v-model="item.poin" />
                 </div>
               </div>
               <a
@@ -515,9 +515,7 @@ tahunAjar.getTahunAjar({
                       {{ item.nis }}
                     </div>
                   </div>
-                  <div class="text-danger font-bold">
-                    {{ numberFormat(item.poin) }}
-                  </div>
+                  <PoinValue v-model="item.poin" />
                 </div>
               </div>
               <a
@@ -786,23 +784,18 @@ tahunAjar.getTahunAjar({
                         {{ timeFormat(item.created_at) }}
                       </div>
                     </div>
-                    <div
-                      :class="[
-                        item.poin > 0 && 'text-success',
-                        item.poin < 0 && 'text-danger',
-                        'font-bold'
-                      ]"
-                    >
-                      {{ item.poin }}
-                    </div>
+                    <PoinType
+                      v-model="item.poin"
+                      :type="item.type"
+                    />
                   </div>
                 </div>
-                <a
-                  href=""
+                <RouterLink
+                  to="/poin/log"
                   class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
                 >
                   Lihat Lebih Banyak
-                </a>
+                </RouterLink>
               </template>
               <p
                 v-else

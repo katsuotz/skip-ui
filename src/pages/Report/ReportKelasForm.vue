@@ -4,7 +4,7 @@ import {ref} from "vue";
 import TomSelect from "../../base-components/TomSelect";
 import {useJurusanStore} from "../../stores/modules/jurusan";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
-import KelasTable from "../../components/Kelas/KelasTable.vue";
+import SiswaKelasTable from "../../components/Siswa/SiswaKelasTable.vue";
 
 const kelas = useKelasStore()
 const jurusan = useJurusanStore()
@@ -102,7 +102,7 @@ getJurusan()
       </TomSelect>
     </div>
 
-    <KelasTable
+    <SiswaKelasTable
       v-if="filter.kelas_id"
       :kelas-id="filter.kelas_id"
       hide-delete
