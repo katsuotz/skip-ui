@@ -1,15 +1,11 @@
 <script setup lang="ts">
 import {countPaginationNumber, dateFormat, getUserPhoto, timeFormat} from "../../utils/helper";
 import Table from "../Table";
-import Button from "../Button";
 import Lucide from "../Lucide";
 import MyTable from "../My/MyTable/MyTable.vue";
 import {ref} from "vue";
-import PoinType from "../../components/Poin/PoinType.vue";
-import PoinValue from "../../components/Poin/PoinValue.vue";
 import {LoginLog} from "../../utils/interfaces/user";
 import {useInfoStore} from "../../stores/modules/info";
-import Tippy from "../Tippy";
 
 interface LoginLogTableProps {
     modelValue?: LoginLog[],

@@ -3,8 +3,6 @@ import {countPaginationNumber, getUserPhoto} from "../../utils/helper";
 import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref} from "vue";
-import {usePoinLogStore} from "../../stores/modules/poin-log";
-import {PoinLog} from "../../utils/interfaces/poin-log";
 import PoinValue from "./PoinValue.vue";
 import {InfoListData} from "../../utils/interfaces/info";
 import {Pagination} from '../../utils/interfaces/table'

@@ -4,7 +4,6 @@ import {defineStore} from "pinia";
 import {Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 import {DataPoin, DataPoinTable} from "../../utils/interfaces/data-poin";
-import {SiswaTable} from "../../utils/interfaces/siswa";
 
 interface DataPoinState {
   dataPoin: DataPoin[];
