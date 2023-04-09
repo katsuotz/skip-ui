@@ -1,8 +1,8 @@
 import {Any} from "./helper";
 
 export interface Table {
-  page: number;
-  per_page: number;
+  page?: number;
+  per_page?: number;
   search?: string;
   order?: string;
   order_by?: string;

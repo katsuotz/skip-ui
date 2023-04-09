@@ -11,6 +11,8 @@ import TomSelect from "../../base-components/TomSelect";
 import {useGuruStore} from "../../stores/modules/guru";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
 import {useJurusanStore} from "../../stores/modules/jurusan";
+import debounce from "lodash-es/debounce";
+import {Guru} from "../../utils/interfaces/guru";
 
 interface KelasProps {
   modelValue: boolean;
@@ -88,13 +90,15 @@ const handleSuccess = (actions: any) => {
   emit('success')
 }
 
-const handleSearchGuru = (search: string) => {
-  guru.getGuru({
-    page: 1,
-    per_page: 5,
+const guruFilter= ref<Guru[]>([])
+
+const handleSearchGuru = debounce((search: string) => {
+  guru.searchGuru({
     search,
+  }).then((res:any) => {
+    guruFilter.value = res.data
   })
-}
+}, 700)
 
 </script>
 
@@ -252,15 +256,13 @@ const handleSearchGuru = (search: string) => {
                   <option value="">
                     Cari Guru
                   </option>
-                  <template v-if="guru.guru?.length">
-                    <option
-                      v-for="(item, key) in guru.guru"
-                      :key="key"
-                      :value="item.id"
-                    >
-                      {{ item.nama }}
-                    </option>
-                  </template>
+                  <option
+                    v-for="(item, key) in guruFilter"
+                    :key="key"
+                    :value="item.id"
+                  >
+                    {{ item.nama }}
+                  </option>
                 </TomSelect>
               </div>
               <div

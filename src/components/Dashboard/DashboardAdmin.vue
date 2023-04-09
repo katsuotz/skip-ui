@@ -12,6 +12,7 @@ import DashboardPoinGraph from "./DashboardPoinGraph.vue";
 import {useAuthStore} from "../../stores/modules/auth";
 import PoinType from "../Poin/PoinType.vue";
 import PoinValue from "../Poin/PoinValue.vue";
+import {TahunAjar} from "../../utils/interfaces/tahun-ajar";
 
 const info = useInfoStore()
 const poinLog = usePoinLogStore()
@@ -101,11 +102,14 @@ const getData = () => {
   }
 }
 
+const tahunAjarFilter = ref<TahunAjar[]>([])
+
 tahunAjar.getTahunAjar({
   page: 1,
   per_page: -1,
-}).then(() => {
+}).then((res: any) => {
   selectedTahunAjar.value = tahunAjar.activeTahunAjar?.id.toString() || ''
+  tahunAjarFilter.value = res.data
 }).finally( () => {
   loaded.value = true
   getData()
@@ -141,11 +145,8 @@ tahunAjar.getTahunAjar({
                   style="width: 200px"
                   @update:modelValue="getData"
                 >
-                  <option value="">
-                    Pilih Tahun Ajar
-                  </option>
                   <option
-                    v-for="(item, key) in tahunAjar.tahunAjar"
+                    v-for="(item, key) in tahunAjarFilter"
                     :key="key"
                     :value="item.id"
                   >

@@ -5,6 +5,7 @@ import TomSelect from "../../base-components/TomSelect";
 import {useJurusanStore} from "../../stores/modules/jurusan";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
 import SiswaKelasTable from "../../components/Siswa/SiswaKelasTable.vue";
+import {Kelas} from "../../utils/interfaces/kelas";
 
 const kelas = useKelasStore()
 const jurusan = useJurusanStore()
@@ -27,9 +28,14 @@ const getJurusan = () => {
   jurusan.getJurusan()
 }
 
+const kelasFilter = ref<Kelas[]>([])
+
 const getKelas = () => {
   if (!filter.value.tahun_ajar_id || !filter.value.jurusan_id) return
   kelas.getKelas(parseInt(filter.value.tahun_ajar_id), parseInt(filter.value.jurusan_id))
+    .then((res:any) => {
+      kelasFilter.value = res
+    })
 }
 
 getTahunAjar()
@@ -93,7 +99,7 @@ getJurusan()
           Pilih Kelas
         </option>
         <option
-          v-for="(item, key) in kelas.kelas"
+          v-for="(item, key) in kelasFilter"
           :key="key"
           :value="item.id"
         >

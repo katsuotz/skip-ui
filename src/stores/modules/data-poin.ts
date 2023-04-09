@@ -4,6 +4,7 @@ import {defineStore} from "pinia";
 import {Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 import {DataPoin, DataPoinTable} from "../../utils/interfaces/data-poin";
+import {SiswaTable} from "../../utils/interfaces/siswa";
 
 interface DataPoinState {
   dataPoin: DataPoin[];
@@ -65,7 +66,7 @@ export const useDataPoinStore = defineStore("dataPoin", {
         })
       })
     },
-    getDataPoin({page = 1, per_page = 10, search = '', type = '', category = ''}: DataPoinTable) {
+    getDataPoin({page = 1, per_page = 10, search = '', type = '', category = ''}: DataPoinTable, loading:boolean = true) {
       const params: Payload = {
         page,
         per_page,
@@ -80,18 +81,31 @@ export const useDataPoinStore = defineStore("dataPoin", {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
-        global.loading = true
+        if (loading) global.loading = true
         api.get('/data-poin', {
           params,
         }).then((res: any) => {
           this.dataPoin = res.data
-          this.pagination = res.pagination
+          if (loading) this.pagination = res.pagination
           resolve(res)
         }).catch(err => {
           reject(err)
         }).finally(() => {
-          global.loading = false
+          if (loading) global.loading = false
         })
+      })
+    },
+    searchDataPoin({search, type, category}: DataPoinTable) {
+      return new Promise((resolve, reject) => {
+        this.getDataPoin({
+          page: 1,
+          per_page: 5,
+          search,
+          type,
+          category
+        }, false)
+          .then(resolve)
+          .catch(reject)
       })
     },
     getDataPoinDetail(id: string) {

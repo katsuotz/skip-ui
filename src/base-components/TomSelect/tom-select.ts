@@ -75,9 +75,9 @@ const init = (
   }, 0));
 
   // On type
-  clonedEl.TomSelect.on("type", debounce(function (value: string) {
+  clonedEl.TomSelect.on("type", (value: string) => {
     emit("search", value)
-  }, 500));
+  });
 
 };
 

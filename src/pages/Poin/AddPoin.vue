@@ -11,11 +11,17 @@ import {useDataPoinStore} from "../../stores/modules/data-poin";
 import {usePoinSiswaStore} from "../../stores/modules/poin-siswa";
 import {PoinSiswaRequest} from "../../utils/interfaces/poin-siswa";
 import {useGlobalStore} from "../../stores/global";
+import {Siswa} from "../../utils/interfaces/siswa";
+import debounce from "lodash-es/debounce";
+import {DataPoin} from "../../utils/interfaces/data-poin";
 
 const siswa = useSiswaStore()
 const dataPoin = useDataPoinStore()
 const poinSiswa = usePoinSiswaStore()
 const global = useGlobalStore()
+
+const siswaSearch = ref<Siswa[]>([])
+const poinSearch = ref<DataPoin[]>([])
 
 const form = ref({
   description: '',
@@ -33,23 +39,23 @@ const handleResetForm = () => {
   }
 }
 
-const handleSearchSiswa = (search:string) => {
-  siswa.getSiswa({
-    page: 1,
-    per_page: 10,
+const handleSearchSiswa = debounce((search: string) => {
+  siswa.searchSiswa({
     search,
     tahun_ajar_active: true,
+  }).then((res: any) => {
+    siswaSearch.value = res.data
   })
-}
+}, 700)
 
-const handleSearchPoin = (search:string) => {
-  dataPoin.getDataPoin({
-    page: 1,
-    per_page: 10,
+const handleSearchPoin = debounce((search:string) => {
+  dataPoin.searchDataPoin({
     search,
     type: form.value.type,
+  }).then((res: any) => {
+    poinSearch.value = res.data
   })
-}
+}, 700)
 
 const handleSubmit = (values:any, actions:any) => {
   const {description, type, siswa_kelas_id, poin_id} = form.value
@@ -157,18 +163,13 @@ const handleSubmit = (values:any, actions:any) => {
                 v-bind="field"
                 @search="handleSearchSiswa"
               >
-                <option value="">
-                  Cari Siswa
+                <option
+                  v-for="(item, key) in siswaSearch"
+                  :key="key"
+                  :value="item.siswa_kelas_id"
+                >
+                  {{ item.nis }} - {{ item.nama }}
                 </option>
-                <template v-if="siswa.siswa?.length">
-                  <option
-                    v-for="(item, key) in siswa.siswa"
-                    :key="key"
-                    :value="item.siswa_kelas_id"
-                  >
-                    {{ item.nis }} - {{ item.nama }}
-                  </option>
-                </template>
               </TomSelect>
             </div>
             <div
@@ -206,12 +207,9 @@ const handleSubmit = (values:any, actions:any) => {
                 v-bind="field"
                 @search="handleSearchPoin"
               >
-                <option value="">
-                  Cari Nama Poin
-                </option>
-                <template v-if="dataPoin.dataPoin?.length">
+                <template v-if="poinSearch?.length">
                   <option
-                    v-for="(item, key) in dataPoin.dataPoin"
+                    v-for="(item, key) in poinSearch"
                     :key="key"
                     :value="item.id"
                   >

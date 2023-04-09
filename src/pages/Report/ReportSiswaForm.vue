@@ -7,6 +7,9 @@ import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
 import {useSiswaStore} from "../../stores/modules/siswa";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import ReportSiswa from "../../components/Report/ReportSiswa.vue";
+import debounce from "lodash-es/debounce";
+import {Siswa} from "../../utils/interfaces/siswa";
+import {Kelas} from "../../utils/interfaces/kelas";
 
 const kelas = useKelasStore()
 const jurusan = useJurusanStore()
@@ -34,26 +37,33 @@ const getJurusan = () => {
   jurusan.getJurusan()
 }
 
+const kelasFilter = ref<Kelas[]>([])
+
 const getKelas = () => {
   if (!filter.value.tahun_ajar_id || !filter.value.jurusan_id) return
   kelas.getKelas(parseInt(filter.value.tahun_ajar_id), parseInt(filter.value.jurusan_id))
+    .then((res:any) => {
+      kelasFilter.value = res
+    })
 }
 
 getTahunAjar()
 getJurusan()
 
-const handleSearchSiswa = (search: string) => {
+const siswaSearch = ref<Siswa[]>([])
+
+const handleSearchSiswa = debounce((search: string) => {
   const {kelas_id, jurusan_id, tahun_ajar_id} = filter.value
 
-  siswa.getSiswa({
-    page: 1,
-    per_page: 10,
+  siswa.searchSiswa({
     search,
     kelas_id,
     jurusan_id,
     tahun_ajar_id,
+  }).then((res: any) => {
+    siswaSearch.value = res.data
   })
-}
+}, 700)
 
 const getData = () => {
   poinLog.getPoinLogByNis(filter.value.nis)
@@ -117,7 +127,7 @@ const getData = () => {
           Pilih Kelas
         </option>
         <option
-          v-for="(item, key) in kelas.kelas"
+          v-for="(item, key) in kelasFilter"
           :key="key"
           :value="item.id"
         >
@@ -132,18 +142,13 @@ const getData = () => {
         @search="handleSearchSiswa"
         @update:modelValue="getData"
       >
-        <option value="">
-          Cari Siswa
+        <option
+          v-for="(item, key) in siswaSearch"
+          :key="key"
+          :value="item.nis"
+        >
+          {{ item.nis }} - {{ item.nama }}
         </option>
-        <template v-if="siswa.siswa?.length">
-          <option
-            v-for="(item, key) in siswa.siswa"
-            :key="key"
-            :value="item.nis"
-          >
-            {{ item.nis }} - {{ item.nama }}
-          </option>
-        </template>
       </TomSelect>
     </div>
   </div>

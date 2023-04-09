@@ -65,7 +65,7 @@ export const useSiswaStore = defineStore("siswa", {
         })
       })
     },
-    getSiswa({page = 1, per_page = 10, search = '', kelas_id = '', jurusan_id = '', tahun_ajar_id = '', tahun_ajar_active}: SiswaTable) {
+    getSiswa({page = 1, per_page = 10, search = '', kelas_id = '', jurusan_id = '', tahun_ajar_id = '', tahun_ajar_active}: SiswaTable, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
@@ -82,18 +82,33 @@ export const useSiswaStore = defineStore("siswa", {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
-        global.loading = true
+        if (loading) global.loading = true
         api.get('/siswa', {
           params,
         }).then((res: any) => {
           this.siswa = res.data
-          this.pagination = res.pagination
+          if (loading) this.pagination = res.pagination
           resolve(res)
         }).catch(err => {
           reject(err)
         }).finally(() => {
-          global.loading = false
+          if (loading) global.loading = false
         })
+      })
+    },
+    searchSiswa({search, kelas_id, jurusan_id, tahun_ajar_id, tahun_ajar_active}: SiswaTable) {
+      return new Promise((resolve, reject) => {
+        this.getSiswa({
+          page: 1,
+          per_page: 5,
+          search,
+          kelas_id,
+          jurusan_id,
+          tahun_ajar_id,
+          tahun_ajar_active,
+        }, false)
+          .then(resolve)
+          .catch(reject)
       })
     },
     getSiswaDetail(id: string) {

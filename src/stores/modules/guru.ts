@@ -65,7 +65,7 @@ export const useGuruStore = defineStore("guru", {
         })
       })
     },
-    getGuru({page = 1, per_page = 10, search = ''}: Table) {
+    getGuru({page = 1, per_page = 10, search = ''}: Table, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
@@ -78,18 +78,29 @@ export const useGuruStore = defineStore("guru", {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
-        global.loading = true
+        if (loading) global.loading = true
         api.get('/guru', {
           params,
         }).then((res: any) => {
           this.guru = res.data
-          this.pagination = res.pagination
+          if (loading) this.pagination = res.pagination
           resolve(res)
         }).catch(err => {
           reject(err)
         }).finally(() => {
-          global.loading = false
+          if (loading) global.loading = false
         })
+      })
+    },
+    searchGuru({search = ''}: Table) {
+      return new Promise((resolve, reject) => {
+        this.getGuru({
+          page: 1,
+          per_page: 5,
+          search,
+        }, false)
+          .then(resolve)
+          .catch(reject)
       })
     },
     getGuruDetail(id: string) {
