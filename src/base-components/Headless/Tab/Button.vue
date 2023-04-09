@@ -60,10 +60,13 @@ const computedClass = computed(() =>
 
     // Link tabs
     list?.variant == "link-tabs" &&
-      "border-b-2 border-transparent dark:border-transparent",
+      "border-b-2 border-transparent dark:border-transparent transition duration-150 ease-in-out",
     list?.variant == "link-tabs" &&
       tab?.selected.value &&
       "border-b-primary font-medium dark:border-b-primary",
+    list?.variant == "link-tabs" &&
+      !tab?.selected.value &&
+      "border-b-black/[0.08] hover:border-b-primary/[0.8]",
 
     typeof attrs.class === "string" && attrs.class,
   ])

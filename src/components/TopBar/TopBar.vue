@@ -8,7 +8,7 @@ import {getUserPhoto} from "../../utils/helper";
 import Breadcrumb from "../../base-components/Breadcrumb";
 import {useRoute} from "vue-router";
 
-const EditProfileModal = defineAsyncComponent(() => import("../User/EditProfileModal.vue"));
+const ProfileModal = defineAsyncComponent(() => import("../User/EditProfileModal.vue"));
 
 const props = defineProps<{
   layout?: "side-menu" | "simple-menu" | "top-menu";
@@ -32,7 +32,7 @@ watch(() => route.meta?.breadcrumbs, () => {
 </script>
 
 <template>
-  <EditProfileModal
+  <ProfileModal
     v-model="showModalProfile"
     @success="auth.getMyData"
   />
@@ -121,7 +121,7 @@ watch(() => route.meta?.breadcrumbs, () => {
               icon="User"
               class="w-4 h-4 mr-2"
             />
-            Ubah Profil
+            Profil
           </Menu.Item>
           <Menu.Item
             class="hover:bg-dark/5"

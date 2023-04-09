@@ -2,7 +2,7 @@ import api from '../../utils/api'
 import {defineStore} from "pinia";
 import router from "../../router";
 
-import {UserResponse} from '../../utils/interfaces/user'
+import {PasswordRequest, UserResponse} from '../../utils/interfaces/user'
 import {useGlobalStore} from "../global";
 import {capitalizeFirstLetter} from "../../utils/helper";
 
@@ -45,6 +45,7 @@ export const useAuthStore = defineStore("auth", {
     },
     isGuru: state => ['guru', 'staff-ict', 'guru-bk', 'tata-usaha'].includes(state.user?.role || ''),
     isAdmin: state => ['admin', 'staff-ict'].includes(state.user?.role || ''),
+    isSiswa: state => ['siswa'].includes(state.user?.role || ''),
   },
   actions: {
     login(username: string, password: string) {
@@ -80,8 +81,21 @@ export const useAuthStore = defineStore("auth", {
       })
     },
     updateProfile(payload: UserResponse) {
+      const global = useGlobalStore()
+      global.loading = true
       return new Promise((resolve, reject) => {
-        api.patch('/profile', payload).then(resolve).catch(reject)
+        api.patch('/profile', payload).then(resolve).catch(reject).finally(() => {
+          global.loading = false
+        })
+      })
+    },
+    updatePassword(payload: PasswordRequest) {
+      const global = useGlobalStore()
+      global.loading = true
+      return new Promise((resolve, reject) => {
+        api.patch('/password', payload).then(resolve).catch(reject).finally(() => {
+          global.loading = false
+        })
       })
     },
   },

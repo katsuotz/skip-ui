@@ -38,3 +38,9 @@ export interface LoginLog {
   created_at: string;
   foto?: string;
 }
+
+export interface PasswordRequest {
+  old_password: string;
+  password: string;
+  password_confirmation: string;
+}

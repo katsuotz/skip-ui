@@ -7,11 +7,12 @@ import FormInput from "../../base-components/Form/FormInput.vue";
 import FormLabel from "../../base-components/Form/FormLabel.vue";
 import Lucide from "../../base-components/Lucide/Lucide.vue";
 import {useAuthStore} from "../../stores/modules/auth";
-import {UserResponse} from "../../utils/interfaces/user";
+import {PasswordRequest, UserResponse} from "../../utils/interfaces/user";
 import {useFileStore} from "../../stores/modules/file";
 import {dateInputFormat, getUserPhoto} from "../../utils/helper";
 import DatePicker from "vue-datepicker-next";
 import FormCheck from "../../base-components/Form/FormCheck";
+import { Tab } from "../../base-components/Headless";
 
 interface TahunAjarProps {
   modelValue: boolean;
@@ -38,6 +39,12 @@ const form = ref<UserResponse>({
   foto: auth.user?.foto || '',
 })
 
+const formPassword = ref<PasswordRequest>({
+  old_password: '',
+  password: '',
+  password_confirmation: '',
+})
+
 const showModal = ref(props.modelValue);
 
 watch(props, () => {
@@ -49,13 +56,21 @@ watch(showModal, () => {
 });
 
 
-const handleSubmit = () => {
+const handleUpdateProfile = () => {
   let payload = {
     ...form.value,
     tanggal_lahir: dateInputFormat(form.value.tanggal_lahir)
   }
 
   auth.updateProfile(payload).then(() => {
+    showModal.value = false
+    emit('success')
+  })
+}
+
+const handleUpdatePassword = (values: any, actions: any) => {
+  auth.updatePassword(formPassword.value).then(() => {
+    actions.resetForm()
     showModal.value = false
     emit('success')
   })
@@ -95,193 +110,329 @@ const handleFileChange = (e: Event) => {
         accept=".png,.jpg,.jpeg"
         @change="handleFileChange"
       >
-      <Form
-        :validate-on-blur="false"
-        @submit="handleSubmit"
-      >
-        <div class="p-5 flex flex-col gap-5">
-          <div class="flex flex-col items-center">
+      <div class="p-5 flex flex-col gap-5">
+        <div class="flex flex-col items-center">
+          <div
+            class="relative flex-none w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 image-fit mb-4 mt-4"
+          >
+            <img
+              alt=""
+              class="rounded-full object-cover object-center"
+              :src="getUserPhoto(form.foto)"
+            >
             <div
-              class="relative flex-none w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 image-fit mb-4 mt-4"
+              class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer shadow-md"
+              @click="openUploadFile"
             >
-              <img
-                alt=""
-                class="rounded-full object-cover object-center"
-                :src="getUserPhoto(form.foto)"
-              >
-              <div
-                class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer shadow-md"
-                @click="openUploadFile"
-              >
-                <Lucide
-                  icon="Camera"
-                  class="w-5 h-5 text-dark"
-                />
-              </div>
+              <Lucide
+                icon="Camera"
+                class="w-5 h-5 text-dark"
+              />
             </div>
-            <p class="font-bold text-lg">
-              {{ form.nama }}
-            </p>
-            <p class="text-slate-500 mt-0.5">
-              {{ form.role }}
-            </p>
           </div>
-
-          <div>
-            <FormLabel for="nama">
-              Nama
-            </FormLabel>
-            <Field
-              v-slot="{ field, errorMessage }"
-              v-model="form.nama"
-              :validate-on-blur="false"
-              name="Nama"
-              :rules="{
-                required: true,
-              }"
-            >
-              <FormInput
-                id="nama"
-                :class="{ 'border-danger': errorMessage }"
-                type="text"
-                v-bind="field"
-                readonly
-              />
-              <div
-                v-show="errorMessage"
-                class="mt-2 text-danger"
-              >
-                {{ errorMessage }}
-              </div>
-            </Field>
-          </div>
-          <div>
-            <FormLabel for="tanggal_lahir">
-              Tanggal Lahir
-            </FormLabel>
-            <Field
-              v-slot="{ errorMessage }"
-              v-model="form.tanggal_lahir"
-              :validate-on-blur="false"
-              name="Tanggal Lahir"
-              :rules="{
-                required: true,
-              }"
-            >
-              <div>
-                <DatePicker
-                  id="tanggal_lahir"
-                  v-model:value="form.tanggal_lahir"
-                  :class="{
-                    'border-danger': errorMessage
-                  }"
-                />
-              </div>
-              <div
-                v-show="errorMessage"
-                class="mt-2 text-danger"
-              >
-                {{ errorMessage }}
-              </div>
-            </Field>
-          </div>
-          <div>
-            <FormLabel for="tempat_lahir">
-              Tempat Lahir
-            </FormLabel>
-            <Field
-              v-slot="{ field, errorMessage }"
-              v-model="form.tempat_lahir"
-              :validate-on-blur="false"
-              name="Tempat Lahir"
-              :rules="{
-                required: true,
-              }"
-            >
-              <FormInput
-                id="tempat_lahir"
-                :class="{ 'border-danger': errorMessage }"
-                type="text"
-                v-bind="field"
-              />
-              <div
-                v-show="errorMessage"
-                class="mt-2 text-danger"
-              >
-                {{ errorMessage }}
-              </div>
-            </Field>
-          </div>
-          <div>
-            <FormLabel for="jenis_kelamin">
-              Jenis Kelamin
-            </FormLabel>
-            <Field
-              v-slot="{ field, errorMessage }"
-              v-model="form.jenis_kelamin"
-              :validate-on-blur="false"
-              name="Jenis Kelamin"
-              :rules="{
-                required: true,
-              }"
-            >
-              <div class="flex flex-row flex-wrap gap-2">
-                <FormCheck>
-                  <FormCheck.Input
-                    id="jenis_kelamin-l"
-                    v-bind="field"
-                    v-model="form.jenis_kelamin"
-                    type="radio"
-                    value="L"
-                  />
-                  <FormCheck.Label for="jenis_kelamin-l">
-                    Laki - Laki
-                  </FormCheck.Label>
-                </FormCheck>
-                <FormCheck>
-                  <FormCheck.Input
-                    id="jenis_kelamin-p"
-                    v-bind="field"
-                    v-model="form.jenis_kelamin"
-                    type="radio"
-                    value="P"
-                  />
-                  <FormCheck.Label for="jenis_kelamin-p">
-                    Perempuan
-                  </FormCheck.Label>
-                </FormCheck>
-              </div>
-
-              <div
-                v-show="errorMessage"
-                class="mt-2 text-danger"
-              >
-                {{ errorMessage }}
-              </div>
-            </Field>
-          </div>
-
-          <div class="text-right">
-            <Button
-              type="button"
-              variant="outline-secondary"
-              class="w-24 mr-1"
-              @click.prevent="() => {
-                showModal = false
-              }"
-            >
-              Batal
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              class="w-24"
-            >
-              Simpan
-            </Button>
-          </div>
+          <p class="font-bold text-lg">
+            {{ form.nama }}
+          </p>
+          <p class="text-slate-500 mt-0.5">
+            {{ form.role }}
+          </p>
         </div>
-      </Form>
+
+        <Tab.Group>
+          <Tab.List variant="link-tabs">
+            <Tab>
+              <Tab.Button
+                class="w-full py-2"
+                as="button"
+              >
+                Profil
+              </Tab.Button>
+            </Tab>
+            <Tab>
+              <Tab.Button
+                class="w-full py-2"
+                as="button"
+              >
+                Password
+              </Tab.Button>
+            </Tab>
+          </Tab.List>
+          <Tab.Panels class="mt-5">
+            <Tab.Panel class="leading-relaxed">
+              <Form
+                :validate-on-blur="false"
+                class="flex flex-col gap-5"
+                @submit="handleUpdateProfile"
+              >
+                <div>
+                  <FormLabel for="nama">
+                    Nama
+                  </FormLabel>
+                  <Field
+                    v-slot="{ field, errorMessage }"
+                    v-model="form.nama"
+                    :validate-on-blur="false"
+                    name="Nama"
+                    :rules="{
+                      required: true,
+                    }"
+                  >
+                    <FormInput
+                      id="nama"
+                      :class="{ 'border-danger': errorMessage }"
+                      type="text"
+                      v-bind="field"
+                      readonly
+                    />
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+                <div>
+                  <FormLabel for="tanggal_lahir">
+                    Tanggal Lahir
+                  </FormLabel>
+                  <Field
+                    v-slot="{ errorMessage }"
+                    v-model="form.tanggal_lahir"
+                    :validate-on-blur="false"
+                    name="Tanggal Lahir"
+                    :rules="{
+                      required: true,
+                    }"
+                  >
+                    <div>
+                      <DatePicker
+                        id="tanggal_lahir"
+                        v-model:value="form.tanggal_lahir"
+                        :class="{
+                          'border-danger': errorMessage
+                        }"
+                      />
+                    </div>
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+                <div>
+                  <FormLabel for="tempat_lahir">
+                    Tempat Lahir
+                  </FormLabel>
+                  <Field
+                    v-slot="{ field, errorMessage }"
+                    v-model="form.tempat_lahir"
+                    :validate-on-blur="false"
+                    name="Tempat Lahir"
+                    :rules="{
+                      required: true,
+                    }"
+                  >
+                    <FormInput
+                      id="tempat_lahir"
+                      :class="{ 'border-danger': errorMessage }"
+                      type="text"
+                      v-bind="field"
+                    />
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+                <div>
+                  <FormLabel for="jenis_kelamin">
+                    Jenis Kelamin
+                  </FormLabel>
+                  <Field
+                    v-slot="{ field, errorMessage }"
+                    v-model="form.jenis_kelamin"
+                    :validate-on-blur="false"
+                    name="Jenis Kelamin"
+                    :rules="{
+                      required: true,
+                    }"
+                  >
+                    <div class="flex flex-row flex-wrap gap-2">
+                      <FormCheck>
+                        <FormCheck.Input
+                          id="jenis_kelamin-l"
+                          v-bind="field"
+                          v-model="form.jenis_kelamin"
+                          type="radio"
+                          value="L"
+                        />
+                        <FormCheck.Label for="jenis_kelamin-l">
+                          Laki - Laki
+                        </FormCheck.Label>
+                      </FormCheck>
+                      <FormCheck>
+                        <FormCheck.Input
+                          id="jenis_kelamin-p"
+                          v-bind="field"
+                          v-model="form.jenis_kelamin"
+                          type="radio"
+                          value="P"
+                        />
+                        <FormCheck.Label for="jenis_kelamin-p">
+                          Perempuan
+                        </FormCheck.Label>
+                      </FormCheck>
+                    </div>
+
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+
+                <div class="text-right">
+                  <Button
+                    type="button"
+                    variant="outline-secondary"
+                    class="w-24 mr-1"
+                    @click.prevent="() => {
+                      showModal = false
+                    }"
+                  >
+                    Batal
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    class="w-24"
+                  >
+                    Simpan
+                  </Button>
+                </div>
+              </Form>
+            </Tab.Panel>
+            <Tab.Panel class="leading-relaxed">
+              <Form
+                :validate-on-blur="false"
+                class="flex flex-col gap-5"
+                @submit="handleUpdatePassword"
+              >
+                <div>
+                  <FormLabel for="old_password">
+                    Password Lama
+                  </FormLabel>
+                  <Field
+                    v-slot="{ field, errorMessage }"
+                    v-model="formPassword.old_password"
+                    :validate-on-blur="false"
+                    name="Password Lama"
+                    :rules="{
+                      required: true,
+                    }"
+                  >
+                    <FormInput
+                      id="old_password"
+                      :class="{ 'border-danger': errorMessage }"
+                      type="password"
+                      v-bind="field"
+                    />
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+                <div>
+                  <FormLabel for="password">
+                    Password Baru
+                  </FormLabel>
+                  <Field
+                    v-slot="{ field, errorMessage }"
+                    v-model="formPassword.password"
+                    :validate-on-blur="false"
+                    name="Password Baru"
+                    :rules="{
+                      required: true,
+                      min: 6,
+                    }"
+                  >
+                    <FormInput
+                      id="password"
+                      :class="{ 'border-danger': errorMessage }"
+                      type="password"
+                      v-bind="field"
+                    />
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+                <div>
+                  <FormLabel for="password_confirmation">
+                    Konfirmasi Password Baru
+                  </FormLabel>
+                  <Field
+                    v-slot="{ field, errorMessage }"
+                    v-model="formPassword.password_confirmation"
+                    :validate-on-blur="false"
+                    name="Konfirmasi Password Baru"
+                    :rules="{
+                      required: true,
+                      min: 6,
+                    }"
+                  >
+                    <FormInput
+                      id="password_confirmation"
+                      :class="{ 'border-danger': errorMessage }"
+                      type="password"
+                      v-bind="field"
+                    />
+                    <div
+                      v-show="errorMessage"
+                      class="mt-2 text-danger"
+                    >
+                      {{ errorMessage }}
+                    </div>
+                  </Field>
+                </div>
+
+                <div class="text-right">
+                  <Button
+                    type="button"
+                    variant="outline-secondary"
+                    class="w-24 mr-1"
+                    @click.prevent="() => {
+                      showModal = false
+                    }"
+                  >
+                    Batal
+                  </Button>
+                  <Button
+                    type="submit"
+                    variant="primary"
+                    class="w-24"
+                  >
+                    Simpan
+                  </Button>
+                </div>
+              </Form>
+            </Tab.Panel>
+          </Tab.Panels>
+        </Tab.Group>
+      </div>
     </Dialog.Panel>
   </Dialog>
 </template>
