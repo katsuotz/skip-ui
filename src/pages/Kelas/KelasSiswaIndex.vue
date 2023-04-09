@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import Table from "../../base-components/Table";
 import {ref} from "vue";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";

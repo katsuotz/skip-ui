@@ -24,7 +24,7 @@ const showModalProfile = ref(false)
 
 const route = useRoute()
 
-const breadcrumbs = ref(route.meta?.breadcrumbs)
+const breadcrumbs = ref<any>(route.meta?.breadcrumbs)
 
 watch(() => route.meta?.breadcrumbs, () => {
   breadcrumbs.value = route.meta?.breadcrumbs

@@ -9,7 +9,7 @@ import {useSiswaStore} from "./siswa";
 interface PoinLogState {
   poinLog?: PoinLog[];
   latestLog?: PoinLog[];
-  poinLogSiswaKelas?: PoinLog[];
+  poinLogSiswaKelas: PoinLog[];
   poinLogWithKelas: PoinLogWithKelas[];
   pagination: Pagination;
 }

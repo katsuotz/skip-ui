@@ -4,7 +4,6 @@ import { ChartData, ChartOptions } from "chart.js/auto";
 import { useDarkModeStore } from "../../stores/dark-mode";
 import Chart from "../../base-components/Chart";
 import { getColor } from "../../utils/colors";
-import {useInfoStore} from "../../stores/modules/info";
 import {InfoGraphCount} from "../../utils/interfaces/info";
 
 const props = defineProps<{

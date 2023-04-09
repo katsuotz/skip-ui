@@ -12,8 +12,6 @@ import Divider from "../../base-components/Divider";
 import PoinLogTable from "../../base-components/PoinLog/PoinLogTable.vue";
 import Lucide from "../../base-components/Lucide/Lucide.vue";
 
-const showModal = ref(false)
-
 const kelas = useKelasStore()
 const jurusan = useJurusanStore()
 const tahunAjar = useTahunAjarStore()

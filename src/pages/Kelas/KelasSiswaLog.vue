@@ -1,10 +1,5 @@
 <script setup lang="ts">
-import Table from "../../base-components/Table";
-import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref} from "vue";
-import {countPaginationNumber} from "../../utils/helper";
-import Button from "../../base-components/Button";
-import Lucide from "../../base-components/Lucide";
 import {useGlobalStore} from "../../stores/global";
 import {useKelasStore} from "../../stores/modules/kelas";
 import {useRoute} from "vue-router";

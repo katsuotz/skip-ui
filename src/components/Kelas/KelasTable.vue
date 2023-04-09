@@ -9,7 +9,6 @@ import {Siswa} from "../../utils/interfaces/siswa";
 import {useGlobalStore} from "../../stores/global";
 import {useSiswaStore} from "../../stores/modules/siswa";
 import {useKelasStore} from "../../stores/modules/kelas";
-import {useRoute} from "vue-router";
 import FormCheck from "../../base-components/Form/FormCheck";
 
 interface KelasTableProps {
@@ -22,8 +21,6 @@ const props = defineProps<KelasTableProps>();
 const global = useGlobalStore()
 const siswa = useSiswaStore()
 const kelas = useKelasStore()
-
-const route = useRoute()
 
 const getData = (resetPage: boolean = false) => {
   if (resetPage) siswa.updateCurrentPage(1)

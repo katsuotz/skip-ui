@@ -88,15 +88,15 @@ const deleteLog = (item: PoinLog) => {
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody
-        v-if="modelValue?.length"
-        :data="modelValue"
+        v-if="props.modelValue?.length"
+        :data="props.modelValue"
       >
         <Table.Tr
-          v-for="(item, key) in modelValue"
+          v-for="(item, key) in props.modelValue"
           :key="key"
         >
           <Table.Td>
-            {{ hidePagination ? key + 1 : countPaginationNumber(poinLog.pagination, key) }}
+            {{ props.hidePagination ? key + 1 : countPaginationNumber(poinLog.pagination, key) }}
           </Table.Td>
           <Table.Td>
             {{ item.title }}
@@ -139,10 +139,10 @@ const deleteLog = (item: PoinLog) => {
               {{ item.poin }}
             </span>
           </Table.Td>
-          <Table.Td v-if="!hideGuru">
+          <Table.Td v-if="!props.hideGuru">
             {{ item.nama_guru }}
           </Table.Td>
-          <Table.Td v-if="!hideAction">
+          <Table.Td v-if="!props.hideAction">
             <div class="flex gap-2">
               <Button
                 class="gap-2"

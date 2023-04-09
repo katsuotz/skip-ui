@@ -6,8 +6,6 @@ import {useJurusanStore} from "../../stores/modules/jurusan";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
 import KelasTable from "../../components/Kelas/KelasTable.vue";
 
-const showModal = ref(false)
-
 const kelas = useKelasStore()
 const jurusan = useJurusanStore()
 const tahunAjar = useTahunAjarStore()
