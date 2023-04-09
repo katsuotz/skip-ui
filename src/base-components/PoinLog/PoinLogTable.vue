@@ -136,7 +136,7 @@ const deleteLog = (item: PoinLog) => {
                 'font-bold'
               ]"
             >
-              {{ item.poin }}
+              {{ item.type === 'Pelanggaran' ? '-' : '+' }}{{ item.poin }}
             </span>
           </Table.Td>
           <Table.Td v-if="!props.hideGuru">
