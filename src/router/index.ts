@@ -1,11 +1,10 @@
 import { createRouter, createWebHistory } from "vue-router";
-import SideMenu from "../layouts/SideMenu/SideMenu.vue";
 import {useAuthStore} from "../stores/modules/auth";
 
 const routes = [
   {
     path: "/",
-    component: SideMenu,
+    component: () => import("../layouts/SideMenu/SideMenu.vue"),
     children: [
       {
         path: "/",

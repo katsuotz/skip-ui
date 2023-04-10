@@ -2,6 +2,7 @@ import {defineStore} from "pinia";
 import {Icon} from "../base-components/Lucide/Lucide.vue";
 import {useAuthStore} from "./modules/auth";
 import {Role} from "../utils/interfaces/user";
+import {toRaw} from "vue";
 
 export interface Menu {
   icon: Icon;
@@ -108,13 +109,13 @@ export const useSideMenuStore = defineStore("sideMenu", {
         return e.role ? e.role.includes(<Role>auth?.user?.role || '') : true
       }
 
-      return state.menu.map(e => {
+      return structuredClone(toRaw(state.menu)).map((e:any) => {
         if (e === "divider") return e
         if (e.subMenu) {
           e.subMenu = e.subMenu?.filter(checkRole)
         }
         return e
-      }).filter(e => {
+      }).filter((e:any) => {
         if (e === "divider") return true
         return checkRole(e)
       })
