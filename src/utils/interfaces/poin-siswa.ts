@@ -1,4 +1,6 @@
 import {Base} from "./helper";
+import {JurusanPoin} from "./jurusan";
+import {KelasPoin} from "./kelas";
 
 export interface PoinSiswaRequest {
   title: string;
@@ -13,4 +15,9 @@ export interface PoinSiswa extends Base {
   nama: string;
   nama_kelas: string;
   poin: number;
+}
+
+export interface PoinJurusanWithKelas {
+  jurusan: JurusanPoin,
+  data: KelasPoin[];
 }

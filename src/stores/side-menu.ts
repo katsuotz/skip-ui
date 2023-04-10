@@ -69,8 +69,8 @@ export const useSideMenuStore = defineStore("sideMenu", {
         ],
       },
       {
-        icon: "Swords",
-        pageName: "dashboard",
+        icon: "AlignCenterVerticalIcon",
+        pageName: "compare",
         title: "Bandingkan",
         role: ['admin', 'staff-ict'],
       },

@@ -22,3 +22,9 @@ export interface KelasResponse extends Kelas {
   tipe_guru: string;
   tahun_ajar?: string;
 }
+
+export interface KelasPoin {
+  nama_kelas: string;
+  tahun_ajaran: string;
+  poin: number;
+}

@@ -4,14 +4,18 @@ import {numberFormat} from "../../utils/helper";
 
 interface PoinValueProps {
     modelValue?: number;
+    as?: string;
 }
 
-const props = defineProps<PoinValueProps>();
+const props = withDefaults(defineProps<PoinValueProps>(), {
+  as: 'span'
+});
 
 </script>
 
 <template>
-  <div
+  <component
+    :is="props.as"
     v-if="props.modelValue"
     :class="[
       props.modelValue < 50 && 'text-danger',
@@ -21,7 +25,7 @@ const props = defineProps<PoinValueProps>();
     ]"
   >
     {{ numberFormat(props.modelValue) }}
-  </div>
+  </component>
   <div v-else>
     -
   </div>

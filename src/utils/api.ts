@@ -32,7 +32,7 @@ const setup = (url: string) => {
   }, function (error: any) {
     const global = useGlobalStore()
 
-    const msg = error?.response?.data?.error || error?.response?.data?.message
+    const msg = error?.response?.data?.message || error?.response?.data?.error
 
     if (msg) global.setNotification(msg, 'danger')
     else if (typeof error.code === 'string') {

@@ -156,6 +156,15 @@ const routes = [
           breadcrumbs: ['Laporan', 'Personal'],
         },
       },
+      {
+        path: "compare",
+        name: "compare",
+        component: () => import("../pages/Compare/CompareForm.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Bandingkan'],
+        },
+      },
     ],
   },
   {
