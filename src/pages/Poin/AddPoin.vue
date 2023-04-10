@@ -80,7 +80,7 @@ const handleSubmit = (values:any, actions:any) => {
         type: 'success',
         title: 'Berhasil melakukan input poin',
         icon: 'CheckCircleIcon',
-        buttonCancel:false,
+        buttonCancel: false,
       })
     })
   }

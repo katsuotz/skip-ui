@@ -108,6 +108,7 @@ const routes = [
         component: () => import("../pages/Poin/PoinLogIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Dashboard', 'Aktivitas Poin'],
         },
       },
       {
@@ -116,6 +117,7 @@ const routes = [
         component: () => import("../pages/Poin/PoinSiswaIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Dashboard', 'Data Jumlah Siswa'],
         },
       },
       {
@@ -124,6 +126,7 @@ const routes = [
         component: () => import("../pages/Poin/PoinTypeIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Dashboard', 'Data Jumlah Poin'],
         },
       },
       {
@@ -132,6 +135,7 @@ const routes = [
         component: () => import("../pages/LoginLog/LoginLogIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['Dashboard', 'Aktivitas Login'],
         },
       },
       {
