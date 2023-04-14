@@ -1,0 +1,13 @@
+variables:
+  GIT_STRATEGY: none
+
+deploy:
+  stage: deploy
+  script:
+    - cd /home/ict/www/skip-project/skip-ui
+    - git pull origin main
+    - cat $env > .env
+    - docker-compose build frontend
+    - docker-compose up -d frontend
+  tags:
+    - eschool
