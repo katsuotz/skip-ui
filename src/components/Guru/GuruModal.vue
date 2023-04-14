@@ -7,7 +7,7 @@ import FormInput from "../../base-components/Form/FormInput.vue";
 import FormLabel from "../../base-components/Form/FormLabel.vue";
 import FormCheck from "../../base-components/Form/FormCheck";
 import {useGuruStore} from "../../stores/modules/guru";
-import {Guru, GuruRequest} from "../../utils/interfaces/guru";
+import {Guru} from "../../utils/interfaces/guru";
 import DatePicker from 'vue-datepicker-next';
 import {dateInputFormat} from "../../utils/helper";
 import TomSelect from "../../base-components/TomSelect";
@@ -27,7 +27,7 @@ const emit = defineEmits<GuruEmit>();
 
 const guru = useGuruStore()
 
-const form = ref<GuruRequest>({
+const form = ref<Guru>({
   nip: '',
   tipe_guru: '',
   nama: '',
@@ -47,6 +47,8 @@ watch(() => guru.selectedGuru, (value) => {
     jenis_kelamin: value?.jenis_kelamin || '',
     tempat_lahir: value?.tempat_lahir || '',
     tanggal_lahir: value?.tanggal_lahir ? new Date(value.tanggal_lahir) : '',
+    username: value?.username,
+    password: '',
   }
 })
 
