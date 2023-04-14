@@ -6,3 +6,8 @@ export interface Guru extends Base, Profile {
   nip: string;
   tipe_guru: string;
 }
+
+export interface GuruRequest extends Guru{
+  username: string;
+  password: string;
+}
