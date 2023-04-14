@@ -300,11 +300,67 @@ const handleSuccess = (actions: any) => {
               </div>
             </Field>
           </div>
+          <div>
+            <FormLabel for="username">
+              Username
+            </FormLabel>
+            <Field
+              v-slot="{ field, errorMessage }"
+              v-model="form.username"
+              :validate-on-blur="false"
+              name="Username"
+              :rules="{
+                required: true,
+              }"
+            >
+              <FormInput
+                id="username"
+                :class="{ 'border-danger': errorMessage }"
+                type="text"
+                v-bind="field"
+              />
+              <div
+                v-show="errorMessage"
+                class="mt-2 text-danger"
+              >
+                {{ errorMessage }}
+              </div>
+            </Field>
+          </div>
+          <div>
+            <FormLabel for="password">
+              Password
+            </FormLabel>
+            <Field
+              v-slot="{ field, errorMessage }"
+              v-model="form.password"
+              :validate-on-blur="false"
+              name="Password"
+              :rules="{
+                required: true,
+                min: 6,
+              }"
+            >
+              <FormInput
+                id="password"
+                :class="{ 'border-danger': errorMessage }"
+                type="password"
+                v-bind="field"
+              />
+              <div
+                v-show="errorMessage"
+                class="mt-2 text-danger"
+              >
+                {{ errorMessage }}
+              </div>
+            </Field>
+          </div>
           <div class="text-right">
             <Button
               type="button"
               variant="outline-secondary"
               class="w-24 mr-1"
+
               @click.prevent="() => {
                 showModal = false
               }"
