@@ -6,14 +6,18 @@ import {Field, Form} from 'vee-validate';
 import Button from "../base-components/Button";
 import {useAuthStore} from "../stores/modules/auth";
 import {ref} from "vue";
+import {useRouter} from "vue-router";
 
 const authStore = useAuthStore()
+const router = useRouter()
 
 const username = ref('')
 const password = ref('')
 
 const handleSubmit = () => {
-  authStore.login(username.value, password.value)
+  authStore.login(username.value, password.value).then(() => {
+    router.push('/')
+  })
 }
 
 </script>

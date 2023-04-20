@@ -50,20 +50,22 @@ export const useAuthStore = defineStore("auth", {
   },
   actions: {
     login(username: string, password: string) {
-      const global = useGlobalStore()
-      global.loading = true
-      api.post('/login', {
-        username,
-        password,
-      }).then((res: any) => {
-        this.user = res.data.user
-        this.token = res.data.token
+      return new Promise((resolve, reject) => {
+        const global = useGlobalStore()
+        global.loading = true
+        api.post('/login', {
+          username,
+          password,
+        }).then((res: any) => {
+          this.user = res.data.user
+          this.token = res.data.token
 
-        localStorage.setItem("skip-user", JSON.stringify(res.data.user));
-        localStorage.setItem("skip-token", res.data.token);
-        router.push('/')
-      }).finally(() => {
-        global.loading = false
+          localStorage.setItem("skip-user", JSON.stringify(res.data.user));
+          localStorage.setItem("skip-token", res.data.token);
+          resolve(res)
+        }).catch(reject).finally(() => {
+          global.loading = false
+        })
       })
     },
     logout() {
