@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import {parseColor} from "tailwindcss/lib/util/color";
 import {Pagination} from "./interfaces/table";
+import avatarUrl from "../assets/images/avatar.svg";
 
 const formatDate = (format: string, date?: string | Date) => {
   return dayjs(date).format(format);
@@ -166,7 +167,7 @@ const getFileUrl = (path: string) => {
 }
 
 const getUserPhoto = (url = '') => {
-  return url ? getFileUrl(url) : '/src/assets/images/avatar.svg'
+  return url ? getFileUrl(url) : avatarUrl
 }
 
 const toLowerCase = (string: string, spaceReplace = '_') => {
