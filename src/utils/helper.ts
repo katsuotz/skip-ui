@@ -163,7 +163,7 @@ const sortStringArray = (data: any[], key?: string, orderBy = 'asc') => {
 }
 
 const getFileUrl = (path: string) => {
-  return import.meta.env.VITE_FILE_URL + '/' + path
+  return import.meta.env.VITE_API + '/' + path
 }
 
 const getUserPhoto = (url = '') => {
