@@ -5,7 +5,7 @@ export interface Kelas extends Base {
   nama_kelas: string;
   jurusan_id: number;
   tahun_ajar_id: number;
-  guru_id: number;
+  pegawai_id: number;
 }
 
 export interface KelasRequest extends Base {
@@ -13,13 +13,13 @@ export interface KelasRequest extends Base {
   nama_kelas: string;
   jurusan_id: string;
   tahun_ajar_id: string;
-  guru_id: string;
+  pegawai_id: string;
 }
 
 export interface KelasResponse extends Kelas {
   nama: string;
   nip: string;
-  tipe_guru: string;
+  tipe_pegawai: string;
   tahun_ajar?: string;
 }
 

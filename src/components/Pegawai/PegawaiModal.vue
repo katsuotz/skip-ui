@@ -6,30 +6,30 @@ import Button from "../../base-components/Button";
 import FormInput from "../../base-components/Form/FormInput.vue";
 import FormLabel from "../../base-components/Form/FormLabel.vue";
 import FormCheck from "../../base-components/Form/FormCheck";
-import {useGuruStore} from "../../stores/modules/guru";
-import {Guru} from "../../utils/interfaces/guru";
+import {usePegawaiStore} from "../../stores/modules/pegawai";
+import {Pegawai} from "../../utils/interfaces/pegawai";
 import DatePicker from 'vue-datepicker-next';
 import {dateInputFormat} from "../../utils/helper";
 import TomSelect from "../../base-components/TomSelect";
 
-interface GuruProps {
+interface PegawaiProps {
   modelValue: boolean;
 }
 
-interface GuruEmit {
+interface PegawaiEmit {
   (e: "update:modelValue", value: boolean): void;
 
   (e: "success"): void;
 }
 
-const props = defineProps<GuruProps>();
-const emit = defineEmits<GuruEmit>();
+const props = defineProps<PegawaiProps>();
+const emit = defineEmits<PegawaiEmit>();
 
-const guru = useGuruStore()
+const pegawai = usePegawaiStore()
 
-const form = ref<Guru>({
+const form = ref<Pegawai>({
   nip: '',
-  tipe_guru: '',
+  tipe_pegawai: '',
   nama: '',
   jenis_kelamin: '',
   tempat_lahir: '',
@@ -38,11 +38,11 @@ const form = ref<Guru>({
   password: '',
 })
 
-watch(() => guru.selectedGuru, (value) => {
+watch(() => pegawai.selectedPegawai, (value) => {
   form.value = {
     id: value?.id,
     nip: value?.nip || '',
-    tipe_guru: value?.tipe_guru || '',
+    tipe_pegawai: value?.tipe_pegawai || '',
     nama: value?.nama || '',
     jenis_kelamin: value?.jenis_kelamin || '',
     tempat_lahir: value?.tempat_lahir || '',
@@ -69,9 +69,9 @@ const handleSubmit = (values: any, actions: any) => {
   }
 
   if (form.value.id)
-    guru.updateGuru(form.value.id, payload).then(() => handleSuccess(actions))
+    pegawai.updatePegawai(form.value.id, payload).then(() => handleSuccess(actions))
   else
-    guru.createGuru(payload).then(() => handleSuccess(actions))
+    pegawai.createPegawai(payload).then(() => handleSuccess(actions))
 }
 
 const handleSuccess = (actions: any) => {
@@ -96,7 +96,7 @@ const handleSuccess = (actions: any) => {
       >
         <div class="p-5 flex flex-col gap-5">
           <p class="text-lg font-bold">
-            Form Guru
+            Form Pegawai
           </p>
           <div>
             <FormLabel for="nip">
@@ -259,34 +259,34 @@ const handleSuccess = (actions: any) => {
             </Field>
           </div>
           <div>
-            <FormLabel for="tipe_guru">
-              Tipe Guru
+            <FormLabel for="tipe_pegawai">
+              Tipe Pegawai
             </FormLabel>
             <Field
               v-slot="{ field, errorMessage }"
-              v-model="form.tipe_guru"
+              v-model="form.tipe_pegawai"
               :validate-on-blur="false"
-              name="Tipe Guru"
+              name="Tipe Pegawai"
               :rules="{
                 required: true,
               }"
             >
               <div>
                 <TomSelect
-                  id="tipe_guru"
-                  v-model="form.tipe_guru"
+                  id="tipe_pegawai"
+                  v-model="form.tipe_pegawai"
                   :class="{ 'border-danger': errorMessage }"
-                  placeholder="Pilih Tipe Guru"
+                  placeholder="Pilih Tipe Pegawai"
                   v-bind="field"
                 >
                   <option value="">
-                    Pilih Tipe Guru
+                    Pilih Tipe Pegawai
                   </option>
-                  <option value="Guru">
-                    Guru
+                  <option value="Pegawai">
+                    Pegawai
                   </option>
-                  <option value="Guru BK">
-                    Guru BK
+                  <option value="Pegawai BK">
+                    Pegawai BK
                   </option>
                   <option value="Staff ICT">
                     Staff ICT

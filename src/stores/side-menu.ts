@@ -46,8 +46,8 @@ export const useSideMenuStore = defineStore("sideMenu", {
       },
       {
         icon: "UserCheck",
-        pageName: "guru",
-        title: "Guru",
+        pageName: "pegawai",
+        title: "Pegawai",
         role: ['admin', 'staff-ict'],
       },
       {

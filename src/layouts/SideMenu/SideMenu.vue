@@ -154,7 +154,7 @@ auth.getMyData()
     </div>
 
     <RouterLink
-      v-if="auth.isGuru"
+      v-if="auth.isPegawai"
       to="/add-poin"
       class="w-12 h-12 bg-primary text-white fixed bottom-8 right-8 flex justify-center items-center rounded-full shadow-md cursor-pointer z-50"
     >

@@ -1,20 +1,20 @@
 import api from '../../utils/api'
 import {defineStore} from "pinia";
 
-import {Guru} from '../../utils/interfaces/guru'
+import {Pegawai} from '../../utils/interfaces/pegawai'
 import {Table, Payload, Pagination} from '../../utils/interfaces/table'
 import {useGlobalStore} from "../global";
 
-interface GuruState {
-  guru?: Guru[];
-  selectedGuru?: Guru | undefined;
+interface PegawaiState {
+  pegawai?: Pegawai[];
+  selectedPegawai?: Pegawai | undefined;
   pagination: Pagination;
 }
 
-export const useGuruStore = defineStore("guru", {
-  state: (): GuruState => ({
-    guru: [],
-    selectedGuru: undefined,
+export const usePegawaiStore = defineStore("pegawai", {
+  state: (): PegawaiState => ({
+    pegawai: [],
+    selectedPegawai: undefined,
     pagination: {
       page: 1,
       total_item: 0,
@@ -23,12 +23,12 @@ export const useGuruStore = defineStore("guru", {
     },
   }),
   actions: {
-    createGuru(data: Guru) {
+    createPegawai(data: Pegawai) {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
         global.loading = true
-        api.post('/guru', data).then((res: any) => {
+        api.post('/pegawai', data).then((res: any) => {
           resolve(res)
         }).catch(err => {
           reject(err)
@@ -37,12 +37,12 @@ export const useGuruStore = defineStore("guru", {
         })
       })
     },
-    updateGuru(id: number, data: Guru) {
+    updatePegawai(id: number, data: Pegawai) {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
         global.loading = true
-        api.patch('/guru/' + id, data).then((res: any) => {
+        api.patch('/pegawai/' + id, data).then((res: any) => {
           resolve(res)
         }).catch(err => {
           reject(err)
@@ -51,12 +51,12 @@ export const useGuruStore = defineStore("guru", {
         })
       })
     },
-    deleteGuru(id: number) {
+    deletePegawai(id: number) {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
         global.loading = true
-        api.delete('/guru/' + id).then((res: any) => {
+        api.delete('/pegawai/' + id).then((res: any) => {
           resolve(res)
         }).catch(err => {
           reject(err)
@@ -65,24 +65,24 @@ export const useGuruStore = defineStore("guru", {
         })
       })
     },
-    getGuru({page = 1, per_page = 10, search = ''}: Table, loading: boolean = true) {
+    getPegawai({page = 1, per_page = 10, search = ''}: Table, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
         search,
       }
 
-      this.guru = []
-      this.selectedGuru = undefined
+      this.pegawai = []
+      this.selectedPegawai = undefined
 
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
         if (loading) global.loading = true
-        api.get('/guru', {
+        api.get('/pegawai', {
           params,
         }).then((res: any) => {
-          this.guru = res.data
+          this.pegawai = res.data
           if (loading) this.pagination = res.pagination
           resolve(res)
         }).catch(err => {
@@ -92,9 +92,9 @@ export const useGuruStore = defineStore("guru", {
         })
       })
     },
-    searchGuru({search = ''}: Table) {
+    searchPegawai({search = ''}: Table) {
       return new Promise((resolve, reject) => {
-        this.getGuru({
+        this.getPegawai({
           page: 1,
           per_page: 5,
           search,
@@ -103,8 +103,8 @@ export const useGuruStore = defineStore("guru", {
           .catch(reject)
       })
     },
-    getGuruDetail(id: string) {
-      this.selectedGuru = undefined
+    getPegawaiDetail(id: string) {
+      this.selectedPegawai = undefined
 
       const params: any = {}
 
@@ -112,10 +112,10 @@ export const useGuruStore = defineStore("guru", {
 
       return new Promise((resolve, reject) => {
         global.loading = true
-        api.get('/guru/' + id, {
+        api.get('/pegawai/' + id, {
           params,
         }).then((res: any) => {
-          this.selectedGuru = res
+          this.selectedPegawai = res
           resolve(res)
         }).catch(err => {
           reject(err)

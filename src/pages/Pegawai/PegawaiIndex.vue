@@ -3,27 +3,27 @@ import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref} from "vue";
 import {countPaginationNumber} from "../../utils/helper";
-import GuruModal from "../../components/Guru/GuruModal.vue";
+import PegawaiModal from "../../components/Pegawai/PegawaiModal.vue";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
-import {Guru} from "../../utils/interfaces/guru";
+import {Pegawai} from "../../utils/interfaces/pegawai";
 import {useGlobalStore} from "../../stores/global";
-import {useGuruStore} from "../../stores/modules/guru";
+import {usePegawaiStore} from "../../stores/modules/pegawai";
 
 const showModal = ref(false)
 
 const global = useGlobalStore()
-const guru = useGuruStore()
+const pegawai = usePegawaiStore()
 
 const getData = (resetPage: boolean = false) => {
   if (resetPage) {
-    guru.updateCurrentPage(1)
-    guru.updatePerPage(10)
+    pegawai.updateCurrentPage(1)
+    pegawai.updatePerPage(10)
   }
 
-  guru.getGuru({
-    page: guru.pagination.page,
-    per_page: guru.pagination.per_page,
+  pegawai.getPegawai({
+    page: pegawai.pagination.page,
+    per_page: pegawai.pagination.per_page,
     search: search.value,
   })
 }
@@ -31,12 +31,12 @@ const getData = (resetPage: boolean = false) => {
 const search = ref('')
 
 const handleUpdatePage = (value: number) => {
-  guru.updateCurrentPage(value)
+  pegawai.updateCurrentPage(value)
   getData()
 }
 
 const handleUpdatePerPage = (value: number) => {
-  guru.updatePerPage(value)
+  pegawai.updatePerPage(value)
   getData(true)
 }
 
@@ -47,41 +47,41 @@ const handleSearch = (value: string = '') => {
 
 getData(true)
 
-const showGuruModal = (item?: Guru) => {
-  guru.selectedGuru = item
+const showPegawaiModal = (item?: Pegawai) => {
+  pegawai.selectedPegawai = item
   showModal.value = true
 }
 
-const deleteGuru = (item: Guru) => {
+const deletePegawai = (item: Pegawai) => {
   global.showModal({
     type: 'danger',
     title: 'Konfirmasi',
-    description: `Yakin untuk menghapus Guru <span class="text-danger">${item.nama}</span>?`,
+    description: `Yakin untuk menghapus Pegawai <span class="text-danger">${item.nama}</span>?`,
     icon: 'XCircle',
     buttonConfirmationText: 'Hapus',
-    callback: () => handleDeleteGuru(item.id || 0),
+    callback: () => handleDeletePegawai(item.id || 0),
   })
 }
 
-const handleDeleteGuru = async (id: number): Promise<void> => {
-  await guru.deleteGuru(id)
+const handleDeletePegawai = async (id: number): Promise<void> => {
+  await pegawai.deletePegawai(id)
   await getData()
 }
 
 </script>
 <template>
-  <GuruModal
+  <PegawaiModal
     v-model="showModal"
     @success="getData"
   />
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
-      Guru
+      Pegawai
     </h2>
     <Button
       class="gap-2"
       variant="primary"
-      @click="showGuruModal()"
+      @click="showPegawaiModal()"
     >
       <Lucide icon="Plus" />
       Tambah Data
@@ -89,9 +89,9 @@ const handleDeleteGuru = async (id: number): Promise<void> => {
   </div>
   <div class="p-5 mt-5 intro-y box">
     <MyTable
-      :current-page="guru.pagination.page"
-      :page-count="guru.pagination.total_page"
-      :per-page="guru.pagination.per_page"
+      :current-page="pegawai.pagination.page"
+      :page-count="pegawai.pagination.total_page"
+      :per-page="pegawai.pagination.per_page"
       :search="search"
       @updatePerPage="handleUpdatePerPage"
       @updatePage="handleUpdatePage"
@@ -116,15 +116,15 @@ const handleDeleteGuru = async (id: number): Promise<void> => {
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody
-          v-if="guru.guru?.length"
-          :data="guru.guru"
+          v-if="pegawai.pegawai?.length"
+          :data="pegawai.pegawai"
         >
           <Table.Tr
-            v-for="(item, key) in guru.guru"
+            v-for="(item, key) in pegawai.pegawai"
             :key="key"
           >
             <Table.Td>
-              {{ countPaginationNumber(guru.pagination, key) }}
+              {{ countPaginationNumber(pegawai.pagination, key) }}
             </Table.Td>
             <Table.Td>
               {{ item.nip }}
@@ -133,14 +133,14 @@ const handleDeleteGuru = async (id: number): Promise<void> => {
               {{ item.nama }}
             </Table.Td>
             <Table.Td>
-              {{ item.tipe_guru }}
+              {{ item.tipe_pegawai }}
             </Table.Td>
             <Table.Td>
               <div class="flex gap-2">
                 <Button
                   class="gap-2"
                   variant="warning"
-                  @click="showGuruModal(item)"
+                  @click="showPegawaiModal(item)"
                 >
                   <Lucide
                     class="w-5 h-5"
@@ -151,7 +151,7 @@ const handleDeleteGuru = async (id: number): Promise<void> => {
                 <Button
                   class="gap-2"
                   variant="danger"
-                  @click="deleteGuru(item)"
+                  @click="deletePegawai(item)"
                 >
                   <Lucide
                     class="w-5 h-5"

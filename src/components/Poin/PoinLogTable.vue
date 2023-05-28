@@ -13,7 +13,7 @@ import PoinValue from "./PoinValue.vue";
 interface PoinLogTableProps {
   modelValue?: PoinLog[],
   hidePagination?: boolean;
-  hideGuru?: boolean;
+  hidePegawai?: boolean;
   hideAction?: boolean;
   hideDetail?: boolean;
   hideSiswa?: boolean;
@@ -84,7 +84,7 @@ const deleteLog = (item: PoinLog) => {
           <Table.Th>
             Poin
           </Table.Th>
-          <Table.Th v-if="!hideGuru">
+          <Table.Th v-if="!hidePegawai">
             Pencatat
           </Table.Th>
           <Table.Th
@@ -139,8 +139,8 @@ const deleteLog = (item: PoinLog) => {
               :type="item.type"
             />
           </Table.Td>
-          <Table.Td v-if="!props.hideGuru">
-            {{ item.nama_guru }}
+          <Table.Td v-if="!props.hidePegawai">
+            {{ item.nama_pegawai }}
           </Table.Td>
           <Table.Td v-if="!props.hideAction">
             <div class="flex gap-2">

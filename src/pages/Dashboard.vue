@@ -10,6 +10,6 @@ const auth = useAuthStore()
 </script>
 
 <template>
-  <DashboardAdmin v-if="auth.isAdmin || auth.isGuru" />
+  <DashboardAdmin v-if="auth.isAdmin || auth.isPegawai" />
   <DashboardSiswa v-else-if="auth.isSiswa" />
 </template>

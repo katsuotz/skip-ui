@@ -65,7 +65,7 @@ const url = computed(() => document.location.origin + '/report/personal/12345')
           v-model="item.data"
           hide-pagination
           hide-action
-          hide-guru
+          hide-pegawai
           hide-siswa
         />
       </div>

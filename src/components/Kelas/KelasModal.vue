@@ -8,11 +8,11 @@ import FormLabel from "../../base-components/Form/FormLabel.vue";
 import {useKelasStore} from "../../stores/modules/kelas";
 import {Kelas, KelasRequest} from "../../utils/interfaces/kelas";
 import TomSelect from "../../base-components/TomSelect";
-import {useGuruStore} from "../../stores/modules/guru";
+import {usePegawaiStore} from "../../stores/modules/pegawai";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
 import {useJurusanStore} from "../../stores/modules/jurusan";
 import debounce from "lodash-es/debounce";
-import {Guru} from "../../utils/interfaces/guru";
+import {Pegawai} from "../../utils/interfaces/pegawai";
 
 interface KelasProps {
   modelValue: boolean;
@@ -28,7 +28,7 @@ const props = defineProps<KelasProps>();
 const emit = defineEmits<KelasEmit>();
 
 const kelas = useKelasStore()
-const guru = useGuruStore()
+const pegawai = usePegawaiStore()
 const tahunAjar = useTahunAjarStore()
 const jurusan = useJurusanStore()
 
@@ -37,16 +37,16 @@ const form = ref<KelasRequest>({
   nama_kelas: '',
   tahun_ajar_id: '',
   jurusan_id: '',
-  guru_id: '',
+  pegawai_id: '',
 })
 
 watch(() => kelas.selectedKelas, (value) => {
-  if (value?.guru_id) {
-    guru.guru = [{
-      id: value.guru_id,
+  if (value?.pegawai_id) {
+    pegawai.pegawai = [{
+      id: value.pegawai_id,
       nama: value.nama,
       nip: '',
-      tipe_guru: '',
+      tipe_pegawai: '',
     }]
   }
 
@@ -55,7 +55,7 @@ watch(() => kelas.selectedKelas, (value) => {
     nama_kelas: value?.nama_kelas || '',
     tahun_ajar_id: value?.tahun_ajar_id.toString() || '',
     jurusan_id: value?.jurusan_id.toString() || '',
-    guru_id: value?.guru_id.toString() || '',
+    pegawai_id: value?.pegawai_id.toString() || '',
   }
 })
 
@@ -75,7 +75,7 @@ const handleSubmit = (values: any, actions: any) => {
     nama_kelas: form.value.nama_kelas,
     tahun_ajar_id: parseInt(form.value.tahun_ajar_id),
     jurusan_id: parseInt(form.value.jurusan_id),
-    guru_id: parseInt(form.value.guru_id),
+    pegawai_id: parseInt(form.value.pegawai_id),
   }
 
   if (form.value.id)
@@ -90,13 +90,13 @@ const handleSuccess = (actions: any) => {
   emit('success')
 }
 
-const guruFilter= ref<Guru[]>([])
+const pegawaFilter= ref<Pegawai[]>([])
 
-const handleSearchGuru = debounce((search: string) => {
-  guru.searchGuru({
+const handleSearchPegawai = debounce((search: string) => {
+  pegawai.searchPegawai({
     search,
   }).then((res:any) => {
-    guruFilter.value = res.data
+    pegawaFilter.value = res.data
   })
 }, 700)
 
@@ -232,12 +232,12 @@ const handleSearchGuru = debounce((search: string) => {
             </Field>
           </div>
           <div>
-            <FormLabel for="guru_id">
+            <FormLabel for="pegawai_id">
               Wali Kelas
             </FormLabel>
             <Field
               v-slot="{ field, errorMessage }"
-              v-model="form.guru_id"
+              v-model="form.pegawai_id"
               :validate-on-blur="false"
               name="Wali Kelas"
               :rules="{
@@ -246,18 +246,18 @@ const handleSearchGuru = debounce((search: string) => {
             >
               <div>
                 <TomSelect
-                  id="guru_id"
-                  v-model="form.guru_id"
+                  id="pegawai_id"
+                  v-model="form.pegawai_id"
                   :class="{ 'border-danger': errorMessage }"
-                  placeholder="Cari Guru"
+                  placeholder="Cari Pegawai"
                   v-bind="field"
-                  @search="handleSearchGuru"
+                  @search="handleSearchPegawai"
                 >
                   <option value="">
-                    Cari Guru
+                    Cari Pegawai
                   </option>
                   <option
-                    v-for="(item, key) in guruFilter"
+                    v-for="(item, key) in pegawaFilter"
                     :key="key"
                     :value="item.id"
                   >

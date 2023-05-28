@@ -15,12 +15,12 @@ const routes = [
         }
       },
       {
-        path: "guru",
-        name: "guru",
-        component: () => import("../pages/Guru/GuruIndex.vue"),
+        path: "pegawai",
+        name: "pegawai",
+        component: () => import("../pages/Pegawai/PegawaiIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Guru', 'Data Guru'],
+          breadcrumbs: ['Pegawai', 'Data Pegawai'],
         },
       },
       {

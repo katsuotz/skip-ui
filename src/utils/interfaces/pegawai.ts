@@ -1,10 +1,10 @@
 import {Base} from "./helper";
 import {Profile} from "./user";
 
-export interface Guru extends Base, Profile {
+export interface Pegawai extends Base, Profile {
   id?: number;
   nip: string;
-  tipe_guru: string;
+  tipe_pegawai: string;
   username?: string;
   password?: string;
 }

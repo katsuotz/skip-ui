@@ -43,7 +43,7 @@ export const useAuthStore = defineStore("auth", {
         return capitalizeFirstLetter(state.user.role.replace(/-/g, ' '))
       return ''
     },
-    isGuru: state => ['guru', 'staff-ict', 'guru-bk', 'tata-usaha'].includes(state.user?.role || ''),
+    isPegawai: state => ['guru', 'staff-ict', 'guru-bk', 'tata-usaha'].includes(state.user?.role || ''),
     isStaff: state => ['admin', 'staff-ict', 'guru-bk'].includes(state.user?.role || ''),
     isAdmin: state => ['admin', 'staff-ict'].includes(state.user?.role || ''),
     isSiswa: state => ['siswa'].includes(state.user?.role || ''),

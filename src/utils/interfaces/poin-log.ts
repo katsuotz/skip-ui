@@ -10,9 +10,9 @@ export interface PoinLog extends Base {
   title: string;
   description: string;
   type: string;
-  guru_id: number;
+  pegawai_id: number;
   nip: string;
-  nama_guru: string;
+  nama_pegawai: string;
   nis?: string;
   nama?: string;
   nama_kelas?: string;
