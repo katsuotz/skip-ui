@@ -192,7 +192,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#0B5351"
+                      color="#3a5a40"
                     />
                   </div>
                   <div
@@ -238,7 +238,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#0B5351"
+                      color="#3a5a40"
                     />
                   </div>
                   <div
@@ -284,7 +284,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#0B5351"
+                      color="#3a5a40"
                     />
                   </div>
                   <div
@@ -320,7 +320,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#0B5351"
+                      color="#3a5a40"
                     />
                   </div>
                   <div
@@ -356,7 +356,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#0B5351"
+                      color="#3a5a40"
                     />
                   </div>
                   <div
@@ -392,7 +392,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#0B5351"
+                      color="#3a5a40"
                     />
                   </div>
                   <div
@@ -424,7 +424,7 @@ tahunAjar.getTahunAjar({
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#0B5351"
+              color="#3a5a40"
             />
           </div>
           <div
@@ -493,7 +493,7 @@ tahunAjar.getTahunAjar({
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#0B5351"
+              color="#3a5a40"
             />
           </div>
           <div
@@ -562,7 +562,7 @@ tahunAjar.getTahunAjar({
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#0B5351"
+              color="#3a5a40"
             />
           </div>
           <div
@@ -622,7 +622,7 @@ tahunAjar.getTahunAjar({
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#0B5351"
+              color="#3a5a40"
             />
           </div>
           <div
@@ -682,7 +682,7 @@ tahunAjar.getTahunAjar({
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#0B5351"
+              color="#3a5a40"
             />
           </div>
           <div
@@ -726,7 +726,7 @@ tahunAjar.getTahunAjar({
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#0B5351"
+              color="#3a5a40"
             />
           </div>
           <div
@@ -776,7 +776,7 @@ tahunAjar.getTahunAjar({
               <LoadingIcon
                 icon="puff"
                 class="w-16 h-16"
-                color="#0B5351"
+                color="#3a5a40"
               />
             </div>
             <div
@@ -847,7 +847,7 @@ tahunAjar.getTahunAjar({
               <LoadingIcon
                 icon="puff"
                 class="w-16 h-16"
-                color="#0B5351"
+                color="#3a5a40"
               />
             </div>
             <div
