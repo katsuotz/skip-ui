@@ -3,6 +3,7 @@ import {Icon} from "../base-components/Lucide/Lucide.vue";
 import {useAuthStore} from "./modules/auth";
 import {Role} from "../utils/interfaces/user";
 import {toRaw} from "vue";
+import cloneDeep from "lodash-es/cloneDeep";
 
 export interface Menu {
   icon: Icon;
@@ -25,29 +26,40 @@ export const useSideMenuStore = defineStore("sideMenu", {
         pageName: "dashboard",
         title: "Dashboard",
       },
-
       {
-        icon: "ListOrdered",
+        icon: "BookCopy",
+        pageName: "siswa",
         title: "Siswa",
-        subMenu: [
-          {
-            icon: "ChevronRight",
-            pageName: "siswa",
-            title: "Data Siswa",
-            role: ['admin', 'staff-ict'],
-          },
-          {
-            icon: "ChevronRight",
-            pageName: "kelas",
-            title: "Kelas",
-            role: ['admin', 'staff-ict'],
-          },
-        ]
+        role: ['admin', 'staff-ict'],
       },
       {
-        icon: "UserCheck",
+        icon: "UserCircle2",
         pageName: "pegawai",
         title: "Pegawai",
+        role: ['admin', 'staff-ict'],
+      },
+      {
+        icon: "Presentation",
+        pageName: "kelas",
+        title: "Kelas",
+        role: ['admin', 'staff-ict'],
+      },
+      {
+        icon: "GraduationCap",
+        pageName: "jurusan",
+        title: "Jurusan",
+        role: ['admin', 'staff-ict'],
+      },
+      {
+        icon: "CalendarDays",
+        pageName: "tahun-ajar",
+        title: "Tahun Ajar",
+        role: ['admin', 'staff-ict'],
+      },
+      {
+        icon: "Binary",
+        pageName: "data-poin",
+        title: "Poin",
         role: ['admin', 'staff-ict'],
       },
       {
@@ -74,30 +86,6 @@ export const useSideMenuStore = defineStore("sideMenu", {
         title: "Bandingkan",
         role: ['admin', 'staff-ict'],
       },
-      {
-        icon: "Inbox",
-        title: "Admin",
-        subMenu: [
-          {
-            icon: "ChevronRight",
-            pageName: "jurusan",
-            title: "Jurusan",
-            role: ['admin', 'staff-ict'],
-          },
-          {
-            icon: "ChevronRight",
-            pageName: "tahun-ajar",
-            title: "Tahun Ajar",
-            role: ['admin', 'staff-ict'],
-          },
-          {
-            icon: "ChevronRight",
-            pageName: "data-poin",
-            title: "Poin",
-            role: ['admin', 'staff-ict'],
-          },
-        ],
-      }
     ],
   }),
   getters: {
@@ -109,7 +97,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
         return e.role ? e.role.includes(<Role>auth?.user?.role || '') : true
       }
 
-      return structuredClone(toRaw(state.menu)).map((e:any) => {
+      return cloneDeep(toRaw(state.menu)).map((e:any) => {
         if (e === "divider") return e
         if (e.subMenu) {
           e.subMenu = e.subMenu?.filter(checkRole)
