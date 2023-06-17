@@ -1,0 +1,16 @@
+.vs__dropdown-toggle {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  border-width: 1px;
+  border-style: solid;
+  border-color: inherit;
+  min-height: 36px;
+}
+
+.vs__search, .vs__search:focus {
+  padding: 0rem 0.75rem;
+  font-size: inherit;
+}
+
+.vs__selected-options {
+  flex-wrap: unset;
+}

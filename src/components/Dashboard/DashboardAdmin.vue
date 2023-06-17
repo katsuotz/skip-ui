@@ -2,7 +2,7 @@
 import Lucide from "../../base-components/Lucide";
 import {useInfoStore} from "../../stores/modules/info";
 import {ref} from "vue";
-import {dateFormat, getUserPhoto, numberFormat, timeFormat} from "../../utils/helper";
+import {dateTimeFormat, getUserPhoto, numberFormat} from "../../utils/helper";
 import LoadingIcon from "../../base-components/LoadingIcon";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
@@ -192,7 +192,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#3a5a40"
+                      color="#0d9488"
                     />
                   </div>
                   <div
@@ -238,7 +238,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#3a5a40"
+                      color="#0d9488"
                     />
                   </div>
                   <div
@@ -284,7 +284,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#3a5a40"
+                      color="#0d9488"
                     />
                   </div>
                   <div
@@ -320,7 +320,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#3a5a40"
+                      color="#0d9488"
                     />
                   </div>
                   <div
@@ -356,7 +356,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#3a5a40"
+                      color="#0d9488"
                     />
                   </div>
                   <div
@@ -392,7 +392,7 @@ tahunAjar.getTahunAjar({
                     <LoadingIcon
                       icon="puff"
                       class="w-8 h-8"
-                      color="#3a5a40"
+                      color="#0d9488"
                     />
                   </div>
                   <div
@@ -412,19 +412,19 @@ tahunAjar.getTahunAjar({
         <div
           class="col-span-12 mt-3 md:col-span-6"
         >
-          <div class="flex items-center h-10 intro-x">
+          <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
               Total Poin Tertinggi
             </h2>
           </div>
           <div
             v-if="loading.listBigger"
-            class="flex justify-center py-8 intro-x"
+            class="flex justify-center py-8 intro-y"
           >
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#3a5a40"
+              color="#0d9488"
             />
           </div>
           <div
@@ -435,7 +435,7 @@ tahunAjar.getTahunAjar({
               <div
                 v-for="(item, key) in info.infoListBigger"
                 :key="key"
-                class="intro-x"
+                class="intro-y"
               >
                 <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                   <div
@@ -465,7 +465,7 @@ tahunAjar.getTahunAjar({
                     order: 'desc',
                   }
                 }"
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
               </RouterLink>
@@ -481,19 +481,19 @@ tahunAjar.getTahunAjar({
         <div
           class="col-span-12 mt-3 md:col-span-6"
         >
-          <div class="flex items-center h-10 intro-x">
+          <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
               Total Poin Terendah
             </h2>
           </div>
           <div
             v-if="loading.listSmaller"
-            class="flex justify-center py-8 intro-x"
+            class="flex justify-center py-8 intro-y"
           >
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#3a5a40"
+              color="#0d9488"
             />
           </div>
           <div
@@ -504,7 +504,7 @@ tahunAjar.getTahunAjar({
               <div
                 v-for="(item, key) in info.infoListSmaller"
                 :key="key"
-                class="intro-x"
+                class="intro-y"
               >
                 <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                   <div
@@ -534,7 +534,7 @@ tahunAjar.getTahunAjar({
                     order: 'asc',
                   }
                 }"
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
               </RouterLink>
@@ -550,19 +550,19 @@ tahunAjar.getTahunAjar({
         <div
           class="col-span-12 mt-3 md:col-span-6"
         >
-          <div class="flex items-center h-10 intro-x">
+          <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
               Jenis Penghargaan Terbanyak
             </h2>
           </div>
           <div
             v-if="loading.listPenghargaan"
-            class="flex justify-center py-8 intro-x"
+            class="flex justify-center py-8 intro-y"
           >
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#3a5a40"
+              color="#0d9488"
             />
           </div>
           <div
@@ -573,7 +573,7 @@ tahunAjar.getTahunAjar({
               <div
                 v-for="(item, key) in info.listPenghargaan"
                 :key="key"
-                class="intro-x"
+                class="intro-y"
               >
                 <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                   <div class="mr-auto">
@@ -594,7 +594,7 @@ tahunAjar.getTahunAjar({
                     type: 'Penghargaan',
                   }
                 }"
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
               </RouterLink>
@@ -610,19 +610,19 @@ tahunAjar.getTahunAjar({
         <div
           class="col-span-12 mt-3 md:col-span-6"
         >
-          <div class="flex items-center h-10 intro-x">
+          <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
               Jenis Pelanggaran Terbanyak
             </h2>
           </div>
           <div
             v-if="loading.listPelanggaran"
-            class="flex justify-center py-8 intro-x"
+            class="flex justify-center py-8 intro-y"
           >
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#3a5a40"
+              color="#0d9488"
             />
           </div>
           <div
@@ -633,7 +633,7 @@ tahunAjar.getTahunAjar({
               <div
                 v-for="(item, key) in info.listPelanggaran"
                 :key="key"
-                class="intro-x"
+                class="intro-y"
               >
                 <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                   <div class="mr-auto">
@@ -654,7 +654,7 @@ tahunAjar.getTahunAjar({
                     type: 'Pelanggaran',
                   }
                 }"
-                class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
               >
                 Lihat Lebih Banyak
               </RouterLink>
@@ -670,19 +670,19 @@ tahunAjar.getTahunAjar({
         <div
           class="col-span-12 mt-3 md:col-span-6"
         >
-          <div class="flex items-center h-10 intro-x">
+          <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
               Grafik Jumlah Penghargaan
             </h2>
           </div>
           <div
             v-if="loading.graphPenghargaan"
-            class="flex justify-center py-8 intro-x"
+            class="flex justify-center py-8 intro-y"
           >
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#3a5a40"
+              color="#0d9488"
             />
           </div>
           <div
@@ -691,7 +691,7 @@ tahunAjar.getTahunAjar({
           >
             <div
               v-if="info.graphCountPenghargaan.length"
-              class="intro-x"
+              class="intro-y"
             >
               <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
                 <DashboardPoinGraph
@@ -714,19 +714,19 @@ tahunAjar.getTahunAjar({
         <div
           class="col-span-12 mt-3 md:col-span-6"
         >
-          <div class="flex items-center h-10 intro-x">
+          <div class="flex items-center h-10 intro-y">
             <h2 class="mr-5 text-lg font-medium truncate">
               Grafik Jumlah Pelanggaran
             </h2>
           </div>
           <div
             v-if="loading.graphPelanggaran"
-            class="flex justify-center py-8 intro-x"
+            class="flex justify-center py-8 intro-y"
           >
             <LoadingIcon
               icon="puff"
               class="w-16 h-16"
-              color="#3a5a40"
+              color="#0d9488"
             />
           </div>
           <div
@@ -735,7 +735,7 @@ tahunAjar.getTahunAjar({
           >
             <div
               v-if="info.graphCountPelanggaran.length"
-              class="intro-x"
+              class="intro-y"
             >
               <div class="flex items-center px-5 pt-5 pb-3 box zoom-in">
                 <DashboardPoinGraph
@@ -764,19 +764,19 @@ tahunAjar.getTahunAjar({
           <div
             class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12 mt-8"
           >
-            <div class="flex items-center h-10 intro-x">
+            <div class="flex items-center h-10 intro-y">
               <h2 class="mr-5 text-lg font-medium truncate">
                 Aktivitas Poin
               </h2>
             </div>
             <div
               v-if="loading.latestLog"
-              class="flex justify-center py-8 intro-x"
+              class="flex justify-center py-8 intro-y"
             >
               <LoadingIcon
                 icon="puff"
                 class="w-16 h-16"
-                color="#3a5a40"
+                color="#0d9488"
               />
             </div>
             <div
@@ -787,7 +787,7 @@ tahunAjar.getTahunAjar({
                 <div
                   v-for="(item, key) in poinLog.latestLog"
                   :key="key"
-                  class="intro-x"
+                  class="intro-y"
                 >
                   <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                     <div
@@ -806,8 +806,7 @@ tahunAjar.getTahunAjar({
                         {{ item.nis }}
                       </div>
                       <div class="text-slate-500 text-xs mt-0.5">
-                        {{ dateFormat(item.created_at) }},
-                        {{ timeFormat(item.created_at) }}
+                        {{ dateTimeFormat(item.created_at) }}
                       </div>
                     </div>
                     <PoinType
@@ -818,7 +817,7 @@ tahunAjar.getTahunAjar({
                 </div>
                 <RouterLink
                   to="/poin/log"
-                  class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                  class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
                 >
                   Lihat Lebih Banyak
                 </RouterLink>
@@ -835,19 +834,19 @@ tahunAjar.getTahunAjar({
             v-if="auth.isAdmin"
             class="col-span-12 md:col-span-6 xl:col-span-4 2xl:col-span-12"
           >
-            <div class="flex items-center h-10 intro-x">
+            <div class="flex items-center h-10 intro-y">
               <h2 class="mr-5 text-lg font-medium truncate">
                 Aktivitas Login
               </h2>
             </div>
             <div
               v-if="loading.loginLog"
-              class="flex justify-center py-8 intro-x"
+              class="flex justify-center py-8 intro-y"
             >
               <LoadingIcon
                 icon="puff"
                 class="w-16 h-16"
-                color="#3a5a40"
+                color="#0d9488"
               />
             </div>
             <div
@@ -858,7 +857,7 @@ tahunAjar.getTahunAjar({
                 <div
                   v-for="(item, key) in info.loginLog"
                   :key="key"
-                  class="intro-x"
+                  class="intro-y"
                 >
                   <div class="flex items-center px-5 py-3 mb-3 box zoom-in">
                     <div
@@ -877,8 +876,7 @@ tahunAjar.getTahunAjar({
                         {{ item.role }}
                       </div>
                       <div class="text-slate-500 text-xs mt-0.5">
-                        {{ dateFormat(item.created_at) }},
-                        {{ timeFormat(item.created_at) }}
+                        {{ dateTimeFormat(item.created_at) }}
                       </div>
                     </div>
                     <Tippy
@@ -926,7 +924,7 @@ tahunAjar.getTahunAjar({
                 </div>
                 <RouterLink
                   to="/login/log"
-                  class="block w-full py-1 text-right rounded-md intro-x border-slate-400 text-slate-500 hover:text-primary"
+                  class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
                 >
                   Lihat Lebih Banyak
                 </RouterLink>

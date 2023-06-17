@@ -50,7 +50,7 @@ watch(() => route.meta?.breadcrumbs, () => {
       <RouterLink
         :to="{ name: 'dashboard' }"
         :class="[
-          '-intro-x hidden md:flex',
+          '-intro-y hidden md:flex',
           props.layout == 'side-menu' && 'xl:w-[180px]',
           props.layout == 'simple-menu' && 'xl:w-auto',
           props.layout == 'top-menu' && 'w-auto',
@@ -76,7 +76,7 @@ watch(() => route.meta?.breadcrumbs, () => {
         v-if="breadcrumbs?.length"
         light
         :class="[
-          'h-[45px] md:ml-10 md:border-l border-white/[0.08] dark:border-white/[0.08] mr-auto -intro-x',
+          'h-[45px] md:ml-10 md:border-l border-white/[0.08] dark:border-white/[0.08] mr-auto -intro-y',
           props.layout != 'top-menu' && 'md:pl-6',
           props.layout == 'top-menu' && 'md:pl-10',
         ]"
@@ -87,21 +87,26 @@ watch(() => route.meta?.breadcrumbs, () => {
           :index="key"
           :active="key + 1 === breadcrumbs.length"
         >
-          {{ item }}
+          <Lucide
+            v-if="item === 'home'"
+            icon="LayoutGrid"
+            class="w-4 h-4 stroke-2.5"
+          />
+          <span v-else>{{ item }}</span>
         </Breadcrumb.Link>
       </Breadcrumb>
 
       <!-- BEGIN: Account Menu -->
       <Menu class="ml-auto">
         <Menu.Button
-          class="flex items-center cursor-default -intro-x"
+          class="flex items-center cursor-default -intro-y"
         >
           <div class="text-white text-right mr-4">
             <div class="font-medium">
               {{ auth.user?.nama }}
             </div>
             <div class="text-xs dark:text-slate-500">
-              {{ auth.user?.role }}
+              {{ auth.roleLabel[auth.user?.role || ''] }}
             </div>
           </div>
           <img

@@ -61,7 +61,7 @@ onMounted(() => {
         class="flex mr-auto"
       >
         <img
-          alt="Midone Tailwind HTML Admin Template"
+          alt="SKIP Logo"
           class="w-6"
           :src="logoUrl"
         >

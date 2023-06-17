@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import logoUrl from "../assets/images/logo.svg";
-import illustrationUrl from "../assets/images/illustration.svg";
+import illustrationUrl from "../assets/images/login-illustration.svg";
 import {FormInput} from "../base-components/Form";
 import {Field, Form} from 'vee-validate';
 import Button from "../base-components/Button";
@@ -37,49 +37,58 @@ const handleSubmit = () => {
           <div class="flex-col hidden min-h-screen xl:flex">
             <a
               href=""
-              class="flex items-center pt-5 -intro-x"
+              class="flex items-center pt-5 -intro-y"
             >
               <img
-                alt="Midone Tailwind HTML Admin Template"
+                alt="SKIP Logo"
                 class="w-6"
                 :src="logoUrl"
               >
-              <span class="ml-3 text-lg text-white"> Rubick </span>
+              <span class="ml-3 text-lg text-white"> SKIP </span>
             </a>
             <div class="my-auto">
               <img
-                alt=""
-                class="w-1/2 -mt-16 -intro-x"
+                alt="unDraw illustration"
+                class="w-1/3 -mt-16 -intro-y"
                 :src="illustrationUrl"
               >
               <div
-                class="mt-10 text-4xl font-medium leading-tight text-white -intro-x"
+                class="mt-10 text-4xl font-medium leading-tight text-white -intro-y"
               >
-                A few more clicks to <br>
-                sign in to your account.
+                Welcome to SKIP
               </div>
               <div
-                class="mt-5 text-lg text-white -intro-x text-opacity-70 dark:text-slate-400"
+                class="mt-2 text-lg text-white -intro-y text-opacity-70 dark:text-slate-400"
               >
-                Manage all your e-commerce accounts in one place
+                Ignite Motivation, Propel Achievement
               </div>
             </div>
           </div>
           <!-- END: Login Info -->
           <!-- BEGIN: Login Form -->
-          <div class="flex h-screen py-5 lg:my-10 xl:h-auto xl:py-0 xl:my-0">
+          <div class="flex h-screen py-5 lg:my-10 xl:h-auto xl:py-0 xl:my-0 flex-col items-center">
+            <a
+              href=""
+              class="flex flex-col items-center pt-5 --intro-y mb-14 mt-10 xl:hidden intro-y"
+            >
+              <img
+                alt="SKIP Logo"
+                class="w-16"
+                :src="logoUrl"
+              >
+            </a>
             <div
-              class="w-full px-5 py-8 mx-auto my-auto bg-white rounded-md shadow-md xl:ml-20 dark:bg-darkmode-600 xl:bg-transparent sm:px-8 xl:p-0 xl:shadow-none sm:w-3/4 lg:w-2/4 xl:w-auto"
+              class="w-full px-5 py-8 mx-auto xl:my-auto mb-auto bg-white rounded-md shadow-md xl:ml-20 dark:bg-darkmode-600 xl:bg-transparent sm:px-8 xl:p-0 xl:shadow-none sm:w-3/4 lg:w-2/4 xl:w-auto"
             >
               <Form
                 @submit="handleSubmit"
               >
                 <h2
-                  class="text-2xl font-bold text-center intro-x xl:text-3xl xl:text-left"
+                  class="text-2xl font-bold text-center intro-y xl:text-3xl xl:text-left"
                 >
-                  Sign In
+                  Sign In <span class="xl:hidden">to SKIP</span>
                 </h2>
-                <div class="mt-8 intro-x">
+                <div class="mt-8 intro-y">
                   <Field
                     v-slot="{ field, errorMessage }"
                     name="Username"
@@ -90,7 +99,7 @@ const handleSubmit = () => {
                       v-model.trim="username"
                       type="text"
                       :class="{
-                        'block px-4 py-3 intro-x login__input min-w-full xl:min-w-[350px]': true,
+                        'block px-4 py-3 intro-y login__input min-w-full xl:min-w-[350px]': true,
                         'border-danger': errorMessage,
                       }"
                       placeholder="Username"
@@ -112,7 +121,7 @@ const handleSubmit = () => {
                       v-model="password"
                       type="password"
                       :class="{
-                        'block px-4 py-3 mt-4 intro-x login__input min-w-full xl:min-w-[350px]': true,
+                        'block px-4 py-3 mt-4 intro-y login__input min-w-full xl:min-w-[350px]': true,
                         'border-danger': errorMessage,
                       }"
                       placeholder="Password"
@@ -125,7 +134,7 @@ const handleSubmit = () => {
                     </div>
                   </Field>
                 </div>
-                <div class="mt-5 text-center intro-x xl:mt-8 xl:text-left">
+                <div class="mt-5 text-center intro-y xl:mt-8 xl:text-left">
                   <Button
                     variant="primary"
                     class="w-full px-4 py-3 align-top xl:w-32 xl:mr-3"

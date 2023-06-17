@@ -43,6 +43,7 @@
 @import "tippy.js/dist/svg-arrow.css";
 @import "tippy.js/animations/shift-away.css";
 @import "vue-datepicker-next/index.css";
+@import "vue-select/dist/vue-select.css";
 
 /*
    |--------------------------------------------------------------------------
@@ -60,6 +61,7 @@
 @import "./components/_tippy.css";
 @import "./components/_toastify.css";
 @import "./components/_tom-select.css";
+@import "./components/_vue-select.css";
 
 .image-fit {
     position: relative;

@@ -11,7 +11,7 @@ const routes = [
         name: "dashboard",
         component: () => import("../pages/Dashboard.vue"),
         meta: {
-          breadcrumbs: ['Dashboard'],
+          breadcrumbs: ['home', 'Dashboard'],
         }
       },
       {
@@ -20,7 +20,7 @@ const routes = [
         component: () => import("../pages/Pegawai/PegawaiIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Pegawai', 'Data Pegawai'],
+          breadcrumbs: ['home', 'Pegawai'],
         },
       },
       {
@@ -29,7 +29,7 @@ const routes = [
         component: () => import("../pages/Siswa/SiswaIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Siswa', 'Data Siswa'],
+          breadcrumbs: ['home', 'Siswa'],
         },
       },
       {
@@ -38,7 +38,7 @@ const routes = [
         component: () => import("../pages/Kelas/KelasIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Siswa', 'Kelas'],
+          breadcrumbs: ['home', 'Kelas'],
         },
       },
       {
@@ -47,7 +47,7 @@ const routes = [
         component: () => import("../pages/Kelas/KelasSiswaIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Siswa', 'Kelas', 'List Siswa'],
+          breadcrumbs: ['home', 'Kelas', 'List Siswa'],
         },
       },
       {
@@ -56,7 +56,7 @@ const routes = [
         component: () => import("../pages/Kelas/KelasSiswaLog.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Siswa', 'Riwayat Poin'],
+          breadcrumbs: ['home', 'Siswa', 'Riwayat Poin'],
         },
       },
       {
@@ -73,7 +73,7 @@ const routes = [
         component: () => import("../pages/TahunAjar/TahunAjarIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Admin', 'Tahun Ajar'],
+          breadcrumbs: ['home', 'Tahun Ajar'],
         },
       },
       {
@@ -82,7 +82,7 @@ const routes = [
         component: () => import("../pages/Jurusan/JurusanIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Admin', 'Jurusan'],
+          breadcrumbs: ['home', 'Jurusan'],
         },
       },
       {
@@ -91,7 +91,7 @@ const routes = [
         component: () => import("../pages/DataPoin/DataPoinIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict'],
-          breadcrumbs: ['Admin', 'Poin'],
+          breadcrumbs: ['home', 'Poin'],
         },
       },
       {
@@ -108,7 +108,7 @@ const routes = [
         component: () => import("../pages/Poin/PoinLogIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Dashboard', 'Aktivitas Poin'],
+          breadcrumbs: ['home', 'Dashboard', 'Aktivitas Poin'],
         },
       },
       {
@@ -117,7 +117,7 @@ const routes = [
         component: () => import("../pages/Poin/PoinSiswaIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Dashboard', 'Data Jumlah Siswa'],
+          breadcrumbs: ['home', 'Dashboard', 'Data Jumlah Siswa'],
         },
       },
       {
@@ -126,7 +126,7 @@ const routes = [
         component: () => import("../pages/Poin/PoinTypeIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Dashboard', 'Data Jumlah Poin'],
+          breadcrumbs: ['home', 'Dashboard', 'Data Jumlah Poin'],
         },
       },
       {
@@ -135,7 +135,7 @@ const routes = [
         component: () => import("../pages/LoginLog/LoginLogIndex.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Dashboard', 'Aktivitas Login'],
+          breadcrumbs: ['home', 'Dashboard', 'Aktivitas Login'],
         },
       },
       {
