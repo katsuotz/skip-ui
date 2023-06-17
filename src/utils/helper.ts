@@ -8,48 +8,12 @@ const formatDate = (format: string, date?: string | Date) => {
 };
 
 const dateTimeFormat = (date?: string | Date) => {
-  return formatDate('DD MMM YYYY, HH:mm', date)
+  return formatDate('D MMM YYYY, HH:mm', date)
 }
 
 const dateInputFormat = (date?: string | Date) => {
   return formatDate('YYYY-MM-DD', date)
 }
-
-const dateFormat = (date?: string | Date) => {
-  return formatDate('D MMM YYYY', date)
-}
-
-const timeFormat = (date?: string | Date) => {
-  return formatDate('HH:mm', date)
-}
-
-const capitalizeFirstLetter = (string: string) => {
-  if (string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  } else {
-    return "";
-  }
-};
-
-const onlyNumber = (string: string) => {
-  if (string) {
-    return string.replace(/\D/g, "");
-  } else {
-    return "";
-  }
-};
-
-const isset = (obj: object | string) => {
-  if (obj !== null && obj !== undefined) {
-    if (typeof obj === "object" || Array.isArray(obj)) {
-      return Object.keys(obj).length;
-    } else {
-      return obj.toString().length;
-    }
-  }
-
-  return false;
-};
 
 const numberFormat = (number:number = 0, decimal:number = 0) => {
   // @ts-ignore
@@ -133,35 +97,6 @@ const countPaginationNumber = (pagination: Pagination, n: number) => {
   return pagination.per_page * (pagination.page - 1) + n + 1
 }
 
-const createFormData = (data: any) => {
-  const formData = new FormData()
-
-  for (const k in data) {
-    formData.append(k, data[k])
-  }
-
-  return formData
-}
-
-const sortStringArray = (data: any[], key?: string, orderBy = 'asc') => {
-  if (key)
-    return data.sort((a, b) => orderBy === 'asc' ? a[key].localeCompare(b[key], undefined, {
-      numeric: true,
-      sensitivity: 'base',
-    }) : b[key].localeCompare(a[key], undefined, {
-      numeric: true,
-      sensitivity: 'base',
-    }))
-
-  return data.sort((a, b) => orderBy === 'asc' ? a.localeCompare(b, undefined, {
-    numeric: true,
-    sensitivity: 'base',
-  }) : b.localeCompare(a, undefined, {
-    numeric: true,
-    sensitivity: 'base',
-  }))
-}
-
 const getFileUrl = (path: string) => {
   return import.meta.env.VITE_API + '/' + path
 }
@@ -176,20 +111,13 @@ const toLowerCase = (string: string, spaceReplace = '_') => {
 
 export {
   formatDate,
-  capitalizeFirstLetter,
-  onlyNumber,
-  isset,
   toRGB,
   slideUp,
   slideDown,
   countPaginationNumber,
-  createFormData,
-  sortStringArray,
   numberFormat,
   dateTimeFormat,
   dateInputFormat,
-  dateFormat,
-  timeFormat,
   getFileUrl,
   getUserPhoto,
   toLowerCase,

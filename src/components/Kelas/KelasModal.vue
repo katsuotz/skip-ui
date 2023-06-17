@@ -177,7 +177,7 @@ const handleSearchPegawai = debounce((search: string) => {
                   >
                     {{ item.tahun_ajar }}
                     <template v-if="item.is_active">
-                      Aktif
+                      (Aktif)
                     </template>
                   </option>
                 </TomSelect>
@@ -249,12 +249,12 @@ const handleSearchPegawai = debounce((search: string) => {
                   id="pegawai_id"
                   v-model="form.pegawai_id"
                   :class="{ 'border-danger': errorMessage }"
-                  placeholder="Cari Pegawai"
+                  placeholder="Cari Guru"
                   v-bind="field"
                   @search="handleSearchPegawai"
                 >
                   <option value="">
-                    Cari Pegawai
+                    Cari Guru
                   </option>
                   <option
                     v-for="(item, key) in pegawaFilter"

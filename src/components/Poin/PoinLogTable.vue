@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {countPaginationNumber, getUserPhoto} from "../../utils/helper";
+import {countPaginationNumber, getFileUrl, getUserPhoto} from "../../utils/helper";
 import Table from "../../base-components/Table";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
@@ -14,7 +14,7 @@ interface PoinLogTableProps {
   modelValue?: PoinLog[],
   hidePagination?: boolean;
   hidePegawai?: boolean;
-  hideAction?: boolean;
+  hideDelete?: boolean;
   hideDetail?: boolean;
   hideSiswa?: boolean;
 }
@@ -88,8 +88,7 @@ const deleteLog = (item: PoinLog) => {
             Pencatat
           </Table.Th>
           <Table.Th
-            v-if="!hideAction"
-            style="width: 200px"
+            style="max-width: 200px"
           />
         </Table.Tr>
       </Table.Thead>
@@ -142,9 +141,24 @@ const deleteLog = (item: PoinLog) => {
           <Table.Td v-if="!props.hidePegawai">
             {{ item.nama_pegawai }}
           </Table.Td>
-          <Table.Td v-if="!props.hideAction">
-            <div class="flex gap-2">
+          <Table.Td>
+            <div class="flex gap-2 justify-end">
               <Button
+                v-if="item.file"
+                as="a"
+                target="_blank"
+                :href="getFileUrl(item.file)"
+                class="whitespace-nowrap gap-2"
+                variant="success"
+              >
+                <Lucide
+                  class="w-5 h-5"
+                  icon="Image"
+                />
+                Lihat Bukti
+              </Button>
+              <Button
+                v-if="!hideDelete"
                 class="gap-2"
                 variant="danger"
                 @click="deleteLog(item)"

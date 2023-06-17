@@ -2,7 +2,7 @@
 import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref} from "vue";
-import {countPaginationNumber} from "../../utils/helper";
+import {countPaginationNumber, getUserPhoto} from "../../utils/helper";
 import PegawaiModal from "../../components/Pegawai/PegawaiModal.vue";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
@@ -130,7 +130,14 @@ const handleDeletePegawai = async (id: number): Promise<void> => {
               {{ item.nip }}
             </Table.Td>
             <Table.Td>
-              {{ item.nama }}
+              <div class="flex items-center">
+                <img
+                  :src="getUserPhoto(item.foto)"
+                  alt=""
+                  class="w-[36px] h-[36px] rounded-full object-cover object-center mr-5"
+                >
+                {{ item.nama }}
+              </div>
             </Table.Td>
             <Table.Td>
               {{ item.tipe_pegawai }}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {countPaginationNumber, dateFormat, getUserPhoto, timeFormat} from "../../utils/helper";
+import {countPaginationNumber, dateTimeFormat, getUserPhoto} from "../../utils/helper";
 import Table from "../Table";
 import Lucide from "../Lucide";
 import MyTable from "../My/MyTable/MyTable.vue";
@@ -99,8 +99,7 @@ const handleSearch = (value: string = '') => {
             </div>
           </Table.Td>
           <Table.Td>
-            {{ dateFormat(item.created_at) }},
-            {{ timeFormat(item.created_at) }}
+            {{ dateTimeFormat(item.created_at) }}
           </Table.Td>
           <Table.Td>
             <div class="flex items-center font-medium gap-3">

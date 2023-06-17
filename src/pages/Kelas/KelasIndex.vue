@@ -56,6 +56,8 @@ const getTahunAjar = () => {
   tahunAjar.getTahunAjar({
     page: 1,
     per_page: -1,
+  }).then(() => {
+    filter.value.tahun_ajar_id = tahunAjar.activeTahunAjar?.id?.toString() || ''
   })
 }
 

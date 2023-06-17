@@ -7,6 +7,7 @@ import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {PoinLog} from "../../utils/interfaces/poin-log";
 import {usePoinSiswaStore} from "../../stores/modules/poin-siswa";
 import PoinLogTable from "../../components/Poin/PoinLogTable.vue";
+import {getUserPhoto} from "../../utils/helper";
 
 const global = useGlobalStore()
 const kelas = useKelasStore()
@@ -75,32 +76,40 @@ const handleDeleteLog = (item: PoinLog) => {
     </h2>
   </div>
   <div class="p-5 mt-5 intro-y box">
-    <table>
-      <tr>
-        <td style="width: 90px">
-          Nama
-        </td>
-        <th class="text-left">
-          : {{ poinSiswa.selectedPoinSiswa?.nama }}
-        </th>
-      </tr>
-      <tr>
-        <td style="width: 90px">
-          Kelas
-        </td>
-        <th class="text-left">
-          : {{ kelas.selectedKelas?.nama_kelas }}
-        </th>
-      </tr>
-      <tr>
-        <td style="width: 90px">
-          Tahun Ajar
-        </td>
-        <th class="text-left">
-          : {{ kelas.selectedKelas?.tahun_ajar }}
-        </th>
-      </tr>
-    </table>
+    <div class="flex items-start">
+      <img
+        v-if="poinSiswa.selectedPoinSiswa"
+        :src="getUserPhoto(poinSiswa.selectedPoinSiswa?.foto)"
+        alt=""
+        class="w-[64px] h-[64px] rounded-full object-cover object-center mr-5"
+      >
+      <table>
+        <tr>
+          <td style="width: 90px">
+            Nama
+          </td>
+          <th class="text-left">
+            : {{ poinSiswa.selectedPoinSiswa?.nama }}
+          </th>
+        </tr>
+        <tr>
+          <td style="width: 90px">
+            Kelas
+          </td>
+          <th class="text-left">
+            : {{ kelas.selectedKelas?.nama_kelas }}
+          </th>
+        </tr>
+        <tr>
+          <td style="width: 90px">
+            Tahun Ajar
+          </td>
+          <th class="text-left">
+            : {{ kelas.selectedKelas?.tahun_ajar }}
+          </th>
+        </tr>
+      </table>
+    </div>
   </div>
   <div class="p-5 mt-5 intro-y box">
     <PoinLogTable

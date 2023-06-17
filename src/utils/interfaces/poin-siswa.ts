@@ -8,6 +8,7 @@ export interface PoinSiswaRequest {
   poin: number;
   type: string;
   siswa_kelas_id: number;
+  file: string;
 }
 
 export interface PoinSiswa extends Base {
@@ -15,6 +16,7 @@ export interface PoinSiswa extends Base {
   nama: string;
   nama_kelas: string;
   poin: number;
+  foto?: string;
 }
 
 export interface PoinJurusanWithKelas {

@@ -23,5 +23,9 @@ export const useFileStore = defineStore("file", {
       const auth = useAuthStore()
       return this.upload(file, auth.user?.username || '', 'foto')
     },
+    uploadFile(file: File) {
+      const auth = useAuthStore()
+      return this.upload(file, auth.user?.username || '', 'file')
+    },
   },
 });

@@ -2,7 +2,7 @@
 import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref, watch} from "vue";
-import {countPaginationNumber} from "../../utils/helper";
+import {countPaginationNumber, getUserPhoto} from "../../utils/helper";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
 import {Siswa} from "../../utils/interfaces/siswa";
@@ -160,7 +160,14 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             {{ item.nis }}
           </Table.Td>
           <Table.Td>
-            {{ item.nama }}
+            <div class="flex items-center">
+              <img
+                :src="getUserPhoto(item.foto)"
+                alt=""
+                class="w-[36px] h-[36px] rounded-full object-cover object-center mr-5"
+              >
+              {{ item.nama }}
+            </div>
           </Table.Td>
           <Table.Td>
             <PoinValue v-model="item.poin" />

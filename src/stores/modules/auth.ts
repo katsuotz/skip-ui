@@ -4,11 +4,11 @@ import router from "../../router";
 
 import {PasswordRequest, UserResponse} from '../../utils/interfaces/user'
 import {useGlobalStore} from "../global";
-import {capitalizeFirstLetter} from "../../utils/helper";
 
 interface AuthState {
   user?: UserResponse;
   token?: string;
+  roleLabel: any;
 }
 
 const removeUser = () => {
@@ -36,13 +36,16 @@ export const useAuthStore = defineStore("auth", {
   state: (): AuthState => ({
     user: getUser(),
     token: getToken(),
+    roleLabel: {
+      'admin': 'Admin',
+      'guru': 'Guru',
+      'guru-bk': 'Guru BK',
+      'tata-usaha': 'Tata Usaha',
+      'staff-ict': 'Staff ICT',
+      'siswa': 'Siswa',
+    },
   }),
   getters: {
-    roleLabel: state => {
-      if (state.user)
-        return capitalizeFirstLetter(state.user.role.replace(/-/g, ' '))
-      return ''
-    },
     isPegawai: state => ['guru', 'staff-ict', 'guru-bk', 'tata-usaha'].includes(state.user?.role || ''),
     isStaff: state => ['admin', 'staff-ict', 'guru-bk'].includes(state.user?.role || ''),
     isAdmin: state => ['admin', 'staff-ict'].includes(state.user?.role || ''),

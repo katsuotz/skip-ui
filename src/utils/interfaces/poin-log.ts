@@ -17,6 +17,7 @@ export interface PoinLog extends Base {
   nama?: string;
   nama_kelas?: string;
   foto?: string;
+  file?: string;
 }
 
 export interface PoinLogTable extends Table {

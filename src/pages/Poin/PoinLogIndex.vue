@@ -44,7 +44,7 @@ handleUpdatePerPage(10)
   <div class="p-5 mt-5 intro-y box">
     <PoinLogTable
       v-model="poinLog.poinLog"
-      hide-action
+      hide-delete
       @updatePerPage="handleUpdatePerPage"
       @updatePage="handleUpdatePage"
       @updateSearch="handleSearch"
