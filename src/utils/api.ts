@@ -34,7 +34,10 @@ const setup = (url: string) => {
 
     const msg = error?.response?.data?.message || error?.response?.data?.error
 
-    if (msg) global.setNotification(msg, 'danger')
+    if (msg) {
+      const errorDesc = (typeof error.response.data?.error === 'string' && error.response.data?.error) || ''
+      global.setNotification(msg, 'danger', errorDesc)
+    }
     else if (typeof error.code === 'string') {
       global.setNotification(error.message || error.code, 'danger')
       router.push('/')

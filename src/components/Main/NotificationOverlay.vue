@@ -10,7 +10,7 @@ const global = useGlobalStore()
 
 const notification = toRef(global, 'notification')
 
-let successNotificationTimeout: ReturnType<typeof setTimeout>;
+let successNotificationTimeout: number | ReturnType<typeof setTimeout>;
 
 const notificationEl = ref<NotificationElement>();
 const showNotification = () => {
@@ -74,6 +74,9 @@ const icon: ComputedRef<Icon | null> = computed((): Icon | null => {
     <div class="ml-4 mr-4">
       <div class="font-medium">
         {{ global.notification.message }}
+      </div>
+      <div v-if="global.notification.description">
+        {{ global.notification.description }}
       </div>
     </div>
   </Notification>

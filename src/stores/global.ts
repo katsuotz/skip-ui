@@ -20,6 +20,7 @@ interface Notification {
   message?: string;
   type?: Variant;
   show: boolean;
+  description?: string;
 }
 
 export interface LoadingState {
@@ -41,13 +42,14 @@ export const useGlobalStore = defineStore("global", {
     },
   }),
   actions: {
-    setNotification(value?: string, type?: Variant) {
+    setNotification(value?: string, type?: Variant, desc?: string) {
       if (value !== this.notification.message)
         this.notification.show = false
 
       setTimeout(() => {
         if (value) {
           this.notification.message = value
+          this.notification.description = desc
           this.notification.type = type
           this.notification.show = true
         }
