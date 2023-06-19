@@ -114,9 +114,9 @@ const handleSubmit = (values:any, actions:any) => {
 
 </script>
 <template>
-  <div class="flex items-center mt-8">
+  <div class="flex items-center sm:mt-8 mt-6">
     <h2 class="mr-auto text-lg font-medium">
-      Tambah Penghargaan / Pelanggaran
+      Lapor Penghargaan / Pelanggaran
     </h2>
   </div>
   <!-- BEGIN: Page Layout -->

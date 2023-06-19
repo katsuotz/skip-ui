@@ -85,7 +85,7 @@ onMounted(() => {
       ref="scrollableRef"
       :class="
         twMerge([
-          'h-screen z-20 top-0 left-0 w-[270px] -ml-[100%] bg-primary transition-all duration-300 ease-in-out dark:bg-darkmode-800',
+          'h-screen z-20 top-0 left-0 w-[270px] -ml-[100%] bg-white transition-all duration-300 ease-in-out dark:bg-darkmode-800',
           '[&[data-simplebar]]:fixed [&_.simplebar-scrollbar]:before:bg-black/50',
           activeMobileMenu && 'ml-0',
         ])
@@ -102,7 +102,7 @@ onMounted(() => {
       >
         <Lucide
           icon="XCircle"
-          class="w-8 h-8 text-white transform -rotate-90"
+          class="w-8 h-8 text-white transform -rotate-90 stroke-2"
           @click="
             () => {
               setActiveMobileMenu(!activeMobileMenu);
@@ -138,7 +138,7 @@ onMounted(() => {
               <ul
                 v-if="menu.subMenu && menu.activeDropdown"
                 :class="[
-                  'bg-black/10 rounded-lg mx-4 my-1 dark:bg-darkmode-700',
+                  'rounded-lg mx-4-darkmode-700 block',
                   !menu.activeDropdown && 'hidden',
                   menu.activeDropdown && 'block',
                 ]"

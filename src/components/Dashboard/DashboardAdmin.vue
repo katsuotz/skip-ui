@@ -131,12 +131,12 @@ tahunAjar.getTahunAjar({
   <div class="grid grid-cols-12 gap-6">
     <div class="col-span-12 2xl:col-span-9">
       <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-12 mt-8">
-          <div class="flex items-center h-10 intro-y">
+        <div class="col-span-12 sm:mt-8 mt-6">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between intro-y gap-2">
             <h2 class="mr-5 text-lg font-medium truncate">
               Statistik Data
             </h2>
-            <div class="ml-auto flex items-center gap-4">
+            <div class="flex items-center gap-4">
               <div>
                 <TomSelect
                   id="tahun_ajar_id"
@@ -170,8 +170,8 @@ tahunAjar.getTahunAjar({
               </div>
             </div>
           </div>
-          <div class="grid grid-cols-12 gap-6 mt-5">
-            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+          <div class="grid grid-cols-12 gap-5 sm:gap-6 mt-5">
+            <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div
                 :class="[
                   'relative zoom-in',
@@ -207,7 +207,7 @@ tahunAjar.getTahunAjar({
                 </div>
               </div>
             </div>
-            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+            <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div
                 :class="[
                   'relative zoom-in',
@@ -253,7 +253,7 @@ tahunAjar.getTahunAjar({
                 </div>
               </div>
             </div>
-            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+            <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div
                 :class="[
                   'relative zoom-in',
@@ -299,7 +299,7 @@ tahunAjar.getTahunAjar({
                 </div>
               </div>
             </div>
-            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+            <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div
                 :class="[
                   'relative zoom-in',
@@ -335,7 +335,7 @@ tahunAjar.getTahunAjar({
                 </div>
               </div>
             </div>
-            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+            <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div
                 :class="[
                   'relative zoom-in',
@@ -371,7 +371,7 @@ tahunAjar.getTahunAjar({
                 </div>
               </div>
             </div>
-            <div class="col-span-12 sm:col-span-6 lg:col-span-4 intro-y">
+            <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div
                 :class="[
                   'relative zoom-in',

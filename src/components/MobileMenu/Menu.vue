@@ -28,8 +28,8 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
 <template>
   <a
     :href="
-      props.menu.subMenu 
-        ? '#' 
+      props.menu.subMenu
+        ? '#'
         : ((pageName: string | undefined) => {
           try {
             return router.resolve({
@@ -41,9 +41,9 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
         })(props.menu.pageName)
     "
     :class="[
-      'h-[50px] flex items-center text-white',
+      'h-[50px] flex items-center text-slate-500',
       props.level == 'first' && 'px-6',
-      props.level != 'first' && 'px-4',
+      props.level != 'first' && 'px-6',
     ]"
     @click="
       (event) => {

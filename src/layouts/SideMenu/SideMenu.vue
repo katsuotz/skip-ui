@@ -154,14 +154,15 @@ auth.getMyData()
     </div>
 
     <RouterLink
-      v-if="auth.isPegawai"
+      v-if="auth.isPegawai && route.name !== 'add-poin'"
       to="/add-poin"
-      class="w-12 h-12 bg-primary text-white fixed bottom-8 right-8 flex justify-center items-center rounded-full shadow-md cursor-pointer z-50"
+      class="h-12 bg-primary text-white fixed bottom-8 right-8 flex items-center rounded-full shadow-lg shadow-black/40 cursor-pointer z-50 px-5 font-medium"
     >
       <Lucide
-        class="w-6 h-6 stroke-2"
+        class="w-5 h-5 stroke-2 mr-2"
         icon="Plus"
       />
+      Lapor Penghargaan / Pelanggaran
     </RouterLink>
   </div>
 </template>
