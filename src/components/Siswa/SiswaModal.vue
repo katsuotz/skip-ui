@@ -160,7 +160,6 @@ const handleSuccess = (actions: any) => {
             >
               <div>
                 <DatePicker
-                  id="tanggal_lahir"
                   v-model:value="form.tanggal_lahir"
                   default-panel="year"
                   :class="{
@@ -241,9 +240,7 @@ const handleSuccess = (actions: any) => {
                     Perempuan
                   </FormCheck.Label>
                 </FormCheck>
-              </div>
-
-              <div
+              </div>   <div
                 v-show="errorMessage"
                 class="mt-2 text-danger"
               >

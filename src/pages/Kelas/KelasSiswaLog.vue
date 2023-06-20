@@ -8,6 +8,7 @@ import {PoinLog} from "../../utils/interfaces/poin-log";
 import {usePoinSiswaStore} from "../../stores/modules/poin-siswa";
 import PoinLogTable from "../../components/Poin/PoinLogTable.vue";
 import {getUserPhoto} from "../../utils/helper";
+import PoinValue from "../../components/Poin/PoinValue.vue";
 
 const global = useGlobalStore()
 const kelas = useKelasStore()
@@ -51,11 +52,18 @@ const onLoaded = async () => {
     kelas.getKelasByID(kelas_id),
     poinSiswa.getPoinSiswa(siswa_kelas_id),
   ]).then(() => {
-    getData(true)
+    handleUpdatePerPage(10)
   })
 }
 
 onLoaded()
+
+const handlePoinLog = async (id: number): Promise<void> => {
+  poinLog.deletePoinLog(id).then(async () => {
+    await poinSiswa.getPoinSiswa(siswa_kelas_id)
+    await getData()
+  })
+}
 
 const handleDeleteLog = (item: PoinLog) => {
   global.showModal({
@@ -64,7 +72,7 @@ const handleDeleteLog = (item: PoinLog) => {
     description: `Yakin untuk menghapus Siswa <span class="text-danger">${item.title}</span>?`,
     icon: 'XCircle',
     buttonConfirmationText: 'Hapus',
-    // callback: () => handleDeleteSiswaKelas([item.id || 0]),
+    callback: () => handlePoinLog(item.id),
   })
 }
 
@@ -75,7 +83,9 @@ const handleDeleteLog = (item: PoinLog) => {
       Riwayat Poin
     </h2>
   </div>
-  <div class="p-5 mt-5 intro-y box">
+  <div
+    class="p-5 mt-5 intro-y box flex sm:flex-row flex-col gap-5 sm:items-center justify-between"
+  >
     <div class="flex items-start">
       <img
         v-if="poinSiswa.selectedPoinSiswa"
@@ -85,7 +95,7 @@ const handleDeleteLog = (item: PoinLog) => {
       >
       <table>
         <tr>
-          <td style="width: 90px">
+          <td class="whitespace-nowrap pr-2 align-top">
             Nama
           </td>
           <th class="text-left">
@@ -93,7 +103,7 @@ const handleDeleteLog = (item: PoinLog) => {
           </th>
         </tr>
         <tr>
-          <td style="width: 90px">
+          <td class="whitespace-nowrap pr-2">
             Kelas
           </td>
           <th class="text-left">
@@ -101,7 +111,7 @@ const handleDeleteLog = (item: PoinLog) => {
           </th>
         </tr>
         <tr>
-          <td style="width: 90px">
+          <td class="whitespace-nowrap pr-2">
             Tahun Ajar
           </td>
           <th class="text-left">
@@ -110,6 +120,12 @@ const handleDeleteLog = (item: PoinLog) => {
         </tr>
       </table>
     </div>
+
+    <PoinValue
+      v-if="poinSiswa.selectedPoinSiswa"
+      v-model="poinSiswa.selectedPoinSiswa.poin"
+      class="text-3xl mr-2 ml-auto"
+    />
   </div>
   <div class="p-5 mt-5 intro-y box">
     <PoinLogTable

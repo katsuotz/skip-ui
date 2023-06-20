@@ -62,7 +62,6 @@ const hasData = computed(() => data.value.filter(e => e).length)
       <div class="col-span-12 xl:col-span-6">
         <div class="flex flex-wrap gap-2">
           <TomSelect
-            id="tahun_ajar_id"
             v-model="filter[0].tahun_ajar_id"
             placeholder="Pilih Tahun Ajar"
             style="width: 200px"
@@ -83,7 +82,6 @@ const hasData = computed(() => data.value.filter(e => e).length)
             </option>
           </TomSelect>
           <TomSelect
-            id="jurusan_id"
             v-model="filter[0].jurusan_id"
             placeholder="Pilih Jurusan"
             style="width: 200px"
@@ -105,7 +103,6 @@ const hasData = computed(() => data.value.filter(e => e).length)
       <div class="col-span-12 xl:col-span-6">
         <div class="flex flex-wrap gap-2">
           <TomSelect
-            id="tahun_ajar_id"
             v-model="filter[1].tahun_ajar_id"
             placeholder="Pilih Tahun Ajar"
             style="width: 200px"
@@ -126,7 +123,6 @@ const hasData = computed(() => data.value.filter(e => e).length)
             </option>
           </TomSelect>
           <TomSelect
-            id="jurusan_id"
             v-model="filter[1].jurusan_id"
             placeholder="Pilih Jurusan"
             style="width: 200px"

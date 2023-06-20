@@ -167,7 +167,6 @@ const handleSuccess = (actions: any) => {
             >
               <div>
                 <DatePicker
-                  id="tanggal_lahir"
                   v-model:value="form.tanggal_lahir"
                   default-panel="year"
                   :class="{
@@ -248,9 +247,7 @@ const handleSuccess = (actions: any) => {
                     Perempuan
                   </FormCheck.Label>
                 </FormCheck>
-              </div>
-
-              <div
+              </div>   <div
                 v-show="errorMessage"
                 class="mt-2 text-danger"
               >
@@ -282,11 +279,11 @@ const handleSuccess = (actions: any) => {
                   <option value="">
                     Pilih Tipe Pegawai
                   </option>
-                  <option value="Pegawai">
-                    Pegawai
+                  <option value="Guru">
+                    Guru
                   </option>
-                  <option value="Pegawai BK">
-                    Pegawai BK
+                  <option value="Guru BK">
+                    Guru BK
                   </option>
                   <option value="Staff ICT">
                     Staff ICT
@@ -364,7 +361,6 @@ const handleSuccess = (actions: any) => {
               type="button"
               variant="outline-secondary"
               class="w-24 mr-1"
-
               @click.prevent="() => {
                 showModal = false
               }"

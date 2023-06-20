@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {numberFormat} from "../../utils/helper";
+import {numberFormat, poinColorClass} from "../../utils/helper";
 
 interface PoinValueProps {
     modelValue?: number;
@@ -18,9 +18,7 @@ const props = withDefaults(defineProps<PoinValueProps>(), {
     :is="props.as"
     v-if="props.modelValue"
     :class="[
-      props.modelValue < 50 && 'text-danger',
-      props.modelValue >= 50 && props.modelValue < 100 && 'text-warning',
-      props.modelValue >= 100 && 'text-success',
+      poinColorClass(props.modelValue),
       'font-bold'
     ]"
   >

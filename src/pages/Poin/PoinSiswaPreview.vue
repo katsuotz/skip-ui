@@ -74,7 +74,6 @@ router.replace({ path: '/poin/siswa', query: {}})
   <div class="p-5 mt-5 intro-y box flex flex-col gap-4">
     <div class="flex flex-wrap gap-2">
       <TomSelect
-        id="tahun_ajar_id"
         v-model="selectedTahunAjar"
         placeholder="Pilih Tahun Ajar"
         style="width: 200px"

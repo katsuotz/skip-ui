@@ -1,7 +1,6 @@
 import axios from "axios"
 import {useAuthStore} from "../stores/modules/auth";
 import {useGlobalStore} from "../stores/global";
-import router from "../router";
 
 const setup = (url: string) => {
   const instance = axios.create({
@@ -36,11 +35,11 @@ const setup = (url: string) => {
 
     if (msg) {
       const errorDesc = (typeof error.response.data?.error === 'string' && error.response.data?.error) || ''
-      global.setNotification(msg, 'danger', errorDesc)
+      global.setNotification(msg, 'danger', msg === errorDesc ? '' : errorDesc)
     }
     else if (typeof error.code === 'string') {
       global.setNotification(error.message || error.code, 'danger')
-      router.push('/')
+      // router.push('/')
     }
 
     // if (error?.response && error?.response.status === 401) {

@@ -207,7 +207,6 @@ const handleFileChange = (e: Event) => {
                   >
                     <div>
                       <DatePicker
-                        id="tanggal_lahir"
                         v-model:value="form.tanggal_lahir"
                         :class="{
                           'border-danger': errorMessage
@@ -287,18 +286,14 @@ const handleFileChange = (e: Event) => {
                           Perempuan
                         </FormCheck.Label>
                       </FormCheck>
-                    </div>
-
-                    <div
+                    </div>         <div
                       v-show="errorMessage"
                       class="mt-2 text-danger"
                     >
                       {{ errorMessage }}
                     </div>
                   </Field>
-                </div>
-
-                <div class="text-right">
+                </div>     <div class="text-right">
                   <Button
                     type="button"
                     variant="outline-secondary"
@@ -407,9 +402,7 @@ const handleFileChange = (e: Event) => {
                       {{ errorMessage }}
                     </div>
                   </Field>
-                </div>
-
-                <div class="text-right">
+                </div>     <div class="text-right">
                   <Button
                     type="button"
                     variant="outline-secondary"

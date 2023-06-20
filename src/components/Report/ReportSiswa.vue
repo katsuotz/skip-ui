@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {getUserPhoto} from "../../utils/helper";
+import {getUserPhoto, poinColorClass, poinIcon, poinLabel} from "../../utils/helper";
 import PoinLogTable from "../Poin/PoinLogTable.vue";
 import Lucide from "../../base-components/Lucide/Lucide.vue";
 import VueQrious from "vue-qrious";
@@ -11,7 +11,7 @@ import {computed} from "vue";
 const siswa = useSiswaStore()
 const poinLog = usePoinLogStore()
 
-const url = computed(() => document.location.origin + '/report/personal/12345')
+const url = computed(() => document.location.origin + '/report/personal/' + siswa.selectedSiswa?.nis)
 
 </script>
 
@@ -49,14 +49,19 @@ const url = computed(() => document.location.origin + '/report/personal/12345')
               {{ item.kelas.nama_kelas }} - {{ item.kelas.tahun_ajar }}
             </p>
             <p class="text-slate-500 mt-0.5">
-              Total Poin: <span class="font-bold text-success">305</span>
+              Total Poin: <span class="font-bold text-success">{{ item.kelas.poin }}</span>
             </p>
           </div>
-          <div class="flex items-center text-lg">
-            <span class="mr-2 font-light">Sangat Baik</span>
+          <div
+            :class="[
+              'flex items-center text-lg',
+              poinColorClass(item.kelas.poin)
+            ]"
+          >
+            <span class="mr-2 font-bold">{{ poinLabel(item.kelas.poin) }}</span>
             <Lucide
-              icon="CheckCircle"
-              class="w-10 h-10 text-success"
+              :icon="poinIcon(item.kelas.poin)"
+              class="w-8 h-8 stroke-2"
             />
           </div>
         </div>
@@ -67,6 +72,7 @@ const url = computed(() => document.location.origin + '/report/personal/12345')
           hide-action
           hide-pegawai
           hide-siswa
+          hide-delete
         />
       </div>
     </div>

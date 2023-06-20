@@ -77,7 +77,6 @@ export const useSiswaStore = defineStore("siswa", {
       }
 
       this.siswa = []
-      this.selectedSiswa = undefined
 
       const global = useGlobalStore()
 

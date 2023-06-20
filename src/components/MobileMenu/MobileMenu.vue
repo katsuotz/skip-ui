@@ -53,6 +53,7 @@ onMounted(() => {
       'before:content-[\'\'] before:w-full before:h-screen before:z-10 before:fixed before:inset-x-0 before:bg-black/90 before:transition-opacity before:duration-200 before:ease-in-out',
       !activeMobileMenu && 'before:invisible before:opacity-0',
       activeMobileMenu && 'before:visible before:opacity-100',
+      'hide-print',
     ]"
   >
     <div class="h-[70px] px-3 sm:px-8 flex items-center">

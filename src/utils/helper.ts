@@ -1,10 +1,12 @@
 import dayjs from "dayjs";
+import id from "dayjs/locale/id";
 import {parseColor} from "tailwindcss/lib/util/color";
 import {Pagination} from "./interfaces/table";
 import avatarUrl from "../assets/images/avatar.svg";
+import {Icon} from "../base-components/Lucide/Lucide.vue";
 
 const formatDate = (format: string, date?: string | Date) => {
-  return dayjs(date).format(format);
+  return dayjs(date).locale(id).format(format);
 };
 
 const dateTimeFormat = (date?: string | Date) => {
@@ -15,7 +17,7 @@ const dateInputFormat = (date?: string | Date) => {
   return formatDate('YYYY-MM-DD', date)
 }
 
-const numberFormat = (number:number = 0, decimal:number = 0) => {
+const numberFormat = (number: number = 0, decimal: number = 0) => {
   // @ts-ignore
   number = +parseFloat(number).toFixed(decimal)
 
@@ -109,6 +111,53 @@ const toLowerCase = (string: string, spaceReplace = '_') => {
   return string.replace(/ /g, spaceReplace).toLowerCase()
 }
 
+const print = () => {
+  const body = document.body
+  const html = document.querySelector('html')
+
+  body.classList.add('printing')
+  // @ts-ignore
+  html.classList.add('printing')
+
+  window.print()
+
+  body.classList.remove('printing')
+  // @ts-ignore
+  html.classList.remove('printing')
+}
+
+const poinIcon = (poin: number): Icon => {
+  if (poin >= 300)
+    return 'CheckCircle'
+  if (poin >= 200)
+    return 'ThumbsUp'
+  if (poin >= 100)
+    return 'Equal'
+  if (poin >= 50)
+    return 'AlertTriangle'
+  return 'Ban'
+}
+
+const poinLabel = (poin: number): string => {
+  if (poin >= 300)
+    return 'Sangat Baik'
+  if (poin >= 200)
+    return 'Baik'
+  if (poin >= 100)
+    return 'Cukup'
+  if (poin >= 50)
+    return 'Peringatan'
+  return 'Peringatan'
+}
+
+const poinColorClass = (poin: number): string => {
+  if (poin >= 100)
+    return 'text-success'
+  if (poin > 50)
+    return 'text-warning'
+  return 'text-danger'
+}
+
 export {
   formatDate,
   toRGB,
@@ -121,4 +170,8 @@ export {
   getFileUrl,
   getUserPhoto,
   toLowerCase,
+  print,
+  poinIcon,
+  poinLabel,
+  poinColorClass,
 };

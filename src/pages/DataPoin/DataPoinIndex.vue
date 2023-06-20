@@ -93,7 +93,6 @@ const handleDeletePoin = async (id: number): Promise<void> => {
   <div class="p-5 mt-5 intro-y box">
     <div class="flex flex-wrap gap-2 mb-4">
       <TomSelect
-        id="type"
         v-model="type"
         placeholder="Pilih Tipe"
         style="width: 200px"
@@ -110,7 +109,6 @@ const handleDeletePoin = async (id: number): Promise<void> => {
         </option>
       </TomSelect>
       <TomSelect
-        id="category"
         v-model="category"
         placeholder="Pilih Kategori"
         style="width: 200px"

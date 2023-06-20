@@ -161,7 +161,6 @@ const handleSearchPegawai = debounce((search: string) => {
             >
               <div>
                 <TomSelect
-                  id="tahun_ajar_id"
                   v-model="form.tahun_ajar_id"
                   :class="{ 'border-danger': errorMessage }"
                   placeholder="Pilih Tahun Ajar"
@@ -205,7 +204,6 @@ const handleSearchPegawai = debounce((search: string) => {
             >
               <div>
                 <TomSelect
-                  id="jurusan_id"
                   v-model="form.jurusan_id"
                   :class="{ 'border-danger': errorMessage }"
                   placeholder="Pilih Jurusan"

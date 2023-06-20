@@ -151,3 +151,37 @@ input[type=number] {
     }
 }
 
+.printing {
+    background-color: #ffffff;
+    padding: 0!important;
+    width: 210mm;
+    height: 297mm;
+
+    * {
+        -webkit-print-color-adjust: exact !important; /*Chrome, Safari */
+        print-color-adjust: exact !important; /*Firefox*/
+    }
+
+    .avoid-break {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        page-break-after: avoid;
+        page-break-before: avoid;
+    }
+
+    .hide-print {
+        display: none!important;
+    }
+
+    .print-overlay {
+        border-radius: 0!important;
+        margin-top: 0!important;
+        padding-top: 0!important;
+        padding-bottom: 0!important;
+        background-color: #ffffff!important;
+    }
+}
+
+@page {
+    size: A4;
+}

@@ -46,6 +46,8 @@ const handleResetForm = () => {
     type: '',
     file: '',
   }
+  poinSearch.value = []
+  siswaSearch.value = []
 }
 
 const handleSearchSiswa = debounce((search: string, loading: any) => {
@@ -301,13 +303,12 @@ const handleSubmit = (values:any, actions:any) => {
             </div>
             <div>
               <FormLabel for="file">
-                Foto / Dokumen Bukti
+                Foto / Dokumen Bukti (Opsional)
               </FormLabel>
               <Field
                 v-slot="{ field, errorMessage }"
                 v-model="form.file"
                 name="Foto / Dokumen Bukti"
-                rules="required"
               >
                 <div class="flex flex-col h-full">
                   <FileUpload

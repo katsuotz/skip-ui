@@ -104,7 +104,6 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
 
     <div class="flex flex-wrap gap-2">
       <TomSelect
-        id="tahun_ajar_id"
         v-model="filter.tahun_ajar_id"
         placeholder="Pilih Tahun Ajar"
         style="width: 200px"
@@ -125,7 +124,6 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
         </option>
       </TomSelect>
       <TomSelect
-        id="jurusan_id"
         v-model="filter.jurusan_id"
         placeholder="Pilih Jurusan"
         style="width: 200px"
@@ -143,7 +141,6 @@ const tahunAjarOptions = computed(() => tahunAjar.tahunAjar.filter(e => e.id !==
         </option>
       </TomSelect>
       <TomSelect
-        id="kelas_id"
         v-model="filter.kelas_id"
         placeholder="Pilih Kelas"
         style="width: 200px"

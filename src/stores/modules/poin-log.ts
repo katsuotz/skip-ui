@@ -28,26 +28,12 @@ export const usePoinLogStore = defineStore("poinLog", {
     },
   }),
   actions: {
-    updatePoinLog(id: number, data: PoinLog) {
-      const global = useGlobalStore()
-
-      return new Promise((resolve, reject) => {
-        global.loading = true
-        api.patch('/poin-log/' + id, data).then((res: any) => {
-          resolve(res)
-        }).catch(err => {
-          reject(err)
-        }).finally(() => {
-          global.loading = false
-        })
-      })
-    },
     deletePoinLog(id: number) {
       const global = useGlobalStore()
 
       return new Promise((resolve, reject) => {
         global.loading = true
-        api.delete('/poin-log/' + id).then((res: any) => {
+        api.delete('/poin/log/' + id).then((res: any) => {
           resolve(res)
         }).catch(err => {
           reject(err)

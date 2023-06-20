@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {countPaginationNumber, getFileUrl, getUserPhoto} from "../../utils/helper";
+import {countPaginationNumber, dateTimeFormat, getFileUrl, getUserPhoto} from "../../utils/helper";
 import Table from "../../base-components/Table";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
@@ -15,6 +15,7 @@ interface PoinLogTableProps {
   hidePagination?: boolean;
   hidePegawai?: boolean;
   hideDelete?: boolean;
+  hideAction?: boolean;
   hideDetail?: boolean;
   hideSiswa?: boolean;
 }
@@ -87,7 +88,11 @@ const deleteLog = (item: PoinLog) => {
           <Table.Th v-if="!hidePegawai">
             Pencatat
           </Table.Th>
+          <Table.Th>
+            Waktu
+          </Table.Th>
           <Table.Th
+            v-if="!hideAction"
             style="max-width: 200px"
           />
         </Table.Tr>
@@ -142,6 +147,9 @@ const deleteLog = (item: PoinLog) => {
             {{ item.nama_pegawai }}
           </Table.Td>
           <Table.Td>
+            {{ dateTimeFormat(item.created_at) }}
+          </Table.Td>
+          <Table.Td v-if="!hideAction">
             <div class="flex gap-2 justify-end">
               <Button
                 v-if="item.file"

@@ -21,6 +21,8 @@ const getTahunAjar = () => {
   tahunAjar.getTahunAjar({
     page: 1,
     per_page: -1,
+  }).then(() => {
+    filter.value.tahun_ajar_id = tahunAjar.activeTahunAjar?.id?.toString() || ''
   })
 }
 
@@ -45,7 +47,7 @@ getJurusan()
 <template>
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
-      Rekap
+      Poin Siswa
     </h2>
   </div>
   <div class="p-5 mt-5 intro-y box flex flex-col gap-4">

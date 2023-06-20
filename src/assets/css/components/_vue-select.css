@@ -14,3 +14,7 @@
 .vs__selected-options {
   flex-wrap: unset;
 }
+
+.vs__dropdown-option--highlight {
+  background-color: #0d9488;
+}

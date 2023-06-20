@@ -100,6 +100,7 @@ const routes = [
         component: () => import("../pages/Poin/AddPoin.vue"),
         meta: {
           role: ['staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['home', 'Lapor'],
         },
       },
       {
@@ -113,8 +114,8 @@ const routes = [
       },
       {
         path: "poin/siswa",
-        name: "poin-siswa",
-        component: () => import("../pages/Poin/PoinSiswaIndex.vue"),
+        name: "poin-siswa/preview",
+        component: () => import("../pages/Poin/PoinSiswaPreview.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Dashboard', 'Data Jumlah Siswa'],
@@ -136,6 +137,15 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Dashboard', 'Aktivitas Login'],
+        },
+      },
+      {
+        path: "poin-siswa",
+        name: "poin-siswa/index",
+        component: () => import("../pages/PoinSiswa/PoinSiswaIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['home' ,'Poin Siswa'],
         },
       },
       {

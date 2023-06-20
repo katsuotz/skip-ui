@@ -139,7 +139,6 @@ tahunAjar.getTahunAjar({
             <div class="flex items-center gap-4">
               <div>
                 <TomSelect
-                  id="tahun_ajar_id"
                   v-model="selectedTahunAjar"
                   placeholder="Pilih Tahun Ajar"
                   style="width: 200px"

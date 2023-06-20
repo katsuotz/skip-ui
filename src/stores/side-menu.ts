@@ -27,6 +27,12 @@ export const useSideMenuStore = defineStore("sideMenu", {
         title: "Dashboard",
       },
       {
+        icon: "ListOrdered",
+        pageName: "poin-siswa/index",
+        title: "Poin Siswa",
+        role: ['admin', 'staff-ict', 'guru', 'guru-bk'],
+      },
+      {
         icon: "BookCopy",
         pageName: "siswa",
         title: "Siswa",

@@ -35,13 +35,13 @@ auth.getMyData()
 </script>
 
 <template>
-  <div class="py-5 md:py-0">
+  <div class="py-5 md:py-0 print-overlay">
     <MobileMenu />
     <TopBar layout="side-menu" />
     <div class="flex overflow-hidden">
       <!-- BEGIN: Side Menu -->
       <nav
-        class="w-[105px] xl:w-[260px] px-5 pb-16 overflow-x-hidden z-50 pt-32 -mt-4 hidden md:block intro-y"
+        class="w-[105px] xl:w-[260px] px-5 pb-16 overflow-x-hidden z-50 pt-32 -mt-4 hidden md:block intro-y hide-print"
       >
         <ul>
           <!-- BEGIN: First Child -->
@@ -146,6 +146,7 @@ auth.getMyData()
         :class="[
           'max-w-full md:max-w-none rounded-[30px] md:rounded-none px-4 md:px-[22px] min-w-0 min-h-screen bg-slate-100 flex-1 md:pt-20 pb-24 mt-5 md:mt-1 relative dark:bg-darkmode-700',
           'before:content-[\'\'] before:w-full before:h-px before:block',
+          'print-overlay'
         ]"
       >
         <RouterView />
@@ -156,7 +157,7 @@ auth.getMyData()
     <RouterLink
       v-if="auth.isPegawai && route.name !== 'add-poin'"
       to="/add-poin"
-      class="h-12 bg-primary text-white fixed bottom-8 right-8 flex items-center rounded-full shadow-lg shadow-black/40 cursor-pointer z-50 px-5 font-medium"
+      class="h-12 bg-primary text-white fixed bottom-6 right-6 flex items-center rounded-full shadow-lg shadow-black/40 cursor-pointer z-50 px-5 font-medium hide-print"
     >
       <Lucide
         class="w-5 h-5 stroke-2 mr-2"
