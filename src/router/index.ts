@@ -55,7 +55,7 @@ const routes = [
         name: "kelas-siswa-log",
         component: () => import("../pages/Kelas/KelasSiswaLog.vue"),
         meta: {
-          role: ['admin', 'staff-ict'],
+          role: ['admin', 'staff-ict', 'guru-bk', 'guru'],
           breadcrumbs: ['home', 'Siswa', 'Riwayat Poin'],
         },
       },
