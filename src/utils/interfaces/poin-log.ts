@@ -1,6 +1,6 @@
 import {Base} from "./helper";
 import {Table} from "./table";
-import {Kelas, KelasResponse} from "./kelas";
+import {Kelas} from "./kelas";
 
 export interface PoinLog extends Base {
   id: number;

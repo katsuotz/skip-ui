@@ -92,7 +92,8 @@ const deleteLog = (item: PoinLog) => {
             Waktu
           </Table.Th>
           <Table.Th
-            v-if="!hideAction"
+            v-if="!hideAction || !hideDelete"
+            class="hide-print"
             style="max-width: 200px"
           />
         </Table.Tr>
@@ -149,10 +150,10 @@ const deleteLog = (item: PoinLog) => {
           <Table.Td>
             {{ dateTimeFormat(item.created_at) }}
           </Table.Td>
-          <Table.Td v-if="!hideAction">
+          <Table.Td class="hide-print">
             <div class="flex gap-2 justify-end">
               <Button
-                v-if="item.file"
+                v-if="item.file && !hideAction"
                 as="a"
                 target="_blank"
                 :href="getFileUrl(item.file)"

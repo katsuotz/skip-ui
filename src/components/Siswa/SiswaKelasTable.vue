@@ -2,7 +2,7 @@
 import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref, watch} from "vue";
-import {countPaginationNumber, getUserPhoto} from "../../utils/helper";
+import {countPaginationNumber, getUserPhoto, numberFormat} from "../../utils/helper";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
 import {Siswa} from "../../utils/interfaces/siswa";
@@ -15,6 +15,9 @@ import PoinValue from "../Poin/PoinValue.vue";
 interface SiswaKelasTableProps {
   kelasId: string | number;
   hideDelete?: boolean;
+  showSummary?: boolean;
+  showAll?: boolean;
+  hidePagination?: boolean;
 }
 
 const props = defineProps<SiswaKelasTableProps>();
@@ -27,10 +30,11 @@ const getData = (resetPage: boolean = false) => {
   if (resetPage) siswa.updateCurrentPage(1)
 
   siswa.getSiswa({
-    page: siswa.pagination.page,
-    per_page: siswa.pagination.per_page,
+    page: props.hidePagination ? 1 : siswa.pagination.page,
+    per_page: props.hidePagination ? -1 : siswa.pagination.per_page,
     search: search.value,
     kelas_id: props.kelasId.toString(),
+    summary: props.showSummary,
   })
 }
 
@@ -110,6 +114,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
     :page-count="siswa.pagination.total_page"
     :per-page="siswa.pagination.per_page"
     :search="search"
+    :pagination="!hidePagination"
     @updatePerPage="handleUpdatePerPage"
     @updatePage="handleUpdatePage"
     @updateSearch="handleSearch"
@@ -126,10 +131,21 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
           <Table.Th>
             Nama
           </Table.Th>
+          <template v-if="showSummary">
+            <Table.Th>
+              Jumlah Poin Penghargaan
+            </Table.Th>
+            <Table.Th>
+              Jumlah Poin Pelanggaran
+            </Table.Th>
+          </template>
           <Table.Th>
             Poin
           </Table.Th>
-          <Table.Th style="width: 200px" />
+          <Table.Th
+            style="width: 200px"
+            class="hide-print"
+          />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody
@@ -144,6 +160,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
             <div class="flex items-center">
               <FormCheck
                 v-if="!props.hideDelete"
+                class="mr-2"
               >
                 <FormCheck.Input
                   v-model="selectedSiswa"
@@ -151,7 +168,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
                   :value="item.id"
                 />
               </FormCheck>
-              <span class="ml-2">
+              <span>
                 {{ countPaginationNumber(siswa.pagination, key) }}
               </span>
             </div>
@@ -164,26 +181,32 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
               <img
                 :src="getUserPhoto(item.foto)"
                 alt=""
-                class="w-[36px] h-[36px] rounded-full object-cover object-center mr-5"
+                class="w-[36px] h-[36px] max-w-[36px] max-h-[36px] rounded-full object-cover object-center mr-3"
               >
               {{ item.nama }}
             </div>
           </Table.Td>
+          <template v-if="showSummary">
+            <Table.Td>
+              <span class="font-bold text-success">{{ numberFormat(item.total_penghargaan) }}</span>
+            </Table.Td>
+            <Table.Td>
+              <span class="font-bold text-danger">{{ numberFormat(item.total_pelanggaran) }}</span>
+            </Table.Td>
+          </template>
           <Table.Td>
             <PoinValue v-model="item.poin" />
           </Table.Td>
-          <Table.Td>
+          <Table.Td class="hide-print">
             <div class="flex gap-2">
               <RouterLink
-                v-slot="{ href, navigate }"
+                target="_blank"
                 :to="`/kelas/${props.kelasId}/siswa/${item.siswa_kelas_id}`"
               >
                 <Button
-                  as="a"
-                  :href="href"
                   class="gap-2 whitespace-nowrap"
                   variant="success"
-                  @click="navigate"
+                  target="_blank"
                 >
                   <Lucide
                     class="w-5 h-5"

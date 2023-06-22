@@ -154,7 +154,7 @@ const routes = [
         component: () => import("../pages/Report/ReportKelasForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Laporan', 'Rekap'],
+          breadcrumbs: ['home', 'Laporan', 'Rekap'],
         },
       },
       {
@@ -163,7 +163,7 @@ const routes = [
         component: () => import("../pages/Report/ReportSiswaForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Laporan', 'Personal'],
+          breadcrumbs: ['home', 'Laporan', 'Personal'],
         },
       },
       {
@@ -172,7 +172,7 @@ const routes = [
         component: () => import("../pages/Compare/CompareForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['Bandingkan'],
+          breadcrumbs: ['home', 'Bandingkan'],
         },
       },
     ],

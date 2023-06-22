@@ -177,7 +177,7 @@ siswa.selectedSiswa = undefined
   <div
     v-if="siswa.selectedSiswa"
     id="element-to-print"
-    class="py-5 px-7 mt-5 intro-y box"
+    class="p-5 mt-5 intro-y box"
   >
     <ReportSiswa />
   </div>

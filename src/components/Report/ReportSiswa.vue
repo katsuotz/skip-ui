@@ -69,7 +69,6 @@ const url = computed(() => document.location.origin + '/report/personal/' + sisw
         <PoinLogTable
           v-model="item.data"
           hide-pagination
-          hide-action
           hide-pegawai
           hide-siswa
           hide-delete

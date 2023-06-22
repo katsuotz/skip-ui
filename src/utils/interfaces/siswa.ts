@@ -8,6 +8,8 @@ export interface Siswa extends Base, Profile {
   siswa_kelas?: SiswaKelas[];
   siswa_kelas_id?: number;
   poin?: number;
+  total_penghargaan?: number;
+  total_pelanggaran?: number;
 }
 
 export interface SiswaTable extends Table {
@@ -15,6 +17,7 @@ export interface SiswaTable extends Table {
   jurusan_id?: string;
   tahun_ajar_id?: string;
   tahun_ajar_active?: boolean;
+  summary?: boolean;
 }
 
 export interface SiswaKelas {
