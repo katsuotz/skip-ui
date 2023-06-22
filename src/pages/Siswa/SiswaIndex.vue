@@ -131,7 +131,7 @@ const handleDeleteSiswa = async (id: number): Promise<void> => {
                 <img
                   :src="getUserPhoto(item.foto)"
                   alt=""
-                  class="w-[36px] h-[36px] rounded-full object-cover object-center mr-5"
+                  class="w-[36px] h-[36px] max-w-[36px] max-h-[36px] rounded-full object-cover object-center mr-3"
                 >
                 {{ item.nama }}
               </div>

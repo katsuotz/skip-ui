@@ -401,7 +401,7 @@ tahunAjar.getTahunAjar({
                     {{ numberFormat(info.avgPoin) }}
                   </div>
                   <div class="mt-1 text-base text-slate-500">
-                    Rata - Rata Jumlah Poin
+                    Rata - Rata Poin
                   </div>
                 </div>
               </div>

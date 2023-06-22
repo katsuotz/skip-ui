@@ -146,7 +146,7 @@ const hasData = computed(() => data.value.filter(e => e).length)
 
   <div
     v-if="hasData"
-    class="py-5 px-7 mt-5 intro-y box"
+    class="p-5 mt-5 intro-y box"
   >
     <div class="grid grid-cols-12 gap-5">
       <div
