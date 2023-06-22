@@ -80,10 +80,10 @@ const deleteLog = (item: PoinLog) => {
             Poin Awal
           </Table.Th>
           <Table.Th>
-            Poin Akhir
+            Poin
           </Table.Th>
           <Table.Th>
-            Poin
+            Poin Akhir
           </Table.Th>
           <Table.Th v-if="!hidePegawai">
             Pencatat
@@ -135,13 +135,13 @@ const deleteLog = (item: PoinLog) => {
             <PoinValue v-model="item.poin_before" />
           </Table.Td>
           <Table.Td>
-            <PoinValue v-model="item.poin_after" />
-          </Table.Td>
-          <Table.Td>
             <PoinType
               v-model="item.poin"
               :type="item.type"
             />
+          </Table.Td>
+          <Table.Td>
+            <PoinValue v-model="item.poin_after" />
           </Table.Td>
           <Table.Td v-if="!props.hidePegawai">
             {{ item.nama_pegawai }}
