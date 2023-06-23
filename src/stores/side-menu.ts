@@ -22,9 +22,16 @@ export const useSideMenuStore = defineStore("sideMenu", {
   state: (): SideMenuState => ({
     menu: [
       {
+        icon: "LogIn",
+        pageName: "login",
+        title: "Login",
+        role: ['guest'],
+      },
+      {
         icon: "LineChart",
         pageName: "dashboard",
         title: "Dashboard",
+        role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'siswa'],
       },
       {
         icon: "ListOrdered",

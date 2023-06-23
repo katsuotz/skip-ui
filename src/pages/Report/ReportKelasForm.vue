@@ -26,11 +26,14 @@ const filter = ref({
 })
 
 const selectedKelas = ref<KelasResponse>()
+const selectedTahunAjar = computed(() => tahunAjar.tahunAjar.find(e=> e.id === parseInt(filter.value.tahun_ajar_id)))
 
 const getTahunAjar = () => {
   tahunAjar.getTahunAjar({
     page: 1,
     per_page: -1,
+  }).then(() => {
+    filter.value.tahun_ajar_id = tahunAjar.activeTahunAjar?.id?.toString() || ''
   })
 }
 
@@ -149,7 +152,7 @@ const avgPoin = computed(() => siswa.siswa?.reduce((a,b) => {
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-xl font-bold">
-            {{ selectedKelas.nama_kelas }}
+            {{ selectedKelas.nama_kelas }} - {{ selectedTahunAjar.tahun_ajar }}
           </h3>
           <p class="text-slate-500 font-medium">
             Wali Kelas: {{ selectedKelas.nama }}

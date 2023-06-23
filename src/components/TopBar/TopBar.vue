@@ -100,7 +100,10 @@ watch(() => route.meta?.breadcrumbs, () => {
       <!-- BEGIN: Account Menu -->
       <Menu class="ml-auto">
         <Menu.Button
-          class="flex items-center cursor-default -intro-y"
+          :class="[
+            'flex items-center -intro-y',
+            !auth.token && 'cursor-default'
+          ]"
         >
           <div class="text-white text-right mr-4">
             <div class="font-medium">
@@ -113,10 +116,11 @@ watch(() => route.meta?.breadcrumbs, () => {
           <img
             alt=""
             :src="getUserPhoto(auth.user?.foto)"
-            class="w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit cursor-pointer bg-white object-cover object-center"
+            class="w-8 h-8 overflow-hidden rounded-full shadow-lg image-fit bg-white object-cover object-center"
           >
         </Menu.Button>
         <Menu.Items
+          v-if="auth.token"
           class="p-2 border-transparent rounded-md dark:bg-darkmode-600 dark:border-transparent w-56 mt-px relative bg-white shadow-lg"
         >
           <Menu.Item

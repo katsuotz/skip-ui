@@ -167,6 +167,15 @@ const routes = [
         },
       },
       {
+        path: "/report/personal/:nis",
+        name: "report-personal-guest",
+        component: () => import("../pages/Report/ReportSiswaFormGuest.vue"),
+        meta: {
+          guest: true,
+          breadcrumbs: ['home', 'Laporan', 'Personal'],
+        },
+      },
+      {
         path: "compare",
         name: "compare",
         component: () => import("../pages/Compare/CompareForm.vue"),
@@ -198,10 +207,19 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const auth = useAuthStore();
 
-  if (!auth.token && to.meta.auth !== false)
-    return next('/login')
-  if (auth.token && to.meta.auth === false)
-    return next('/')
+  if (!to.meta.guest) {
+    if (!auth.token && to.meta.auth !== false)
+      return next('/login')
+    if (auth.token && to.meta.auth === false)
+      return next('/')
+  } else {
+    if (!auth.token)
+      auth.user = {
+        username: 'guest',
+        role: 'guest',
+        nama: 'Guest',
+      }
+  }
 
   const {meta} = to
 

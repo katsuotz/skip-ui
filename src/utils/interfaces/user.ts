@@ -23,6 +23,7 @@ export interface UserResponse extends User, Profile {
 
 export type Role =
   | ""
+  | "guest"
   | "admin"
   | "staff-ict"
   | "siswa"

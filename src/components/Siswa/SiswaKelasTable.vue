@@ -16,7 +16,6 @@ interface SiswaKelasTableProps {
   kelasId: string | number;
   hideDelete?: boolean;
   showSummary?: boolean;
-  showAll?: boolean;
   hidePagination?: boolean;
 }
 
@@ -169,7 +168,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
                 />
               </FormCheck>
               <span>
-                {{ countPaginationNumber(siswa.pagination, key) }}
+                {{ hidePagination ? key + 1 : countPaginationNumber(siswa.pagination, key) }}
               </span>
             </div>
           </Table.Td>
