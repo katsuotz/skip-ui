@@ -152,7 +152,10 @@ const avgPoin = computed(() => siswa.siswa?.reduce((a,b) => {
       <div class="flex items-center justify-between">
         <div>
           <h3 class="text-xl font-bold">
-            {{ selectedKelas.nama_kelas }} - {{ selectedTahunAjar.tahun_ajar }}
+            {{ selectedKelas.nama_kelas }}
+            <template v-if="selectedTahunAjar">
+              - {{ selectedTahunAjar.tahun_ajar }}
+            </template>
           </h3>
           <p class="text-slate-500 font-medium">
             Wali Kelas: {{ selectedKelas.nama }}
