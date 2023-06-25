@@ -16,10 +16,13 @@ interface SiswaKelasTableProps {
   kelasId: string | number;
   hideDelete?: boolean;
   showSummary?: boolean;
+  showPoin?: boolean;
   hidePagination?: boolean;
 }
 
-const props = defineProps<SiswaKelasTableProps>();
+const props = withDefaults(defineProps<SiswaKelasTableProps>(), {
+  showPoin: true,
+});
 
 const global = useGlobalStore()
 const siswa = useSiswaStore()
@@ -138,7 +141,7 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
               Jumlah Poin Pelanggaran
             </Table.Th>
           </template>
-          <Table.Th>
+          <Table.Th v-if="showPoin">
             Poin
           </Table.Th>
           <Table.Th
@@ -193,12 +196,13 @@ const handleDeleteSiswaKelas = async (siswa_id: number[]): Promise<void> => {
               <span class="font-bold text-danger">{{ numberFormat(item.total_pelanggaran) }}</span>
             </Table.Td>
           </template>
-          <Table.Td>
+          <Table.Td v-if="showPoin">
             <PoinValue v-model="item.poin" />
           </Table.Td>
           <Table.Td class="hide-print">
             <div class="flex gap-2">
               <RouterLink
+                v-if="showPoin"
                 target="_blank"
                 :to="`/kelas/${props.kelasId}/siswa/${item.siswa_kelas_id}`"
               >

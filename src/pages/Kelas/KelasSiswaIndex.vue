@@ -63,6 +63,7 @@ kelas.getKelasByID(kelas_id).then(() => {
     <SiswaKelasTable
       v-if="loaded"
       :kelas-id="kelas_id"
+      :show-poin="false"
     />
   </div>
 </template>
