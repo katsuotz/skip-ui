@@ -10,6 +10,7 @@ export interface Siswa extends Base, Profile {
   poin?: number;
   total_penghargaan?: number;
   total_pelanggaran?: number;
+  nama_kelas?: string;
 }
 
 export interface SiswaTable extends Table {

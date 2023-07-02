@@ -178,6 +178,9 @@ const handleSubmit = (values:any, actions:any) => {
               <p class="text-slate-500 font-medium">
                 {{ form.siswa?.nis }}
               </p>
+              <p class="text-slate-500 font-medium">
+                {{ form.siswa?.nama_kelas }}
+              </p>
             </div>
           </div>
 
