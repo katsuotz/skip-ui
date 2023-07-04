@@ -9,7 +9,9 @@ import FormCheck from "../../base-components/Form/FormCheck";
 import {useSiswaStore} from "../../stores/modules/siswa";
 import {Siswa} from "../../utils/interfaces/siswa";
 import DatePicker from 'vue-datepicker-next';
-import {dateInputFormat} from "../../utils/helper";
+import {dateInputFormat, getUserPhoto} from "../../utils/helper";
+import Lucide from "../../base-components/Lucide/Lucide.vue";
+import {useFileStore} from "../../stores/modules/file";
 
 interface SiswaProps {
   modelValue: boolean;
@@ -42,6 +44,7 @@ watch(() => siswa.selectedSiswa, (value) => {
     jenis_kelamin: value?.jenis_kelamin || '',
     tempat_lahir: value?.tempat_lahir || '',
     tanggal_lahir: value?.tanggal_lahir ? new Date(value.tanggal_lahir) : '',
+    foto: value?.foto,
   }
 })
 
@@ -72,6 +75,22 @@ const handleSuccess = (actions: any) => {
   showModal.value = false
   emit('success')
 }
+
+const file = useFileStore()
+const fileInput: any = ref(null)
+
+const openUploadFile = () => {
+  if (fileInput.value) fileInput.value.click()
+}
+
+const handleFileChange = (e: Event) => {
+  const target = e.target as HTMLInputElement;
+  if (target && target.files?.length) {
+    file.uploadFoto(target.files[0]).then((res:any) => {
+      form.value.foto = res.url
+    })
+  }
+}
 </script>
 
 <template>
@@ -87,10 +106,37 @@ const handleSuccess = (actions: any) => {
         :validate-on-blur="false"
         @submit="handleSubmit"
       >
+        <input
+          ref="fileInput"
+          type="file"
+          class="hidden"
+          accept=".png,.jpg,.jpeg"
+          @change="handleFileChange"
+        >
         <div class="p-5 flex flex-col gap-5">
           <p class="text-lg font-bold">
             Form Siswa
           </p>
+          <div class="flex justify-center">
+            <div
+              class="relative flex-none w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 image-fit"
+            >
+              <img
+                alt=""
+                class="rounded-full object-cover object-center"
+                :src="getUserPhoto(form.foto)"
+              >
+              <div
+                class="absolute bottom-0 right-0 flex items-center justify-center p-2 rounded-full bg-light cursor-pointer shadow-md"
+                @click="openUploadFile"
+              >
+                <Lucide
+                  icon="Camera"
+                  class="w-5 h-5 text-dark"
+                />
+              </div>
+            </div>
+          </div>
           <div>
             <FormLabel for="nis">
               NIS
