@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import logoUrl from "../assets/images/logo.svg";
+import logoUrl from "../assets/images/logo-smkn4.png";
 import illustrationUrl from "../assets/images/login-illustration.svg";
 import {FormInput} from "../base-components/Form";
 import {Field, Form} from 'vee-validate';
@@ -41,10 +41,9 @@ const handleSubmit = () => {
             >
               <img
                 alt="SKIP Logo"
-                class="w-6"
+                class="w-10"
                 :src="logoUrl"
               >
-              <span class="ml-3 text-lg text-white"> SKIP </span>
             </a>
             <div class="my-auto">
               <img
@@ -55,7 +54,7 @@ const handleSubmit = () => {
               <div
                 class="mt-10 text-4xl font-medium leading-tight text-white -intro-y"
               >
-                Welcome to SKIP
+                Welcome to POIN
               </div>
               <div
                 class="mt-2 text-lg text-white -intro-y text-opacity-70 dark:text-slate-400"
@@ -73,7 +72,7 @@ const handleSubmit = () => {
             >
               <img
                 alt="SKIP Logo"
-                class="w-16"
+                class="w-24"
                 :src="logoUrl"
               >
             </a>
@@ -86,7 +85,7 @@ const handleSubmit = () => {
                 <h2
                   class="text-2xl font-bold text-center intro-y xl:text-3xl xl:text-left"
                 >
-                  Sign In <span class="xl:hidden">to SKIP</span>
+                  Sign In <span class="xl:hidden">to POIN</span>
                 </h2>
                 <div class="mt-8 intro-y">
                   <Field
