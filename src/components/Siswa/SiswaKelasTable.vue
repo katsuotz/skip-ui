@@ -61,7 +61,7 @@ const handleSearch = (value: string = '') => {
   getData(true)
 }
 
-getData()
+handleUpdatePerPage(10)
 
 const selectedSiswa = ref<number[]>([])
 
