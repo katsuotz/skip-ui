@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
 import { twMerge } from "tailwind-merge";
-import logoUrl from "../../assets/images/logo.svg";
+import logoUrl from "../../assets/images/logo-smkn4.png";
 import Divider from "./Divider.vue";
 import Menu from "./Menu.vue";
 import Lucide from "../../base-components/Lucide";
@@ -62,8 +62,8 @@ onMounted(() => {
         class="flex mr-auto"
       >
         <img
-          alt="SKIP Logo"
-          class="w-6"
+          alt="Sistem Kredit Poin"
+          class="w-12"
           :src="logoUrl"
         >
       </a>
