@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Lucide from "../../base-components/Lucide";
-import logoUrl from "../../assets/images/logo.svg";
+import logoUrl from "../../assets/images/logo-smkn4.png";
 import {Menu} from "../../base-components/Headless";
 import {useAuthStore} from "../../stores/modules/auth";
 import {defineAsyncComponent, ref, watch} from "vue";
@@ -51,7 +51,7 @@ watch(() => route.meta?.breadcrumbs, () => {
       <RouterLink
         :to="{ name: 'dashboard' }"
         :class="[
-          '-intro-y hidden md:flex',
+          '-intro-y hidden md:flex items-center',
           props.layout == 'side-menu' && 'xl:w-[180px]',
           props.layout == 'simple-menu' && 'xl:w-auto',
           props.layout == 'top-menu' && 'w-auto',
@@ -59,7 +59,7 @@ watch(() => route.meta?.breadcrumbs, () => {
       >
         <img
           alt="Sistem Kredit Poin"
-          class="w-6"
+          class="w-10"
           :src="logoUrl"
         >
         <span
@@ -69,7 +69,7 @@ watch(() => route.meta?.breadcrumbs, () => {
             props.layout == 'simple-menu' && 'hidden',
           ]"
         >
-          SKIP
+          POIN
         </span>
       </RouterLink>
       <!-- END: Logo -->
