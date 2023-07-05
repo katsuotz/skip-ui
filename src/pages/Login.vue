@@ -41,7 +41,7 @@ const handleSubmit = () => {
             >
               <img
                 alt="SKIP Logo"
-                class="w-10"
+                class="w-16"
                 :src="logoUrl"
               >
             </a>
