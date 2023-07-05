@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Lucide from "../../base-components/Lucide";
-import logoUrl from "../../assets/images/logo-smkn4.png";
+import logo2Url from "../../assets/images/logo-2.png";
 import {Menu} from "../../base-components/Headless";
 import {useAuthStore} from "../../stores/modules/auth";
 import {defineAsyncComponent, ref, watch} from "vue";
@@ -59,18 +59,9 @@ watch(() => route.meta?.breadcrumbs, () => {
       >
         <img
           alt="Sistem Kredit Poin"
-          class="w-10"
-          :src="logoUrl"
+          class="h-18"
+          :src="logo2Url"
         >
-        <span
-          :class="[
-            'ml-3 text-lg text-white',
-            props.layout == 'side-menu' && 'hidden xl:block',
-            props.layout == 'simple-menu' && 'hidden',
-          ]"
-        >
-          POIN
-        </span>
       </RouterLink>
       <!-- END: Logo -->
       <Breadcrumb
