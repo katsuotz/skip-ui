@@ -59,7 +59,7 @@ const handleUpdateSelectedKelas = () => {
 }
 
 const avgPoin = computed(() => siswa.siswa?.reduce((a,b) => {
-  return a + (b?.poin || 0)
+  return a + (b?.poin || 0) / (siswa.siswa?.length || 0)
 }, 0))
 
 </script>
