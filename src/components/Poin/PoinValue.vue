@@ -22,7 +22,7 @@ const props = withDefaults(defineProps<PoinValueProps>(), {
       'font-bold'
     ]"
   >
-    {{ numberFormat(props.modelValue) }}
+    {{ numberFormat(props.modelValue, 2) }}
   </component>
   <div v-else>
     -
