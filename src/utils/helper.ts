@@ -17,7 +17,7 @@ const dateInputFormat = (date?: string | Date) => {
   return formatDate('YYYY-MM-DD', date)
 }
 
-const numberFormat = (number: number = 0, decimal: number = 0) => {
+const numberFormat = (number: number = 0, decimal: number = 2) => {
   // @ts-ignore
   number = +parseFloat(number).toFixed(decimal)
 
