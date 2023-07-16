@@ -95,7 +95,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
       },
       {
         icon: "AlignCenterVerticalIcon",
-        pageName: "compare",
+        pageName: "bandingkan",
         title: "Bandingkan",
         role: ['admin', 'staff-ict'],
       },

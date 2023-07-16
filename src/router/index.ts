@@ -176,8 +176,8 @@ const routes = [
         },
       },
       {
-        path: "compare",
-        name: "compare",
+        path: "bandingkan",
+        name: "bandingkan",
         component: () => import("../pages/Compare/CompareForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
