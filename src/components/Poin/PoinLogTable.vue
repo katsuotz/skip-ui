@@ -9,6 +9,7 @@ import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {PoinLog} from "../../utils/interfaces/poin-log";
 import PoinType from "./PoinType.vue";
 import PoinValue from "./PoinValue.vue";
+import PoinLogTindakanModal from "./PoinLogTindakanModal.vue";
 
 interface PoinLogTableProps {
   modelValue?: PoinLog[],
@@ -51,9 +52,20 @@ const deleteLog = (item: PoinLog) => {
   emit('delete', item)
 }
 
+const tindakanModal = ref(false)
+
+const showTindakanModal = (item?: PoinLog) => {
+  poinLog.selectedPoinLog = item
+  tindakanModal.value = true
+}
+
 </script>
 
 <template>
+  <PoinLogTindakanModal
+    v-model="tindakanModal"
+  />
+
   <MyTable
     :current-page="poinLog.pagination.page"
     :page-count="poinLog.pagination.total_page"
@@ -75,6 +87,12 @@ const deleteLog = (item: PoinLog) => {
           </Table.Th>
           <Table.Th>
             Riwayat Poin
+          </Table.Th>
+          <Table.Th>
+            Penanganan
+          </Table.Th>
+          <Table.Th>
+            Tindak Lanjut
           </Table.Th>
           <Table.Th>
             Poin Awal
@@ -127,10 +145,18 @@ const deleteLog = (item: PoinLog) => {
             </div>
           </Table.Td>
           <Table.Td>
-            {{ item.title }}
+            <p class="font-bold">
+              {{ item.title }}
+            </p>
             <p class="text-xs">
               {{ item.description }}
             </p>
+          </Table.Td>
+          <Table.Td>
+            {{ item.penanganan || '-' }}
+          </Table.Td>
+          <Table.Td>
+            {{ item.tindak_lanjut || '-' }}
           </Table.Td>
           <Table.Td>
             <PoinValue v-model="item.poin_before" />
@@ -152,6 +178,18 @@ const deleteLog = (item: PoinLog) => {
           </Table.Td>
           <Table.Td class="hide-print">
             <div class="flex gap-2 justify-end">
+              <Button
+                v-if="!hideDelete"
+                class="whitespace-nowrap gap-2"
+                variant="warning"
+                @click="showTindakanModal(item)"
+              >
+                <Lucide
+                  class="w-5 h-5"
+                  icon="Flag"
+                />
+                Tindakan
+              </Button>
               <Button
                 v-if="item.file && !hideAction"
                 as="a"

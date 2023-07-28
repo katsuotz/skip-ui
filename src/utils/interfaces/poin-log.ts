@@ -9,6 +9,8 @@ export interface PoinLog extends Base {
   poin_after: number;
   title: string;
   description: string;
+  penanganan: string;
+  tindak_lanjut?: string;
   type: string;
   pegawai_id: number;
   nip: string;
@@ -28,6 +30,7 @@ export interface PoinLogTable extends Table {
 export interface PoinWithKelas extends Kelas {
   poin: number;
   tahun_ajar: string;
+  wali_kelas: string;
 }
 
 export interface PoinLogWithKelas {

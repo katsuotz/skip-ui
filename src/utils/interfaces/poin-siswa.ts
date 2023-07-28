@@ -5,6 +5,7 @@ import {KelasPoin} from "./kelas";
 export interface PoinSiswaRequest {
   title: string;
   description: string;
+  penanganan: string;
   poin: number;
   type: string;
   siswa_kelas_id: number;

@@ -180,6 +180,18 @@ input[type=number] {
         padding-bottom: 0!important;
         background-color: #ffffff!important;
     }
+
+    th, td {
+        padding: .75rem .5rem !important;
+    }
+
+    #element-to-print {
+        padding: 0!important;
+    }
+
+    .box {
+        box-shadow: none!important;
+    }
 }
 
 @page {

@@ -27,15 +27,17 @@ const siswaSearch = ref<Siswa[]>([])
 const poinSearch = ref<DataPoin[]>([])
 
 const form = ref<{
-  description: string,
-  type: string,
-  siswa_kelas_id?: number,
-  siswa?: Siswa,
-  poin?: DataPoin,
-  poin_id?: number,
-  file: string,
+  description: string;
+  penanganan: string;
+  type: string;
+  siswa_kelas_id?: number;
+  siswa?: Siswa;
+  poin?: DataPoin;
+  poin_id?: number;
+  file: string;
 }>({
   description: '',
+  penanganan: '',
   type: '',
   file: '',
 })
@@ -43,6 +45,7 @@ const form = ref<{
 const handleResetForm = () => {
   form.value = {
     description: '',
+    penanganan: '',
     type: '',
     file: '',
   }
@@ -85,7 +88,7 @@ const handleSearchPoin = debounce((search: string, loading: any) => {
 }, 700)
 
 const handleSubmit = (values:any, actions:any) => {
-  const {description, type, siswa_kelas_id, poin_id, file} = form.value
+  const {description, penanganan, type, siswa_kelas_id, poin_id, file} = form.value
 
   if (!poin_id || !siswa_kelas_id) return
 
@@ -95,6 +98,7 @@ const handleSubmit = (values:any, actions:any) => {
     const payload: PoinSiswaRequest = {
       title: selectedPoin.title,
       description,
+      penanganan,
       poin: selectedPoin.poin || 0,
       type,
       siswa_kelas_id,
@@ -280,7 +284,7 @@ const handleSubmit = (values:any, actions:any) => {
             </div>
             <div>
               <FormLabel for="description">
-                Deskripsi
+                Deskripsi / Latar Belakang
               </FormLabel>
               <Field
                 v-slot="{ field, errorMessage }"
@@ -293,6 +297,32 @@ const handleSubmit = (values:any, actions:any) => {
                 <FormTextarea
                   id="description"
                   v-model="form.description"
+                  :class="{ 'border-danger': errorMessage }"
+                  v-bind="field"
+                />
+                <div
+                  v-show="errorMessage"
+                  class="mt-2 text-danger"
+                >
+                  {{ errorMessage }}
+                </div>
+              </Field>
+            </div>
+            <div>
+              <FormLabel for="penanganan">
+                Penanganan
+              </FormLabel>
+              <Field
+                v-slot="{ field, errorMessage }"
+                v-model="form.penanganan"
+                name="Penanganan"
+                :rules="{
+                  required: true,
+                }"
+              >
+                <FormTextarea
+                  id="penanganan"
+                  v-model="form.penanganan"
                   :class="{ 'border-danger': errorMessage }"
                   v-bind="field"
                 />

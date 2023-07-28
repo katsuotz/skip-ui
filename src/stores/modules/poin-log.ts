@@ -8,6 +8,7 @@ import {useSiswaStore} from "./siswa";
 
 interface PoinLogState {
   poinLog?: PoinLog[];
+  selectedPoinLog?: PoinLog | null;
   latestLog?: PoinLog[];
   poinLogSiswaKelas: PoinLog[];
   poinLogWithKelas: PoinLogWithKelas[];
@@ -17,6 +18,7 @@ interface PoinLogState {
 export const usePoinLogStore = defineStore("poinLog", {
   state: (): PoinLogState => ({
     poinLog: [],
+    selectedPoinLog: null,
     latestLog: [],
     poinLogSiswaKelas: [],
     poinLogWithKelas: [],
@@ -34,6 +36,22 @@ export const usePoinLogStore = defineStore("poinLog", {
       return new Promise((resolve, reject) => {
         global.loading = true
         api.delete('/poin/log/' + id).then((res: any) => {
+          resolve(res)
+        }).catch(err => {
+          reject(err)
+        }).finally(() => {
+          global.loading = false
+        })
+      })
+    },
+    updatePoinLog(id: number, tindak_lanjut: string) {
+      const global = useGlobalStore()
+
+      return new Promise((resolve, reject) => {
+        global.loading = true
+        api.patch('/poin/log/' + id, {
+          tindak_lanjut,
+        }).then((res: any) => {
           resolve(res)
         }).catch(err => {
           reject(err)

@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import {getUserPhoto, poinColorClass, poinIcon, poinLabel} from "../../utils/helper";
+import {getUserPhoto} from "../../utils/helper";
 import PoinLogTable from "../Poin/PoinLogTable.vue";
-import Lucide from "../../base-components/Lucide/Lucide.vue";
 import VueQrious from "vue-qrious";
 import Divider from "../../base-components/Divider";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {useSiswaStore} from "../../stores/modules/siswa";
 import {computed} from "vue";
+import PoinValue from "../Poin/PoinValue.vue";
 
 const siswa = useSiswaStore()
 const poinLog = usePoinLogStore()
@@ -49,19 +49,19 @@ const url = computed(() => document.location.origin + '/report/personal/' + sisw
               {{ item.kelas.nama_kelas }} - {{ item.kelas.tahun_ajar }}
             </p>
             <p class="text-slate-500 mt-0.5">
-              Total Poin: <span class="font-bold text-success">{{ item.kelas.poin }}</span>
+              Wali Kelas: <span class="font-bold text-success">{{ item.kelas.wali_kelas }}</span>
+              <!--              Total Poin: <span class="font-bold text-success">{{ item.kelas.poin }}</span>-->
             </p>
           </div>
           <div
             :class="[
-              'flex items-center text-lg',
-              poinColorClass(item.kelas.poin)
+              'flex items-center text-xl',
             ]"
           >
-            <span class="mr-2 font-bold">{{ poinLabel(item.kelas.poin) }}</span>
-            <Lucide
-              :icon="poinIcon(item.kelas.poin)"
-              class="w-8 h-8 stroke-2"
+            <span class="mr-2 font-bold text-slate-600">Poin: </span>
+            <PoinValue
+              v-model="item.kelas.poin"
+              class="text-3xl"
             />
           </div>
         </div>

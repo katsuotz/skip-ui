@@ -381,7 +381,7 @@ tahunAjar.getTahunAjar({
                   <div class="flex">
                     <Lucide
                       icon="ChevronsLeftRight"
-                      class="w-[28px] h-[28px] text-gray-500"
+                      class="w-[28px] h-[28px] text-slate-500"
                     />
                   </div>
                   <div
