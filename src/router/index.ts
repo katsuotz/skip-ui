@@ -11,7 +11,7 @@ const routes = [
         name: "dashboard",
         component: () => import("../pages/Dashboard.vue"),
         meta: {
-          breadcrumbs: ['home', 'Dashboard'],
+          breadcrumbs: ['home'],
         }
       },
       {
