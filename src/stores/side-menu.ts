@@ -46,6 +46,30 @@ export const useSideMenuStore = defineStore("sideMenu", {
         role: ['admin', 'staff-ict', 'guru', 'guru-bk'],
       },
       {
+        icon: "FileText",
+        title: "Laporan",
+        subMenu: [
+          {
+            icon: "ChevronRight",
+            pageName: "report",
+            title: "Rekap",
+            role: ['admin', 'staff-ict', 'guru-bk', 'tata-usaha'],
+          },
+          {
+            icon: "ChevronRight",
+            pageName: "report-personal",
+            title: "Personal",
+            role: ['admin', 'staff-ict', 'guru-bk', 'tata-usaha'],
+          },
+        ],
+      },
+      {
+        icon: "AlignCenterVerticalIcon",
+        pageName: "bandingkan",
+        title: "Bandingkan",
+        role: ['admin', 'staff-ict', 'guru-bk'],
+      },
+      {
         icon: "BookCopy",
         pageName: "siswa",
         title: "Siswa",
@@ -78,31 +102,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
       {
         icon: "Binary",
         pageName: "data-poin",
-        title: "Poin",
-        role: ['admin', 'staff-ict'],
-      },
-      {
-        icon: "FileText",
-        title: "Laporan",
-        subMenu: [
-          {
-            icon: "ChevronRight",
-            pageName: "report",
-            title: "Rekap",
-            role: ['admin', 'staff-ict', 'guru-bk', 'tata-usaha'],
-          },
-          {
-            icon: "ChevronRight",
-            pageName: "report-personal",
-            title: "Personal",
-            role: ['admin', 'staff-ict', 'guru-bk', 'tata-usaha'],
-          },
-        ],
-      },
-      {
-        icon: "AlignCenterVerticalIcon",
-        pageName: "bandingkan",
-        title: "Bandingkan",
+        title: "Master Poin",
         role: ['admin', 'staff-ict', 'guru-bk'],
       },
     ],

@@ -90,7 +90,7 @@ const routes = [
         name: "data-poin",
         component: () => import("../pages/DataPoin/DataPoinIndex.vue"),
         meta: {
-          role: ['admin', 'staff-ict'],
+          role: ['admin', 'staff-ict', 'guru-bk'],
           breadcrumbs: ['home', 'Poin'],
         },
       },
