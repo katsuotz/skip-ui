@@ -135,6 +135,7 @@ const handleDeleteLog = (item: PoinLog) => {
       @updatePage="handleUpdatePage"
       @updateSearch="handleSearch"
       @delete="handleDeleteLog"
+      @getData="getData()"
     />
   </div>
 </template>

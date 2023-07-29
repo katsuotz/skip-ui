@@ -6,7 +6,6 @@ import Button from "../../base-components/Button";
 import FormInput from "../../base-components/Form/FormInput.vue";
 import FormLabel from "../../base-components/Form/FormLabel.vue";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
-import {PoinLog} from "../../utils/interfaces/poin-log";
 
 interface PoinLogProps {
   modelValue: boolean;

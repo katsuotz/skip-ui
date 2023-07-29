@@ -23,6 +23,7 @@ interface PoinLogTableProps {
 
 interface PoinLogEmit {
   (e: "update:modelValue", value: boolean): void;
+  (e: "getData"): void;
   (e: "updatePage", value: number): void;
   (e: "updatePerPage", value: number): void;
   (e: "updateSearch", value?: string): void;
@@ -64,6 +65,7 @@ const showTindakanModal = (item?: PoinLog) => {
 <template>
   <PoinLogTindakanModal
     v-model="tindakanModal"
+    @success="emit('getData')"
   />
 
   <MyTable
