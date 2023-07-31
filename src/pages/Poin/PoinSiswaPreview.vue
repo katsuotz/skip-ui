@@ -25,6 +25,7 @@ tahunAjar.getTahunAjar({
   per_page: -1,
 }).then((res: any) => {
   selectedTahunAjar.value = route.query.tahun_ajar_id ? route.query.tahun_ajar_id.toString() : (tahunAjar.activeTahunAjar?.id.toString() || '')
+  router.replace({query: {}})
   tahunAjarFilter.value = res.data
 }).finally( () => {
   loaded.value = true
@@ -61,8 +62,6 @@ const handleSearch = (value: string = '') => {
 }
 
 info.infoListPagination.per_page = 10
-
-router.replace({ path: '/poin/siswa', query: {}})
 
 </script>
 <template>

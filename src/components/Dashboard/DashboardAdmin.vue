@@ -815,7 +815,13 @@ tahunAjar.getTahunAjar({
                   </div>
                 </div>
                 <RouterLink
-                  to="/poin/log"
+                  :to="{
+                    path: '/poin/log',
+                    query: {
+                      tahun_ajar_id: selectedTahunAjar,
+                      order: 'asc',
+                    }
+                  }"
                   class="block w-full py-1 text-right rounded-md intro-y border-slate-400 text-slate-500 hover:text-primary"
                 >
                   Lihat Lebih Banyak
