@@ -79,7 +79,7 @@ const handleDeletePoin = async (id: number): Promise<void> => {
   />
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
-      Data Poin
+      Master Poin
     </h2>
     <Button
       class="gap-2"

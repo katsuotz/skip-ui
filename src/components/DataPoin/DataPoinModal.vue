@@ -84,7 +84,7 @@ const handleSuccess = (actions: any) => {
       >
         <div class="p-5 flex flex-col gap-5">
           <p class="text-lg font-bold">
-            Form Data Poin
+            Form Master Poin
           </p>
           <div>
             <FormLabel for="title">
