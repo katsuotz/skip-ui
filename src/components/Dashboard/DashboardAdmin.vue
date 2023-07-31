@@ -13,6 +13,7 @@ import {useAuthStore} from "../../stores/modules/auth";
 import PoinType from "../Poin/PoinType.vue";
 import PoinValue from "../Poin/PoinValue.vue";
 import {TahunAjar} from "../../utils/interfaces/tahun-ajar";
+import {Role} from "../../utils/interfaces/user";
 
 const info = useInfoStore()
 const poinLog = usePoinLogStore()
@@ -122,6 +123,19 @@ tahunAjar.getTahunAjar({
 //   order_by: 'created_at',
 //   tahun_ajar_id
 // })
+
+
+const getRole = (role: Role) => {
+  switch (role) {
+  case "admin":
+    return "Guru BK"
+  case "staff-ict":
+    return "Guru"
+  default:
+    return auth.roleLabel[role]
+  }
+}
+
 
 
 </script>
@@ -878,7 +892,7 @@ tahunAjar.getTahunAjar({
                         {{ item.nama }}
                       </div>
                       <div class="text-slate-500 text-xs mt-0.5">
-                        {{ item.role }}
+                        {{ getRole(item.role) }}
                       </div>
                       <div class="text-slate-500 text-xs mt-0.5">
                         {{ dateTimeFormat(item.created_at) }}

@@ -4,8 +4,9 @@ import Table from "../Table";
 import Lucide from "../Lucide";
 import MyTable from "../My/MyTable/MyTable.vue";
 import {ref} from "vue";
-import {LoginLog} from "../../utils/interfaces/user";
+import {LoginLog, Role} from "../../utils/interfaces/user";
 import {useInfoStore} from "../../stores/modules/info";
+import {useAuthStore} from "../../stores/modules/auth";
 
 interface LoginLogTableProps {
     modelValue?: LoginLog[],
@@ -22,6 +23,7 @@ interface LoginLogEmit {
 const props = defineProps<LoginLogTableProps>();
 const emit = defineEmits<LoginLogEmit>();
 
+const auth = useAuthStore()
 const info = useInfoStore()
 
 const search = ref('')
@@ -36,6 +38,17 @@ const handleUpdatePerPage = (value: number) => {
 
 const handleSearch = (value: string = '') => {
   emit('updateSearch', value)
+}
+
+const getRole = (role: Role) => {
+  switch (role) {
+  case "admin":
+    return "Guru BK"
+  case "staff-ict":
+    return "Guru"
+  default:
+    return auth.roleLabel[role]
+  }
 }
 
 </script>
@@ -93,7 +106,7 @@ const handleSearch = (value: string = '') => {
                   {{ item.nama }}
                 </p>
                 <p class="text-slate-500 text-xs mt-0.5">
-                  {{ item.role }}
+                  {{ getRole(item.role) }}
                 </p>
               </div>
             </div>
