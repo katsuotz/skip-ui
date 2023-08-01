@@ -31,6 +31,7 @@ export interface PoinWithKelas extends Kelas {
   poin: number;
   tahun_ajar: string;
   wali_kelas: string;
+  kelas_id: number;
 }
 
 export interface PoinLogWithKelas {

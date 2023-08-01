@@ -142,7 +142,11 @@ export const usePoinLogStore = defineStore("poinLog", {
       return new Promise((resolve, reject) => {
         api.get('/siswa/' + nis + '/log').then((res: any) => {
           siswa.selectedSiswa = res.siswa
-          this.poinLogWithKelas = res.log
+          this.poinLogWithKelas = res.log.reduce((a:PoinLogWithKelas[], b: PoinLogWithKelas) => {
+            const find = a.find(e => e.kelas.kelas_id == b.kelas.kelas_id)
+            if (!find) a.push(b)
+            return a
+          }, [])
           resolve(res)
         }).catch(err => {
           reject(err)
