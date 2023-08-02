@@ -251,15 +251,34 @@ const handleSuccess = (actions: any) => {
                   <option value="">
                     Pilih Kategori
                   </option>
-                  <option value="Ringan">
-                    Ringan
-                  </option>
-                  <option value="Sedang">
-                    Sedang
-                  </option>
-                  <option value="Berat">
-                    Berat
-                  </option>
+                  <template v-if="form.type === 'Penghargaan'">
+                    <option value="Sekolah">
+                      Sekolah
+                    </option>
+                    <option value="Kota">
+                      Kota
+                    </option>
+                    <option value="Provinsi">
+                      Provinsi
+                    </option>
+                    <option value="Nasional">
+                      Nasional
+                    </option>
+                    <option value="Internasional">
+                      Internasional
+                    </option>
+                  </template>
+                  <template v-else-if="form.type === 'Pelanggaran'">
+                    <option value="Ringan">
+                      Ringan
+                    </option>
+                    <option value="Sedang">
+                      Sedang
+                    </option>
+                    <option value="Berat">
+                      Berat
+                    </option>
+                  </template>
                 </TomSelect>
               </div>
               <div

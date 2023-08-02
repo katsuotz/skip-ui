@@ -109,6 +109,7 @@ const handleDeletePoin = async (id: number): Promise<void> => {
         </option>
       </TomSelect>
       <TomSelect
+        v-if="type"
         v-model="category"
         placeholder="Pilih Kategori"
         style="width: 200px"
@@ -117,15 +118,34 @@ const handleDeletePoin = async (id: number): Promise<void> => {
         <option value="">
           Pilih Kategori
         </option>
-        <option value="Ringan">
-          Ringan
-        </option>
-        <option value="Sedang">
-          Sedang
-        </option>
-        <option value="Berat">
-          Berat
-        </option>
+        <template v-if="type === 'Penghargaan'">
+          <option value="Sekolah">
+            Sekolah
+          </option>
+          <option value="Kota">
+            Kota
+          </option>
+          <option value="Provinsi">
+            Provinsi
+          </option>
+          <option value="Nasional">
+            Nasional
+          </option>
+          <option value="Internasional">
+            Internasional
+          </option>
+        </template>
+        <template v-else-if="type === 'Pelanggaran'">
+          <option value="Ringan">
+            Ringan
+          </option>
+          <option value="Sedang">
+            Sedang
+          </option>
+          <option value="Berat">
+            Berat
+          </option>
+        </template>
       </TomSelect>
     </div>
 
@@ -197,6 +217,11 @@ const handleDeletePoin = async (id: number): Promise<void> => {
                   item.category === 'Ringan' && 'bg-success/90',
                   item.category === 'Sedang' && 'bg-warning/90',
                   item.category === 'Berat' && 'bg-danger/90',
+                  item.category === 'Sekolah' && 'bg-blue-300',
+                  item.category === 'Kota' && 'bg-blue-400',
+                  item.category === 'Provinsi' && 'bg-blue-500',
+                  item.category === 'Nasional' && 'bg-blue-600',
+                  item.category === 'Internasional' && 'bg-blue-700',
                 ]"
               >{{ item.category }}</span>
             </Table.Td>
