@@ -9,6 +9,7 @@ import { useRouter } from "vue-router";
 import Lucide from "../../base-components/Lucide";
 import SideMenuTooltip from "./SideMenuTooltip.vue";
 import { FormattedMenu, linkTo } from "./side-menu";
+import {useSideMenuStore} from "../../stores/side-menu";
 
 interface MenuProps {
   class?: string | object;
@@ -23,6 +24,8 @@ interface MenuProps {
 const router = useRouter();
 const props = defineProps<MenuProps>();
 const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
+
+const sideMenuStore = useSideMenuStore()
 </script>
 
 <template>
@@ -83,7 +86,7 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
     </div>
     <div
       :class="[
-        'w-full ml-3 hidden xl:flex items-center',
+        'w-full ml-3 hidden items-center',
         {
           'text-primary font-medium z-10 dark:text-slate-300':
             props.menu.active && props.level == 'first',
@@ -91,6 +94,7 @@ const [formattedMenu, setFormattedMenu] = props.formattedMenuState;
             props.menu.active && props.level != 'first',
           'dark:text-slate-400': !props.menu.active,
         },
+        sideMenuStore.expand && 'xl:flex',
       ]"
     >
       {{ props.menu.title }}

@@ -118,6 +118,9 @@ const hasData = computed(() => data.value.filter(e => e?.length).length)
         :key="n - 1"
         class="col-span-12"
       >
+        <p class="mb-2">
+          Siswa {{ n }}
+        </p>
         <div class="flex flex-wrap gap-2">
           <TomSelect
             v-model="filter[n - 1].tahun_ajar_id"

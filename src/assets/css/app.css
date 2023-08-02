@@ -112,9 +112,9 @@ input[type=number] {
 .dropzone {
     border-style: solid!important;
     border-color: rgba(0,0,0,.1) !important;
-.dz-message {
-    color: rgba(0,0,0,.7);
-}
+    .dz-message {
+        color: rgba(0,0,0,.7);
+    }
 }
 
 .mx-datepicker {
@@ -149,6 +149,11 @@ input[type=number] {
         max-height: 100%;
         object-fit: cover;
     }
+}
+
+textarea {
+    height: 100px!important;
+    resize: none;
 }
 
 .printing {

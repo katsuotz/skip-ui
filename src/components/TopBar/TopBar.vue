@@ -7,6 +7,7 @@ import {defineAsyncComponent, ref, watch} from "vue";
 import {getUserPhoto} from "../../utils/helper";
 import Breadcrumb from "../../base-components/Breadcrumb";
 import {useRoute} from "vue-router";
+import {useSideMenuStore} from "../../stores/side-menu";
 
 const ProfileModal = defineAsyncComponent(() => import("../User/ProfileModal.vue"));
 
@@ -19,6 +20,8 @@ const auth = useAuthStore()
 const logout = () => {
   auth.logout()
 }
+
+const sideMenuStore = useSideMenuStore()
 
 const showModalProfile = ref(false)
 
@@ -48,27 +51,36 @@ watch(() => route.meta?.breadcrumbs, () => {
   >
     <div class="flex items-center h-full">
       <!-- BEGIN: Logo -->
-      <RouterLink
-        :to="{ name: 'dashboard' }"
-        :class="[
-          '-intro-y hidden md:flex items-center',
-          props.layout == 'side-menu' && 'xl:w-[180px]',
-          props.layout == 'simple-menu' && 'xl:w-auto',
-          props.layout == 'top-menu' && 'w-auto',
-        ]"
-      >
-        <img
-          alt="Sistem Kredit Poin"
-          class="h-18"
-          :src="logo2Url"
+      <div class="flex items-center xl:w-[200px]">
+        <RouterLink
+          :to="{ name: 'dashboard' }"
+          :class="[
+            '-intro-y hidden md:flex items-center',
+            props.layout == 'side-menu' && 'xl:w-[180px]',
+            props.layout == 'simple-menu' && 'xl:w-auto',
+            props.layout == 'top-menu' && 'w-auto',
+          ]"
         >
-      </RouterLink>
+          <img
+            alt="Sistem Kredit Poin"
+            class="h-18"
+            :src="logo2Url"
+          >
+        </RouterLink>
+        <div class="z-10 xl:block hidden ml-auto -intro-y">
+          <Lucide
+            icon="AlignLeft"
+            class="text-white cursor-pointer"
+            @click="sideMenuStore.expand = !sideMenuStore.expand"
+          />
+        </div>
+      </div>
       <!-- END: Logo -->
       <Breadcrumb
         v-if="breadcrumbs?.length"
         light
         :class="[
-          'h-[45px] md:ml-10 md:border-l border-white/[0.08] dark:border-white/[0.08] mr-auto -intro-y',
+          'h-[45px] md:ml-10 xl:ml-5 md:border-l border-white/[0.08] dark:border-white/[0.08] mr-auto -intro-y',
           props.layout != 'top-menu' && 'md:pl-6',
           props.layout == 'top-menu' && 'md:pl-10',
         ]"

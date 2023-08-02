@@ -15,11 +15,13 @@ export interface Menu {
 }
 
 export interface SideMenuState {
+  expand: boolean;
   menu: Array<Menu | "divider">;
 }
 
 export const useSideMenuStore = defineStore("sideMenu", {
   state: (): SideMenuState => ({
+    expand: true,
     menu: [
       {
         icon: "LogIn",

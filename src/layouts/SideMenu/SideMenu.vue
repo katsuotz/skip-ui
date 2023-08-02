@@ -41,7 +41,10 @@ auth.getMyData()
     <div class="flex overflow-hidden">
       <!-- BEGIN: Side Menu -->
       <nav
-        class="w-[105px] xl:w-[260px] px-5 pb-16 overflow-x-hidden z-50 pt-32 -mt-4 hidden md:block intro-y hide-print"
+        :class="[
+          'w-[105px] px-5 pb-16 overflow-x-hidden z-50 pt-32 -mt-4 hidden md:block intro-y hide-print animate',
+          sideMenuStore.expand && 'xl:w-[260px]',
+        ]"
       >
         <ul>
           <!-- BEGIN: First Child -->

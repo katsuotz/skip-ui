@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onMounted, withDefaults, ref, provide } from "vue";
+import {onMounted, withDefaults, ref, provide, watch} from "vue";
 import Tippy, { ProvideTippy } from "../../base-components/Tippy";
 import { PopperElement } from "tippy.js";
+import {useSideMenuStore} from "../../stores/side-menu";
 
 interface SideMenuTooltipProps {
   refKey?: string;
@@ -9,11 +10,13 @@ interface SideMenuTooltipProps {
   content: string;
 }
 
+const sideMenuStore = useSideMenuStore()
+
 const toggleTooltip = (el: PopperElement) => {
-  if (window.innerWidth <= 1260) {
-    el._tippy?.enable();
-  } else {
+  if (window.innerWidth > 1260 && sideMenuStore.expand) {
     el._tippy?.disable();
+  } else {
+    el._tippy?.enable();
   }
 };
 
@@ -39,6 +42,11 @@ onMounted(() => {
     initTooltipEvent(tippyRef.value);
   }
 });
+
+watch(() => sideMenuStore.expand, () => {
+  if (tippyRef.value)
+    toggleTooltip(tippyRef.value)
+})
 </script>
 
 <template>
