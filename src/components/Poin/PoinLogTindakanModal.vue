@@ -1,11 +1,13 @@
 <script setup lang="ts">
-import {ref, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import {Form, Field} from "vee-validate";
 import Dialog from "../../base-components/Headless/Dialog";
 import Button from "../../base-components/Button";
 import FormInput from "../../base-components/Form/FormInput.vue";
 import FormLabel from "../../base-components/Form/FormLabel.vue";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
+import {tindakLanjutLabel} from "../../utils/helper";
+import {useDataPoinStore} from "../../stores/modules/data-poin";
 
 interface PoinLogProps {
   modelValue: boolean;
@@ -19,6 +21,7 @@ interface PoinLogEmit {
 const props = defineProps<PoinLogProps>();
 const emit = defineEmits<PoinLogEmit>();
 
+const dataPoin = useDataPoinStore()
 const poinLog = usePoinLogStore()
 
 const form = ref<{
@@ -36,7 +39,11 @@ watch(() => poinLog.selectedPoinLog, (value) => {
 
 const showModal = ref(props.modelValue);
 
-watch(props, () => {
+watch(props, async () => {
+  if (props.modelValue && poinLog.selectedPoinLog?.data_poin_id) {
+    await dataPoin.getDataPoinDetail(poinLog.selectedPoinLog.data_poin_id)
+  }
+
   showModal.value = props.modelValue
 })
 
@@ -54,6 +61,9 @@ const handleSuccess = (actions: any) => {
   showModal.value = false
   emit("success")
 }
+
+const label = computed(() => tindakLanjutLabel(poinLog.selectedPoinLog?.type || ''))
+
 </script>
 
 <template>
@@ -71,17 +81,23 @@ const handleSuccess = (actions: any) => {
       >
         <div class="p-5 flex flex-col gap-5">
           <p class="text-lg font-bold">
-            Form Tindak Lanjut
+            Form {{ label }}
           </p>
           <div>
             <FormLabel for="tindak_lanjut">
-              Tindak Lanjut
+              {{ label }}
             </FormLabel>
+            <p
+              v-if="dataPoin.selectedDataPoin?.tindak_lanjut"
+              class="mb-2"
+            >
+              <span class="font-bold">Rekomendasi Tindak Lanjut</span>: {{ dataPoin.selectedDataPoin?.tindak_lanjut }}
+            </p>
             <Field
               v-slot="{ field, errorMessage }"
               v-model="form.tindak_lanjut"
               :validate-on-blur="false"
-              name="Tindak Lanjut"
+              :name="label"
               :rules="{
                 required: true,
               }"

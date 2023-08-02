@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {countPaginationNumber, dateTimeFormat, getFileUrl, getUserPhoto} from "../../utils/helper";
+import {countPaginationNumber, dateTimeFormat, getFileUrl, getUserPhoto, tindakLanjutLabel} from "../../utils/helper";
 import Table from "../../base-components/Table";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
@@ -96,6 +96,7 @@ const showTindakanModal = (item?: PoinLog) => {
           </Table.Th>
           <Table.Th>
             Tindak Lanjut
+            <!--            / Apresiasi-->
           </Table.Th>
           <Table.Th>
             Poin Awal
@@ -184,14 +185,14 @@ const showTindakanModal = (item?: PoinLog) => {
               <Button
                 v-if="!hideDelete"
                 class="whitespace-nowrap gap-2"
-                variant="warning"
+                :variant="item.type === 'Penghargaan' ? 'info' : 'warning'"
                 @click="showTindakanModal(item)"
               >
                 <Lucide
                   class="w-5 h-5"
-                  icon="Flag"
+                  :icon="item.type === 'Penghargaan' ? 'Star' : 'Flag'"
                 />
-                Tindakan
+                {{ tindakLanjutLabel(item.type) }}
               </Button>
               <Button
                 v-if="item.file && !hideAction"

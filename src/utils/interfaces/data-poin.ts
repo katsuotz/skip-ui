@@ -8,6 +8,8 @@ export interface DataPoin extends Base {
   poin?: number;
   type: string;
   category: string;
+  penanganan?: string;
+  tindak_lanjut?: string;
 }
 
 export interface DataPoinTable extends Table {

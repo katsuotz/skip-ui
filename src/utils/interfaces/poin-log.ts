@@ -13,6 +13,7 @@ export interface PoinLog extends Base {
   tindak_lanjut?: string;
   type: string;
   pegawai_id: number;
+  data_poin_id?: number;
   nip: string;
   nama_pegawai: string;
   nis?: string;

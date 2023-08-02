@@ -3,7 +3,7 @@ import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {useDataPoinStore} from "../../stores/modules/data-poin";
 import {ref} from "vue";
-import {countPaginationNumber} from "../../utils/helper";
+import {countPaginationNumber, tindakLanjutLabel} from "../../utils/helper";
 import DataPoinModal from "../../components/DataPoin/DataPoinModal.vue";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
@@ -198,6 +198,12 @@ const handleDeletePoin = async (id: number): Promise<void> => {
             </Table.Td>
             <Table.Td>
               {{ item.description }}
+              <p v-if="item.penanganan">
+                <span class="font-bold">Penanganan</span>: {{ item.penanganan }}
+              </p>
+              <p v-if="item.tindak_lanjut">
+                <span class="font-bold">{{ tindakLanjutLabel(item.type) }}</span>: {{ item.tindak_lanjut }}
+              </p>
             </Table.Td>
             <Table.Td>
               <span

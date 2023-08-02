@@ -31,7 +31,7 @@ const form = ref<{
   penanganan: string;
   type: string;
   siswa_kelas_id?: number;
-  siswa?: Siswa;
+  siswa: Siswa[];
   poin?: DataPoin;
   poin_id?: number;
   file: string;
@@ -40,6 +40,7 @@ const form = ref<{
   penanganan: '',
   type: '',
   file: '',
+  siswa: [],
 })
 
 const handleResetForm = () => {
@@ -48,6 +49,7 @@ const handleResetForm = () => {
     penanganan: '',
     type: '',
     file: '',
+    siswa: [],
   }
   poinSearch.value = []
   siswaSearch.value = []
@@ -65,10 +67,6 @@ const handleSearchSiswa = debounce((search: string, loading: any) => {
     loading(false)
   })
 }, 1000)
-
-const handleSelectSiswa = () => {
-  form.value.siswa_kelas_id = form.value.siswa?.siswa_kelas_id
-}
 
 const handleSelectPoin = () => {
   form.value.poin_id = form.value.poin?.id
@@ -88,24 +86,31 @@ const handleSearchPoin = debounce((search: string, loading: any) => {
 }, 700)
 
 const handleSubmit = (values:any, actions:any) => {
-  const {description, penanganan, type, siswa_kelas_id, poin_id, file} = form.value
+  const {description, penanganan, type, poin_id, file, siswa} = form.value
 
-  if (!poin_id || !siswa_kelas_id) return
+  if (!poin_id || !siswa.length) return
 
   const selectedPoin = form.value.poin
 
   if (selectedPoin) {
-    const payload: PoinSiswaRequest = {
-      title: selectedPoin.title,
-      description,
-      penanganan,
-      poin: selectedPoin.poin || 0,
-      type,
-      siswa_kelas_id,
-      file,
+    let promises: any[] = []
+
+    for (let i = 0; i < siswa.length; i++) {
+      const payload: PoinSiswaRequest = {
+        title: selectedPoin.title,
+        description,
+        penanganan,
+        poin: selectedPoin.poin || 0,
+        type,
+        siswa_kelas_id: siswa[i].siswa_kelas_id || 0,
+        data_poin_id: poin_id,
+        file,
+      }
+
+      promises.push(poinSiswa.addPoinSiswa(payload))
     }
 
-    poinSiswa.addPoinSiswa(payload).then(() => {
+    Promise.all(promises).then(() => {
       actions.resetForm()
       handleResetForm()
       global.showModal({
@@ -137,7 +142,7 @@ const handleSubmit = (values:any, actions:any) => {
           </FormLabel>
           <Field
             v-slot="{ errorMessage }"
-            v-model="form.siswa_kelas_id"
+            v-model="form.siswa"
             name="Siswa"
             :rules="{
               required: true,
@@ -149,9 +154,15 @@ const handleSubmit = (values:any, actions:any) => {
                 :options="siswaSearch"
                 label="nama"
                 placeholder="Cari Siswa"
+                multiple
                 @search="handleSearchSiswa"
-                @update:modelValue="handleSelectSiswa"
               >
+                <template #selected-option="{nis, nama}">
+                  <p>{{ nis }} - {{ nama }}</p>
+                </template>
+                <template #option="{nis, nama}">
+                  <p>{{ nis }} - {{ nama }}</p>
+                </template>
                 <template #open-indicator="{ attributes }">
                   <span v-bind="attributes">
                     <Lucide icon="ChevronDown" />
@@ -168,26 +179,31 @@ const handleSubmit = (values:any, actions:any) => {
           </Field>
         </div>
 
-        <template v-if="form.siswa_kelas_id && form.siswa">
-          <div class="flex items-center">
-            <img
-              :src="getUserPhoto(form.siswa.foto)"
-              alt=""
-              class="w-[64px] h-[64px] rounded-full object-cover object-center"
+        <template v-if="form.siswa?.length">
+          <div class="flex flex-wrap gap-5">
+            <div
+              v-for="(item, key) in form.siswa"
+              :key="key"
+              class="flex items-center"
             >
-            <div class="ml-4">
-              <h3 class="text-xl font-bold">
-                {{ form.siswa?.nama }}
-              </h3>
-              <p class="text-slate-500 font-medium">
-                {{ form.siswa?.nis }}
-              </p>
-              <p class="text-slate-500 font-medium">
-                {{ form.siswa?.nama_kelas }}
-              </p>
+              <img
+                :src="getUserPhoto(item.foto)"
+                alt=""
+                class="w-[64px] h-[64px] rounded-full object-cover object-center"
+              >
+              <div class="ml-4">
+                <h3 class="text-xl font-bold">
+                  {{ item.nama }}
+                </h3>
+                <p class="text-slate-500 font-medium">
+                  {{ item.nis }}
+                </p>
+                <p class="text-slate-500 font-medium">
+                  {{ item.nama_kelas }}
+                </p>
+              </div>
             </div>
           </div>
-
           <div>
             <Field
               v-slot="{ field, errorMessage }"
@@ -308,16 +324,22 @@ const handleSubmit = (values:any, actions:any) => {
                 </div>
               </Field>
             </div>
-            <div>
+            <div v-if="form.type === 'Pelanggaran'">
               <FormLabel for="penanganan">
                 Penanganan
               </FormLabel>
+              <p
+                v-if="form.poin?.penanganan"
+                class="mb-2"
+              >
+                <span class="font-bold">Rekomendasi Penanganan</span>: {{ form.poin?.penanganan }}
+              </p>
               <Field
                 v-slot="{ field, errorMessage }"
                 v-model="form.penanganan"
                 name="Penanganan"
                 :rules="{
-                  required: true,
+                  required: form.type === 'Pelanggaran',
                 }"
               >
                 <FormTextarea

@@ -9,6 +9,7 @@ export interface PoinSiswaRequest {
   poin: number;
   type: string;
   siswa_kelas_id: number;
+  data_poin_id: number;
   file: string;
 }
 

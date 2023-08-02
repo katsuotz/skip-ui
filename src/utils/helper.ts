@@ -158,6 +158,13 @@ const poinColorClass = (poin: number): string => {
   return 'text-danger'
 }
 
+const tindakLanjutLabel = (type: string): string => {
+// for later
+//   return type === 'Penghargaan' ? 'Apresiasi' : 'Tindak Lanjut'
+  console.log(type)
+  return 'Tindak Lanjut'
+}
+
 export {
   formatDate,
   toRGB,
@@ -174,4 +181,5 @@ export {
   poinIcon,
   poinLabel,
   poinColorClass,
+  tindakLanjutLabel,
 };

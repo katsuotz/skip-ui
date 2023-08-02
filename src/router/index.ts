@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import {useAuthStore} from "../stores/modules/auth";
+import {useSideMenuStore} from "../stores/side-menu";
 
 const routes = [
   {
@@ -191,6 +192,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru-bk'],
           breadcrumbs: ['home', 'Bandingkan', 'Siswa'],
+          expand: false,
         },
       },
     ],
@@ -229,6 +231,10 @@ router.beforeEach((to, from, next) => {
         nama: 'Guest',
       }
   }
+
+  const sideMenuStore = useSideMenuStore()
+
+  sideMenuStore.expand = to.meta.expand !== false
 
   const {meta} = to
 

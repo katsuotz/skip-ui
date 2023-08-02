@@ -107,7 +107,7 @@ export const useDataPoinStore = defineStore("dataPoin", {
           .catch(reject)
       })
     },
-    getDataPoinDetail(id: string) {
+    getDataPoinDetail(id: number) {
       this.selectedDataPoin = undefined
 
       const params: any = {}

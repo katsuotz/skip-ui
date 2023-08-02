@@ -10,6 +10,7 @@ import FormTextarea from "../../base-components/Form/FormTextarea.vue";
 import {DataPoin} from "../../utils/interfaces/data-poin";
 import TomSelect from "../../base-components/TomSelect";
 import InputGroup from "../../base-components/Form/InputGroup";
+import {tindakLanjutLabel} from "../../utils/helper";
 
 interface TahunAjarProps {
   modelValue: boolean;
@@ -32,7 +33,14 @@ const form = ref<DataPoin>({
   poin: undefined,
   type: '',
   category: '',
+  penanganan: '',
+  tindak_lanjut: '',
 })
+
+const handleUpdateType = () => {
+  form.value.penanganan = ''
+  form.value.tindak_lanjut = ''
+}
 
 watch(() => dataPoin.selectedDataPoin, (value) => {
   form.value = {
@@ -160,6 +168,7 @@ const handleSuccess = (actions: any) => {
                   :class="{ 'border-danger': errorMessage }"
                   placeholder="Pilih Tipe"
                   v-bind="field"
+                  @update:modelValue="handleUpdateType"
                 >
                   <option value="">
                     Pilih Tipe
@@ -198,9 +207,9 @@ const handleSuccess = (actions: any) => {
                 <InputGroup.Text
                   v-if="form.type"
                   :class="[
-                    form.type === 'Pelanggaran' && 'text-danger',
-                    form.type === 'Penghargaan' && 'text-success',
-                    'font-bold border-r-transparent w-10 text-center'
+                    form.type === 'Pelanggaran' && 'bg-danger border-danger',
+                    form.type === 'Penghargaan' && 'bg-success border-success',
+                    'font-bold border-r-transparent w-10 text-center text-white'
                   ]"
                 >
                   {{ form.type === 'Penghargaan' ? '+' : '-' }}
@@ -217,6 +226,8 @@ const handleSuccess = (actions: any) => {
                   step="1"
                   v-bind="field"
                   :disabled="!form.type"
+                  @wheel="//@ts-ignore
+                    $event.target.blur()"
                 />
               </InputGroup>
               <div
@@ -289,6 +300,56 @@ const handleSuccess = (actions: any) => {
               </div>
             </Field>
           </div>
+          <template v-if="form.type">
+            <div v-if="form.type === 'Pelanggaran'">
+              <FormLabel for="penanganan">
+                Penanganan (Opsional)
+              </FormLabel>
+              <Field
+                v-slot="{ field, errorMessage }"
+                v-model="form.penanganan"
+                :validate-on-blur="false"
+                name="Penanganan"
+              >
+                <FormTextarea
+                  id="penanganan"
+                  v-model="form.penanganan"
+                  :class="{ 'border-danger': errorMessage }"
+                  v-bind="field"
+                />
+                <div
+                  v-show="errorMessage"
+                  class="mt-2 text-danger"
+                >
+                  {{ errorMessage }}
+                </div>
+              </Field>
+            </div>
+            <div>
+              <FormLabel for="tindak_lanjut">
+                {{ tindakLanjutLabel(form.type) }} (Opsional)
+              </FormLabel>
+              <Field
+                v-slot="{ field, errorMessage }"
+                v-model="form.tindak_lanjut"
+                :validate-on-blur="false"
+                :name="tindakLanjutLabel(form.type)"
+              >
+                <FormTextarea
+                  id="tindak_lanjut"
+                  v-model="form.tindak_lanjut"
+                  :class="{ 'border-danger': errorMessage }"
+                  v-bind="field"
+                />
+                <div
+                  v-show="errorMessage"
+                  class="mt-2 text-danger"
+                >
+                  {{ errorMessage }}
+                </div>
+              </Field>
+            </div>
+          </template>
 
           <div class="text-right">
             <Button
