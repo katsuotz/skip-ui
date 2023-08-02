@@ -17,6 +17,7 @@ interface PoinLogTableProps {
   hidePegawai?: boolean;
   hideDelete?: boolean;
   hideAction?: boolean;
+  hideQr?: boolean;
   hideDetail?: boolean;
   hideSiswa?: boolean;
 }

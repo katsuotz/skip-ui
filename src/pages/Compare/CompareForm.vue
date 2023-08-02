@@ -54,7 +54,7 @@ const hasData = computed(() => data.value.filter(e => e).length)
 <template>
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
-      Bandingkan
+      Bandingkan Kelas
     </h2>
   </div>
   <div class="p-5 mt-5 intro-y box">

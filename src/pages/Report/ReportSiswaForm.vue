@@ -179,6 +179,9 @@ siswa.selectedSiswa = undefined
     id="element-to-print"
     class="p-5 mt-5 intro-y box"
   >
-    <ReportSiswa />
+    <ReportSiswa
+      v-model="poinLog.poinLogWithKelas"
+      :selected-siswa="siswa.selectedSiswa"
+    />
   </div>
 </template>

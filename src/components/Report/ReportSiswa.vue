@@ -3,15 +3,21 @@ import {getUserPhoto} from "../../utils/helper";
 import PoinLogTable from "../Poin/PoinLogTable.vue";
 import VueQrious from "vue-qrious";
 import Divider from "../../base-components/Divider";
-import {usePoinLogStore} from "../../stores/modules/poin-log";
-import {useSiswaStore} from "../../stores/modules/siswa";
 import {computed} from "vue";
 import PoinValue from "../Poin/PoinValue.vue";
+import {PoinLogWithKelas} from "../../utils/interfaces/poin-log";
+import {Siswa} from "../../utils/interfaces/siswa";
 
-const siswa = useSiswaStore()
-const poinLog = usePoinLogStore()
+interface ReportSiswaProps {
+  modelValue: PoinLogWithKelas[];
+  selectedSiswa?: Siswa | null;
+  hideAction?: boolean;
+  hideQr?: boolean;
+}
 
-const url = computed(() => document.location.origin + '/report/personal/' + siswa.selectedSiswa?.nis)
+const props = defineProps<ReportSiswaProps>();
+
+const url = computed(() => document.location.origin + '/report/personal/' + props.selectedSiswa?.nis)
 
 </script>
 
@@ -20,27 +26,28 @@ const url = computed(() => document.location.origin + '/report/personal/' + sisw
     <div class="flex items-center justify-between">
       <div class="flex items-center">
         <img
-          :src="getUserPhoto(siswa.selectedSiswa?.foto)"
+          :src="getUserPhoto(props.selectedSiswa?.foto)"
           alt=""
           class="w-[86px] h-[86px] rounded-full object-cover object-center"
         >
         <div class="ml-4">
           <h3 class="text-xl font-bold">
-            {{ siswa.selectedSiswa?.nama }}
+            {{ props.selectedSiswa?.nama }}
           </h3>
           <p class="text-slate-500 font-medium">
-            {{ siswa.selectedSiswa?.nis }}
+            {{ props.selectedSiswa?.nis }}
           </p>
         </div>
       </div>
       <VueQrious
+        v-if="!hideQr"
         :value="url"
       />
     </div>
     <Divider />
     <div class="flex flex-col gap-8">
       <div
-        v-for="(item, key) in poinLog.poinLogWithKelas"
+        v-for="(item, key) in props.modelValue"
         :key="key"
       >
         <div class="mb-5 flex justify-between items-center">
@@ -50,7 +57,6 @@ const url = computed(() => document.location.origin + '/report/personal/' + sisw
             </p>
             <p class="text-slate-500 mt-0.5">
               Wali Kelas: <span class="font-bold text-success">{{ item.kelas.wali_kelas }}</span>
-              <!--              Total Poin: <span class="font-bold text-success">{{ item.kelas.poin }}</span>-->
             </p>
           </div>
           <div
@@ -72,6 +78,7 @@ const url = computed(() => document.location.origin + '/report/personal/' + sisw
           hide-pegawai
           hide-siswa
           hide-delete
+          :hide-action="hideAction"
         />
       </div>
     </div>
