@@ -220,14 +220,14 @@ const handleDeletePoin = async (id: number): Promise<void> => {
               <span
                 :class="[
                   'px-2 py-1 text-xs text-white rounded-full',
-                  item.category === 'Ringan' && 'bg-success/90',
-                  item.category === 'Sedang' && 'bg-warning/90',
+                  item.category === 'Ringan' && 'bg-red-400',
+                  item.category === 'Sedang' && 'bg-red-500',
                   item.category === 'Berat' && 'bg-danger/90',
-                  item.category === 'Sekolah' && 'bg-blue-300',
-                  item.category === 'Kota' && 'bg-blue-400',
-                  item.category === 'Provinsi' && 'bg-blue-500',
-                  item.category === 'Nasional' && 'bg-blue-600',
-                  item.category === 'Internasional' && 'bg-blue-700',
+                  item.category === 'Sekolah' && 'bg-teal-400',
+                  item.category === 'Kota' && 'bg-teal-500',
+                  item.category === 'Provinsi' && 'bg-teal-600',
+                  item.category === 'Nasional' && 'bg-teal-700',
+                  item.category === 'Internasional' && 'bg-success-800',
                 ]"
               >{{ item.category }}</span>
             </Table.Td>
