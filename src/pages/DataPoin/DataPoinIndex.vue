@@ -227,7 +227,7 @@ const handleDeletePoin = async (id: number): Promise<void> => {
                   item.category === 'Kota' && 'bg-teal-500',
                   item.category === 'Provinsi' && 'bg-teal-600',
                   item.category === 'Nasional' && 'bg-teal-700',
-                  item.category === 'Internasional' && 'bg-success-800',
+                  item.category === 'Internasional' && 'bg-teal-800',
                 ]"
               >{{ item.category }}</span>
             </Table.Td>
