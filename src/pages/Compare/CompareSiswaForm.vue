@@ -92,10 +92,14 @@ const data = ref<PoinLogWithKelas[][]>([
 ])
 
 const getData = (value: string, key: number) => {
-  poinLog.getPoinLogByNis(filter.value[key].nis).then((res: any) => {
-    data.value[key] = res.log
-    filter.value[key].siswa = res.siswa
-  })
+  data.value[key] = []
+  filter.value[key].siswa = null
+
+  if (filter.value[key].nis)
+    poinLog.getPoinLogByNis(filter.value[key].nis).then((res: any) => {
+      data.value[key] = res.log
+      filter.value[key].siswa = res.siswa
+    })
 }
 
 const hasData = computed(() => data.value.filter(e => e?.length).length)
