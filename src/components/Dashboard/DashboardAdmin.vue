@@ -151,7 +151,7 @@ const getRole = (role: Role) => {
         <div class="col-span-12 sm:mt-8 mt-6">
           <div class="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between intro-y gap-2">
             <h2 class="mr-5 text-lg font-medium truncate">
-              Statistik Data
+              Dashboard
             </h2>
             <div class="flex items-center gap-4">
               <div>
