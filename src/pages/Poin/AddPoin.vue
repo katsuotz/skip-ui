@@ -277,13 +277,18 @@ const handleSubmit = (values:any, actions:any) => {
 
                     <template #option="{ title, category }">
                       <span>
-                        {{ title }} -
+                        {{ title }}
                         <span
                           :class="[
-                            'px-2 py-1 text-xs text-white rounded-full',
-                            category === 'Ringan' && 'bg-success/90',
-                            category === 'Sedang' && 'bg-warning/90',
+                            'px-1.5 py-0.5 ml-1 text-xs text-white rounded-full',
+                            category === 'Ringan' && 'bg-red-400',
+                            category === 'Sedang' && 'bg-red-500',
                             category === 'Berat' && 'bg-danger/90',
+                            category === 'Sekolah' && 'bg-teal-400',
+                            category === 'Kota' && 'bg-teal-500',
+                            category === 'Provinsi' && 'bg-teal-600',
+                            category === 'Nasional' && 'bg-teal-700',
+                            category === 'Internasional' && 'bg-teal-800',
                           ]"
                         >{{ category }}</span>
                       </span>
