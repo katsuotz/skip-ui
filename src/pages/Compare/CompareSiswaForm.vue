@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {computed, ref} from "vue";
+import {computed, onMounted, ref} from "vue";
 import TomSelect from "../../base-components/TomSelect";
 import {useJurusanStore} from "../../stores/modules/jurusan";
 import {useTahunAjarStore} from "../../stores/modules/tahun-ajar";
@@ -11,6 +11,7 @@ import {useKelasStore} from "../../stores/modules/kelas";
 import {usePoinLogStore} from "../../stores/modules/poin-log";
 import {PoinLogWithKelas} from "../../utils/interfaces/poin-log";
 import ReportSiswa from "../../components/Report/ReportSiswa.vue";
+import {useSideMenuStore} from "../../stores/side-menu";
 
 const jurusan = useJurusanStore()
 const tahunAjar = useTahunAjarStore()
@@ -72,20 +73,6 @@ const handleSearchSiswa = debounce((search: string, n: number) => {
   })
 }, 700)
 
-const getTahunAjar = () => {
-  tahunAjar.getTahunAjar({
-    page: 1,
-    per_page: -1,
-  })
-}
-
-const getJurusan = () => {
-  jurusan.getJurusan()
-}
-
-getTahunAjar()
-getJurusan()
-
 const data = ref<PoinLogWithKelas[][]>([
   [],
   [],
@@ -104,14 +91,15 @@ const getData = (value: string, key: number) => {
 
 const hasData = computed(() => data.value.filter(e => e?.length).length)
 
+const sideMenuStore = useSideMenuStore()
+
+onMounted(() => {
+  sideMenuStore.expand = false
+})
+
 </script>
 <template>
-  <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
-    <h2 class="mr-auto text-lg font-medium">
-      Bandingkan Siswa
-    </h2>
-  </div>
-  <div class="p-5 mt-5 intro-y box">
+  <div class="p-5 intro-y box">
     <div class="grid grid-cols-12 gap-5">
       <div
         v-for="n in 2"

@@ -70,20 +70,6 @@ export const useSideMenuStore = defineStore("sideMenu", {
         pageName: "bandingkan",
         title: "Bandingkan",
         role: ['admin', 'staff-ict', 'guru-bk'],
-        subMenu: [
-          {
-            icon: "ChevronRight",
-            pageName: "bandingkan-kelas",
-            title: "Kelas",
-            role: ['admin', 'staff-ict', 'guru-bk'],
-          },
-          {
-            icon: "ChevronRight",
-            pageName: "bandingkan-siswa",
-            title: "Siswa",
-            role: ['admin', 'staff-ict', 'guru-bk'],
-          },
-        ],
       },
       {
         icon: "BookCopy",

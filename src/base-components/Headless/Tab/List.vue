@@ -29,7 +29,7 @@ const attrs = useAttrs();
 const computedClass = computed(() =>
   twMerge([
     variant == "tabs" && "border-b border-slate-200 dark:border-darkmode-400",
-    "w-full flex",
+    "flex",
     typeof attrs.class === "string" && attrs.class,
   ])
 );

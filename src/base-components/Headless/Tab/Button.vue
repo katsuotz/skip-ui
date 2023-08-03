@@ -53,10 +53,13 @@ const computedClass = computed(() =>
 
     // Boxed tabs
     list?.variant == "boxed-tabs" &&
-      "shadow-[0px_3px_20px_#0000000b] rounded-md",
+      "rounded-md",
     list?.variant == "boxed-tabs" &&
       tab?.selected.value &&
-      "bg-primary text-white font-medium",
+      "bg-primary text-white font-medium shadow-[0px_3px_20px_#0000000b] ",
+    list?.variant == "boxed-tabs" &&
+      !tab?.selected.value &&
+      "bg-white",
 
     // Link tabs
     list?.variant == "link-tabs" &&

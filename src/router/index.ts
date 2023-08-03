@@ -177,22 +177,12 @@ const routes = [
         },
       },
       {
-        path: "bandingkan/kelas",
-        name: "bandingkan-kelas",
+        path: "bandingkan",
+        name: "bandingkan",
         component: () => import("../pages/Compare/CompareForm.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru-bk'],
-          breadcrumbs: ['home', 'Bandingkan', 'Kelas'],
-        },
-      },
-      {
-        path: "bandingkan/siswa",
-        name: "bandingkan-siswa",
-        component: () => import("../pages/Compare/CompareSiswaForm.vue"),
-        meta: {
-          role: ['admin', 'staff-ict', 'guru-bk'],
-          breadcrumbs: ['home', 'Bandingkan', 'Siswa'],
-          expand: false,
+          breadcrumbs: ['home', 'Bandingkan'],
         },
       },
     ],
