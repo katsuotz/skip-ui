@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {useInfoStore} from "../../stores/modules/info";
 import PoinSiswaTable from "../../components/Poin/PoinSiswaTable.vue";
 import TomSelect from "../../base-components/TomSelect";
@@ -9,6 +9,8 @@ import {useRoute, useRouter} from "vue-router";
 
 const router = useRouter()
 const route = useRoute()
+
+const isPeringatan = computed(() => route.name === 'poin-siswa/peringatan/preview')
 
 const info = useInfoStore()
 const tahunAjar = useTahunAjarStore()
@@ -40,7 +42,8 @@ const getData = (resetPage: boolean = false) => {
     per_page: info.infoListPagination.per_page,
     search: search.value,
     order: selectedSort.value,
-    tahun_ajar_id: selectedTahunAjar.value
+    tahun_ajar_id: selectedTahunAjar.value,
+    max_poin: isPeringatan.value ? 50: undefined
   })
 }
 
@@ -67,7 +70,7 @@ info.infoListPagination.per_page = 10
 <template>
   <div class="flex items-center sm:mt-8 mt-6 intro-y">
     <h2 class="mr-auto text-lg font-medium">
-      Data Poin Siswa
+      Data Poin Siswa <span v-if="isPeringatan">- Peringatan</span>
     </h2>
   </div>
   <div class="p-5 mt-5 intro-y box flex flex-col gap-4">
@@ -91,6 +94,7 @@ info.infoListPagination.per_page = 10
         </option>
       </TomSelect>
       <TomSelect
+        v-if="!isPeringatan"
         v-model="selectedSort"
         style="width: 200px"
         :clearable="false"

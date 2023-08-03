@@ -119,7 +119,16 @@ const routes = [
         component: () => import("../pages/Poin/PoinSiswaPreview.vue"),
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
-          breadcrumbs: ['home', 'Dashboard', 'Data Jumlah Siswa'],
+          breadcrumbs: ['home', 'Dashboard', 'Data Poin Siswa'],
+        },
+      },
+      {
+        path: "poin/siswa/peringatan",
+        name: "poin-siswa/peringatan/preview",
+        component: () => import("../pages/Poin/PoinSiswaPreview.vue"),
+        meta: {
+          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          breadcrumbs: ['home', 'Dashboard', 'Data Poin Siswa', 'Peringatan'],
         },
       },
       {

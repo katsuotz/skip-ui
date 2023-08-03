@@ -4,6 +4,7 @@ export interface InfoListTable extends Table {
   tahun_ajar_id?: string;
   group_by?: string;
   type?: string;
+  max_poin?: number;
 }
 
 export interface InfoListData {

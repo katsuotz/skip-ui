@@ -98,6 +98,22 @@ export const useInfoStore = defineStore("info", {
         })
       })
     },
+    countPoinSiswaTotal(tahun_ajar_id: string, max_poin: number) {
+      return new Promise((resolve, reject) => {
+        api.get('/info/poin/total', {
+          params: {
+            tahun_ajar_id,
+            max_poin,
+          },
+        }).then((res: any) => {
+          const {total} = res
+
+          resolve(total)
+        }).catch(err => {
+          reject(err)
+        })
+      })
+    },
     calculatePoin(type: string, tahun_ajar_id: string) {
       return new Promise((resolve, reject) => {
         api.get('/info/poin/' + type, {
@@ -115,13 +131,14 @@ export const useInfoStore = defineStore("info", {
         })
       })
     },
-    listPoin({page = 1, per_page = 10, order = 'desc', order_by = 'poin', tahun_ajar_id}: InfoListTable, loading: boolean = true) {
+    listPoin({page = 1, per_page = 10, order = 'desc', order_by = 'poin', tahun_ajar_id, max_poin}: InfoListTable, loading: boolean = true) {
       const params: Payload = {
         page,
         per_page,
         order,
         order_by,
         tahun_ajar_id,
+        max_poin,
       }
 
       this.infoList = []

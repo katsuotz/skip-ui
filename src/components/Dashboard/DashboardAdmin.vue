@@ -14,6 +14,7 @@ import PoinType from "../Poin/PoinType.vue";
 import PoinValue from "../Poin/PoinValue.vue";
 import {TahunAjar} from "../../utils/interfaces/tahun-ajar";
 import {Role} from "../../utils/interfaces/user";
+import Alert from "../../base-components/Alert";
 
 const info = useInfoStore()
 const poinLog = usePoinLogStore()
@@ -21,6 +22,7 @@ const tahunAjar = useTahunAjarStore()
 const auth = useAuthStore()
 
 const loading = ref({
+  totalPoinInDanger: true,
   countPenghargaan: true,
   countPelanggaran: true,
   calculateMax: true,
@@ -40,8 +42,11 @@ const loaded = ref(false)
 
 const selectedTahunAjar = ref<string>('')
 
+const totalPoinInDanger = ref(0)
+
 const getData = () => {
   loading.value = {
+    totalPoinInDanger: true,
     countPenghargaan: true,
     countPelanggaran: true,
     calculateMax: true,
@@ -93,6 +98,15 @@ const getData = () => {
   info.getGraphCountPelanggaran(selectedTahunAjar.value).finally(() => {
     loading.value.graphPelanggaran = false
   })
+
+  totalPoinInDanger.value = 0
+
+  info.countPoinSiswaTotal(selectedTahunAjar.value, 50).then((res: any) => {
+    totalPoinInDanger.value = res
+  }).finally(() => {
+    loading.value.totalPoinInDanger = false
+  })
+
   if (auth.isAdmin) {
     info.getLoginLog({
       page: 1,
@@ -116,15 +130,6 @@ tahunAjar.getTahunAjar({
   getData()
 })
 
-// poinLog.getPoinLog({
-//   page: 1,
-//   per_page: 5,
-//   order: 'desc',
-//   order_by: 'created_at',
-//   tahun_ajar_id
-// })
-
-
 const getRole = (role: Role) => {
   switch (role) {
   case "admin":
@@ -135,8 +140,6 @@ const getRole = (role: Role) => {
     return auth.roleLabel[role]
   }
 }
-
-
 
 </script>
 
@@ -183,6 +186,30 @@ const getRole = (role: Role) => {
               </div>
             </div>
           </div>
+          <Alert
+            v-if="!loading.totalPoinInDanger && totalPoinInDanger"
+            variant="soft-danger"
+            class="flex items-center intro-y mt-5"
+          >
+            <Lucide
+              icon="AlertTriangle"
+              class="w-8 h-8 mr-4 stroke-2"
+            />
+            <span class="text-[16px]">{{ totalPoinInDanger }} Siswa memiliki poin di bawah 50</span>
+            <RouterLink
+              :to="{
+                path: '/poin/siswa/peringatan',
+                query: {
+                  tahun_ajar_id: selectedTahunAjar,
+                  order: 'asc',
+                }
+              }"
+              class="ml-auto hover:underline cursor-pointer mr-2 text-right"
+            >
+              Lihat Siswa
+            </RouterLink>
+          </Alert>
+
           <div class="grid grid-cols-12 gap-5 sm:gap-6 mt-5">
             <div class="col-span-6 sm:col-span-6 lg:col-span-4 intro-y">
               <div

@@ -143,15 +143,15 @@ const poinLabel = (poin: number): string => {
     return 'Sangat Baik'
   if (poin >= 200)
     return 'Baik'
-  if (poin >= 100)
+  if (poin > 100)
     return 'Cukup'
-  if (poin >= 50)
+  if (poin > 50)
     return 'Peringatan'
   return 'Peringatan'
 }
 
 const poinColorClass = (poin: number): string => {
-  if (poin >= 100)
+  if (poin > 100)
     return 'text-success'
   if (poin > 50)
     return 'text-warning'

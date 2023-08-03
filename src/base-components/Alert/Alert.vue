@@ -149,7 +149,7 @@ const softDark = [
 
 const computedClass = computed(() =>
   twMerge([
-    "relative border rounded-md px-3 py-2 font-medium",
+    "relative border rounded-md px-5 py-4 font-medium",
     variant.value == "primary" && primary,
     variant.value == "secondary" && secondary,
     variant.value == "success" && success,
