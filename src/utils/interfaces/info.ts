@@ -10,6 +10,8 @@ export interface InfoListTable extends Table {
 export interface InfoListData {
   nis: string;
   nama: string;
+  kelas_id?: string;
+  siswa_kelas_id?: string;
   nama_kelas: string;
   poin: number;
   foto?: string;

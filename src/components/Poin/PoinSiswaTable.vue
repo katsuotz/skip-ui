@@ -6,6 +6,8 @@ import {ref} from "vue";
 import PoinValue from "./PoinValue.vue";
 import {InfoListData} from "../../utils/interfaces/info";
 import {Pagination} from '../../utils/interfaces/table'
+import Button from "../../base-components/Button";
+import Lucide from "../../base-components/Lucide";
 
 interface PoinLogTableProps {
   modelValue?: InfoListData[];
@@ -58,8 +60,12 @@ const handleSearch = (value: string = '') => {
             Siswa
           </Table.Th>
           <Table.Th>
+            Kelas
+          </Table.Th>
+          <Table.Th>
             Poin
           </Table.Th>
+          <Table.Th />
         </Table.Tr>
       </Table.Thead>
       <Table.Tbody
@@ -91,9 +97,30 @@ const handleSearch = (value: string = '') => {
             </div>
           </Table.Td>
           <Table.Td>
+            {{ item.nama_kelas }}
+          </Table.Td>
+          <Table.Td>
             <PoinValue
               v-model="item.poin"
             />
+          </Table.Td>
+          <Table.Td class="text-right">
+            <RouterLink
+              target="_blank"
+              :to="`/kelas/${item.kelas_id}/siswa/${item.siswa_kelas_id}`"
+            >
+              <Button
+                class="gap-2 whitespace-nowrap"
+                variant="success"
+                target="_blank"
+              >
+                <Lucide
+                  class="w-5 h-5"
+                  icon="History"
+                />
+                Riwayat Poin
+              </Button>
+            </RouterLink>
           </Table.Td>
         </Table.Tr>
       </Table.Tbody>
