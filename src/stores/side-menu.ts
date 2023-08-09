@@ -107,6 +107,12 @@ export const useSideMenuStore = defineStore("sideMenu", {
         title: "Master Poin",
         role: ['admin', 'staff-ict', 'guru-bk'],
       },
+      {
+        icon: "DatabaseBackup",
+        pageName: "sync",
+        title: "SITI",
+        role: ['admin', 'staff-ict'],
+      },
     ],
   }),
   getters: {

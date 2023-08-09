@@ -194,6 +194,15 @@ const routes = [
           breadcrumbs: ['home', 'Bandingkan'],
         },
       },
+      {
+        path: "sync",
+        name: "sync",
+        component: () => import("../pages/Sync/SyncIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+          breadcrumbs: ['home', 'Sync'],
+        },
+      },
     ],
   },
   {
