@@ -3,13 +3,10 @@ import Table from "../../base-components/Table";
 import MyTable from "../../base-components/My/MyTable/MyTable.vue";
 import {ref} from "vue";
 import {countPaginationNumber, dateTimeFormat} from "../../utils/helper";
-import TahunAjarModal from "../../components/TahunAjar/TahunAjarModal.vue";
 import Button from "../../base-components/Button";
 import Lucide from "../../base-components/Lucide";
 import {useGlobalStore} from "../../stores/global";
 import {useSyncStore} from "../../stores/modules/sync";
-
-const showModal = ref(false)
 
 const global = useGlobalStore()
 const sync = useSyncStore()
@@ -77,10 +74,6 @@ const handleSyncPassword = async (): Promise<void> => {
 
 </script>
 <template>
-  <TahunAjarModal
-    v-model="showModal"
-    @success="getData"
-  />
   <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">
     <h2 class="mr-auto text-lg font-medium">
       SITI
