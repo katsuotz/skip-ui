@@ -158,7 +158,7 @@ auth.getMyData()
     </div>
 
     <RouterLink
-      v-if="auth.isPegawai && route.name !== 'add-poin'"
+      v-if="auth.canAdd && auth.isPegawai && route.name !== 'add-poin'"
       to="/add-poin"
       class="h-12 bg-primary text-white fixed bottom-6 right-6 flex items-center rounded-full shadow-lg shadow-black/40 cursor-pointer z-50 px-5 font-medium hide-print"
     >

@@ -19,6 +19,8 @@ export interface UserResponse extends User, Profile {
   nis?: string;
   nip?: string;
   foto?: string;
+  can_view?: boolean;
+  can_add?: boolean;
 }
 
 export type Role =
