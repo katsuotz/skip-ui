@@ -12,6 +12,7 @@ export interface Menu {
   subMenu?: Menu[];
   ignore?: boolean;
   role?: string[];
+  view?: boolean;
 }
 
 export interface SideMenuState {
@@ -46,6 +47,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
         pageName: "poin-siswa/index",
         title: "Poin Siswa",
         role: ['admin', 'staff-ict', 'guru', 'guru-bk'],
+        view: true,
       },
       {
         icon: "FileText",
@@ -55,13 +57,15 @@ export const useSideMenuStore = defineStore("sideMenu", {
             icon: "ChevronRight",
             pageName: "report",
             title: "Rekap",
-            role: ['admin', 'staff-ict', 'guru-bk', 'tata-usaha'],
+            role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+            view: true,
           },
           {
             icon: "ChevronRight",
             pageName: "report-personal",
             title: "Personal",
-            role: ['admin', 'staff-ict', 'guru-bk', 'tata-usaha'],
+            role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+            view: true,
           },
         ],
       },
@@ -70,6 +74,7 @@ export const useSideMenuStore = defineStore("sideMenu", {
         pageName: "bandingkan",
         title: "Bandingkan",
         role: ['admin', 'staff-ict', 'guru-bk'],
+        view: true,
       },
       {
         icon: "BookCopy",
@@ -107,6 +112,12 @@ export const useSideMenuStore = defineStore("sideMenu", {
         title: "Master Poin",
         role: ['admin', 'staff-ict', 'guru-bk'],
       },
+      {
+        icon: "DatabaseBackup",
+        pageName: "sync",
+        title: "SITI",
+        role: ['admin', 'staff-ict'],
+      },
     ],
   }),
   getters: {
@@ -118,15 +129,20 @@ export const useSideMenuStore = defineStore("sideMenu", {
         return e.role ? e.role.includes(<Role>auth?.user?.role || '') : true
       }
 
+      const checkView = (e: Menu) => {
+        if (e.subMenu) return e.subMenu.length
+        return e.view ? auth.canView : true
+      }
+
       return cloneDeep(toRaw(state.menu)).map((e:any) => {
         if (e === "divider") return e
         if (e.subMenu) {
-          e.subMenu = e.subMenu?.filter(checkRole)
+          e.subMenu = e.subMenu?.filter(checkRole).filter(checkView)
         }
         return e
       }).filter((e:any) => {
         if (e === "divider") return true
-        return checkRole(e)
+        return checkRole(e) && checkView(e)
       })
     }
   },

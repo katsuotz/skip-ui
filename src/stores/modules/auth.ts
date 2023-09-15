@@ -50,6 +50,8 @@ export const useAuthStore = defineStore("auth", {
     isStaff: state => ['admin', 'staff-ict', 'guru-bk'].includes(state.user?.role || ''),
     isAdmin: state => ['admin', 'staff-ict'].includes(state.user?.role || ''),
     isSiswa: state => ['siswa'].includes(state.user?.role || ''),
+    canView: state => state.user?.can_view === true,
+    canAdd: state => state.user?.can_add === true,
   },
   actions: {
     login(username: string, password: string) {

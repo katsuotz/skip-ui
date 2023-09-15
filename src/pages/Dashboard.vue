@@ -10,7 +10,7 @@ const auth = useAuthStore()
 </script>
 
 <template>
-  <DashboardAdmin v-if="auth.isStaff" />
+  <DashboardAdmin v-if="!auth.isSiswa && auth.canView" />
   <DashboardSiswa v-else-if="auth.isSiswa" />
   <template v-else>
     <div class="flex items-center sm:mt-8 mt-6 intro-y justify-between">

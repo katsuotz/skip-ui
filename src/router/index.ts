@@ -102,6 +102,7 @@ const routes = [
         meta: {
           role: ['staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Lapor'],
+          add: true,
         },
       },
       {
@@ -111,6 +112,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Dashboard', 'Aktivitas Poin'],
+          view: true,
         },
       },
       {
@@ -120,6 +122,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Dashboard', 'Data Poin Siswa'],
+          view: true,
         },
       },
       {
@@ -129,6 +132,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Dashboard', 'Data Poin Siswa', 'Peringatan'],
+          view: true,
         },
       },
       {
@@ -138,6 +142,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Dashboard', 'Data Jumlah Poin'],
+          view: true,
         },
       },
       {
@@ -145,7 +150,7 @@ const routes = [
         name: "login-log",
         component: () => import("../pages/LoginLog/LoginLogIndex.vue"),
         meta: {
-          role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
+          role: ['admin', 'staff-ict'],
           breadcrumbs: ['home', 'Dashboard', 'Aktivitas Login'],
         },
       },
@@ -156,6 +161,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home' ,'Poin Siswa'],
+          view: true,
         },
       },
       {
@@ -165,6 +171,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Laporan', 'Rekap'],
+          view: true,
         },
       },
       {
@@ -174,6 +181,7 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru', 'guru-bk', 'tata-usaha'],
           breadcrumbs: ['home', 'Laporan', 'Personal'],
+          view: true,
         },
       },
       {
@@ -183,6 +191,7 @@ const routes = [
         meta: {
           guest: true,
           breadcrumbs: ['home', 'Laporan', 'Personal'],
+          view: true,
         },
       },
       {
@@ -192,6 +201,16 @@ const routes = [
         meta: {
           role: ['admin', 'staff-ict', 'guru-bk'],
           breadcrumbs: ['home', 'Bandingkan'],
+          view: true,
+        },
+      },
+      {
+        path: "sync",
+        name: "sync",
+        component: () => import("../pages/Sync/SyncIndex.vue"),
+        meta: {
+          role: ['admin', 'staff-ict'],
+          breadcrumbs: ['home', 'Sync'],
         },
       },
     ],
@@ -230,6 +249,12 @@ router.beforeEach((to, from, next) => {
         nama: 'Guest',
       }
   }
+
+  if (to.meta.view && !auth.canView)
+    return next('/')
+
+  if (to.meta.add && !auth.canAdd)
+    return next('/')
 
   const sideMenuStore = useSideMenuStore()
 
